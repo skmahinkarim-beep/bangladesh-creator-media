@@ -3,16 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bangladesh Creator Media - Home</title>
+    <title>Bangladesh Creator Media</title>
     <meta name="description" content="Science & Technology News Hub in Bangladesh.">
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
-
-    <!-- Open Graph Tags -->
-    <meta property="og:title" content="Bangladesh Creator Media">
-    <meta property="og:description" content="The Future of Science & Technology in Bangladesh.">
-    <meta property="og:image" content="https://i.ibb.co/sXXbLyk/Untitled-design.png">
-    <meta property="og:url" content="https://bangladeshcreatormedia.github.io">
-
+    
     <style>
         /* CSS Variables */
         :root {
@@ -23,101 +17,92 @@
             --border-color: #e0e0e0;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            line-height: 1.6;
-            color: var(--text-color);
-            background-color: var(--bg-color);
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
+
+        /* Header & Nav */
+        header { background: #fafafa; text-align: center; padding: 2rem; border-bottom: 1px solid #ddd; }
+        .site-logo { width: 130px; border-radius: 50%; box-shadow: 0 4px 10px rgba(0,0,0,0.1); margin-bottom: 10px; border: 4px solid #fff; }
+        header h1 { font-size: 2.2rem; color: var(--primary-color); }
+        
+        nav { background: var(--primary-color); position: sticky; top: 0; z-index: 1000; text-align: center; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
+        nav ul li a { display: block; padding: 15px 20px; color: white; text-decoration: none; font-weight: bold; transition: background 0.3s; }
+        nav ul li a:hover { background: rgba(255,255,255,0.2); }
+
+        /* --- 1. FULL SCREEN BANNER SLIDER --- */
+        .slider-container {
+            width: 100%;
+            height: 450px; /* পিসি তে বড় দেখাবে */
+            position: relative;
+            overflow: hidden;
+            background: #000;
         }
-        /* Header */
-        header {
-            background-color: #fafafa;
-            text-align: center;
-            padding: 2.5rem 1rem;
-            border-bottom: 1px solid var(--border-color);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .site-logo {
-            width: 140px;
-            height: auto;
-            border-radius: 50%;
-            margin-bottom: 1rem;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            border: 4px solid #fff;
-        }
-        header h1 { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
-        header p { font-size: 1.1rem; color: #555; }
-        /* Navigation */
-        nav {
-            background-color: var(--primary-color);
-            position: sticky;
+        .slide {
+            width: 100%;
+            height: 100%;
+            position: absolute;
             top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+            left: 0;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            background-size: cover;
+            background-position: center;
+            cursor: pointer;
         }
-        nav ul {
-            list-style: none;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        nav ul li a {
-            display: block;
-            padding: 15px 20px;
-            color: white;
-            text-decoration: none;
-            font-weight: 600;
-            transition: background 0.3s;
-        }
-        nav ul li a:hover { background-color: rgba(255,255,255,0.2); }
+        .slide.active { opacity: 1; }
         
-        /* Container */
-        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        /* Slider Buttons */
+        .prev, .next {
+            position: absolute; top: 50%; transform: translateY(-50%);
+            background: rgba(0,0,0,0.5); color: white; border: none;
+            padding: 15px; cursor: pointer; font-size: 24px; z-index: 20; border-radius: 50%; margin: 0 10px;
+        }
+        .prev { left: 10px; } .next { right: 10px; }
+        .prev:hover, .next:hover { background: rgba(0,0,0,0.8); }
+
+        /* --- 2. VIDEO GRID SECTION --- */
+        .section-container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+        .section-title { font-size: 2rem; color: var(--primary-color); margin-bottom: 30px; border-left: 6px solid var(--primary-color); padding-left: 15px; }
+
+        .video-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 in a row */
+            gap: 25px;
+        }
         
-        /* Blog Post Styling */
-        h2 {
-            font-size: 2rem;
-            color: var(--primary-color);
-            margin-bottom: 20px;
-            border-left: 5px solid var(--primary-color);
-            padding-left: 15px;
+        .video-card {
+            background: #fff; border: 1px solid #eee; border-radius: 8px; overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05); transition: transform 0.3s;
         }
-        .blog-post {
-            background: white;
-            border: 1px solid #eee;
-            border-radius: 10px;
-            padding: 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
+        .video-card:hover { transform: translateY(-5px); box-shadow: 0 8px 15px rgba(0,0,0,0.1); }
+        
+        .vid-thumb { width: 100%; height: 200px; object-fit: cover; cursor: pointer; display: block; }
+        .vid-title {
+            padding: 15px; font-size: 1.1rem; font-weight: 600; color: #222; text-decoration: none; display: block; line-height: 1.4;
         }
-        .blog-post:hover { transform: translateY(-5px); }
-        .meta { color: #888; font-size: 0.9rem; display: block; margin-bottom: 15px; }
-        .read-more {
-            display: inline-block;
-            margin-top: 15px;
-            color: var(--primary-color);
-            text-decoration: none;
-            font-weight: bold;
-        }
+        .vid-title:hover { color: var(--primary-color); }
+
+        /* --- 3. TEXT SECTION --- */
+        .text-box { background: #f9f9f9; padding: 40px; border-radius: 10px; border-left: 6px solid #333; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .text-box h2 { margin-top: 0; color: var(--primary-color); font-size: 1.8rem; margin-bottom: 20px; }
+        .text-box p { white-space: pre-line; /* Keeps line breaks */ font-size: 1.15rem; line-height: 1.8; color: #444; }
 
         /* Footer */
-        footer {
-            background-color: #222;
-            color: #fff;
-            text-align: center;
-            padding: 2rem;
-            margin-top: 2rem;
-        }
+        footer { background: #222; color: white; text-align: center; padding: 30px; margin-top: 60px; }
         footer p { margin-bottom: 10px; opacity: 0.8; }
-        footer a { color: #aaa; text-decoration: none; margin: 0 8px; }
-        footer a:hover { color: #fff; }
+        footer a { color: #ccc; text-decoration: none; margin: 0 10px; }
+        footer a:hover { color: white; }
 
-        @media (max-width: 600px) {
+        /* Responsive */
+        @media (max-width: 768px) {
+            .slider-container { height: 250px; }
+            .video-grid { grid-template-columns: repeat(2, 1fr); }
             header h1 { font-size: 1.8rem; }
-            nav ul li a { padding: 10px; font-size: 0.9rem; }
+        }
+        @media (max-width: 480px) {
+            .video-grid { grid-template-columns: 1fr; }
+            .slider-container { height: 200px; }
+            .section-container { margin: 30px auto; }
         }
     </style>
 </head>
@@ -134,36 +119,150 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="contact.html">Contact</a></li>
-            <li><a href="privacy.html">Privacy Policy</a></li>
-            <li><a href="terms.html">Terms & Conditions</a></li>
+            <li><a href="privacy.html">Privacy</a></li>
+            <li><a href="terms.html">Terms</a></li>
         </ul>
     </nav>
 
-    <div class="container">
-        <h2>Latest Updates</h2>
-        
-        <article class="blog-post">
-            <h3>Innovation in AI: The Dhaka Tech Scene</h3>
-            <span class="meta">Technology • January 2026</span>
-            <p>Bangladesh is rapidly adopting Artificial Intelligence in various sectors. From agriculture to fintech, local startups are utilizing AI to solve real-world problems. Read more about how the youth are leading this change...</p>
-            <a href="#" class="read-more">Continue Reading →</a>
-        </article>
+    <!-- 1. SLIDER SECTION -->
+    <div class="slider-container" id="slider-box">
+        <!-- Banners will load here -->
+        <div style="width:100%; height:100%; display:flex; align-items:center; justify-content:center; color:white;">
+            <h2>Loading Banners...</h2>
+        </div>
+    </div>
+    <!-- Slider Controls -->
+    <div style="text-align:center; margin-top:-40px; position:relative; z-index:10; pointer-events:none;">
+        <button class="prev" onclick="moveSlide(-1)" style="pointer-events:auto;">&#10094;</button>
+        <button class="next" onclick="moveSlide(1)" style="pointer-events:auto;">&#10095;</button>
+    </div>
 
-        <article class="blog-post">
-            <h3>Solar Energy Revolution in Villages</h3>
-            <span class="meta">Science • January 2026</span>
-            <p>Renewable energy is becoming a game-changer for rural Bangladesh. New solar grid technologies are providing affordable electricity to thousands of homes, fostering education and small businesses.</p>
-            <a href="#" class="read-more">Continue Reading →</a>
-        </article>
+    <!-- 2. VIDEO GRID SECTION -->
+    <div class="section-container">
+        <h2 class="section-title">Featured Videos</h2>
+        <div class="video-grid" id="video-box">
+            <p>Loading videos...</p>
+        </div>
+    </div>
+
+    <!-- 3. TEXT SECTION -->
+    <div class="section-container">
+        <div class="text-box" id="text-box">
+            <h2>Loading...</h2>
+            <p>Please wait while content is loading...</p>
+        </div>
     </div>
 
     <footer>
         <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
         <p>
-            <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank">Facebook</a> • 
-            <a href="https://youtube.com/@bangladesh_creator_media0?si=OjC4ETyy4OzMcEpB" target="_blank">YouTube</a>
+            <a href="privacy.html">Privacy Policy</a> | 
+            <a href="terms.html">Terms & Conditions</a>
         </p>
     </footer>
 
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // আপনার দেওয়া কনফিগ
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        // Load Content
+        db.collection('siteContent').doc('homePage').onSnapshot((doc) => {
+            if(doc.exists) {
+                const data = doc.data();
+
+                // 1. Setup Slider
+                const sliderBox = document.getElementById('slider-box');
+                let slidesHtml = '';
+                let hasSlides = false;
+                
+                if(data.banners) {
+                    data.banners.forEach((b, index) => {
+                        if(b.img) {
+                            hasSlides = true;
+                            slidesHtml += `<div class="slide ${index === 0 ? 'active' : ''}" 
+                                style="background-image: url('${b.img}');" 
+                                onclick="window.open('${b.link}', '_blank')"></div>`;
+                        }
+                    });
+                }
+                
+                if(hasSlides) {
+                    sliderBox.innerHTML = slidesHtml;
+                    // Reset interval if exists
+                    if(window.sliderInterval) clearInterval(window.sliderInterval);
+                    startAutoSlide();
+                } else {
+                    sliderBox.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100%;color:white;"><h3>No Banners Added Yet</h3></div>';
+                }
+
+                // 2. Setup Videos
+                const vidBox = document.getElementById('video-box');
+                let vidHtml = '';
+                if(data.videos) {
+                    data.videos.forEach(v => {
+                        if(v.img && v.title) {
+                            vidHtml += `
+                                <div class="video-card">
+                                    <a href="${v.link}" target="_blank">
+                                        <img src="${v.img}" class="vid-thumb" alt="Video Thumbnail">
+                                    </a>
+                                    <a href="${v.link}" target="_blank" class="vid-title">${v.title}</a>
+                                </div>
+                            `;
+                        }
+                    });
+                    if(vidHtml) vidBox.innerHTML = vidHtml;
+                    else vidBox.innerHTML = '<p>No videos added yet.</p>';
+                }
+
+                // 3. Setup Text
+                if(data.textSection) {
+                    const txtBox = document.getElementById('text-box');
+                    txtBox.innerHTML = `
+                        <h2>${data.textSection.title || 'Welcome'}</h2>
+                        <p>${data.textSection.desc || 'No content available.'}</p>
+                    `;
+                }
+            } else {
+                console.log("No data found!");
+            }
+        });
+
+        // Slider Logic
+        let slideIndex = 0;
+        function moveSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            if(slides.length === 0) return;
+            
+            slides[slideIndex].classList.remove('active');
+            slideIndex += n;
+            
+            if (slideIndex >= slides.length) { slideIndex = 0; }
+            if (slideIndex < 0) { slideIndex = slides.length - 1; }
+            
+            slides[slideIndex].classList.add('active');
+        }
+
+        function startAutoSlide() {
+            window.sliderInterval = setInterval(() => { moveSlide(1); }, 4000); // Change every 4 seconds
+        }
+
+    </script>
 </body>
 </html>
