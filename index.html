@@ -3,15 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bangladesh Creator Media</title>
+    <title>Bangladesh Creator Media - Home</title>
     <meta name="description" content="Science & Technology News Hub in Bangladesh.">
-    
-    <!-- ব্রাউজার ট্যাবে লোগো দেখানোর জন্য -->
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
 
-    <!-- ফেসবুকে বা সোশ্যাল মিডিয়ায় শেয়ার করলে যা দেখাবে (Open Graph) -->
+    <!-- Open Graph Tags -->
     <meta property="og:title" content="Bangladesh Creator Media">
-    <meta property="og:description" content="The Future of Science & Technology in Bangladesh. Follow us for updates.">
+    <meta property="og:description" content="The Future of Science & Technology in Bangladesh.">
     <meta property="og:image" content="https://i.ibb.co/sXXbLyk/Untitled-design.png">
     <meta property="og:url" content="https://bangladeshcreatormedia.github.io">
 
@@ -23,36 +21,24 @@
             --text-color: #333;
             --bg-color: #ffffff;
             --border-color: #e0e0e0;
-            
-            /* Social Brand Colors */
-            --youtube: #FF0000;
-            --facebook: #1877F2;
-            --tiktok: #000000;
-            --telegram: #0088cc;
         }
-
-        /* Basic Reset */
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
             color: var(--text-color);
             background-color: var(--bg-color);
-            scroll-behavior: smooth;
         }
-
-        /* Header Section */
+        /* Header */
         header {
             background-color: #fafafa;
             text-align: center;
-            padding: 2rem 1rem;
+            padding: 2.5rem 1rem;
             border-bottom: 1px solid var(--border-color);
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .site-logo {
             width: 140px;
             height: auto;
@@ -61,19 +47,9 @@
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
             border: 4px solid #fff;
         }
-
-        header h1 {
-            font-size: 2.2rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        header p {
-            font-size: 1.1rem;
-            color: #555;
-        }
-
-        /* Navigation Bar */
+        header h1 { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 0.5rem; }
+        header p { font-size: 1.1rem; color: #555; }
+        /* Navigation */
         nav {
             background-color: var(--primary-color);
             position: sticky;
@@ -81,14 +57,12 @@
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-
         nav ul {
             list-style: none;
             display: flex;
             justify-content: center;
             flex-wrap: wrap;
         }
-
         nav ul li a {
             display: block;
             padding: 15px 20px;
@@ -97,23 +71,12 @@
             font-weight: 600;
             transition: background 0.3s;
         }
-
-        nav ul li a:hover {
-            background-color: rgba(255,255,255,0.2);
-        }
-
-        /* Main Container */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem 1rem;
-        }
-
-        section {
-            padding: 40px 0;
-            border-bottom: 1px solid #eee;
-        }
-
+        nav ul li a:hover { background-color: rgba(255,255,255,0.2); }
+        
+        /* Container */
+        .container { max-width: 900px; margin: 0 auto; padding: 2rem 1rem; }
+        
+        /* Blog Post Styling */
         h2 {
             font-size: 2rem;
             color: var(--primary-color);
@@ -121,8 +84,6 @@
             border-left: 5px solid var(--primary-color);
             padding-left: 15px;
         }
-
-        /* Blog Post Card */
         .blog-post {
             background: white;
             border: 1px solid #eee;
@@ -132,77 +93,14 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.05);
             transition: transform 0.2s;
         }
-
-        .blog-post:hover {
-            transform: translateY(-5px);
-        }
-
-        .meta {
-            color: #888;
-            font-size: 0.9rem;
-            display: block;
-            margin-bottom: 15px;
-        }
-
+        .blog-post:hover { transform: translateY(-5px); }
+        .meta { color: #888; font-size: 0.9rem; display: block; margin-bottom: 15px; }
         .read-more {
             display: inline-block;
             margin-top: 15px;
             color: var(--primary-color);
             text-decoration: none;
             font-weight: bold;
-        }
-
-        /* Contact Section Styles */
-        .contact-box {
-            background: var(--secondary-color);
-            padding: 30px;
-            border-radius: 10px;
-            border: 1px solid #dcebf7;
-        }
-
-        .contact-box h3 {
-            font-size: 1.3rem;
-            margin-bottom: 10px;
-            color: #222;
-        }
-
-        .social-links {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin: 20px 0;
-        }
-
-        .social-btn {
-            display: inline-flex;
-            align-items: center;
-            padding: 12px 18px;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 0.95rem;
-            transition: opacity 0.3s, transform 0.2s;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
-        .social-btn:hover {
-            opacity: 0.9;
-            transform: scale(1.02);
-        }
-
-        /* Button Colors */
-        .yt { background: var(--youtube); }
-        .fb { background: var(--facebook); }
-        .ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); }
-        .tk { background: var(--tiktok); }
-        .tg { background: var(--telegram); }
-
-        .divider {
-            height: 1px;
-            background: #cbdcee;
-            border: none;
-            margin: 25px 0;
         }
 
         /* Footer */
@@ -213,111 +111,52 @@
             padding: 2rem;
             margin-top: 2rem;
         }
-
         footer p { margin-bottom: 10px; opacity: 0.8; }
         footer a { color: #aaa; text-decoration: none; margin: 0 8px; }
         footer a:hover { color: #fff; }
 
-        /* Mobile Adjustments */
         @media (max-width: 600px) {
             header h1 { font-size: 1.8rem; }
-            .social-btn { width: 100%; justify-content: center; }
             nav ul li a { padding: 10px; font-size: 0.9rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Header with Logo -->
     <header>
-        <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Bangladesh Creator Media Logo" class="site-logo">
+        <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
         <h1>Bangladesh Creator Media</h1>
         <p>Connecting Science, Technology & Innovation</p>
     </header>
 
-    <!-- Navigation -->
     <nav>
         <ul>
-            <li><a href="#home">Home</a></li>
-            <li><a href="#about">About</a></li>
-            <li><a href="#contact">Contact</a></li>
-            <li><a href="#privacy">Privacy</a></li>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="privacy.html">Privacy Policy</a></li>
+            <li><a href="terms.html">Terms & Conditions</a></li>
         </ul>
     </nav>
 
-    <!-- Content Container -->
     <div class="container">
+        <h2>Latest Updates</h2>
+        
+        <article class="blog-post">
+            <h3>Innovation in AI: The Dhaka Tech Scene</h3>
+            <span class="meta">Technology • January 2026</span>
+            <p>Bangladesh is rapidly adopting Artificial Intelligence in various sectors. From agriculture to fintech, local startups are utilizing AI to solve real-world problems. Read more about how the youth are leading this change...</p>
+            <a href="#" class="read-more">Continue Reading →</a>
+        </article>
 
-        <!-- News / Home Section -->
-        <section id="home">
-            <h2>Latest Updates</h2>
-            
-            <article class="blog-post">
-                <h3>Innovation in AI: The Dhaka Tech Scene</h3>
-                <span class="meta">Technology • January 2026</span>
-                <p>Bangladesh is rapidly adopting Artificial Intelligence in various sectors. From agriculture to fintech, local startups are utilizing AI to solve real-world problems. Read more about how the youth are leading this change...</p>
-                <a href="#" class="read-more">Continue Reading →</a>
-            </article>
-
-            <article class="blog-post">
-                <h3>Solar Energy Revolution in Villages</h3>
-                <span class="meta">Science • January 2026</span>
-                <p>Renewable energy is becoming a game-changer for rural Bangladesh. New solar grid technologies are providing affordable electricity to thousands of homes, fostering education and small businesses.</p>
-                <a href="#" class="read-more">Continue Reading →</a>
-            </article>
-        </section>
-
-        <!-- About Section -->
-        <section id="about">
-            <h2>About Us</h2>
-            <p><strong>Bangladesh Creator Media</strong> is the premier platform for Science and Technology enthusiasts in Bangladesh.</p>
-            <br>
-            <p>We aim to highlight local innovations, review the latest gadgets, and provide deep dives into scientific breakthroughs. Our goal is to create a knowledgeable community ready for the future.</p>
-        </section>
-
-        <!-- Contact & Social Media Section -->
-        <section id="contact">
-            <h2>Contact Us</h2>
-            
-            <div class="contact-box">
-                <!-- Social Media Links -->
-                <h3>Follow Our Channels</h3>
-                <p>Stay updated with our latest videos and posts:</p>
-                
-                <div class="social-links">
-                    <a href="https://youtube.com/@bangladesh_creator_media0?si=OjC4ETyy4OzMcEpB" target="_blank" class="social-btn yt">▶ YouTube</a>
-                    <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-btn fb">📘 Facebook</a>
-                    <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-btn ig">📷 Instagram</a>
-                    <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&amp;_t=ZS-932DorHaHd2" target="_blank" class="social-btn tk">🎵 TikTok</a>
-                    <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-btn tg">✈ Telegram</a>
-                </div>
-
-                <hr class="divider">
-
-                <!-- ADDED: Professional English Section (Sponsors) -->
-                <h3>Sponsors & Collaborations</h3>
-                <p>If you are interested in sponsoring or collaborating with Bangladesh Creator Media, please contact us at:</p>
-                <p style="margin-top: 5px;">
-                    📧 <a href="mailto:skmahinkarim2003@gmail.com" style="color: var(--primary-color); font-weight: bold;">skmahinkarim2003@gmail.com</a>
-                </p>
-
-                <hr class="divider">
-
-                <!-- ADDED: Professional English Section (Subscribers) -->
-                <h3>For Subscribers</h3>
-                <p>If you face any issues, have questions, or need support, feel free to reach out via email. We’re always happy to help.</p>
-            </div>
-        </section>
-
-        <!-- Privacy Policy -->
-        <section id="privacy">
-            <h2>Privacy Policy</h2>
-            <p>At Bangladesh Creator Media, we value your privacy. We do not share your personal information with third parties without consent. This site uses basic cookies to improve user experience and analyze traffic.</p>
-        </section>
-
+        <article class="blog-post">
+            <h3>Solar Energy Revolution in Villages</h3>
+            <span class="meta">Science • January 2026</span>
+            <p>Renewable energy is becoming a game-changer for rural Bangladesh. New solar grid technologies are providing affordable electricity to thousands of homes, fostering education and small businesses.</p>
+            <a href="#" class="read-more">Continue Reading →</a>
+        </article>
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
         <p>
@@ -328,4 +167,3 @@
 
 </body>
 </html>
-
