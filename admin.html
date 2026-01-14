@@ -12,6 +12,10 @@
         input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
         .section { background: #f9f9f9; padding: 20px; margin-bottom: 25px; border-radius: 5px; border: 1px solid #e0e0e0; }
+        
+        /* Stats Grid for Admin */
+        .admin-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+        
         button { background: #0056b3; color: white; cursor: pointer; font-weight: bold; font-size: 1rem; border: none; }
         button:hover { background: #004494; }
         .logout-btn { background: #d9534f; margin-top: 20px; }
@@ -34,28 +38,23 @@
     <div id="admin-panel" class="container">
         <h1>Website Control Panel</h1>
         
-        <!-- 1. Top Banners (3 Slots) -->
+        <!-- 1. Top Banners -->
         <div class="section">
-            <h3>1. Top Full-Screen Banners (3 Items)</h3>
-            <p style="font-size: 0.9rem; color: #666;">Enter Image Link (URL) and YouTube Video Link.</p>
-            
+            <h3>1. Top Full-Screen Banners</h3>
             <label>Banner 1:</label>
-            <input type="text" id="b1-img" placeholder="Banner 1 Image URL">
-            <input type="text" id="b1-link" placeholder="Banner 1 YouTube Link">
-            
+            <input type="text" id="b1-img" placeholder="Image URL">
+            <input type="text" id="b1-link" placeholder="YouTube Link">
             <label>Banner 2:</label>
-            <input type="text" id="b2-img" placeholder="Banner 2 Image URL">
-            <input type="text" id="b2-link" placeholder="Banner 2 YouTube Link">
-            
+            <input type="text" id="b2-img" placeholder="Image URL">
+            <input type="text" id="b2-link" placeholder="YouTube Link">
             <label>Banner 3:</label>
-            <input type="text" id="b3-img" placeholder="Banner 3 Image URL">
-            <input type="text" id="b3-link" placeholder="Banner 3 YouTube Link">
+            <input type="text" id="b3-img" placeholder="Image URL">
+            <input type="text" id="b3-link" placeholder="YouTube Link">
         </div>
 
-        <!-- 2. Video Grid (6 Slots) -->
+        <!-- 2. Video Grid -->
         <div class="section">
             <h3>2. Video Grid (6 Items)</h3>
-            <p style="font-size: 0.9rem; color: #666;">Enter Title, Thumbnail URL, and Video Link.</p>
             <div id="video-inputs"></div>
         </div>
 
@@ -63,9 +62,38 @@
         <div class="section">
             <h3>3. Important Text Sections</h3>
             <label>Section Title:</label>
-            <input type="text" id="txt-title" placeholder="Title (e.g. Latest Tech News)">
+            <input type="text" id="txt-title" placeholder="Title">
             <label>Description:</label>
-            <textarea id="txt-desc" rows="8" placeholder="Write your content here..."></textarea>
+            <textarea id="txt-desc" rows="5" placeholder="Content..."></textarea>
+        </div>
+
+        <!-- 4. STATISTICS SECTION (NEW) -->
+        <div class="section">
+            <h3>4. Company Statistics (Bottom Section)</h3>
+            <p style="font-size: 0.9rem; color: #666;">Edit the numbers and labels for the stats section.</p>
+            
+            <div class="admin-stat-grid">
+                <div>
+                    <label>Box 1 (Greenish):</label>
+                    <input type="text" id="s1-num" placeholder="Number (e.g. 4+)">
+                    <input type="text" id="s1-lbl" placeholder="Label (e.g. Years Experience)">
+                </div>
+                <div>
+                    <label>Box 2 (Yellowish):</label>
+                    <input type="text" id="s2-num" placeholder="Number (e.g. 150+)">
+                    <input type="text" id="s2-lbl" placeholder="Label (e.g. Projects)">
+                </div>
+                <div>
+                    <label>Box 3 (White/Gray):</label>
+                    <input type="text" id="s3-num" placeholder="Number (e.g. 3+)">
+                    <input type="text" id="s3-lbl" placeholder="Label (e.g. Running Project)">
+                </div>
+                <div>
+                    <label>Box 4 (Dark Gray):</label>
+                    <input type="text" id="s4-num" placeholder="Number (e.g. 100%)">
+                    <input type="text" id="s4-lbl" placeholder="Label (e.g. Satisfaction)">
+                </div>
+            </div>
         </div>
 
         <button onclick="saveData()" style="padding: 15px; font-size: 1.2rem; background: #28a745;">SAVE ALL CHANGES</button>
@@ -78,7 +106,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // আপনার দেওয়া কনফিগ এখানে বসানো হয়েছে
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -88,27 +115,26 @@
             appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
         };
 
-        // Initialize Firebase
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Generate 6 Video Inputs automatically
+        // Generate Video Inputs
         const vidContainer = document.getElementById('video-inputs');
         for(let i=1; i<=6; i++) {
             vidContainer.innerHTML += `
-                <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
-                    <strong style="color:#555;">Video ${i}</strong>
+                <div style="margin-top:10px; border-top:1px dashed #ccc; padding-top:5px;">
+                    <strong>Video ${i}</strong>
                     <input type="text" id="v${i}-title" placeholder="Title">
-                    <input type="text" id="v${i}-img" placeholder="Thumbnail Image URL">
-                    <input type="text" id="v${i}-link" placeholder="YouTube Video Link">
+                    <input type="text" id="v${i}-img" placeholder="Thumbnail URL">
+                    <input type="text" id="v${i}-link" placeholder="Video Link">
                 </div>
             `;
         }
 
-        // Check Login Status
+        // Auth Listener
         auth.onAuthStateChanged(user => {
             if(user) {
                 document.getElementById('login-section').style.display = 'none';
@@ -123,14 +149,12 @@
         function login() {
             const e = document.getElementById('email').value;
             const p = document.getElementById('password').value;
-            auth.signInWithEmailAndPassword(e, p)
-                .then(() => alert("Login Successful!"))
-                .catch(err => alert("Error: " + err.message));
+            auth.signInWithEmailAndPassword(e, p).catch(err => alert("Error: " + err.message));
         }
 
         function logout() { auth.signOut(); }
 
-        // Save Data to Firestore
+        // Save Data
         function saveData() {
             const data = {
                 banners: [
@@ -142,6 +166,13 @@
                 textSection: {
                     title: document.getElementById('txt-title').value,
                     desc: document.getElementById('txt-desc').value
+                },
+                // New Stats Data
+                stats: {
+                    s1: { num: document.getElementById('s1-num').value, lbl: document.getElementById('s1-lbl').value },
+                    s2: { num: document.getElementById('s2-num').value, lbl: document.getElementById('s2-lbl').value },
+                    s3: { num: document.getElementById('s3-num').value, lbl: document.getElementById('s3-lbl').value },
+                    s4: { num: document.getElementById('s4-num').value, lbl: document.getElementById('s4-lbl').value }
                 }
             };
 
@@ -154,25 +185,30 @@
             }
 
             db.collection('siteContent').doc('homePage').set(data)
-                .then(() => alert('Website Updated Successfully! Check your homepage.'))
+                .then(() => alert('Website Updated Successfully!'))
                 .catch(err => alert('Error: ' + err.message));
         }
 
-        // Load Data from Firestore
+        // Load Data
         function loadData() {
             db.collection('siteContent').doc('homePage').get().then(doc => {
                 if(doc.exists) {
                     const d = doc.data();
                     
+                    // Load Banners & Text (Standard)
                     if(d.banners) {
-                        document.getElementById('b1-img').value = d.banners[0]?.img || '';
-                        document.getElementById('b1-link').value = d.banners[0]?.link || '';
-                        document.getElementById('b2-img').value = d.banners[1]?.img || '';
-                        document.getElementById('b2-link').value = d.banners[1]?.link || '';
-                        document.getElementById('b3-img').value = d.banners[2]?.img || '';
-                        document.getElementById('b3-link').value = d.banners[2]?.link || '';
+                        d.banners.forEach((b, i) => {
+                            if(i<3) {
+                                document.getElementById(`b${i+1}-img`).value = b.img || '';
+                                document.getElementById(`b${i+1}-link`).value = b.link || '';
+                            }
+                        });
                     }
-
+                    if(d.textSection) {
+                        document.getElementById('txt-title').value = d.textSection.title || '';
+                        document.getElementById('txt-desc').value = d.textSection.desc || '';
+                    }
+                    // Load Videos
                     if(d.videos) {
                         d.videos.forEach((v, index) => {
                             let i = index + 1;
@@ -183,13 +219,19 @@
                             }
                         });
                     }
-
-                    if(d.textSection) {
-                        document.getElementById('txt-title').value = d.textSection.title || '';
-                        document.getElementById('txt-desc').value = d.textSection.desc || '';
+                    // Load Stats (NEW)
+                    if(d.stats) {
+                        document.getElementById('s1-num').value = d.stats.s1?.num || '';
+                        document.getElementById('s1-lbl').value = d.stats.s1?.lbl || '';
+                        document.getElementById('s2-num').value = d.stats.s2?.num || '';
+                        document.getElementById('s2-lbl').value = d.stats.s2?.lbl || '';
+                        document.getElementById('s3-num').value = d.stats.s3?.num || '';
+                        document.getElementById('s3-lbl').value = d.stats.s3?.lbl || '';
+                        document.getElementById('s4-num').value = d.stats.s4?.num || '';
+                        document.getElementById('s4-lbl').value = d.stats.s4?.lbl || '';
                     }
                 }
-            }).catch(err => console.log(err));
+            });
         }
     </script>
 </body>
