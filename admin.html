@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCM Admin Panel</title>
+    <style>
+        body { font-family: sans-serif; padding: 20px; background: #f0f2f5; margin: 0; }
+        .container { max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1 { text-align: center; color: #333; }
+        h3 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px; }
+        input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
+        .section { background: #f9f9f9; padding: 20px; margin-bottom: 25px; border-radius: 5px; border: 1px solid #e0e0e0; }
+        button { background: #0056b3; color: white; cursor: pointer; font-weight: bold; font-size: 1rem; border: none; }
+        button:hover { background: #004494; }
+        .logout-btn { background: #d9534f; margin-top: 20px; }
+        .logout-btn:hover { background: #c9302c; }
+        #admin-panel { display: none; }
+        #login-section { max-width: 400px; margin: 50px auto; text-align: center; }
+    </style>
+</head>
+<body>
+
+    <!-- Login Section -->
+    <div id="login-section" class="container">
+        <h3>Admin Login</h3>
+        <input type="email" id="email" placeholder="Admin Email">
+        <input type="password" id="password" placeholder="Password">
+        <button onclick="login()">Login</button>
+    </div>
+
+    <!-- Main Admin Panel -->
+    <div id="admin-panel" class="container">
+        <h1>Website Control Panel</h1>
+        
+        <!-- 1. Top Banners (3 Slots) -->
+        <div class="section">
+            <h3>1. Top Full-Screen Banners (3 Items)</h3>
+            <p style="font-size: 0.9rem; color: #666;">Enter Image Link (URL) and YouTube Video Link.</p>
+            
+            <label>Banner 1:</label>
+            <input type="text" id="b1-img" placeholder="Banner 1 Image URL">
+            <input type="text" id="b1-link" placeholder="Banner 1 YouTube Link">
+            
+            <label>Banner 2:</label>
+            <input type="text" id="b2-img" placeholder="Banner 2 Image URL">
+            <input type="text" id="b2-link" placeholder="Banner 2 YouTube Link">
+            
+            <label>Banner 3:</label>
+            <input type="text" id="b3-img" placeholder="Banner 3 Image URL">
+            <input type="text" id="b3-link" placeholder="Banner 3 YouTube Link">
+        </div>
+
+        <!-- 2. Video Grid (6 Slots) -->
+        <div class="section">
+            <h3>2. Video Grid (6 Items)</h3>
+            <p style="font-size: 0.9rem; color: #666;">Enter Title, Thumbnail URL, and Video Link.</p>
+            <div id="video-inputs"></div>
+        </div>
+
+        <!-- 3. Text Content -->
+        <div class="section">
+            <h3>3. Important Text Sections</h3>
+            <label>Section Title:</label>
+            <input type="text" id="txt-title" placeholder="Title (e.g. Latest Tech News)">
+            <label>Description:</label>
+            <textarea id="txt-desc" rows="8" placeholder="Write your content here..."></textarea>
+        </div>
+
+        <button onclick="saveData()" style="padding: 15px; font-size: 1.2rem; background: #28a745;">SAVE ALL CHANGES</button>
+        <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        // আপনার দেওয়া কনফিগ এখানে বসানো হয়েছে
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+        };
+
+        // Initialize Firebase
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // Generate 6 Video Inputs automatically
+        const vidContainer = document.getElementById('video-inputs');
+        for(let i=1; i<=6; i++) {
+            vidContainer.innerHTML += `
+                <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
+                    <strong style="color:#555;">Video ${i}</strong>
+                    <input type="text" id="v${i}-title" placeholder="Title">
+                    <input type="text" id="v${i}-img" placeholder="Thumbnail Image URL">
+                    <input type="text" id="v${i}-link" placeholder="YouTube Video Link">
+                </div>
+            `;
+        }
+
+        // Check Login Status
+        auth.onAuthStateChanged(user => {
+            if(user) {
+                document.getElementById('login-section').style.display = 'none';
+                document.getElementById('admin-panel').style.display = 'block';
+                loadData();
+            } else {
+                document.getElementById('login-section').style.display = 'block';
+                document.getElementById('admin-panel').style.display = 'none';
+            }
+        });
+
+        function login() {
+            const e = document.getElementById('email').value;
+            const p = document.getElementById('password').value;
+            auth.signInWithEmailAndPassword(e, p)
+                .then(() => alert("Login Successful!"))
+                .catch(err => alert("Error: " + err.message));
+        }
+
+        function logout() { auth.signOut(); }
+
+        // Save Data to Firestore
+        function saveData() {
+            const data = {
+                banners: [
+                    { img: document.getElementById('b1-img').value, link: document.getElementById('b1-link').value },
+                    { img: document.getElementById('b2-img').value, link: document.getElementById('b2-link').value },
+                    { img: document.getElementById('b3-img').value, link: document.getElementById('b3-link').value }
+                ],
+                videos: [],
+                textSection: {
+                    title: document.getElementById('txt-title').value,
+                    desc: document.getElementById('txt-desc').value
+                }
+            };
+
+            for(let i=1; i<=6; i++) {
+                data.videos.push({
+                    title: document.getElementById(`v${i}-title`).value,
+                    img: document.getElementById(`v${i}-img`).value,
+                    link: document.getElementById(`v${i}-link`).value
+                });
+            }
+
+            db.collection('siteContent').doc('homePage').set(data)
+                .then(() => alert('Website Updated Successfully! Check your homepage.'))
+                .catch(err => alert('Error: ' + err.message));
+        }
+
+        // Load Data from Firestore
+        function loadData() {
+            db.collection('siteContent').doc('homePage').get().then(doc => {
+                if(doc.exists) {
+                    const d = doc.data();
+                    
+                    if(d.banners) {
+                        document.getElementById('b1-img').value = d.banners[0]?.img || '';
+                        document.getElementById('b1-link').value = d.banners[0]?.link || '';
+                        document.getElementById('b2-img').value = d.banners[1]?.img || '';
+                        document.getElementById('b2-link').value = d.banners[1]?.link || '';
+                        document.getElementById('b3-img').value = d.banners[2]?.img || '';
+                        document.getElementById('b3-link').value = d.banners[2]?.link || '';
+                    }
+
+                    if(d.videos) {
+                        d.videos.forEach((v, index) => {
+                            let i = index + 1;
+                            if(i <= 6) {
+                                document.getElementById(`v${i}-title`).value = v.title || '';
+                                document.getElementById(`v${i}-img`).value = v.img || '';
+                                document.getElementById(`v${i}-link`).value = v.link || '';
+                            }
+                        });
+                    }
+
+                    if(d.textSection) {
+                        document.getElementById('txt-title').value = d.textSection.title || '';
+                        document.getElementById('txt-desc').value = d.textSection.desc || '';
+                    }
+                }
+            }).catch(err => console.log(err));
+        }
+    </script>
+</body>
+</html>
