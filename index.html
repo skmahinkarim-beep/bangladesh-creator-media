@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -13,144 +12,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangladesh Creator Media</title>
-    <meta name="description" content="Science & Technology News Hub in Bangladesh.">
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
-        /* CSS Variables */
-        :root {
-            --primary-color: #0056b3;
-            --text-color: #333;
-            --bg-color: #f8f9fa;
-        }
+        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
-        /* --- HEADER STYLES (CENTERED SEARCH LAYOUT) --- */
-        header { 
-            background: #fff; 
-            padding: 10px 30px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; /* 3 parts spaced out */
-            position: relative; 
-            z-index: 100; 
-            gap: 20px;
-        }
-
-        /* 1. Left Side (Logo & Text) - Takes 1 part space */
-        .header-left { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-            flex: 1; /* Occupies left space */
-        }
+        /* HEADER */
+        header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
+        .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
         .header-text p { font-size: 0.8rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* 2. Center Side (Search Bar) - Takes 2 parts space to stay in middle */
-        .header-center { 
-            flex: 2; 
-            display: flex; 
-            justify-content: center; /* Absolutely centered */
-        }
-        .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; transition: 0.3s; }
-        .search-box:focus-within { border-color: var(--primary-color); box-shadow: 0 0 10px rgba(0, 86, 179, 0.1); }
+        .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
+        .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
-        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; transition: 0.3s; }
-        .search-btn:hover { background: #004494; }
+        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
 
-        /* 3. Right Side (Button + Socials) - Takes 1 part space */
-        .header-right-container {
-            flex: 1;
-            display: flex;
-            align-items: center;
-            justify-content: flex-end; /* Push everything to right */
-            gap: 15px;
-        }
+        .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
+        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; }
+        .header-service-btn:hover { transform: translateY(-2px); }
 
-        /* Our Service Button */
-        .header-service-btn {
-            background: linear-gradient(45deg, #ff9800, #ff5722);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 700;
-            font-size: 0.9rem;
-            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3);
-            transition: all 0.3s ease;
-            white-space: nowrap;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .header-service-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(255, 87, 34, 0.5); }
-
-        /* Social Icons */
         .social-group { display: flex; gap: 8px; }
-        .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: transform 0.3s, box-shadow 0.3s; }
-        .social-icon:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
+        .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .social-icon:hover { transform: translateY(-3px); }
         .social-icon svg { width: 18px; height: 18px; fill: white; }
-        
-        .bg-yt { background: #FF0000; } 
-        .bg-fb { background: #1877F2; } 
-        .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } 
-        .bg-tk { background: #000000; } 
-        .bg-tg { background: #0088cc; }
+        .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
 
-        /* Navigation */
+        /* NAV */
         nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
-        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
+        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
-        /* SLIDER */
+        /* SLIDER & CONTENT */
         .slider-container { width: 100%; height: 450px; position: relative; overflow: hidden; background: #000; }
         .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
         .slide.active { opacity: 1; }
         .prev, .next { position: absolute; top: 50%; transform: translateY(-50%); background: rgba(255,255,255,0.2); color: white; border: 2px solid white; padding: 10px 18px; cursor: pointer; font-size: 20px; z-index: 20; border-radius: 50%; margin: 0 20px; transition: 0.3s; backdrop-filter: blur(5px); }
         .prev { left: 0; } .next { right: 0; }
-        .prev:hover, .next:hover { background: white; color: #000; }
 
-        /* SECTIONS */
         .section-container { max-width: 1150px; margin: 80px auto 40px; padding: 0 20px; }
         .section-title { font-size: 2rem; color: #222; margin-bottom: 30px; position: relative; padding-left: 20px; font-weight: 800; }
         .section-title::before { content: ''; position: absolute; left: 0; top: 5px; height: 80%; width: 6px; background: var(--primary-color); border-radius: 3px; }
-        
         .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
-        .video-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: transform 0.3s, box-shadow 0.3s; border: none; }
+        .video-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: none; }
         .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
         .vid-thumb { width: 100%; height: 200px; object-fit: cover; }
         .vid-title { padding: 15px 20px; font-size: 1.1rem; font-weight: 700; color: #333; text-decoration: none; display: block; }
-        .vid-title:hover { color: var(--primary-color); }
-
+        
         .text-box { background: #fff; padding: 40px; border-radius: 15px; border-left: 8px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
         .text-box h2 { margin-top: 0; color: var(--primary-color); font-weight: 800; font-size: 2rem; }
 
-        /* CTA */
+        /* UNIQUE CTA */
         .cta-unique-box { max-width: 1000px; margin: 60px auto 30px; padding: 25px 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border: 2px solid #0056b3; border-radius: 60px; text-align: center; box-shadow: 0 10px 30px rgba(0, 86, 179, 0.15); position: relative; overflow: hidden; animation: pulse-border 3s infinite; }
         .cta-unique-box p { font-size: 1.4rem; font-weight: 700; color: #333; margin: 0; line-height: 1.5; }
         .cta-inline-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 5px 20px; border-radius: 20px; text-decoration: none; display: inline-block; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); margin: 0 5px; vertical-align: middle; }
         .cta-inline-btn:hover { transform: scale(1.1); color: white; }
         @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 86, 179, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0); } }
 
-        /* Stats */
+        /* STATS */
         .stats-wrapper { max-width: 1150px; margin: 0 auto 80px; padding: 0 20px; display: flex; gap: 50px; align-items: center; }
         .stats-left { flex: 1; padding-right: 20px; }
         .stats-brand { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
         .stats-heading { font-size: 2.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 25px; color: #222; }
         .highlight-text { color: var(--primary-color); position: relative; }
-        .highlight-text::after { content: ''; position: absolute; bottom: 5px; left: 0; width: 100%; height: 8px; background: rgba(0, 86, 179, 0.1); z-index: -1; }
         .stats-desc { font-size: 1.05rem; line-height: 1.7; color: #555; margin-bottom: 20px; }
         .stats-right { flex: 1.2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .stat-card { border-radius: 20px; padding: 35px 25px; text-align: center; color: white; position: relative; overflow: hidden; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .stat-card:hover { transform: translateY(-10px) scale(1.02); box-shadow: 0 20px 30px rgba(0,0,0,0.2); }
-        .stat-number { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; display: block; text-shadow: 2px 2px 4px rgba(0,0,0,0.2); }
-        .stat-label { font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; opacity: 0.9; }
+        .stat-card { border-radius: 20px; padding: 35px 25px; text-align: center; color: white; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .stat-card:hover { transform: translateY(-10px) scale(1.02); }
+        .stat-number { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; }
+        .stat-label { font-size: 1rem; font-weight: 600; text-transform: uppercase; opacity: 0.9; }
         .card-style-1 { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
         .card-style-2 { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
         .card-style-3 { background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%); }
@@ -160,32 +95,21 @@
         footer a { color: #aaa; text-decoration: none; margin: 0 15px; font-weight: 600; transition: 0.3s; }
         footer a:hover { color: var(--primary-color); }
 
-        /* Responsive */
         @media (max-width: 1100px) {
             header { flex-direction: column; gap: 15px; }
             .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; }
             .header-right-container { flex-direction: column; gap: 10px; }
             .stats-wrapper { flex-direction: column; }
             .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; }
-            .highlight-text::after { left: 50%; transform: translateX(-50%); width: 150px; }
             .cta-unique-box { border-radius: 20px; padding: 20px; }
-            .cta-unique-box p { font-size: 1.1rem; }
         }
-        @media (max-width: 768px) {
-            .video-grid { grid-template-columns: 1fr 1fr; }
-            .slider-container { height: 250px; }
-        }
-        @media (max-width: 480px) {
-            .video-grid { grid-template-columns: 1fr; }
-            .stats-right { grid-template-columns: 1fr; } 
-        }
+        @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
+        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
-    <!-- Header Section (CENTERED SEARCH LAYOUT) -->
     <header>
-        <!-- 1. Left: Logo -->
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
             <div class="header-text">
@@ -194,7 +118,6 @@
             </div>
         </div>
         
-        <!-- 2. Center: Search Bar -->
         <div class="header-center">
             <div class="search-box">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search videos...">
@@ -202,14 +125,8 @@
             </div>
         </div>
 
-        <!-- 3. Right: Button + Icons -->
         <div class="header-right-container">
-            <!-- Our Service Button -->
-            <a href="service.html" class="header-service-btn">
-                ✨ Our Service
-            </a>
-            
-            <!-- Social Icons -->
+            <a href="service.html" class="header-service-btn">✨ Our Service</a>
             <div class="social-group">
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
@@ -257,12 +174,10 @@
 
     <!-- UNIQUE CTA BOX -->
     <div class="cta-unique-box">
-        <p>
-            আমাদের সার্ভিস সম্বন্ধে জানতে <a href="service.html" class="cta-inline-btn">Our Service ✨</a> বাটনে চাপ দিন
-        </p>
+        <p>আমাদের সার্ভিস সম্বন্ধে জানতে <a href="service.html" class="cta-inline-btn">Our Service ✨</a> বাটনে চাপ দিন</p>
     </div>
 
-    <!-- STATS SECTION -->
+    <!-- STATS -->
     <div class="stats-wrapper">
         <div class="stats-left">
             <span class="stats-brand">Bangladesh Creator Media</span>
