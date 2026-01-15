@@ -12,21 +12,22 @@
         input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
         .section { background: #f9f9f9; padding: 20px; margin-bottom: 25px; border-radius: 5px; border: 1px solid #e0e0e0; }
-        
-        /* Stats Grid for Admin */
         .admin-stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         
         button { background: #0056b3; color: white; cursor: pointer; font-weight: bold; font-size: 1rem; border: none; }
         button:hover { background: #004494; }
         .logout-btn { background: #d9534f; margin-top: 20px; }
-        .logout-btn:hover { background: #c9302c; }
+        
+        .upload-group { display: flex; gap: 10px; align-items: center; }
+        .upload-btn { background: #28a745; width: auto; padding: 10px 20px; white-space: nowrap; cursor: pointer; }
+        .upload-status { font-size: 0.9rem; color: #666; margin-left: 10px; font-weight: bold; }
+
         #admin-panel { display: none; }
         #login-section { max-width: 400px; margin: 50px auto; text-align: center; }
     </style>
 </head>
 <body>
 
-    <!-- Login Section -->
     <div id="login-section" class="container">
         <h3>Admin Login</h3>
         <input type="email" id="email" placeholder="Admin Email">
@@ -34,31 +35,44 @@
         <button onclick="login()">Login</button>
     </div>
 
-    <!-- Main Admin Panel -->
     <div id="admin-panel" class="container">
         <h1>Website Control Panel</h1>
         
-        <!-- 1. Top Banners -->
         <div class="section">
             <h3>1. Top Full-Screen Banners</h3>
             <label>Banner 1:</label>
-            <input type="text" id="b1-img" placeholder="Image URL">
+            <div class="upload-group">
+                <input type="text" id="b1-img" placeholder="Image URL">
+                <input type="file" id="file-b1" style="display:none" onchange="uploadToImgBB(this, 'b1-img', 'status-b1')">
+                <button class="upload-btn" onclick="document.getElementById('file-b1').click()">📷 Upload</button>
+                <span id="status-b1" class="upload-status"></span>
+            </div>
             <input type="text" id="b1-link" placeholder="YouTube Link">
+
             <label>Banner 2:</label>
-            <input type="text" id="b2-img" placeholder="Image URL">
+            <div class="upload-group">
+                <input type="text" id="b2-img" placeholder="Image URL">
+                <input type="file" id="file-b2" style="display:none" onchange="uploadToImgBB(this, 'b2-img', 'status-b2')">
+                <button class="upload-btn" onclick="document.getElementById('file-b2').click()">📷 Upload</button>
+                <span id="status-b2" class="upload-status"></span>
+            </div>
             <input type="text" id="b2-link" placeholder="YouTube Link">
+
             <label>Banner 3:</label>
-            <input type="text" id="b3-img" placeholder="Image URL">
+            <div class="upload-group">
+                <input type="text" id="b3-img" placeholder="Image URL">
+                <input type="file" id="file-b3" style="display:none" onchange="uploadToImgBB(this, 'b3-img', 'status-b3')">
+                <button class="upload-btn" onclick="document.getElementById('file-b3').click()">📷 Upload</button>
+                <span id="status-b3" class="upload-status"></span>
+            </div>
             <input type="text" id="b3-link" placeholder="YouTube Link">
         </div>
 
-        <!-- 2. Video Grid -->
         <div class="section">
             <h3>2. Video Grid (6 Items)</h3>
             <div id="video-inputs"></div>
         </div>
 
-        <!-- 3. Text Content -->
         <div class="section">
             <h3>3. Important Text Sections</h3>
             <label>Section Title:</label>
@@ -67,32 +81,13 @@
             <textarea id="txt-desc" rows="5" placeholder="Content..."></textarea>
         </div>
 
-        <!-- 4. STATISTICS SECTION (NEW) -->
         <div class="section">
-            <h3>4. Company Statistics (Bottom Section)</h3>
-            <p style="font-size: 0.9rem; color: #666;">Edit the numbers and labels for the stats section.</p>
-            
+            <h3>4. Statistics</h3>
             <div class="admin-stat-grid">
-                <div>
-                    <label>Box 1 (Greenish):</label>
-                    <input type="text" id="s1-num" placeholder="Number (e.g. 4+)">
-                    <input type="text" id="s1-lbl" placeholder="Label (e.g. Years Experience)">
-                </div>
-                <div>
-                    <label>Box 2 (Yellowish):</label>
-                    <input type="text" id="s2-num" placeholder="Number (e.g. 150+)">
-                    <input type="text" id="s2-lbl" placeholder="Label (e.g. Projects)">
-                </div>
-                <div>
-                    <label>Box 3 (White/Gray):</label>
-                    <input type="text" id="s3-num" placeholder="Number (e.g. 3+)">
-                    <input type="text" id="s3-lbl" placeholder="Label (e.g. Running Project)">
-                </div>
-                <div>
-                    <label>Box 4 (Dark Gray):</label>
-                    <input type="text" id="s4-num" placeholder="Number (e.g. 100%)">
-                    <input type="text" id="s4-lbl" placeholder="Label (e.g. Satisfaction)">
-                </div>
+                <div><label>Years Exp:</label><input type="text" id="s1-num"><input type="text" id="s1-lbl"></div>
+                <div><label>Projects:</label><input type="text" id="s2-num"><input type="text" id="s2-lbl"></div>
+                <div><label>Running:</label><input type="text" id="s3-num"><input type="text" id="s3-lbl"></div>
+                <div><label>Satisfaction:</label><input type="text" id="s4-num"><input type="text" id="s4-lbl"></div>
             </div>
         </div>
 
@@ -100,12 +95,15 @@
         <button onclick="logout()" class="logout-btn">Logout</button>
     </div>
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
+        // --- ⚠️ আপনার ImgBB API Key এখানে বসান ⚠️ ---
+        const imgbbAPI = "e229c99665293297a72d7330777b73c4"; 
+
+        // --- ⚠️ আপনার Firebase Config এখানে বসান ⚠️ ---
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -115,11 +113,28 @@
             appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
         };
 
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
         const auth = firebase.auth();
         const db = firebase.firestore();
+
+        // ImgBB Upload
+        function uploadToImgBB(input, targetId, statusId) {
+            const file = input.files[0];
+            const status = document.getElementById(statusId);
+            if (!file) return;
+            status.innerText = "Uploading...";
+            const formData = new FormData();
+            formData.append("image", file);
+            fetch(`https://api.imgbb.com/1/upload?key=${imgbbAPI}`, { method: "POST", body: formData })
+            .then(res => res.json())
+            .then(data => {
+                if(data.success) {
+                    document.getElementById(targetId).value = data.data.url;
+                    status.innerText = "Done! ✅";
+                    status.style.color = "green";
+                } else { alert("Error!"); status.innerText = "Failed"; }
+            });
+        }
 
         // Generate Video Inputs
         const vidContainer = document.getElementById('video-inputs');
@@ -128,13 +143,17 @@
                 <div style="margin-top:10px; border-top:1px dashed #ccc; padding-top:5px;">
                     <strong>Video ${i}</strong>
                     <input type="text" id="v${i}-title" placeholder="Title">
-                    <input type="text" id="v${i}-img" placeholder="Thumbnail URL">
+                    <div class="upload-group">
+                        <input type="text" id="v${i}-img" placeholder="Thumbnail URL">
+                        <input type="file" id="file-v${i}" style="display:none" onchange="uploadToImgBB(this, 'v${i}-img', 'status-v${i}')">
+                        <button class="upload-btn" onclick="document.getElementById('file-v${i}').click()">📷 Upload</button>
+                        <span id="status-v${i}" class="upload-status"></span>
+                    </div>
                     <input type="text" id="v${i}-link" placeholder="Video Link">
                 </div>
             `;
         }
 
-        // Auth Listener
         auth.onAuthStateChanged(user => {
             if(user) {
                 document.getElementById('login-section').style.display = 'none';
@@ -149,90 +168,13 @@
         function login() {
             const e = document.getElementById('email').value;
             const p = document.getElementById('password').value;
-            auth.signInWithEmailAndPassword(e, p).catch(err => alert("Error: " + err.message));
+            auth.signInWithEmailAndPassword(e, p).catch(err => alert(err.message));
         }
-
         function logout() { auth.signOut(); }
 
-        // Save Data
         function saveData() {
             const data = {
                 banners: [
                     { img: document.getElementById('b1-img').value, link: document.getElementById('b1-link').value },
                     { img: document.getElementById('b2-img').value, link: document.getElementById('b2-link').value },
                     { img: document.getElementById('b3-img').value, link: document.getElementById('b3-link').value }
-                ],
-                videos: [],
-                textSection: {
-                    title: document.getElementById('txt-title').value,
-                    desc: document.getElementById('txt-desc').value
-                },
-                // New Stats Data
-                stats: {
-                    s1: { num: document.getElementById('s1-num').value, lbl: document.getElementById('s1-lbl').value },
-                    s2: { num: document.getElementById('s2-num').value, lbl: document.getElementById('s2-lbl').value },
-                    s3: { num: document.getElementById('s3-num').value, lbl: document.getElementById('s3-lbl').value },
-                    s4: { num: document.getElementById('s4-num').value, lbl: document.getElementById('s4-lbl').value }
-                }
-            };
-
-            for(let i=1; i<=6; i++) {
-                data.videos.push({
-                    title: document.getElementById(`v${i}-title`).value,
-                    img: document.getElementById(`v${i}-img`).value,
-                    link: document.getElementById(`v${i}-link`).value
-                });
-            }
-
-            db.collection('siteContent').doc('homePage').set(data)
-                .then(() => alert('Website Updated Successfully!'))
-                .catch(err => alert('Error: ' + err.message));
-        }
-
-        // Load Data
-        function loadData() {
-            db.collection('siteContent').doc('homePage').get().then(doc => {
-                if(doc.exists) {
-                    const d = doc.data();
-                    
-                    // Load Banners & Text (Standard)
-                    if(d.banners) {
-                        d.banners.forEach((b, i) => {
-                            if(i<3) {
-                                document.getElementById(`b${i+1}-img`).value = b.img || '';
-                                document.getElementById(`b${i+1}-link`).value = b.link || '';
-                            }
-                        });
-                    }
-                    if(d.textSection) {
-                        document.getElementById('txt-title').value = d.textSection.title || '';
-                        document.getElementById('txt-desc').value = d.textSection.desc || '';
-                    }
-                    // Load Videos
-                    if(d.videos) {
-                        d.videos.forEach((v, index) => {
-                            let i = index + 1;
-                            if(i <= 6) {
-                                document.getElementById(`v${i}-title`).value = v.title || '';
-                                document.getElementById(`v${i}-img`).value = v.img || '';
-                                document.getElementById(`v${i}-link`).value = v.link || '';
-                            }
-                        });
-                    }
-                    // Load Stats (NEW)
-                    if(d.stats) {
-                        document.getElementById('s1-num').value = d.stats.s1?.num || '';
-                        document.getElementById('s1-lbl').value = d.stats.s1?.lbl || '';
-                        document.getElementById('s2-num').value = d.stats.s2?.num || '';
-                        document.getElementById('s2-lbl').value = d.stats.s2?.lbl || '';
-                        document.getElementById('s3-num').value = d.stats.s3?.num || '';
-                        document.getElementById('s3-lbl').value = d.stats.s3?.lbl || '';
-                        document.getElementById('s4-num').value = d.stats.s4?.num || '';
-                        document.getElementById('s4-lbl').value = d.stats.s4?.lbl || '';
-                    }
-                }
-            });
-        }
-    </script>
-</body>
-</html>
