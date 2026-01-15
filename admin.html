@@ -8,8 +8,8 @@
         body { font-family: sans-serif; padding: 20px; background: #f0f2f5; margin: 0; }
         .container { max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #333; }
-        h3 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 5px; }
-        .size-guide { color: #d9534f; font-size: 0.85rem; font-weight: bold; margin-bottom: 15px; display: block; }
+        h3 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 10px; }
+        .size-guide { color: #d9534f; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; display: block; }
         
         input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
@@ -20,12 +20,6 @@
         button:hover { background: #004494; }
         .logout-btn { background: #d9534f; margin-top: 20px; }
         .logout-btn:hover { background: #c9302c; }
-        
-        /* Upload Button Style */
-        .upload-group { display: flex; gap: 10px; align-items: center; }
-        .upload-btn { background: #28a745; width: auto; padding: 10px 20px; white-space: nowrap; cursor: pointer; }
-        .upload-btn:hover { background: #218838; }
-        .upload-status { font-size: 0.9rem; color: #666; margin-left: 10px; font-weight: bold; }
 
         #admin-panel { display: none; }
         #login-section { max-width: 400px; margin: 50px auto; text-align: center; }
@@ -48,40 +42,25 @@
         <!-- 1. Top Banners -->
         <div class="section">
             <h3>1. Top Full-Screen Banners</h3>
-            <span class="size-guide">ℹ️ Recommended Size: 1280 x 720 px (16:9 Ratio)</span>
+            <span class="size-guide">ℹ️ Paste Direct Image Link (URL) & YouTube Link</span>
             
             <label>Banner 1:</label>
-            <div class="upload-group">
-                <input type="text" id="b1-img" placeholder="Image URL (will auto-fill after upload)">
-                <input type="file" id="file-b1" style="display:none" onchange="uploadToImgBB(this, 'b1-img', 'status-b1')">
-                <button class="upload-btn" onclick="document.getElementById('file-b1').click()">📷 Upload Photo</button>
-                <span id="status-b1" class="upload-status"></span>
-            </div>
-            <input type="text" id="b1-link" placeholder="YouTube Link (e.g. https://youtu.be/...)">
+            <input type="text" id="b1-img" placeholder="Paste Image Link Here (https://...)">
+            <input type="text" id="b1-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 2:</label>
-            <div class="upload-group">
-                <input type="text" id="b2-img" placeholder="Image URL">
-                <input type="file" id="file-b2" style="display:none" onchange="uploadToImgBB(this, 'b2-img', 'status-b2')">
-                <button class="upload-btn" onclick="document.getElementById('file-b2').click()">📷 Upload Photo</button>
-                <span id="status-b2" class="upload-status"></span>
-            </div>
-            <input type="text" id="b2-link" placeholder="YouTube Link">
+            <input type="text" id="b2-img" placeholder="Paste Image Link Here (https://...)">
+            <input type="text" id="b2-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 3:</label>
-            <div class="upload-group">
-                <input type="text" id="b3-img" placeholder="Image URL">
-                <input type="file" id="file-b3" style="display:none" onchange="uploadToImgBB(this, 'b3-img', 'status-b3')">
-                <button class="upload-btn" onclick="document.getElementById('file-b3').click()">📷 Upload Photo</button>
-                <span id="status-b3" class="upload-status"></span>
-            </div>
-            <input type="text" id="b3-link" placeholder="YouTube Link">
+            <input type="text" id="b3-img" placeholder="Paste Image Link Here (https://...)">
+            <input type="text" id="b3-link" placeholder="Paste YouTube Link Here">
         </div>
 
         <!-- 2. Video Grid -->
         <div class="section">
             <h3>2. Video Grid (6 Items)</h3>
-            <span class="size-guide">ℹ️ Recommended Size: 1280 x 720 px (Standard YouTube Thumbnail)</span>
+            <span class="size-guide">ℹ️ Paste Title, Thumbnail Image Link & Video Link</span>
             <div id="video-inputs"></div>
         </div>
 
@@ -115,80 +94,32 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // --- ⚠️ আপনার ImgBB API Key এখানে বসান ⚠️ ---
-        const imgbbAPI = "এখানে_আপনার_IMGBB_KEY_বসবে"; 
-
-        // --- ⚠️ আপনার Firebase Config এখানে বসান ⚠️ ---
+        // --- আপনার দেওয়া কনফিগ এখানে বসানো হয়েছে ---
         const firebaseConfig = {
-            apiKey: "এখানে_আপনার_FIREBASE_API_KEY",
-            authDomain: "...",
-            projectId: "...",
-            storageBucket: "...",
-            messagingSenderId: "...",
-            appId: "..."
+          apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+          authDomain: "bangladesh-creator-media.firebaseapp.com",
+          projectId: "bangladesh-creator-media",
+          storageBucket: "bangladesh-creator-media.firebasestorage.app",
+          messagingSenderId: "261777783760",
+          appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
         };
 
+        // Firebase Initialize
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // ImgBB Upload Function
-        function uploadToImgBB(input, targetInputId, statusId) {
-            const file = input.files[0];
-            const statusSpan = document.getElementById(statusId);
-            
-            if (!file) return;
-            if (imgbbAPI.includes("IMGBB_KEY")) {
-                alert("Please put your ImgBB API Key in the admin.html code!");
-                return;
-            }
-
-            statusSpan.style.display = "inline";
-            statusSpan.style.color = "blue";
-            statusSpan.innerText = "Uploading...";
-
-            const formData = new FormData();
-            formData.append("image", file);
-
-            fetch(`https://api.imgbb.com/1/upload?key=${imgbbAPI}`, {
-                method: "POST",
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    document.getElementById(targetInputId).value = data.data.url;
-                    statusSpan.style.color = "green";
-                    statusSpan.innerText = "Done! ✅";
-                } else {
-                    statusSpan.style.color = "red";
-                    statusSpan.innerText = "Error!";
-                    alert("Upload Failed: " + (data.error ? data.error.message : "Unknown error"));
-                }
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                statusSpan.style.color = "red";
-                statusSpan.innerText = "Net Error!";
-            });
-        }
-
-        // Generate Video Inputs
+        // Generate Video Inputs (Manual Link Only)
         const vidContainer = document.getElementById('video-inputs');
         for(let i=1; i<=6; i++) {
             vidContainer.innerHTML += `
                 <div style="margin-top:15px; border-top:1px dashed #ccc; padding-top:10px;">
                     <strong>Video ${i}</strong>
-                    <input type="text" id="v${i}-title" placeholder="Title">
-                    <div class="upload-group">
-                        <input type="text" id="v${i}-img" placeholder="Thumbnail URL (or upload)">
-                        <input type="file" id="file-v${i}" style="display:none" onchange="uploadToImgBB(this, 'v${i}-img', 'status-v${i}')">
-                        <button class="upload-btn" onclick="document.getElementById('file-v${i}').click()">📷 Upload Photo</button>
-                        <span id="status-v${i}" class="upload-status"></span>
-                    </div>
-                    <input type="text" id="v${i}-link" placeholder="YouTube Video Link">
+                    <input type="text" id="v${i}-title" placeholder="Video Title">
+                    <input type="text" id="v${i}-img" placeholder="Paste Thumbnail Image Link Here">
+                    <input type="text" id="v${i}-link" placeholder="Paste YouTube Video Link">
                 </div>
             `;
         }
