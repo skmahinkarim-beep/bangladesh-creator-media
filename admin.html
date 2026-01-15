@@ -9,7 +9,9 @@
         .container { max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #333; }
         h3 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 10px; }
-        .size-guide { color: #d9534f; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; display: block; }
+        
+        /* Size Guide Style */
+        .size-hint { color: #d9534f; font-size: 0.8rem; font-weight: bold; margin-top: -5px; margin-bottom: 10px; display: block; }
         
         input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
@@ -42,25 +44,26 @@
         <!-- 1. Top Banners -->
         <div class="section">
             <h3>1. Top Full-Screen Banners</h3>
-            <span class="size-guide">ℹ️ Paste Direct Image Link (URL) & YouTube Link</span>
             
             <label>Banner 1:</label>
             <input type="text" id="b1-img" placeholder="Paste Image Link Here (https://...)">
+            <span class="size-hint">ℹ️ Recommended Size: 1920 x 600 px (Wide) or 1280 x 720 px</span>
             <input type="text" id="b1-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 2:</label>
             <input type="text" id="b2-img" placeholder="Paste Image Link Here (https://...)">
+            <span class="size-hint">ℹ️ Recommended Size: 1920 x 600 px (Wide) or 1280 x 720 px</span>
             <input type="text" id="b2-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 3:</label>
             <input type="text" id="b3-img" placeholder="Paste Image Link Here (https://...)">
+            <span class="size-hint">ℹ️ Recommended Size: 1920 x 600 px (Wide) or 1280 x 720 px</span>
             <input type="text" id="b3-link" placeholder="Paste YouTube Link Here">
         </div>
 
         <!-- 2. Video Grid -->
         <div class="section">
             <h3>2. Video Grid (6 Items)</h3>
-            <span class="size-guide">ℹ️ Paste Title, Thumbnail Image Link & Video Link</span>
             <div id="video-inputs"></div>
         </div>
 
@@ -94,24 +97,23 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // --- আপনার দেওয়া কনফিগ এখানে বসানো হয়েছে ---
+        // --- ⚠️ আপনার Firebase Config এখানে বসান ⚠️ ---
         const firebaseConfig = {
-          apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
-          authDomain: "bangladesh-creator-media.firebaseapp.com",
-          projectId: "bangladesh-creator-media",
-          storageBucket: "bangladesh-creator-media.firebasestorage.app",
-          messagingSenderId: "261777783760",
-          appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
         };
 
-        // Firebase Initialize
         if (!firebase.apps.length) {
             firebase.initializeApp(firebaseConfig);
         }
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Generate Video Inputs (Manual Link Only)
+        // Generate Video Inputs (With Size Hint)
         const vidContainer = document.getElementById('video-inputs');
         for(let i=1; i<=6; i++) {
             vidContainer.innerHTML += `
@@ -119,6 +121,7 @@
                     <strong>Video ${i}</strong>
                     <input type="text" id="v${i}-title" placeholder="Video Title">
                     <input type="text" id="v${i}-img" placeholder="Paste Thumbnail Image Link Here">
+                    <span class="size-hint">ℹ️ Size: 1280 x 720 px (Standard YouTube Thumbnail)</span>
                     <input type="text" id="v${i}-link" placeholder="Paste YouTube Video Link">
                 </div>
             `;
