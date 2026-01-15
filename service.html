@@ -53,12 +53,43 @@
         .welcome-box h2 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 700; line-height: 1.4; }
         .welcome-box p { font-size: 1.1rem; opacity: 0.9; }
 
-        /* SERVICE GRID (Updated) */
-        .service-container { max-width: 1100px; margin: 40px auto 80px; padding: 0 20px; }
+        /* SERVICE GRID */
+        .service-container { max-width: 1100px; margin: 40px auto 40px; padding: 0 20px; }
         .service-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .service-card { background: white; padding: 20px; border-radius: 12px; text-align: center; font-weight: 700; color: #444; box-shadow: 0 4px 10px rgba(0,0,0,0.05); transition: all 0.3s ease; border-bottom: 4px solid transparent; cursor: pointer; position: relative; overflow: hidden; }
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); color: var(--primary-color); border-bottom-color: var(--primary-color); }
         .service-card:nth-child(odd) { border-right: 4px solid #e0e0e0; } .service-card:nth-child(even) { border-left: 4px solid #e0e0e0; }
+
+        /* NEW CUSTOM MESSAGE BOX */
+        .custom-message-box {
+            max-width: 900px;
+            margin: 60px auto 80px; /* Adjust margin */
+            padding: 35px;
+            background: linear-gradient(135deg, #e0f2f7 0%, #c1e0eb 100%); /* Light blue gradient */
+            border: 2px solid #0056b3;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.1);
+            color: #222;
+        }
+        .custom-message-box p {
+            font-size: 1.15rem;
+            font-weight: 600;
+            line-height: 1.7;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        .custom-message-box .email-link {
+            font-size: 1.15rem;
+            color: #0056b3;
+            font-weight: bold;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        .custom-message-box .email-link:hover {
+            color: #003d80;
+            text-decoration: underline;
+        }
 
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
         footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
@@ -147,6 +178,16 @@
             <div class="service-card">স্ন্যাপ চ্যাট</div>
             <div class="service-card">মুভি / সিরিজ</div>
         </div>
+    </div>
+
+    <!-- NEW CUSTOM MESSAGE BOX -->
+    <div class="custom-message-box">
+        <p>
+            অসংখ্য ধন্যবাদ স্যার/ম্যাম। আপনার প্রয়োজনীয় সার্ভিসের বিস্তারিত ও যোগাযোগের মাধ্যম (মোবাইল নম্বর/ইমেইল) নিচের ইমেইলে পাঠান। আমাদের প্রতিনিধি ২৪ ঘণ্টার মধ্যে আপনার সাথে যোগাযোগ করবে।
+        </p>
+        <p>
+            📧 <a href="mailto:skmahinkarim2003@gmail.com" class="email-link">skmahinkarim2003@gmail.com</a>
+        </p>
     </div>
 
     <footer>
