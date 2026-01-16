@@ -1,18 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-64QZM220P0');
+    </script>
+
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Internet Speed Test - BCM Tools</title>
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png">
+    
     <style>
-        body { font-family: sans-serif; background: #000; text-align: center; margin: 0; padding: 0; height: 100vh; overflow: hidden; }
+        :root { --primary: #0056b3; --bg: #f0f2f5; }
+        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
+
+        /* HEADER TEXT BOX */
+        .header-box {
+            max-width: 800px;
+            margin: 20px auto 40px;
+            background: linear-gradient(135deg, #1cb5e0, #000046); /* Blue/Dark Theme for Speed */
+            color: white;
+            padding: 40px 20px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0, 0, 70, 0.3);
+            border: 2px solid rgba(255,255,255,0.2);
+        }
+        .header-top { font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 1px; text-transform: uppercase; background: rgba(255,255,255,0.1); display: inline-block; padding: 5px 15px; border-radius: 50px; margin-bottom: 10px; }
+        .header-brand { font-size: 2rem; font-weight: 800; margin: 5px 0; }
+        .header-sub { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: #fff; }
+        .header-desc { font-size: 1.05rem; opacity: 0.95; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+
+        /* SPEED TEST BOX */
+        .tool-box {
+            background: white;
+            max-width: 800px;
+            height: 500px;
+            margin: 0 auto;
+            border-radius: 25px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+            border: 1px solid #e1e4e8;
+        }
         iframe { width: 100%; height: 100%; border: none; }
-        .back-btn { position: absolute; top: 20px; left: 20px; color: white; background: rgba(255,255,255,0.2); padding: 10px 20px; text-decoration: none; border-radius: 5px; font-weight: bold; }
+
+        /* BACK BUTTON */
+        .back-container { margin-top: 50px; text-align: center; }
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            color: var(--primary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid var(--primary);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+        }
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.2);
+        }
+
+        @media (max-width: 600px) {
+            .header-brand { font-size: 1.5rem; }
+            .tool-box { height: 400px; }
+        }
     </style>
 </head>
 <body>
-    <a href="tools.html" class="back-btn">← Back to Tools</a>
-    <!-- Embedding Fast.com -->
-    <iframe src="https://fast.com"></iframe>
+
+    <!-- Header Text Box -->
+    <div class="header-box">
+        <div class="header-top">🚀 Internet Speed Test</div>
+        <h1 class="header-brand">Bangladesh Creator Media</h1>
+        <div class="header-sub">আপনার ইন্টারনেটের গতি যাচাই করুন</div>
+        <p class="header-desc">
+            নিচে লোড হওয়া মিটারে আপনার ইন্টারনেট স্পিড দেখুন। এটি সম্পূর্ণ ফ্রি এবং রিয়েল-টাইম রেজাল্ট দেয়।<br>
+            (Powered by Fast.com)
+        </p>
+    </div>
+
+    <!-- Main Tool (Embed) -->
+    <div class="tool-box">
+        <iframe src="https://fast.com"></iframe>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-container">
+        <a href="tools.html" class="back-btn">
+            <span>🔙</span> Back to Tools
+        </a>
+    </div>
+
 </body>
 </html>
