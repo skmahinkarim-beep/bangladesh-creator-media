@@ -48,10 +48,65 @@
         /* AD CONTAINER */
         .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* WELCOME BOX */
-        .welcome-box { max-width: 900px; margin: 30px auto; padding: 30px; background: linear-gradient(135deg, #0056b3 0%, #0088cc 100%); color: white; border-radius: 15px; text-align: center; box-shadow: 0 10px 25px rgba(0, 86, 179, 0.2); border: 2px solid #fff; }
-        .welcome-box h2 { font-size: 1.5rem; margin-bottom: 15px; font-weight: 700; line-height: 1.4; }
-        .welcome-box p { font-size: 1.1rem; opacity: 0.9; }
+        /* --- REDESIGNED WELCOME BOX --- */
+        .welcome-box {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 40px 30px;
+            background: linear-gradient(135deg, #0056b3 0%, #004494 100%);
+            color: white;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 30px rgba(0, 86, 179, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        /* Background Shape Decoration */
+        .welcome-box::before {
+            content: '';
+            position: absolute;
+            top: -50px; right: -50px;
+            width: 150px; height: 150px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+        .welcome-box::after {
+            content: '';
+            position: absolute;
+            bottom: -30px; left: -30px;
+            width: 100px; height: 100px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .welcome-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+        .welcome-subtitle {
+            font-size: 1.2rem;
+            font-weight: 500;
+            margin-bottom: 20px;
+            opacity: 0.95;
+        }
+        .highlight {
+            color: #ff9800; /* Orange highlight */
+            font-weight: 800;
+        }
+        .welcome-desc {
+            font-size: 1rem;
+            opacity: 0.8;
+            font-weight: 400;
+            max-width: 700px;
+            margin: 0 auto;
+            border-top: 1px solid rgba(255,255,255,0.3);
+            padding-top: 15px;
+        }
 
         /* SERVICE GRID */
         .service-container { max-width: 1100px; margin: 40px auto 60px; padding: 0 20px; }
@@ -60,90 +115,19 @@
         .service-card:hover { transform: translateY(-5px); box-shadow: 0 10px 20px rgba(0,0,0,0.1); color: var(--primary-color); border-bottom-color: var(--primary-color); }
         .service-card:nth-child(odd) { border-right: 4px solid #e0e0e0; } .service-card:nth-child(even) { border-left: 4px solid #e0e0e0; }
 
-        /* CONTACT INSTRUCTION BOX */
-        .contact-instruction {
-            max-width: 900px;
-            margin: 0 auto 60px;
-            padding: 40px;
-            background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            border: 2px solid #eef2f5;
-        }
-        .contact-instruction::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 6px;
-            background: linear-gradient(90deg, #ff9800, #ff5722, #0056b3);
-        }
-        .contact-instruction p {
-            font-size: 1.2rem;
-            color: #444;
-            margin-bottom: 25px;
-            font-weight: 600;
-            line-height: 1.8;
-        }
-        .contact-email {
-            font-size: 1.3rem;
-            font-weight: 700;
-            color: white;
-            text-decoration: none;
-            background: linear-gradient(45deg, #0056b3, #0088cc);
-            padding: 12px 30px;
-            border-radius: 50px;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3);
-            transition: all 0.3s ease;
-        }
-        .contact-email:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4);
-        }
+        /* CONTACT BOX */
+        .contact-instruction { max-width: 900px; margin: 0 auto 80px; padding: 40px; background: #fff; border-radius: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center; position: relative; overflow: hidden; border: 2px solid #eef2f5; }
+        .contact-instruction::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 6px; background: linear-gradient(90deg, #ff9800, #ff5722, #0056b3); }
+        .contact-instruction p { font-size: 1.2rem; color: #444; margin-bottom: 25px; font-weight: 600; line-height: 1.8; }
+        .contact-email { font-size: 1.3rem; font-weight: 700; color: white; text-decoration: none; background: linear-gradient(45deg, #0056b3, #0088cc); padding: 12px 30px; border-radius: 50px; display: inline-flex; align-items: center; gap: 10px; box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3); transition: all 0.3s ease; }
+        .contact-email:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4); }
 
-        /* --- UNIQUE WHATSAPP BOX --- */
-        .whatsapp-box {
-            margin-top: 20px;
-            padding: 20px;
-            background: linear-gradient(135deg, #25D366, #128C7E);
-            color: white;
-            border-radius: 12px;
-            text-align: center;
-            box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
-            text-decoration: none;
-            display: block;
-            transition: transform 0.3s ease;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        .whatsapp-box:hover {
-            transform: scale(1.05);
-            box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4);
-        }
-        .whatsapp-title {
-            font-size: 1.2rem;
-            font-weight: 700;
-            margin-bottom: 5px;
-            display: block;
-        }
-        .whatsapp-number {
-            font-size: 1.5rem;
-            font-weight: 900;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-        .whatsapp-icon {
-            width: 30px;
-            height: 30px;
-            fill: white;
-        }
+        /* WHATSAPP BOX */
+        .whatsapp-box { margin-top: 20px; padding: 20px; background: linear-gradient(135deg, #25D366, #128C7E); color: white; border-radius: 12px; text-align: center; box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3); text-decoration: none; display: block; transition: transform 0.3s ease; max-width: 400px; margin-left: auto; margin-right: auto; }
+        .whatsapp-box:hover { transform: scale(1.05); box-shadow: 0 12px 25px rgba(37, 211, 102, 0.4); }
+        .whatsapp-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; display: block; }
+        .whatsapp-number { font-size: 1.5rem; font-weight: 900; display: flex; align-items: center; justify-content: center; gap: 10px; }
+        .whatsapp-icon { width: 30px; height: 30px; fill: white; }
 
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
         footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
@@ -202,10 +186,11 @@
         <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
 
-    <!-- Welcome Message -->
+    <!-- Redesigned Welcome Box -->
     <div class="welcome-box">
-        <h2>আসসালামুয়ালাইকুম প্রিয় গ্রাহক আপনাকে অসংখ্য ধন্যবাদ, বাংলাদেশ ক্রিয়েটার মিডিয়ার সেবা সম্বন্ধে জানার জন্য এবং সার্ভিস গ্রহণ করার জন্য।</h2>
-        <p>আপনি কোন প্লাটফর্মে সার্ভিস করাতে চান তা নির্বাচন করুন। নির্বাচন করলে আপনারা দেখতে পারবেন ওই প্ল্যাটফর্মে আমাদের কি কি সার্ভিস এভেলেবেল আছে।</p>
+        <h2 class="welcome-title">আসসালামু আলাইকুম <span class="highlight">প্রিয় গ্রাহক</span></h2>
+        <p class="welcome-subtitle">বাংলাদেশ ক্রিয়েটার মিডিয়ার সেবা সম্বন্ধে জানার এবং গ্রহণ করার জন্য আপনাকে ধন্যবাদ</p>
+        <p class="welcome-desc">আমাদের এ সকল সার্ভিসগুলো বর্তমানে উপলব্ধ রয়েছে; বিস্তারিত তথ্য পেতে পেজের নিচে দেখুন।</p>
     </div>
 
     <!-- Service List (All Options Included) -->
