@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Google Analytics Code (Corrected) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -12,39 +13,77 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bangladesh Creator Media</title>
+    <meta name="description" content="Science & Technology News Hub in Bangladesh.">
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
-        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
+        /* CSS Variables */
+        :root {
+            --primary-color: #0056b3;
+            --text-color: #333;
+            --bg-color: #f8f9fa;
+        }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
-        /* HEADER */
-        header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
+        /* HEADER STYLES */
+        header { 
+            background: #fff; 
+            padding: 10px 30px; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 15px; 
+            position: relative; 
+            z-index: 100; 
+        }
+
+        /* Left: Logo & Text */
         .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
         .header-text p { font-size: 0.8rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
+        /* Center: Search Bar */
         .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
         .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
 
+        /* Right: Button + Socials */
         .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
-        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; }
+        
+        .header-service-btn { 
+            background: linear-gradient(45deg, #ff9800, #ff5722); 
+            color: white; 
+            padding: 8px 20px; 
+            border-radius: 30px; 
+            text-decoration: none; 
+            font-weight: 700; 
+            font-size: 0.9rem; 
+            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); 
+            transition: 0.3s; 
+            white-space: nowrap; 
+        }
         .header-service-btn:hover { transform: translateY(-2px); }
 
         .social-group { display: flex; gap: 8px; }
         .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-icon:hover { transform: translateY(-3px); }
         .social-icon svg { width: 18px; height: 18px; fill: white; }
-        .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
+        
+        /* Brand Colors */
+        .bg-yt { background: #FF0000; } 
+        .bg-fb { background: #1877F2; } 
+        .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } 
+        .bg-tk { background: #000000; } 
+        .bg-tg { background: #0088cc; }
 
         /* NAV */
         nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
-        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
+        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
@@ -58,32 +97,35 @@
         .section-container { max-width: 1150px; margin: 80px auto 40px; padding: 0 20px; }
         .section-title { font-size: 2rem; color: #222; margin-bottom: 30px; position: relative; padding-left: 20px; font-weight: 800; }
         .section-title::before { content: ''; position: absolute; left: 0; top: 5px; height: 80%; width: 6px; background: var(--primary-color); border-radius: 3px; }
+        
         .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .video-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: none; }
         .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
         .vid-thumb { width: 100%; height: 200px; object-fit: cover; }
         .vid-title { padding: 15px 20px; font-size: 1.1rem; font-weight: 700; color: #333; text-decoration: none; display: block; }
         
-        .text-box { background: #fff; padding: 40px; border-radius: 15px; border-left: 8px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .text-box h2 { margin-top: 0; color: var(--primary-color); font-weight: 800; font-size: 2rem; }
+        /* TEXT BOXES */
+        .text-box { background: #fff; padding: 40px; border-radius: 15px; border-left: 8px solid var(--primary-color); box-shadow: 0 5px 15px rgba(0,0,0,0.05); margin-bottom: 30px; }
+        .text-box h2 { margin-top: 0; color: var(--primary-color); font-weight: 800; font-size: 1.8rem; margin-bottom: 15px; }
+        .text-box p { white-space: pre-line; font-size: 1.1rem; line-height: 1.8; color: #444; }
 
-        /* UNIQUE CTA */
+        /* UNIQUE CTA BOX */
         .cta-unique-box { max-width: 1000px; margin: 60px auto 30px; padding: 25px 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border: 2px solid #0056b3; border-radius: 60px; text-align: center; box-shadow: 0 10px 30px rgba(0, 86, 179, 0.15); position: relative; overflow: hidden; animation: pulse-border 3s infinite; }
         .cta-unique-box p { font-size: 1.4rem; font-weight: 700; color: #333; margin: 0; line-height: 1.5; }
-        .cta-inline-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 5px 20px; border-radius: 20px; text-decoration: none; display: inline-block; transition: transform 0.2s; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); margin: 0 5px; vertical-align: middle; }
-        .cta-inline-btn:hover { transform: scale(1.1); color: white; }
+        .cta-inline-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 5px 20px; border-radius: 20px; text-decoration: none; display: inline-block; transition: 0.2s; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); margin: 0 5px; vertical-align: middle; }
+        .cta-inline-btn:hover { transform: scale(1.1); }
         @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 86, 179, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0); } }
 
         /* STATS */
         .stats-wrapper { max-width: 1150px; margin: 0 auto 80px; padding: 0 20px; display: flex; gap: 50px; align-items: center; }
         .stats-left { flex: 1; padding-right: 20px; }
-        .stats-brand { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 10px; display: block; }
+        .stats-brand { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; display: block; }
         .stats-heading { font-size: 2.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 25px; color: #222; }
         .highlight-text { color: var(--primary-color); position: relative; }
         .stats-desc { font-size: 1.05rem; line-height: 1.7; color: #555; margin-bottom: 20px; }
         .stats-right { flex: 1.2; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-        .stat-card { border-radius: 20px; padding: 35px 25px; text-align: center; color: white; transition: all 0.4s ease; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
-        .stat-card:hover { transform: translateY(-10px) scale(1.02); }
+        .stat-card { border-radius: 20px; padding: 35px 25px; text-align: center; color: white; transition: 0.4s; box-shadow: 0 10px 20px rgba(0,0,0,0.1); display: flex; flex-direction: column; justify-content: center; align-items: center; }
+        .stat-card:hover { transform: translateY(-10px); }
         .stat-number { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; }
         .stat-label { font-size: 1rem; font-weight: 600; text-transform: uppercase; opacity: 0.9; }
         .card-style-1 { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); }
@@ -95,20 +137,14 @@
         footer a { color: #aaa; text-decoration: none; margin: 0 15px; font-weight: 600; transition: 0.3s; }
         footer a:hover { color: var(--primary-color); }
 
-        @media (max-width: 1100px) {
-            header { flex-direction: column; gap: 15px; }
-            .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; }
-            .header-right-container { flex-direction: column; gap: 10px; }
-            .stats-wrapper { flex-direction: column; }
-            .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; }
-            .cta-unique-box { border-radius: 20px; padding: 20px; }
-        }
+        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; } .stats-wrapper { flex-direction: column; } .stats-left { padding: 0; text-align: center; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
         @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
         @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <header>
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
@@ -165,14 +201,14 @@
         </div>
     </div>
 
-    <!-- Text Section -->
+    <!-- 3 Text Sections -->
     <div class="section-container">
-        <div class="text-box" id="text-box">
-            <h2>Loading...</h2><p>Please wait...</p>
-        </div>
+        <div class="text-box" id="text-box"><h2>Loading...</h2></div>
+        <div class="text-box" id="text-box-2" style="margin-top:30px; display:none;"></div>
+        <div class="text-box" id="text-box-3" style="margin-top:30px; display:none;"></div>
     </div>
 
-    <!-- UNIQUE CTA BOX -->
+    <!-- CTA -->
     <div class="cta-unique-box">
         <p>আমাদের সার্ভিস সম্বন্ধে জানতে <a href="service.html" class="cta-inline-btn">Our Service ✨</a> বাটনে চাপ দিন</p>
     </div>
@@ -183,7 +219,6 @@
             <span class="stats-brand">Bangladesh Creator Media</span>
             <h2 class="stats-heading">All Works Run <span class="highlight-text">Smoothly.</span></h2>
             <p class="stats-desc">Bangladesh Creator Media is a technology-driven creative platform focused on delivering smart digital solutions. We specialize in content creation and media management.</p>
-            <p class="stats-desc">We approach every project with clarity, precision, and dedication—ensuring smooth workflows and consistent results.</p>
         </div>
         <div class="stats-right">
             <div class="stat-card card-style-1"><span class="stat-number" id="s1-num">4+</span><span class="stat-label" id="s1-lbl">Years Experience</span></div>
@@ -203,6 +238,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
+        // --- ⚠️ আপনার নির্দিষ্ট Firebase Config ⚠️ ---
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -220,6 +256,8 @@
         db.collection('siteContent').doc('homePage').onSnapshot((doc) => {
             if(doc.exists) {
                 const data = doc.data();
+
+                // Slider
                 const sliderBox = document.getElementById('slider-box');
                 let slidesHtml = '';
                 let hasSlides = false;
@@ -238,12 +276,35 @@
                 } else {
                     sliderBox.innerHTML = '<div style="display:flex;justify-content:center;align-items:center;height:100%;color:white;"><h3>No Banners Added Yet</h3></div>';
                 }
+
+                // Videos
                 window.allVideos = data.videos || [];
                 renderVideos(window.allVideos);
+
+                // 3 Text Sections Logic
                 if(data.textSection) {
-                    const txtBox = document.getElementById('text-box');
-                    txtBox.innerHTML = `<h2>${data.textSection.title || 'Welcome'}</h2><p>${data.textSection.desc || 'No content available.'}</p>`;
+                    document.getElementById('text-box').innerHTML = `<h2>${data.textSection.title || 'Welcome'}</h2><p>${data.textSection.desc || 'No content available.'}</p>`;
                 }
+                
+                // Box 2
+                const box2 = document.getElementById('text-box-2');
+                if(data.textSection2 && data.textSection2.title) {
+                    box2.innerHTML = `<h2>${data.textSection2.title}</h2><p>${data.textSection2.desc}</p>`;
+                    box2.style.display = 'block';
+                } else {
+                    box2.style.display = 'none';
+                }
+
+                // Box 3
+                const box3 = document.getElementById('text-box-3');
+                if(data.textSection3 && data.textSection3.title) {
+                    box3.innerHTML = `<h2>${data.textSection3.title}</h2><p>${data.textSection3.desc}</p>`;
+                    box3.style.display = 'block';
+                } else {
+                    box3.style.display = 'none';
+                }
+
+                // Stats
                 if(data.stats) {
                     if(data.stats.s1) { document.getElementById('s1-num').innerText = data.stats.s1.num; document.getElementById('s1-lbl').innerText = data.stats.s1.lbl; }
                     if(data.stats.s2) { document.getElementById('s2-num').innerText = data.stats.s2.num; document.getElementById('s2-lbl').innerText = data.stats.s2.lbl; }
