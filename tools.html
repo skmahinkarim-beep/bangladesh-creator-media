@@ -20,29 +20,36 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
-        /* HEADER & NAV (Standard) */
+        /* HEADER STYLES */
         header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
         .header-text p { font-size: 0.8rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+
         .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
         .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
+
         .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
         .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; }
+        .header-service-btn:hover { transform: translateY(-2px); }
+
         .social-group { display: flex; gap: 8px; }
         .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .social-icon:hover { transform: translateY(-3px); }
+        .social-icon svg { width: 18px; height: 18px; fill: white; }
         .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
-        
+
+        /* NAV */
         nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
         nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
-        /* --- UPDATED WELCOME BOX (Better Typography) --- */
+        /* --- UPDATED WELCOME BOX (New Pattern) --- */
         .welcome-box { 
             max-width: 900px; 
             margin: 40px auto; 
@@ -54,11 +61,20 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); 
             border: 1px solid rgba(255, 255, 255, 0.2); 
         }
+        .main-brand { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: #ffcc00; /* Yellow Highlight */
+            text-transform: uppercase; 
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 5px;
+        }
         .welcome-title { 
-            font-size: 1.8rem; 
+            font-size: 2rem; 
             font-weight: 700; 
-            margin-bottom: 15px; 
-            line-height: 1.4;
+            margin-bottom: 20px; 
+            line-height: 1.3;
         }
         .welcome-desc { 
             font-size: 1.1rem; 
@@ -67,15 +83,19 @@
             line-height: 1.8; 
             max-width: 800px;
         }
-        .welcome-desc strong {
-            color: #ffcc00; /* Highlight important text */
+        .highlight-text {
+            color: #fff; 
             font-weight: 600;
+            background: rgba(255,255,255,0.2);
+            padding: 2px 8px;
+            border-radius: 5px;
         }
         .divider-line {
-            width: 50%;
-            height: 1px;
+            width: 40%;
+            height: 2px;
             background: rgba(255,255,255,0.3);
-            margin: 20px auto;
+            margin: 25px auto;
+            border-radius: 2px;
         }
 
         /* TOOLS GRID */
@@ -96,7 +116,7 @@
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
         footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
 
-        @media (max-width: 900px) { header { flex-direction: column; } .header-center { width: 100%; order: 2; flex-direction: column; gap: 10px; } }
+        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; } }
     </style>
 </head>
 <body>
@@ -109,12 +129,14 @@
                 <p>Connecting Science, Technology & Innovation</p>
             </div>
         </div>
+        
         <div class="header-center">
             <div class="search-box">
                 <input type="text" class="search-input" placeholder="Search videos...">
                 <button class="search-btn">🔍</button>
             </div>
         </div>
+
         <div class="header-right-container">
             <a href="service.html" class="header-service-btn">✨ Our Service</a>
             <div class="social-group">
@@ -141,12 +163,13 @@
 
     <!-- UPDATED WELCOME BOX -->
     <div class="welcome-box">
-        <h2 class="welcome-title">স্বাগতম <span style="color:#ffcc00;">Bangladesh Creator Media (BCM)</span> এর Free Tools পেজে</h2>
+        <span class="main-brand">Bangladesh Creator Media</span>
+        <h2 class="welcome-title">স্বাগতম <span style="color:#ffcc00;">Free Tools</span> পেজে</h2>
         <p class="welcome-desc">
             এখানে আপনি পাবেন দৈনন্দিন কাজকে সহজ করার জন্য প্রয়োজনীয় কিছু ফ্রি, দ্রুত ও নিরাপদ অনলাইন টুলস—কোনো রেজিস্ট্রেশন ছাড়াই।
         </p>
         <div class="divider-line"></div>
-        <p class="welcome-desc"><strong>আমাদের লক্ষ্য একটাই—আপনার সময় বাঁচানো এবং এক ক্লিকে কাজ শেষ করা।</strong></p>
+        <p class="welcome-desc"><span class="highlight-text">আমাদের লক্ষ্য একটাই—আপনার সময় বাঁচানো এবং এক ক্লিকে কাজ শেষ করা।</span></p>
     </div>
 
     <!-- Tools List -->
