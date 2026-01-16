@@ -9,7 +9,16 @@
         .container { max-width: 800px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
         h1 { text-align: center; color: #333; }
         h3 { color: #0056b3; border-bottom: 2px solid #eee; padding-bottom: 10px; margin-top: 30px; margin-bottom: 10px; }
-        .size-guide { color: #d9534f; font-size: 0.85rem; font-weight: bold; margin-bottom: 10px; display: block; }
+        
+        /* Size Guide Style - RED COLOR */
+        .size-guide { 
+            color: #d9534f; 
+            font-size: 0.85rem; 
+            font-weight: bold; 
+            margin-top: -5px; 
+            margin-bottom: 10px; 
+            display: block; 
+        }
         
         input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
@@ -39,54 +48,57 @@
     <div id="admin-panel" class="container">
         <h1>Website Control Panel</h1>
         
-        <!-- 1. BREAKING NEWS (NEW SECTION) -->
-        <div class="section" style="border-left: 5px solid #ff0000;">
+        <!-- 1. BREAKING NEWS -->
+        <div class="section" style="border-left: 5px solid #ff0000; background: #fff5f5;">
             <h3 style="margin-top: 0; color: #d32f2f;">📢 Breaking News Ticker</h3>
-            <label>News Text:</label>
-            <input type="text" id="breaking-news" placeholder="Write your breaking news here... (Leave empty to hide)">
-            <span class="size-guide" style="color: #666; font-weight: normal;">* This text will scroll below the menu bar.</span>
+            <label>Scrolling Text:</label>
+            <input type="text" id="breaking-news" placeholder="Write breaking news here... (Leave empty to hide ticker)">
         </div>
 
         <!-- 2. Top Banners -->
         <div class="section">
             <h3>2. Top Full-Screen Banners</h3>
-            <span class="size-guide">ℹ️ Paste Direct Image Link (URL) & YouTube Link</span>
             
             <label>Banner 1:</label>
             <input type="text" id="b1-img" placeholder="Paste Image Link Here">
+            <span class="size-guide">ℹ️ Recommended Size: 1920 x 600 px (Wide Banner)</span>
             <input type="text" id="b1-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 2:</label>
             <input type="text" id="b2-img" placeholder="Paste Image Link Here">
+            <span class="size-guide">ℹ️ Recommended Size: 1920 x 600 px (Wide Banner)</span>
             <input type="text" id="b2-link" placeholder="Paste YouTube Link Here">
 
             <label>Banner 3:</label>
             <input type="text" id="b3-img" placeholder="Paste Image Link Here">
+            <span class="size-guide">ℹ️ Recommended Size: 1920 x 600 px (Wide Banner)</span>
             <input type="text" id="b3-link" placeholder="Paste YouTube Link Here">
         </div>
 
         <!-- 3. Video Grid -->
         <div class="section">
             <h3>3. Video Grid (6 Items)</h3>
-            <span class="size-guide">ℹ️ Paste Title, Thumbnail Image Link & Video Link</span>
             <div id="video-inputs"></div>
         </div>
 
-        <!-- 4. Text Content -->
+        <!-- 4. Text Content (3 BOXES) -->
         <div class="section">
             <h3>4. Important Text Sections</h3>
+            
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px;">
-                <label style="margin-top:0;">Text Box 1:</label>
+                <label style="margin-top:0;">Text Box 1 (Title & Content):</label>
                 <input type="text" id="txt-title" placeholder="Title 1">
                 <textarea id="txt-desc" rows="4" placeholder="Content 1..."></textarea>
             </div>
+
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px;">
-                <label style="margin-top:0;">Text Box 2:</label>
+                <label style="margin-top:0;">Text Box 2 (Title & Content):</label>
                 <input type="text" id="txt-title-2" placeholder="Title 2">
                 <textarea id="txt-desc-2" rows="4" placeholder="Content 2..."></textarea>
             </div>
+
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
-                <label style="margin-top:0;">Text Box 3:</label>
+                <label style="margin-top:0;">Text Box 3 (Title & Content):</label>
                 <input type="text" id="txt-title-3" placeholder="Title 3">
                 <textarea id="txt-desc-3" rows="4" placeholder="Content 3..."></textarea>
             </div>
@@ -113,7 +125,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // --- ⚠️ আপনার Firebase Config এখানে বসান ⚠️ ---
+        // --- আপনার Firebase Config এখানে বসানো আছে ---
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -129,7 +141,7 @@
         const auth = firebase.auth();
         const db = firebase.firestore();
 
-        // Generate Video Inputs
+        // Generate Video Inputs with Size Hint
         const vidContainer = document.getElementById('video-inputs');
         for(let i=1; i<=6; i++) {
             vidContainer.innerHTML += `
@@ -137,6 +149,7 @@
                     <strong>Video ${i}</strong>
                     <input type="text" id="v${i}-title" placeholder="Video Title">
                     <input type="text" id="v${i}-img" placeholder="Paste Thumbnail Link">
+                    <span class="size-guide">ℹ️ Recommended Size: 1280 x 720 px (YouTube Thumbnail)</span>
                     <input type="text" id="v${i}-link" placeholder="Paste YouTube Link">
                 </div>
             `;
@@ -166,16 +179,18 @@
 
         function saveData() {
             const data = {
-                breakingNews: document.getElementById('breaking-news').value, // Saving News
+                breakingNews: document.getElementById('breaking-news').value,
                 banners: [
                     { img: document.getElementById('b1-img').value, link: document.getElementById('b1-link').value },
                     { img: document.getElementById('b2-img').value, link: document.getElementById('b2-link').value },
                     { img: document.getElementById('b3-img').value, link: document.getElementById('b3-link').value }
                 ],
                 videos: [],
+                // Saving 3 Text Sections
                 textSection: { title: document.getElementById('txt-title').value, desc: document.getElementById('txt-desc').value },
                 textSection2: { title: document.getElementById('txt-title-2').value, desc: document.getElementById('txt-desc-2').value },
                 textSection3: { title: document.getElementById('txt-title-3').value, desc: document.getElementById('txt-desc-3').value },
+                
                 stats: {
                     s1: { num: document.getElementById('s1-num').value, lbl: document.getElementById('s1-lbl').value },
                     s2: { num: document.getElementById('s2-num').value, lbl: document.getElementById('s2-lbl').value },
@@ -220,9 +235,11 @@
                             }
                         });
                     }
+                    // Load 3 Text Sections
                     if(d.textSection) { document.getElementById('txt-title').value = d.textSection.title || ''; document.getElementById('txt-desc').value = d.textSection.desc || ''; }
                     if(d.textSection2) { document.getElementById('txt-title-2').value = d.textSection2.title || ''; document.getElementById('txt-desc-2').value = d.textSection2.desc || ''; }
                     if(d.textSection3) { document.getElementById('txt-title-3').value = d.textSection3.title || ''; document.getElementById('txt-desc-3').value = d.textSection3.desc || ''; }
+
                     if(d.stats) {
                         document.getElementById('s1-num').value = d.stats.s1?.num || ''; document.getElementById('s1-lbl').value = d.stats.s1?.lbl || '';
                         document.getElementById('s2-num').value = d.stats.s2?.num || ''; document.getElementById('s2-lbl').value = d.stats.s2?.lbl || '';
