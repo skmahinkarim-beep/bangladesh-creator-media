@@ -19,12 +19,21 @@
         :root { --primary: #0056b3; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
 
-        /* AD CONTAINER */
-        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
+        /* AD CONTAINER (FIXED CENTER ALIGNMENT) */
+        .ad-banner-container { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin: 20px auto; 
+            padding: 10px; 
+            width: 100%; 
+            max-width: 100%; 
+            overflow: hidden; 
+        }
 
         /* HEADER TEXT BOX */
         .header-box {
-            max-width: 900px; /* Width Increased */
+            max-width: 900px;
             margin: 20px auto 40px;
             background: linear-gradient(135deg, #1cb5e0, #000046); 
             color: white;
@@ -42,12 +51,11 @@
             font-size: 1.1rem; 
             opacity: 0.95; 
             line-height: 1.6; 
-            max-width: 800px; /* Increased Width */
+            max-width: 800px;
             margin: 0 auto; 
-            white-space: normal; /* Normal text wrap */
+            white-space: normal;
         }
         
-        /* Mobile adjustment to keep text readable */
         @media (max-width: 600px) {
             .header-desc { font-size: 0.95rem; }
         }
