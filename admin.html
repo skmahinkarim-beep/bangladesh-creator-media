@@ -39,9 +39,17 @@
     <div id="admin-panel" class="container">
         <h1>Website Control Panel</h1>
         
-        <!-- 1. Top Banners -->
+        <!-- 1. BREAKING NEWS (NEW SECTION) -->
+        <div class="section" style="border-left: 5px solid #ff0000;">
+            <h3 style="margin-top: 0; color: #d32f2f;">📢 Breaking News Ticker</h3>
+            <label>News Text:</label>
+            <input type="text" id="breaking-news" placeholder="Write your breaking news here... (Leave empty to hide)">
+            <span class="size-guide" style="color: #666; font-weight: normal;">* This text will scroll below the menu bar.</span>
+        </div>
+
+        <!-- 2. Top Banners -->
         <div class="section">
-            <h3>1. Top Full-Screen Banners</h3>
+            <h3>2. Top Full-Screen Banners</h3>
             <span class="size-guide">ℹ️ Paste Direct Image Link (URL) & YouTube Link</span>
             
             <label>Banner 1:</label>
@@ -57,39 +65,36 @@
             <input type="text" id="b3-link" placeholder="Paste YouTube Link Here">
         </div>
 
-        <!-- 2. Video Grid -->
+        <!-- 3. Video Grid -->
         <div class="section">
-            <h3>2. Video Grid (6 Items)</h3>
+            <h3>3. Video Grid (6 Items)</h3>
             <span class="size-guide">ℹ️ Paste Title, Thumbnail Image Link & Video Link</span>
             <div id="video-inputs"></div>
         </div>
 
-        <!-- 3. Text Content (UPDATED: 3 BOXES) -->
+        <!-- 4. Text Content -->
         <div class="section">
-            <h3>3. Important Text Sections</h3>
-            
+            <h3>4. Important Text Sections</h3>
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px;">
-                <label style="margin-top:0;">Text Box 1 (Title & Content):</label>
+                <label style="margin-top:0;">Text Box 1:</label>
                 <input type="text" id="txt-title" placeholder="Title 1">
                 <textarea id="txt-desc" rows="4" placeholder="Content 1..."></textarea>
             </div>
-
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px; margin-bottom: 15px;">
-                <label style="margin-top:0;">Text Box 2 (Title & Content):</label>
+                <label style="margin-top:0;">Text Box 2:</label>
                 <input type="text" id="txt-title-2" placeholder="Title 2">
                 <textarea id="txt-desc-2" rows="4" placeholder="Content 2..."></textarea>
             </div>
-
             <div style="background: #fff; padding: 15px; border: 1px solid #ddd; border-radius: 5px;">
-                <label style="margin-top:0;">Text Box 3 (Title & Content):</label>
+                <label style="margin-top:0;">Text Box 3:</label>
                 <input type="text" id="txt-title-3" placeholder="Title 3">
                 <textarea id="txt-desc-3" rows="4" placeholder="Content 3..."></textarea>
             </div>
         </div>
 
-        <!-- 4. Statistics -->
+        <!-- 5. Statistics -->
         <div class="section">
-            <h3>4. Statistics (Numbers)</h3>
+            <h3>5. Statistics (Numbers)</h3>
             <div class="admin-stat-grid">
                 <div><label>Years Exp:</label><input type="text" id="s1-num"><input type="text" id="s1-lbl"></div>
                 <div><label>Projects:</label><input type="text" id="s2-num"><input type="text" id="s2-lbl"></div>
@@ -161,17 +166,16 @@
 
         function saveData() {
             const data = {
+                breakingNews: document.getElementById('breaking-news').value, // Saving News
                 banners: [
                     { img: document.getElementById('b1-img').value, link: document.getElementById('b1-link').value },
                     { img: document.getElementById('b2-img').value, link: document.getElementById('b2-link').value },
                     { img: document.getElementById('b3-img').value, link: document.getElementById('b3-link').value }
                 ],
                 videos: [],
-                // Saving 3 Text Sections
                 textSection: { title: document.getElementById('txt-title').value, desc: document.getElementById('txt-desc').value },
                 textSection2: { title: document.getElementById('txt-title-2').value, desc: document.getElementById('txt-desc-2').value },
                 textSection3: { title: document.getElementById('txt-title-3').value, desc: document.getElementById('txt-desc-3').value },
-                
                 stats: {
                     s1: { num: document.getElementById('s1-num').value, lbl: document.getElementById('s1-lbl').value },
                     s2: { num: document.getElementById('s2-num').value, lbl: document.getElementById('s2-lbl').value },
@@ -197,6 +201,7 @@
             db.collection('siteContent').doc('homePage').get().then(doc => {
                 if(doc.exists) {
                     const d = doc.data();
+                    if(d.breakingNews) document.getElementById('breaking-news').value = d.breakingNews;
                     if(d.banners) {
                         d.banners.forEach((b, i) => {
                             if(i<3) {
@@ -215,11 +220,9 @@
                             }
                         });
                     }
-                    // Load 3 Text Sections
                     if(d.textSection) { document.getElementById('txt-title').value = d.textSection.title || ''; document.getElementById('txt-desc').value = d.textSection.desc || ''; }
                     if(d.textSection2) { document.getElementById('txt-title-2').value = d.textSection2.title || ''; document.getElementById('txt-desc-2').value = d.textSection2.desc || ''; }
                     if(d.textSection3) { document.getElementById('txt-title-3').value = d.textSection3.title || ''; document.getElementById('txt-desc-3').value = d.textSection3.desc || ''; }
-
                     if(d.stats) {
                         document.getElementById('s1-num').value = d.stats.s1?.num || ''; document.getElementById('s1-lbl').value = d.stats.s1?.lbl || '';
                         document.getElementById('s2-num').value = d.stats.s2?.num || ''; document.getElementById('s2-lbl').value = d.stats.s2?.lbl || '';
