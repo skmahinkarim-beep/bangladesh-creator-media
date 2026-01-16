@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics Code -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -16,22 +16,22 @@
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
-        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f4f7f6; }
+        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: var(--bg-color); color: var(--text-color); line-height: 1.6; }
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
-        /* HEADER STYLES */
+        /* HEADER & NAV (Same as other pages) */
         header { background: #fff; padding: 15px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 20px; }
         .header-left { display: flex; align-items: center; gap: 15px; }
         .site-logo { width: 65px; height: 65px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         .header-text h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; line-height: 1.2; font-weight: 800; }
         .header-text p { font-size: 0.85rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
-
         .header-center { flex-grow: 1; max-width: 500px; display: flex; justify-content: center; align-items: center; gap: 15px; margin: 0 20px; }
         .search-box { width: 100%; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 12px 25px; border: none; outline: none; font-size: 1rem; }
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
-
+        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 10px 25px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.95rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 8px; }
+        .header-service-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(255, 87, 34, 0.5); }
         .header-right { display: flex; gap: 10px; }
         .social-icon { width: 38px; height: 38px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-icon:hover { transform: translateY(-3px); }
@@ -45,62 +45,35 @@
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
-        /* --- STYLISH WELCOME BOX --- */
-        .welcome-box {
-            max-width: 900px;
-            margin: 50px auto 40px;
-            padding: 40px;
-            background: linear-gradient(135deg, #0056b3 0%, #0088cc 100%);
-            color: white;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 15px 35px rgba(0, 86, 179, 0.25);
-            border: 2px solid #fff;
-            position: relative;
-            overflow: hidden;
+        /* WELCOME BOX */
+        .welcome-box { 
+            max-width: 900px; margin: 40px auto; padding: 40px 30px; 
+            background: linear-gradient(135deg, #2c3e50 0%, #3498db 100%); 
+            color: white; border-radius: 20px; text-align: center; 
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1); border: 1px solid rgba(255, 255, 255, 0.2); 
         }
-        .welcome-box::before { content: ''; position: absolute; top: -50px; right: -50px; width: 150px; height: 150px; background: rgba(255, 255, 255, 0.1); border-radius: 50%; }
-        .welcome-title { font-size: 1.8rem; font-weight: 800; margin-bottom: 15px; line-height: 1.4; }
-        .highlight { color: #ffeb3b; font-weight: 900; } /* Yellow highlight */
-        .welcome-desc { font-size: 1.15rem; font-weight: 500; opacity: 0.95; margin-bottom: 20px; }
-        .welcome-footer { font-size: 1.05rem; font-weight: 600; padding-top: 15px; border-top: 1px solid rgba(255,255,255,0.3); letter-spacing: 0.5px; }
+        .welcome-title { font-size: 1.8rem; font-weight: 700; margin-bottom: 10px; }
+        .welcome-desc { font-size: 1rem; opacity: 0.9; margin: 0; line-height: 1.6; }
 
-        /* --- TOOLS GRID --- */
-        .tools-container { max-width: 1100px; margin: 0 auto 80px; padding: 0 20px; }
-        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; }
-
-        .tool-card {
-            background: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            font-size: 1.2rem;
-            font-weight: 700;
-            color: #333;
-            text-decoration: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            border: 2px solid transparent;
+        /* TOOLS GRID */
+        .tools-container { max-width: 1000px; margin: 40px auto 80px; padding: 0 20px; }
+        .tools-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px; }
+        
+        .tool-card { 
+            background: white; padding: 30px; border-radius: 15px; text-align: center; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05); transition: all 0.3s ease; 
+            border: 1px solid #eee; cursor: pointer; text-decoration: none; color: #333;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
         }
-        .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 15px 25px rgba(0, 86, 179, 0.15);
-            color: var(--primary-color);
-            border-color: var(--primary-color);
-        }
+        .tool-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px rgba(0,0,0,0.1); border-color: var(--primary-color); }
+        .tool-icon { font-size: 3rem; margin-bottom: 15px; }
+        .tool-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 5px; }
+        .tool-sub { font-size: 0.9rem; color: #666; }
 
-        /* Tool Emojis/Icons */
-        .tool-icon { font-size: 2.5rem; }
+        footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
+        footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
 
-        footer { background: #222; color: white; text-align: center; padding: 25px; margin-top: 50px; }
-        footer a { color: #ccc; text-decoration: none; }
-
-        @media (max-width: 900px) { header { flex-direction: column; } .header-center { width: 100%; order: 2; margin: 0; } .header-right { order: 3; } }
+        @media (max-width: 900px) { header { flex-direction: column; } .header-center { width: 100%; order: 2; flex-direction: column; gap: 10px; } .search-box, .header-service-btn { width: 100%; } .header-right { order: 3; } }
     </style>
 </head>
 <body>
@@ -118,6 +91,7 @@
                 <input type="text" class="search-input" placeholder="Search videos...">
                 <button class="search-btn">🔍</button>
             </div>
+            <a href="service.html" class="header-service-btn">✨ Our Service</a>
         </div>
         <div class="header-right">
             <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
@@ -133,42 +107,41 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
             <li><a href="service.html">Our Service</a></li>
-            <li><a href="tools.html" class="nav-active">Free Tools</a></li>
+            <li><a href="tools.html" class="nav-active">Free Tools</a></li> <!-- Highlights Tools -->
             <li><a href="contact.html">Contact</a></li>
             <li><a href="privacy.html">Privacy</a></li>
             <li><a href="terms.html">Terms</a></li>
         </ul>
     </nav>
 
-    <!-- NEW WELCOME BOX -->
+    <!-- Welcome Message -->
     <div class="welcome-box">
-        <h2 class="welcome-title">স্বাগতম <span class="highlight">Bangladesh Creator Media</span> এর Free Tools পেজে</h2>
-        <p class="welcome-desc">এখানে আপনি পাবেন দৈনন্দিন কাজকে সহজ করার জন্য প্রয়োজনীয় কিছু ফ্রি, দ্রুত ও নিরাপদ অনলাইন টুলস—কোনো রেজিস্ট্রেশন ছাড়াই।</p>
-        <p class="welcome-footer">আমাদের লক্ষ্য একটাই—আপনার সময় বাঁচানো এবং এক ক্লিকে কাজ শেষ করা।</p>
+        <h2 class="welcome-title">স্বাগতম <span style="color:#ffcc00;">Bangladesh Creator Media (BCM)</span> এর Free Tools পেজে</h2>
+        <p class="welcome-desc">
+            এখানে আপনি পাবেন দৈনন্দিন কাজকে সহজ করার জন্য প্রয়োজনীয় কিছু ফ্রি, দ্রুত ও নিরাপদ অনলাইন টুলস—কোনো রেজিস্ট্রেশন ছাড়াই।
+            <br><br>
+            আমাদের লক্ষ্য একটাই—আপনার সময় বাঁচানো এবং এক ক্লিকে কাজ শেষ করা।
+        </p>
     </div>
 
-    <!-- FREE TOOLS GRID -->
+    <!-- Tools List -->
     <div class="tools-container">
         <div class="tools-grid">
-            
-            <!-- Tool 1: QR Generator -->
-            <a href="qr.html" class="tool-card">
-                <span class="tool-icon">📱</span>
-                QR কোড জেনারেটর
+            <a href="qrcode.html" class="tool-card">
+                <div class="tool-icon">📸</div>
+                <div class="tool-title">QR কোড জেনারেটর</div>
+                <div class="tool-sub">Create free QR Codes instantly</div>
             </a>
-
-            <!-- Tool 2: Password Generator -->
             <a href="password.html" class="tool-card">
-                <span class="tool-icon">🔒</span>
-                শক্তিশালী পাসওয়ার্ড জেনারেটর
+                <div class="tool-icon">🔒</div>
+                <div class="tool-title">শক্তিশালী পাসওয়ার্ড জেনারেটর</div>
+                <div class="tool-sub">Generate secure passwords</div>
             </a>
-
-            <!-- Tool 3: Speed Test -->
-            <a href="speed.html" class="tool-card">
-                <span class="tool-icon">🚀</span>
-                ইন্টারনেট স্পিড টেস্ট
+            <a href="speedtest.html" class="tool-card">
+                <div class="tool-icon">🚀</div>
+                <div class="tool-title">ইন্টারনেট স্পিড টেস্ট</div>
+                <div class="tool-sub">Check your internet speed</div>
             </a>
-
         </div>
     </div>
 
@@ -177,7 +150,7 @@
         <p><a href="index.html">Back to Home</a></p>
     </footer>
 
-    <!-- Firebase SDK (Kept for consistency, no JS logic needed for static display) -->
+    <!-- Firebase SDK (For consistency) -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
     <script>
@@ -189,7 +162,7 @@
             messagingSenderId: "261777783760",
             appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
         };
-        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        firebase.initializeApp(firebaseConfig);
     </script>
 </body>
 </html>
