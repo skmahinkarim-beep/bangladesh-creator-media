@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics -->
+    <!-- Google Analytics Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -47,16 +47,12 @@
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
         nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
+        
+        /* Highlight About Page */
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
-        /* AD CONTAINER STYLE */
-        .ad-banner-container {
-            text-align: center;
-            margin: 20px auto;
-            padding: 10px;
-            max-width: 100%;
-            overflow: hidden;
-        }
+        /* AD CONTAINER */
+        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
         /* CONTENT */
         .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
@@ -67,11 +63,12 @@
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
         footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
 
-        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; } }
+        @media (max-width: 900px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; } }
     </style>
 </head>
 <body>
 
+    <!-- Header Section -->
     <header>
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
@@ -103,6 +100,7 @@
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html" class="nav-active">About</a></li> <!-- Highlights About -->
             <li><a href="service.html">Our Service</a></li>
+            <li><a href="tools.html">Free Tools</a></li> <!-- NEW BUTTON ADDED -->
             <li><a href="contact.html">Contact</a></li>
             <li><a href="privacy.html">Privacy</a></li>
             <li><a href="terms.html">Terms</a></li>
@@ -120,7 +118,7 @@
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+        <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
 
     <div class="container">
