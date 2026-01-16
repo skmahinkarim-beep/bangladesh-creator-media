@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics Code (Corrected) -->
+    <!-- Google Analytics Code -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -27,58 +27,24 @@
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
         /* HEADER STYLES */
-        header { 
-            background: #fff; 
-            padding: 10px 30px; 
-            box-shadow: 0 4px 20px rgba(0,0,0,0.05); 
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between; 
-            gap: 15px; 
-            position: relative; 
-            z-index: 100; 
-        }
-
-        /* Left: Logo & Text */
+        header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
         .header-text p { font-size: 0.8rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
 
-        /* Center: Search Bar */
         .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
         .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
-
-        /* Right: Button + Socials */
         .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
-        
-        .header-service-btn { 
-            background: linear-gradient(45deg, #ff9800, #ff5722); 
-            color: white; 
-            padding: 8px 20px; 
-            border-radius: 30px; 
-            text-decoration: none; 
-            font-weight: 700; 
-            font-size: 0.9rem; 
-            box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); 
-            transition: 0.3s; 
-            white-space: nowrap; 
-        }
+        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; }
         .header-service-btn:hover { transform: translateY(-2px); }
-
         .social-group { display: flex; gap: 8px; }
         .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-icon:hover { transform: translateY(-3px); }
         .social-icon svg { width: 18px; height: 18px; fill: white; }
-        
-        /* Brand Colors */
-        .bg-yt { background: #FF0000; } 
-        .bg-fb { background: #1877F2; } 
-        .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } 
-        .bg-tk { background: #000000; } 
-        .bg-tg { background: #0088cc; }
+        .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
 
         /* NAV */
         nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
@@ -86,6 +52,15 @@
         nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
+
+        /* AD CONTAINER STYLE */
+        .ad-banner-container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 100%;
+            overflow: hidden;
+        }
 
         /* SLIDER & CONTENT */
         .slider-container { width: 100%; height: 450px; position: relative; overflow: hidden; background: #000; }
@@ -97,7 +72,6 @@
         .section-container { max-width: 1150px; margin: 80px auto 40px; padding: 0 20px; }
         .section-title { font-size: 2rem; color: #222; margin-bottom: 30px; position: relative; padding-left: 20px; font-weight: 800; }
         .section-title::before { content: ''; position: absolute; left: 0; top: 5px; height: 80%; width: 6px; background: var(--primary-color); border-radius: 3px; }
-        
         .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
         .video-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: none; }
         .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
@@ -109,15 +83,14 @@
         .text-box h2 { margin-top: 0; color: var(--primary-color); font-weight: 800; font-size: 1.8rem; margin-bottom: 15px; }
         .text-box p { white-space: pre-line; font-size: 1.1rem; line-height: 1.8; color: #444; }
 
-        /* UNIQUE CTA BOX */
-        .cta-unique-box { max-width: 1000px; margin: 60px auto 30px; padding: 25px 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border: 2px solid #0056b3; border-radius: 60px; text-align: center; box-shadow: 0 10px 30px rgba(0, 86, 179, 0.15); position: relative; overflow: hidden; animation: pulse-border 3s infinite; }
+        /* CTA & STATS */
+        .cta-unique-box { max-width: 1000px; margin: 30px auto; padding: 25px 40px; background: linear-gradient(135deg, #ffffff 0%, #f0f8ff 100%); border: 2px solid #0056b3; border-radius: 60px; text-align: center; box-shadow: 0 10px 30px rgba(0, 86, 179, 0.15); position: relative; overflow: hidden; animation: pulse-border 3s infinite; }
         .cta-unique-box p { font-size: 1.4rem; font-weight: 700; color: #333; margin: 0; line-height: 1.5; }
         .cta-inline-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 5px 20px; border-radius: 20px; text-decoration: none; display: inline-block; transition: 0.2s; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); margin: 0 5px; vertical-align: middle; }
         .cta-inline-btn:hover { transform: scale(1.1); }
         @keyframes pulse-border { 0% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0.4); } 70% { box-shadow: 0 0 0 10px rgba(0, 86, 179, 0); } 100% { box-shadow: 0 0 0 0 rgba(0, 86, 179, 0); } }
 
-        /* STATS */
-        .stats-wrapper { max-width: 1150px; margin: 0 auto 80px; padding: 0 20px; display: flex; gap: 50px; align-items: center; }
+        .stats-wrapper { max-width: 1150px; margin: 60px auto; padding: 0 20px; display: flex; gap: 50px; align-items: center; }
         .stats-left { flex: 1; padding-right: 20px; }
         .stats-brand { font-size: 0.9rem; font-weight: 700; color: var(--primary-color); text-transform: uppercase; letter-spacing: 2px; display: block; }
         .stats-heading { font-size: 2.5rem; font-weight: 900; line-height: 1.2; margin-bottom: 25px; color: #222; }
@@ -144,7 +117,6 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
@@ -153,14 +125,12 @@
                 <p>Connecting Science, Technology & Innovation</p>
             </div>
         </div>
-        
         <div class="header-center">
             <div class="search-box">
                 <input type="text" id="searchInput" class="search-input" placeholder="Search videos...">
                 <button class="search-btn" onclick="searchVideos()">🔍</button>
             </div>
         </div>
-
         <div class="header-right-container">
             <a href="service.html" class="header-service-btn">✨ Our Service</a>
             <div class="social-group">
@@ -183,6 +153,20 @@
             <li><a href="terms.html">Terms</a></li>
         </ul>
     </nav>
+
+    <!-- ADSTERRA BANNER -->
+    <div class="ad-banner-container">
+        <script>
+            atOptions = {
+                'key' : '913c56baf27591442617260739df7bf0',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+    </div>
 
     <!-- Slider -->
     <div class="slider-container" id="slider-box">
@@ -238,7 +222,6 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // --- ⚠️ আপনার নির্দিষ্ট Firebase Config ⚠️ ---
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -281,28 +264,20 @@
                 window.allVideos = data.videos || [];
                 renderVideos(window.allVideos);
 
-                // 3 Text Sections Logic
+                // 3 Text Sections
                 if(data.textSection) {
                     document.getElementById('text-box').innerHTML = `<h2>${data.textSection.title || 'Welcome'}</h2><p>${data.textSection.desc || 'No content available.'}</p>`;
                 }
-                
-                // Box 2
                 const box2 = document.getElementById('text-box-2');
                 if(data.textSection2 && data.textSection2.title) {
                     box2.innerHTML = `<h2>${data.textSection2.title}</h2><p>${data.textSection2.desc}</p>`;
                     box2.style.display = 'block';
-                } else {
-                    box2.style.display = 'none';
-                }
-
-                // Box 3
+                } else { box2.style.display = 'none'; }
                 const box3 = document.getElementById('text-box-3');
                 if(data.textSection3 && data.textSection3.title) {
                     box3.innerHTML = `<h2>${data.textSection3.title}</h2><p>${data.textSection3.desc}</p>`;
                     box3.style.display = 'block';
-                } else {
-                    box3.style.display = 'none';
-                }
+                } else { box3.style.display = 'none'; }
 
                 // Stats
                 if(data.stats) {
