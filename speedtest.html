@@ -24,7 +24,7 @@
 
         /* HEADER TEXT BOX */
         .header-box {
-            max-width: 800px;
+            max-width: 900px; /* Width Increased */
             margin: 20px auto 40px;
             background: linear-gradient(135deg, #1cb5e0, #000046); 
             color: white;
@@ -37,7 +37,20 @@
         .header-top { font-size: 1.1rem; font-weight: 600; color: #fff; letter-spacing: 1px; text-transform: uppercase; background: rgba(255,255,255,0.1); display: inline-block; padding: 5px 15px; border-radius: 50px; margin-bottom: 10px; }
         .header-brand { font-size: 2rem; font-weight: 800; margin: 5px 0; }
         .header-sub { font-size: 1.5rem; font-weight: 700; margin-bottom: 15px; color: #fff; }
-        .header-desc { font-size: 1.05rem; opacity: 0.95; line-height: 1.6; max-width: 700px; margin: 0 auto; }
+        
+        .header-desc { 
+            font-size: 1.1rem; 
+            opacity: 0.95; 
+            line-height: 1.6; 
+            max-width: 800px; /* Increased Width */
+            margin: 0 auto; 
+            white-space: normal; /* Normal text wrap */
+        }
+        
+        /* Mobile adjustment to keep text readable */
+        @media (max-width: 600px) {
+            .header-desc { font-size: 0.95rem; }
+        }
 
         /* SPEED TEST BOX */
         .tool-box {
@@ -83,7 +96,7 @@
         <div class="header-sub">আপনার ইন্টারনেটের গতি যাচাই করুন</div>
         <p class="header-desc">
             নিচে লোড হওয়া মিটারে আপনার ইন্টারনেট স্পিড দেখুন। এটি সম্পূর্ণ ফ্রি এবং রিয়েল-টাইম রেজাল্ট দেয়।<br>
-            (Powered by Fast.com)
+            <span style="font-size: 0.9rem; opacity: 0.8;">(Powered by Fast.com)</span>
         </p>
     </div>
 
