@@ -19,11 +19,14 @@
         :root { --primary: #0056b3; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
 
+        /* AD CONTAINER */
+        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
+
         /* HEADER TEXT BOX */
         .header-box {
             max-width: 800px;
             margin: 20px auto 40px;
-            background: linear-gradient(135deg, #1cb5e0, #000046); /* Blue/Dark Theme for Speed */
+            background: linear-gradient(135deg, #1cb5e0, #000046); 
             color: white;
             padding: 40px 20px;
             border-radius: 20px;
@@ -51,34 +54,27 @@
 
         /* BACK BUTTON */
         .back-container { margin-top: 50px; text-align: center; }
-        .back-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            background: white;
-            color: var(--primary);
-            padding: 12px 30px;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 700;
-            border: 2px solid var(--primary);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-        }
-        .back-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 20px rgba(0, 86, 179, 0.2);
-        }
+        .back-btn { display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--primary); padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; border: 2px solid var(--primary); transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
+        .back-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); }
 
-        @media (max-width: 600px) {
-            .header-brand { font-size: 1.5rem; }
-            .tool-box { height: 400px; }
-        }
+        @media (max-width: 600px) { .header-brand { font-size: 1.5rem; } .tool-box { height: 400px; } }
     </style>
 </head>
 <body>
+
+    <!-- ADSTERRA BANNER -->
+    <div class="ad-banner-container">
+        <script>
+            atOptions = {
+                'key' : '913c56baf27591442617260739df7bf0',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+    </div>
 
     <!-- Header Text Box -->
     <div class="header-box">
@@ -98,9 +94,7 @@
 
     <!-- Back Button -->
     <div class="back-container">
-        <a href="tools.html" class="back-btn">
-            <span>🔙</span> Back to Tools
-        </a>
+        <a href="tools.html" class="back-btn"><span>🔙</span> Back to Tools</a>
     </div>
 
 </body>
