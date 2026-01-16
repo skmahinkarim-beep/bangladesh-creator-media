@@ -19,16 +19,24 @@
         :root { --primary: #0056b3; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
 
-        /* AD CONTAINER (FIXED CENTER ALIGNMENT) */
-        .ad-banner-container { 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            margin: 20px auto; 
-            padding: 10px; 
-            width: 100%; 
-            max-width: 100%; 
-            overflow: hidden; 
+        /* --- AD CONTAINER (FIXED CENTER) --- */
+        .ad-banner-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            margin: 0 auto 30px; /* Center horizontally */
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        /* Force iframe center inside ad container */
+        .ad-banner-container > div, 
+        .ad-banner-container iframe {
+            margin-left: auto !important;
+            margin-right: auto !important;
+            display: block !important;
         }
 
         /* HEADER TEXT BOX */
@@ -83,7 +91,7 @@
 </head>
 <body>
 
-    <!-- ADSTERRA BANNER -->
+    <!-- ADSTERRA BANNER (Centered) -->
     <div class="ad-banner-container">
         <script>
             atOptions = {
