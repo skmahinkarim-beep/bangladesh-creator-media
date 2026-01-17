@@ -159,92 +159,9 @@
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
         footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
 
-        /* --- BCM SMART AGENT STYLES --- */
-        .chat-btn {
-            position: fixed; bottom: 30px; right: 30px;
-            width: 60px; height: 60px;
-            background: linear-gradient(135deg, #0056b3, #0088cc);
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            cursor: pointer; z-index: 2000;
-            transition: all 0.3s ease;
-            animation: float 3s ease-in-out infinite;
-        }
-        .chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
-        .chat-icon { width: 30px; height: 30px; fill: white; }
-        
-        .chat-box {
-            position: fixed; bottom: 100px; right: 30px;
-            width: 320px; background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
-            overflow: hidden;
-            display: none; z-index: 2000;
-            border: 1px solid #eee;
-            font-family: 'Segoe UI', sans-serif;
-            animation: slideUp 0.3s ease;
-        }
-        .chat-header {
-            background: linear-gradient(135deg, #0056b3, #004494);
-            color: white; padding: 15px;
-            display: flex; align-items: center; gap: 10px;
-            font-weight: 700;
-        }
-        .chat-body {
-            padding: 15px;
-            height: 350px;
-            overflow-y: auto;
-            background: #f9f9f9;
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
-        .bot-msg {
-            background: #eef2f5; color: #333;
-            padding: 10px 15px; border-radius: 15px 15px 15px 0;
-            font-size: 0.9rem; align-self: flex-start;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            max-width: 85%;
-        }
-        .user-msg {
-            background: #0056b3; color: white;
-            padding: 10px 15px; border-radius: 15px 15px 0 15px;
-            font-size: 0.9rem; align-self: flex-end;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-            max-width: 85%;
-        }
-        .chat-footer {
-            padding: 10px;
-            background: white;
-            border-top: 1px solid #eee;
-            display: flex;
-            gap: 5px;
-        }
-        .chat-input {
-            flex-grow: 1;
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-            font-size: 0.9rem;
-        }
-        .chat-send-btn {
-            background: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 8px 15px;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.9rem;
-        }
-        
-        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
-        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-
         @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
         @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
-        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .chat-box { width: 90%; right: 5%; bottom: 90px; } }
+        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } }
     </style>
 </head>
 <body>
@@ -384,37 +301,22 @@
         <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p>
     </footer>
 
-    <!-- BCM SMART AGENT START -->
-    <div class="chat-btn" onclick="toggleChat()">
-        <svg class="chat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-    </div>
-
-    <div class="chat-box" id="chat-box">
-        <div class="chat-header">
-            <span>🤖 BCM Smart Agent</span>
-            <span style="margin-left:auto; cursor:pointer;" onclick="toggleChat()">✖</span>
-        </div>
-        <div class="chat-body" id="chat-body">
-            <div class="bot-msg">আসসালামু আলাইকুম! 👋<br>আমি BCM এর স্মার্ট অ্যাসিস্ট্যান্ট।<br>আজ আপনাকে কিভাবে সাহায্য করতে পারি?</div>
-            <div class="chat-options">
-                <button class="chat-opt-btn" onclick="botReply('আমাদের সার্ভিসগুলো কি কি?', 'service.html')">🛠️ আমাদের সার্ভিসসমূহ</button>
-                <button class="chat-opt-btn" onclick="botReply('কিভাবে যোগাযোগ করব?', 'contact.html')">📞 যোগাযোগ করুন</button>
-                <button class="chat-opt-btn" onclick="botReply('ফ্রি টুলস ব্যবহার করতে চাই', 'tools.html')">🎁 ফ্রি টুলস</button>
-                <button class="chat-opt-btn" onclick="botReply('লেটেস্ট ভিডিও দেখতে চাই', '#video-box')">🎥 নতুন ভিডিও</button>
-            </div>
-        </div>
-        
-        <!-- Chat Input Area -->
-        <div class="chat-footer">
-            <input type="text" id="chatInput" class="chat-input" placeholder="এখানে লিখুন..." onkeypress="handleEnter(event)">
-            <button class="chat-send-btn" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-    <!-- BCM SMART AGENT END -->
-
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- Tawk.to Messaging Widget -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/696b5e80e9768b197f02db61/1jf5mia2f';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
 
     <script>
         const firebaseConfig = {
@@ -555,83 +457,6 @@
         function closePopup() {
             document.getElementById('popup-ad').style.display = 'none';
             sessionStorage.setItem('popupClosed', 'true');
-        }
-
-        // --- BCM SMART AGENT CHAT LOGIC ---
-        function toggleChat() {
-            const chatBox = document.getElementById('chat-box');
-            if(chatBox.style.display === 'none' || chatBox.style.display === '') {
-                chatBox.style.display = 'block';
-            } else {
-                chatBox.style.display = 'none';
-            }
-        }
-
-        // Predefined Replies
-        function botReply(userMsg, link) {
-            appendMessage(userMsg, 'user');
-            setTimeout(() => {
-                appendMessage(`ধন্যবাদ! আপনি <a href="${link}" style="color:#0056b3; font-weight:bold;">এখানে ক্লিক করে</a> বিস্তারিত দেখতে পারেন।`, 'bot');
-                
-                if(link.startsWith('#')) {
-                    document.querySelector(link).scrollIntoView({behavior: 'smooth'});
-                } else {
-                    setTimeout(() => { window.location.href = link; }, 2000);
-                }
-            }, 1000);
-        }
-
-        // Handle User Input
-        function handleEnter(e) {
-            if (e.key === 'Enter') sendMessage();
-        }
-
-        function sendMessage() {
-            const input = document.getElementById('chatInput');
-            const text = input.value.trim();
-            if (text === "") return;
-
-            appendMessage(text, 'user');
-            input.value = "";
-
-            // Smart Reply Logic
-            setTimeout(() => {
-                let reply = "দুঃখিত, আমি বুঝতে পারিনি। দয়া করে নিচের বাটনগুলো ব্যবহার করুন।";
-                
-                const lowerText = text.toLowerCase();
-                
-                if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("start")) {
-                    reply = "আসসালামু আলাইকুম! আপনাকে কীভাবে সাহায্য করতে পারি?";
-                } else if (lowerText.includes("service") || lowerText.includes("সার্ভিস") || lowerText.includes("কাজ")) {
-                    reply = "আমাদের সার্ভিসগুলো দেখতে <a href='service.html'>এখানে ক্লিক করুন</a>।";
-                } else if (lowerText.includes("contact") || lowerText.includes("যোগাযোগ") || lowerText.includes("number") || lowerText.includes("নাম্বার")) {
-                    reply = "আমাদের সাথে যোগাযোগ করতে <a href='contact.html'>এখানে ক্লিক করুন</a> অথবা <a href='https://wa.me/8801942434920'>WhatsApp-এ নক দিন</a>।";
-                } else if (lowerText.includes("tool") || lowerText.includes("টুল")) {
-                    reply = "আমাদের ফ্রি টুলস ব্যবহার করতে <a href='tools.html'>এখানে যান</a>।";
-                } else if (lowerText.includes("news") || lowerText.includes("খবর")) {
-                    reply = "লেটেস্ট টেক নিউজ দেখার জন্য আমাদের হোমপেজে চোখ রাখুন।";
-                }
-
-                appendMessage(reply, 'bot');
-            }, 1000);
-        }
-
-        function appendMessage(text, sender) {
-            const chatBody = document.getElementById('chat-body');
-            const msgDiv = document.createElement('div');
-            
-            if (sender === 'user') {
-                msgDiv.className = 'user-msg';
-                msgDiv.innerHTML = text;
-                msgDiv.style.textAlign = 'right';
-            } else {
-                msgDiv.className = 'bot-msg';
-                msgDiv.innerHTML = text;
-                msgDiv.style.textAlign = 'left';
-            }
-            
-            chatBody.appendChild(msgDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
         }
     </script>
 </body>
