@@ -115,6 +115,14 @@
             </div>
         </div>
 
+        <!-- 6. Side Notice Popup -->
+        <div class="section" style="border-left: 5px solid #ff9800; background: #fff8e1;">
+            <h3 style="color: #ff9800;">🔔 Side Notice Popup</h3>
+            <label>Notice Text:</label>
+            <textarea id="notice-text" rows="4" placeholder="Write notice text for side popup... (Leave empty to hide)"></textarea>
+            <span class="size-guide">ℹ️ This notice will appear on the right side after closing the main ad popup.</span>
+        </div>
+
         <button onclick="saveData()" style="padding: 15px; font-size: 1.2rem; background: #28a745;">SAVE ALL CHANGES</button>
         <button onclick="logout()" class="logout-btn">Logout</button>
     </div>
@@ -196,7 +204,9 @@
                     s2: { num: document.getElementById('s2-num').value, lbl: document.getElementById('s2-lbl').value },
                     s3: { num: document.getElementById('s3-num').value, lbl: document.getElementById('s3-lbl').value },
                     s4: { num: document.getElementById('s4-num').value, lbl: document.getElementById('s4-lbl').value }
-                }
+                },
+                // Notice Text for Side Popup
+                noticeText: document.getElementById('notice-text').value
             };
 
             for(let i=1; i<=6; i++) {
@@ -246,6 +256,9 @@
                         document.getElementById('s3-num').value = d.stats.s3?.num || ''; document.getElementById('s3-lbl').value = d.stats.s3?.lbl || '';
                         document.getElementById('s4-num').value = d.stats.s4?.num || ''; document.getElementById('s4-lbl').value = d.stats.s4?.lbl || '';
                     }
+                    
+                    // Load Notice Text
+                    if(d.noticeText) document.getElementById('notice-text').value = d.noticeText || '';
                 }
             });
         }
