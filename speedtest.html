@@ -26,11 +26,37 @@
             align-items: center;
             width: 100%;
             margin: 20px 0;
-            overflow: hidden;
+            min-height: 90px;
         }
         .ad-banner-container {
             display: inline-block;
             text-align: center;
+            width: 728px;
+            height: 90px;
+            overflow: hidden;
+            background-color: transparent;
+            position: relative;
+        }
+        .ad-banner-container script {
+            display: none !important;
+        }
+
+        /* AD FALLBACK STYLE */
+        .ad-fallback {
+            display: none;
+            width: 728px;
+            height: 90px;
+            background-color: #f8f9fa;
+            border: 1px solid #dee2e6;
+            border-radius: 4px;
+            text-align: center;
+            line-height: 90px;
+            color: #6c757d;
+            font-size: 14px;
+        }
+        .ad-banner-container:empty + .ad-fallback,
+        .ad-banner-container:has(script:only-child) + .ad-fallback {
+            display: block;
         }
 
         /* HEADER TEXT BOX */
@@ -60,6 +86,16 @@
         
         @media (max-width: 600px) {
             .header-desc { font-size: 0.95rem; }
+            .ad-banner-container, .ad-fallback {
+                width: 100%;
+                max-width: 728px;
+                height: auto;
+                min-height: 90px;
+            }
+            .ad-fallback {
+                line-height: 60px;
+                font-size: 12px;
+            }
         }
 
         /* SPEED TEST BOX */
@@ -88,7 +124,7 @@
     <!-- ADSTERRA BANNER (Centered with Flex Wrapper) -->
     <div class="ad-wrapper">
         <div class="ad-banner-container">
-            <script>
+            <script type="text/javascript">
                 atOptions = {
                     'key' : '913c56baf27591442617260739df7bf0',
                     'format' : 'iframe',
@@ -98,6 +134,10 @@
                 };
             </script>
             <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+        </div>
+        <!-- Fallback ad if script doesn't load -->
+        <div class="ad-fallback">
+            Advertisement
         </div>
     </div>
 
