@@ -19,24 +19,18 @@
         :root { --primary: #0056b3; --bg: #f0f2f5; }
         body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
 
-        /* --- AD CONTAINER (FIXED CENTER) --- */
-        .ad-banner-container {
+        /* --- FORCE CENTER AD BANNER --- */
+        .ad-wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
-            text-align: center;
-            margin: 0 auto 30px; /* Center horizontally */
             width: 100%;
-            max-width: 100%;
+            margin: 20px 0;
             overflow: hidden;
         }
-        
-        /* Force iframe center inside ad container */
-        .ad-banner-container > div, 
-        .ad-banner-container iframe {
-            margin-left: auto !important;
-            margin-right: auto !important;
-            display: block !important;
+        .ad-banner-container {
+            display: inline-block;
+            text-align: center;
         }
 
         /* HEADER TEXT BOX */
@@ -91,18 +85,20 @@
 </head>
 <body>
 
-    <!-- ADSTERRA BANNER (Centered) -->
-    <div class="ad-banner-container">
-        <script>
-            atOptions = {
-                'key' : '913c56baf27591442617260739df7bf0',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+    <!-- ADSTERRA BANNER (Centered with Flex Wrapper) -->
+    <div class="ad-wrapper">
+        <div class="ad-banner-container">
+            <script>
+                atOptions = {
+                    'key' : '913c56baf27591442617260739df7bf0',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+        </div>
     </div>
 
     <!-- Header Text Box -->
