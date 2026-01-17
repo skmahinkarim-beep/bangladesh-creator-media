@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Google Analytics Code -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -64,7 +64,6 @@
             display: flex;
             align-items: center;
             overflow: hidden;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: none; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -86,17 +85,17 @@
             display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(4px);
         }
         .popup-content {
             background: white;
             padding: 20px;
-            border-radius: 10px;
+            border-radius: 12px;
             width: 320px;
             text-align: center;
             position: relative;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-            animation: popIn 0.5s ease;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: popIn 0.4s ease;
         }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .popup-close {
@@ -158,8 +157,7 @@
         .card-style-4 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
 
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
-        footer a { color: #aaa; text-decoration: none; margin: 0 15px; font-weight: 600; transition: 0.3s; }
-        footer a:hover { color: var(--primary-color); }
+        footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
 
         /* --- BCM SMART AGENT STYLES --- */
         .chat-btn {
@@ -195,25 +193,51 @@
         }
         .chat-body {
             padding: 15px;
-            height: 300px;
+            height: 350px;
             overflow-y: auto;
             background: #f9f9f9;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .bot-msg {
             background: #eef2f5; color: #333;
             padding: 10px 15px; border-radius: 15px 15px 15px 0;
-            margin-bottom: 10px; font-size: 0.9rem;
+            font-size: 0.9rem; align-self: flex-start;
             box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-            display: inline-block; max-width: 85%;
+            max-width: 85%;
         }
-        .chat-options { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-        .chat-opt-btn {
-            background: white; border: 1px solid #0056b3;
-            color: #0056b3; padding: 8px; border-radius: 20px;
-            cursor: pointer; font-size: 0.85rem; font-weight: 600;
-            transition: 0.2s;
+        .user-msg {
+            background: #0056b3; color: white;
+            padding: 10px 15px; border-radius: 15px 15px 0 15px;
+            font-size: 0.9rem; align-self: flex-end;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            max-width: 85%;
         }
-        .chat-opt-btn:hover { background: #0056b3; color: white; }
+        .chat-footer {
+            padding: 10px;
+            background: white;
+            border-top: 1px solid #eee;
+            display: flex;
+            gap: 5px;
+        }
+        .chat-input {
+            flex-grow: 1;
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+            font-size: 0.9rem;
+        }
+        .chat-send-btn {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
         
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
         @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
@@ -379,6 +403,12 @@
                 <button class="chat-opt-btn" onclick="botReply('লেটেস্ট ভিডিও দেখতে চাই', '#video-box')">🎥 নতুন ভিডিও</button>
             </div>
         </div>
+        
+        <!-- Chat Input Area -->
+        <div class="chat-footer">
+            <input type="text" id="chatInput" class="chat-input" placeholder="এখানে লিখুন..." onkeypress="handleEnter(event)">
+            <button class="chat-send-btn" onclick="sendMessage()">Send</button>
+        </div>
     </div>
     <!-- BCM SMART AGENT END -->
 
@@ -527,7 +557,7 @@
             sessionStorage.setItem('popupClosed', 'true');
         }
 
-        // --- BCM SMART AGENT LOGIC ---
+        // --- BCM SMART AGENT CHAT LOGIC ---
         function toggleChat() {
             const chatBox = document.getElementById('chat-box');
             if(chatBox.style.display === 'none' || chatBox.style.display === '') {
@@ -537,34 +567,71 @@
             }
         }
 
+        // Predefined Replies
         function botReply(userMsg, link) {
-            const chatBody = document.getElementById('chat-body');
-            
-            // User Message
-            const userDiv = document.createElement('div');
-            userDiv.style.textAlign = 'right';
-            userDiv.innerHTML = `<span style="background:#0056b3; color:white; padding:8px 12px; border-radius:15px 15px 0 15px; display:inline-block; margin-bottom:10px; font-size:0.9rem;">${userMsg}</span>`;
-            chatBody.appendChild(userDiv);
-
-            // Bot Typing...
-            const botDiv = document.createElement('div');
-            botDiv.innerHTML = `<span class="bot-msg">Typing...</span>`;
-            chatBody.appendChild(botDiv);
-            chatBody.scrollTop = chatBody.scrollHeight;
-
-            // Bot Response
+            appendMessage(userMsg, 'user');
             setTimeout(() => {
-                botDiv.innerHTML = `<span class="bot-msg">ধন্যবাদ! আপনি <a href="${link}" style="color:#0056b3; font-weight:bold;">এখানে ক্লিক করে</a> বিস্তারিত দেখতে পারেন।</span>`;
-                chatBody.scrollTop = chatBody.scrollHeight;
+                appendMessage(`ধন্যবাদ! আপনি <a href="${link}" style="color:#0056b3; font-weight:bold;">এখানে ক্লিক করে</a> বিস্তারিত দেখতে পারেন।`, 'bot');
                 
-                // If it's a section link, scroll to it
                 if(link.startsWith('#')) {
                     document.querySelector(link).scrollIntoView({behavior: 'smooth'});
                 } else {
-                    // If it's a page link, redirect after 1.5s
-                    setTimeout(() => { window.location.href = link; }, 1500);
+                    setTimeout(() => { window.location.href = link; }, 2000);
                 }
             }, 1000);
+        }
+
+        // Handle User Input
+        function handleEnter(e) {
+            if (e.key === 'Enter') sendMessage();
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('chatInput');
+            const text = input.value.trim();
+            if (text === "") return;
+
+            appendMessage(text, 'user');
+            input.value = "";
+
+            // Smart Reply Logic
+            setTimeout(() => {
+                let reply = "দুঃখিত, আমি বুঝতে পারিনি। দয়া করে নিচের বাটনগুলো ব্যবহার করুন।";
+                
+                const lowerText = text.toLowerCase();
+                
+                if (lowerText.includes("hello") || lowerText.includes("hi") || lowerText.includes("start")) {
+                    reply = "আসসালামু আলাইকুম! আপনাকে কীভাবে সাহায্য করতে পারি?";
+                } else if (lowerText.includes("service") || lowerText.includes("সার্ভিস") || lowerText.includes("কাজ")) {
+                    reply = "আমাদের সার্ভিসগুলো দেখতে <a href='service.html'>এখানে ক্লিক করুন</a>।";
+                } else if (lowerText.includes("contact") || lowerText.includes("যোগাযোগ") || lowerText.includes("number") || lowerText.includes("নাম্বার")) {
+                    reply = "আমাদের সাথে যোগাযোগ করতে <a href='contact.html'>এখানে ক্লিক করুন</a> অথবা <a href='https://wa.me/8801942434920'>WhatsApp-এ নক দিন</a>।";
+                } else if (lowerText.includes("tool") || lowerText.includes("টুল")) {
+                    reply = "আমাদের ফ্রি টুলস ব্যবহার করতে <a href='tools.html'>এখানে যান</a>।";
+                } else if (lowerText.includes("news") || lowerText.includes("খবর")) {
+                    reply = "লেটেস্ট টেক নিউজ দেখার জন্য আমাদের হোমপেজে চোখ রাখুন।";
+                }
+
+                appendMessage(reply, 'bot');
+            }, 1000);
+        }
+
+        function appendMessage(text, sender) {
+            const chatBody = document.getElementById('chat-body');
+            const msgDiv = document.createElement('div');
+            
+            if (sender === 'user') {
+                msgDiv.className = 'user-msg';
+                msgDiv.innerHTML = text;
+                msgDiv.style.textAlign = 'right';
+            } else {
+                msgDiv.className = 'bot-msg';
+                msgDiv.innerHTML = text;
+                msgDiv.style.textAlign = 'left';
+            }
+            
+            chatBody.appendChild(msgDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
         }
     </script>
 </body>
