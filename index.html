@@ -64,6 +64,7 @@
             display: flex;
             align-items: center;
             overflow: hidden;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
             display: none; 
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
         }
@@ -75,35 +76,34 @@
         /* ADSTERRA BANNER */
         .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* --- POPUP AD STYLES --- */
+        /* POPUP AD STYLES */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0;
             width: 100%; height: 100%;
             background: rgba(0, 0, 0, 0.7);
             z-index: 9999;
-            display: none; /* Hidden by default */
+            display: none;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(4px);
+            backdrop-filter: blur(3px);
         }
         .popup-content {
             background: white;
             padding: 20px;
-            border-radius: 12px;
+            border-radius: 10px;
             width: 320px;
             text-align: center;
             position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            animation: popIn 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            animation: popIn 0.5s ease;
         }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        
         .popup-close {
             position: absolute;
             top: -15px;
             right: -15px;
-            background: #ff0000;
+            background: red;
             color: white;
             border: 2px solid white;
             width: 35px; height: 35px;
@@ -112,11 +112,9 @@
             line-height: 32px;
             cursor: pointer;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: 0.3s;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
-        .popup-close:hover { transform: scale(1.1); background: #cc0000; }
-        
+
         /* SLIDER & CONTENT */
         .slider-container { width: 100%; height: 450px; position: relative; overflow: hidden; background: #000; }
         .slide { width: 100%; height: 100%; position: absolute; top: 0; left: 0; opacity: 0; transition: opacity 1s ease-in-out; background-size: cover; background-position: center; }
@@ -163,9 +161,66 @@
         footer a { color: #aaa; text-decoration: none; margin: 0 15px; font-weight: 600; transition: 0.3s; }
         footer a:hover { color: var(--primary-color); }
 
-        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; } .stats-wrapper { flex-direction: column; } .stats-left { padding: 0; text-align: center; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
+        /* --- BCM SMART AGENT STYLES --- */
+        .chat-btn {
+            position: fixed; bottom: 30px; right: 30px;
+            width: 60px; height: 60px;
+            background: linear-gradient(135deg, #0056b3, #0088cc);
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
+            cursor: pointer; z-index: 2000;
+            transition: all 0.3s ease;
+            animation: float 3s ease-in-out infinite;
+        }
+        .chat-btn:hover { transform: scale(1.1); box-shadow: 0 8px 25px rgba(0,0,0,0.4); }
+        .chat-icon { width: 30px; height: 30px; fill: white; }
+        
+        .chat-box {
+            position: fixed; bottom: 100px; right: 30px;
+            width: 320px; background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+            overflow: hidden;
+            display: none; z-index: 2000;
+            border: 1px solid #eee;
+            font-family: 'Segoe UI', sans-serif;
+            animation: slideUp 0.3s ease;
+        }
+        .chat-header {
+            background: linear-gradient(135deg, #0056b3, #004494);
+            color: white; padding: 15px;
+            display: flex; align-items: center; gap: 10px;
+            font-weight: 700;
+        }
+        .chat-body {
+            padding: 15px;
+            height: 300px;
+            overflow-y: auto;
+            background: #f9f9f9;
+        }
+        .bot-msg {
+            background: #eef2f5; color: #333;
+            padding: 10px 15px; border-radius: 15px 15px 15px 0;
+            margin-bottom: 10px; font-size: 0.9rem;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            display: inline-block; max-width: 85%;
+        }
+        .chat-options { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
+        .chat-opt-btn {
+            background: white; border: 1px solid #0056b3;
+            color: #0056b3; padding: 8px; border-radius: 20px;
+            cursor: pointer; font-size: 0.85rem; font-weight: 600;
+            transition: 0.2s;
+        }
+        .chat-opt-btn:hover { background: #0056b3; color: white; }
+        
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+
+        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
         @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
-        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .chat-box { width: 90%; right: 5%; bottom: 90px; } }
     </style>
 </head>
 <body>
@@ -305,6 +360,28 @@
         <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p>
     </footer>
 
+    <!-- BCM SMART AGENT START -->
+    <div class="chat-btn" onclick="toggleChat()">
+        <svg class="chat-icon" viewBox="0 0 24 24"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
+    </div>
+
+    <div class="chat-box" id="chat-box">
+        <div class="chat-header">
+            <span>🤖 BCM Smart Agent</span>
+            <span style="margin-left:auto; cursor:pointer;" onclick="toggleChat()">✖</span>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="bot-msg">আসসালামু আলাইকুম! 👋<br>আমি BCM এর স্মার্ট অ্যাসিস্ট্যান্ট।<br>আজ আপনাকে কিভাবে সাহায্য করতে পারি?</div>
+            <div class="chat-options">
+                <button class="chat-opt-btn" onclick="botReply('আমাদের সার্ভিসগুলো কি কি?', 'service.html')">🛠️ আমাদের সার্ভিসসমূহ</button>
+                <button class="chat-opt-btn" onclick="botReply('কিভাবে যোগাযোগ করব?', 'contact.html')">📞 যোগাযোগ করুন</button>
+                <button class="chat-opt-btn" onclick="botReply('ফ্রি টুলস ব্যবহার করতে চাই', 'tools.html')">🎁 ফ্রি টুলস</button>
+                <button class="chat-opt-btn" onclick="botReply('লেটেস্ট ভিডিও দেখতে চাই', '#video-box')">🎥 নতুন ভিডিও</button>
+            </div>
+        </div>
+    </div>
+    <!-- BCM SMART AGENT END -->
+
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
@@ -436,11 +513,9 @@
             window.sliderInterval = setInterval(() => { moveSlide(1); }, 4000); 
         }
 
-        // --- POPUP LOGIC ---
+        // --- POPUP AD LOGIC ---
         window.addEventListener('load', function() {
-            // Show popup after 2 seconds
             setTimeout(function() {
-                // Check if already closed in this session
                 if (!sessionStorage.getItem('popupClosed')) {
                     document.getElementById('popup-ad').style.display = 'flex';
                 }
@@ -449,8 +524,47 @@
 
         function closePopup() {
             document.getElementById('popup-ad').style.display = 'none';
-            // Save state so it doesn't show again until browser restart
             sessionStorage.setItem('popupClosed', 'true');
+        }
+
+        // --- BCM SMART AGENT LOGIC ---
+        function toggleChat() {
+            const chatBox = document.getElementById('chat-box');
+            if(chatBox.style.display === 'none' || chatBox.style.display === '') {
+                chatBox.style.display = 'block';
+            } else {
+                chatBox.style.display = 'none';
+            }
+        }
+
+        function botReply(userMsg, link) {
+            const chatBody = document.getElementById('chat-body');
+            
+            // User Message
+            const userDiv = document.createElement('div');
+            userDiv.style.textAlign = 'right';
+            userDiv.innerHTML = `<span style="background:#0056b3; color:white; padding:8px 12px; border-radius:15px 15px 0 15px; display:inline-block; margin-bottom:10px; font-size:0.9rem;">${userMsg}</span>`;
+            chatBody.appendChild(userDiv);
+
+            // Bot Typing...
+            const botDiv = document.createElement('div');
+            botDiv.innerHTML = `<span class="bot-msg">Typing...</span>`;
+            chatBody.appendChild(botDiv);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            // Bot Response
+            setTimeout(() => {
+                botDiv.innerHTML = `<span class="bot-msg">ধন্যবাদ! আপনি <a href="${link}" style="color:#0056b3; font-weight:bold;">এখানে ক্লিক করে</a> বিস্তারিত দেখতে পারেন।</span>`;
+                chatBody.scrollTop = chatBody.scrollHeight;
+                
+                // If it's a section link, scroll to it
+                if(link.startsWith('#')) {
+                    document.querySelector(link).scrollIntoView({behavior: 'smooth'});
+                } else {
+                    // If it's a page link, redirect after 1.5s
+                    setTimeout(() => { window.location.href = link; }, 1500);
+                }
+            }, 1000);
         }
     </script>
 </body>
