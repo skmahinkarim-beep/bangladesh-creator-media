@@ -15,63 +15,411 @@
     <title>QR Code Generator - BCM Tools</title>
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary: #0056b3; --accent: #ff9800; --bg: #f0f2f5; }
-        body { font-family: 'Segoe UI', sans-serif; background: var(--bg); margin: 0; padding: 20px; color: #333; }
-
-        /* AD CONTAINER */
-        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
-
-        /* HEADER TEXT BOX */
-        .header-box {
-            max-width: 800px;
-            margin: 20px auto 40px;
-            background: linear-gradient(135deg, #0056b3, #004494);
-            color: white;
-            padding: 40px 20px;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 10px 25px rgba(0, 86, 179, 0.3);
-            border: 2px solid rgba(255,255,255,0.2);
+        :root {
+            --gradient-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-secondary: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-accent: linear-gradient(45deg, #4facfe 0%, #00f2fe 100%);
+            --shadow-neon: 0 0 20px rgba(102, 126, 234, 0.4);
+            --shadow-soft: 0 10px 30px rgba(0, 0, 0, 0.08);
         }
-        .header-top { font-size: 1.1rem; font-weight: 600; color: #ffcc00; letter-spacing: 1px; text-transform: uppercase; }
-        .header-brand { font-size: 2rem; font-weight: 800; margin: 10px 0; }
-        .header-sub { font-size: 1.4rem; font-weight: 600; margin-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.3); display: inline-block; padding-bottom: 5px; }
-        .header-desc { font-size: 1rem; opacity: 0.9; line-height: 1.6; max-width: 650px; margin: 0 auto; }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+            background: #f8fafc;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        /* Background Elements */
+        .bg-blur {
+            position: fixed;
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.15;
+            z-index: -1;
+        }
+        
+        .blur-1 {
+            background: #667eea;
+            top: 10%;
+            left: 5%;
+        }
+        
+        .blur-2 {
+            background: #f093fb;
+            bottom: 10%;
+            right: 5%;
+        }
+        
+        /* AD CONTAINER */
+        .ad-banner-container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            background: white;
+            box-shadow: var(--shadow-soft);
+        }
 
-        /* TOOL BOX */
+        /* Header */
+        .header-box {
+            max-width: 900px;
+            margin: 30px auto 50px;
+            background: white;
+            padding: 45px 30px;
+            border-radius: 30px;
+            text-align: center;
+            box-shadow: var(--shadow-soft);
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            overflow: hidden;
+        }
+        
+        .header-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 8px;
+            background: var(--gradient-primary);
+        }
+        
+        .header-top {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #667eea;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .header-brand {
+            font-size: 2.8rem;
+            font-weight: 800;
+            margin: 15px 0;
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 5px 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .header-sub {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin: 20px 0;
+            color: #333;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+        
+        .header-sub::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 4px;
+            background: var(--gradient-accent);
+            border-radius: 2px;
+        }
+        
+        .header-desc {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            max-width: 700px;
+            margin: 25px auto 0;
+            color: #555;
+            padding: 0 20px;
+        }
+        
+        .highlight {
+            background: var(--gradient-accent);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            font-weight: 700;
+        }
+        
+        /* Tool Box */
         .tool-box {
             background: white;
-            max-width: 600px;
-            margin: 0 auto;
-            padding: 50px 30px;
-            border-radius: 25px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            max-width: 650px;
+            margin: 0 auto 60px;
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: var(--shadow-soft);
             text-align: center;
-            border: 1px solid #e1e4e8;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            transition: transform 0.3s ease;
         }
-
-        input { width: 100%; padding: 15px 20px; font-size: 1.1rem; border: 2px solid #ddd; border-radius: 50px; outline: none; transition: 0.3s; box-sizing: border-box; text-align: center; }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 10px rgba(0, 86, 179, 0.2); }
-
-        .gen-btn { background: linear-gradient(45deg, #0056b3, #0088cc); color: white; border: none; padding: 15px 40px; font-size: 1.2rem; font-weight: 700; border-radius: 50px; cursor: pointer; margin-top: 20px; transition: 0.2s; box-shadow: 0 5px 15px rgba(0, 86, 179, 0.3); width: 100%; }
-        .gen-btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 86, 179, 0.4); }
-
-        #qrcode { margin-top: 30px; display: flex; justify-content: center; align-items: center; min-height: 200px; }
-        #qrcode img { border: 5px solid white; box-shadow: 0 5px 15px rgba(0,0,0,0.15); border-radius: 10px; }
-
-        .download-btn { display: none; background: linear-gradient(45deg, #28a745, #218838); color: white; text-decoration: none; padding: 12px 30px; border-radius: 30px; font-weight: 700; margin-top: 20px; box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); transition: 0.3s; }
-        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 6px 15px rgba(40, 167, 69, 0.4); }
-
-        .back-container { margin-top: 50px; text-align: center; }
-        .back-btn { display: inline-flex; align-items: center; gap: 10px; background: white; color: var(--primary); padding: 12px 30px; border-radius: 50px; text-decoration: none; font-weight: 700; border: 2px solid var(--primary); transition: all 0.3s ease; box-shadow: 0 4px 10px rgba(0,0,0,0.05); }
-        .back-btn:hover { background: var(--primary); color: white; transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0, 86, 179, 0.2); }
-
-        @media (max-width: 600px) { .header-brand { font-size: 1.5rem; } .tool-box { padding: 30px 20px; } }
+        
+        .tool-box:hover {
+            transform: translateY(-5px);
+        }
+        
+        .input-container {
+            position: relative;
+            margin-bottom: 25px;
+        }
+        
+        .input-icon {
+            position: absolute;
+            left: 25px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            font-size: 1.3rem;
+        }
+        
+        input {
+            width: 100%;
+            padding: 20px 25px 20px 60px;
+            font-size: 1.1rem;
+            border: 2px solid #e2e8f0;
+            border-radius: 60px;
+            outline: none;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        input:focus {
+            border-color: #667eea;
+            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.2);
+            background: white;
+        }
+        
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.9rem;
+            margin-top: 8px;
+            text-align: left;
+            padding-left: 20px;
+            display: none;
+            font-weight: 500;
+        }
+        
+        .gen-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 20px 45px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            width: 100%;
+            letter-spacing: 0.5px;
+        }
+        
+        .gen-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(102, 126, 234, 0.4);
+        }
+        
+        .gen-btn:active {
+            transform: translateY(-1px);
+        }
+        
+        #qrcode {
+            margin: 40px 0 30px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 280px;
+            padding: 25px;
+            background: #f8fafc;
+            border-radius: 20px;
+            border: 2px dashed #cbd5e0;
+            transition: all 0.3s ease;
+        }
+        
+        #qrcode img {
+            border: 10px solid white;
+            box-shadow: var(--shadow-soft);
+            border-radius: 15px;
+            transition: transform 0.3s ease;
+        }
+        
+        #qrcode img:hover {
+            transform: scale(1.03);
+        }
+        
+        .download-btn {
+            background: var(--gradient-secondary);
+            color: white;
+            text-decoration: none;
+            padding: 18px 40px;
+            border-radius: 60px;
+            font-weight: 700;
+            margin-top: 25px;
+            box-shadow: 0 10px 20px rgba(240, 147, 251, 0.3);
+            transition: all 0.3s ease;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            border: none;
+            cursor: pointer;
+        }
+        
+        .download-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(240, 147, 251, 0.4);
+        }
+        
+        .download-btn:disabled {
+            background: #cbd5e0;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        /* Back Button */
+        .back-container {
+            margin: 50px auto 80px;
+            text-align: center;
+        }
+        
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            background: white;
+            color: #667eea;
+            padding: 16px 35px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 700;
+            border: 2px solid #667eea;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-soft);
+            font-size: 1.1rem;
+        }
+        
+        .back-btn:hover {
+            background: var(--gradient-primary);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 15px 25px rgba(102, 126, 234, 0.3);
+            border-color: transparent;
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 25px;
+            color: #64748b;
+            font-size: 0.9rem;
+            border-top: 1px solid #e2e8f0;
+            margin-top: 40px;
+            background: white;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-box {
+                padding: 35px 20px;
+                margin: 20px 15px 40px;
+            }
+            
+            .header-brand {
+                font-size: 2.2rem;
+            }
+            
+            .header-sub {
+                font-size: 1.5rem;
+            }
+            
+            .tool-box {
+                padding: 35px 25px;
+                margin: 0 15px 40px;
+            }
+            
+            .gen-btn, .download-btn {
+                padding: 18px 25px;
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-brand {
+                font-size: 1.8rem;
+            }
+            
+            .header-sub {
+                font-size: 1.3rem;
+            }
+            
+            input {
+                padding: 18px 20px 18px 50px;
+                font-size: 1rem;
+            }
+            
+            .input-icon {
+                left: 20px;
+            }
+        }
+        
+        /* Animation */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .tool-box, .header-box {
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+            20%, 40%, 60%, 80% { transform: translateX(5px); }
+        }
+        
+        .shake {
+            animation: shake 0.5s ease-in-out;
+        }
     </style>
 </head>
 <body>
+
+    <!-- Background Elements -->
+    <div class="bg-blur blur-1"></div>
+    <div class="bg-blur blur-2"></div>
 
     <!-- ADSTERRA BANNER -->
     <div class="ad-banner-container">
@@ -89,42 +437,234 @@
 
     <!-- Header Text Box -->
     <div class="header-box">
-        <div class="header-top">📱 Free QR Code Generator</div>
+        <div class="header-top">
+            <i class="fas fa-qrcode"></i>
+            FREE QR CODE GENERATOR
+        </div>
         <h1 class="header-brand">Bangladesh Creator Media</h1>
         <div class="header-sub">স্বাগতম QR Code Generator পেজে</div>
         <p class="header-desc">
-            এখানে আপনি যেকোনো লিংক, টেক্সট বা তথ্য থেকে এক ক্লিকেই QR Code তৈরি করতে পারবেন—সম্পূর্ণ ফ্রি এবং কোনো রেজিস্ট্রেশন ছাড়াই।<br>
-            <span style="color: #ffcc00; font-weight:bold;">QR Code ব্যবহার করে সহজেই আপনার তথ্য দ্রুত শেয়ার করুন।</span>
+            এখানে আপনি যেকোনো লিংক, টেক্সট বা তথ্য থেকে এক ক্লিকেই QR Code তৈরি করতে পারবেন—সম্পূর্ণ ফ্রি এবং কোনো রেজিস্ট্রেশন ছাড়াই।
+            <br><br>
+            <span class="highlight">QR Code ব্যবহার করে সহজেই আপনার তথ্য দ্রুত শেয়ার করুন।</span>
         </p>
     </div>
 
     <!-- Main Tool -->
     <div class="tool-box">
-        <input type="text" id="text" placeholder="Enter URL, Text, or Number here...">
-        <button class="gen-btn" onclick="generateQR()">⚡ Generate QR Code</button>
+        <div class="input-container">
+            <i class="fas fa-link input-icon"></i>
+            <input type="text" id="text" placeholder="Enter URL, Text, Phone Number, or any information...">
+            <div class="error-message" id="errorMsg">দয়া করে কিছু লিখুন!</div>
+        </div>
+        <button class="gen-btn" onclick="generateQR()">
+            <i class="fas fa-bolt"></i>
+            GENERATE QR CODE
+        </button>
         <div id="qrcode"></div>
-        <a id="downloadLink" class="download-btn" href="#" download="qrcode.png">📥 Download QR Image</a>
+        <button id="downloadBtn" class="download-btn" onclick="downloadQR()">
+            <i class="fas fa-download"></i>
+            DOWNLOAD QR CODE IMAGE
+        </button>
     </div>
 
     <!-- Back Button -->
     <div class="back-container">
-        <a href="tools.html" class="back-btn"><span>🔙</span> Back to Tools</a>
+        <a href="tools.html" class="back-btn">
+            <i class="fas fa-arrow-left"></i>
+            Back to All Tools
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <p>© 2026 Bangladesh Creator Media | All Rights Reserved</p>
+        <p>Free QR Code Generator Tool</p>
     </div>
 
     <script>
+        let currentQRCodeUrl = null;
+        let isQRGenerated = false;
+        
         function generateQR() {
             const text = document.getElementById("text").value;
             const container = document.getElementById("qrcode");
-            const downloadBtn = document.getElementById("downloadLink");
+            const downloadBtn = document.getElementById("downloadBtn");
+            const errorMsg = document.getElementById("errorMsg");
+            const inputField = document.getElementById("text");
+            
+            // Reset previous states
             container.innerHTML = "";
             downloadBtn.style.display = "none";
-            if(text.trim() === "") { alert("Please enter some text or link!"); return; }
-            new QRCode(container, { text: text, width: 300, height: 300, colorDark : "#000000", colorLight : "#ffffff", correctLevel : QRCode.CorrectLevel.H });
+            errorMsg.style.display = "none";
+            inputField.classList.remove("shake");
+            container.style.border = "2px dashed #cbd5e0";
+            isQRGenerated = false;
+            currentQRCodeUrl = null;
+            
+            // Check if input is empty
+            if(text.trim() === "") { 
+                // Show error message
+                errorMsg.style.display = "block";
+                inputField.style.borderColor = "#e53e3e";
+                inputField.style.boxShadow = "0 0 0 4px rgba(229, 62, 62, 0.2)";
+                
+                // Add shake animation to input field
+                inputField.classList.add("shake");
+                
+                // Focus on input field
+                inputField.focus();
+                
+                // Show message in QR container
+                container.innerHTML = `
+                    <div style="text-align:center; padding:30px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#e53e3e; margin-bottom:15px;"></i>
+                        <p style="color:#e53e3e; font-size:1.1rem; font-weight:600; margin-bottom:10px;">কিছু লিখুন!</p>
+                        <p style="color:#718096; font-size:0.9rem;">দয়া করে উপরের বক্সে কিছু লিখুন বা লিংক দিন</p>
+                    </div>
+                `;
+                return; 
+            }
+            
+            // If input is valid, reset input styling
+            inputField.style.borderColor = "#667eea";
+            inputField.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.2)";
+            
+            // Add loading animation
+            container.innerHTML = '<div style="text-align:center; padding:40px;"><i class="fas fa-spinner fa-spin fa-3x" style="color:#667eea;"></i><p style="margin-top:15px; color:#64748b;">Generating QR Code...</p></div>';
+            
             setTimeout(() => {
-                const qrImage = container.querySelector("img");
-                if (qrImage) { downloadBtn.href = qrImage.src; downloadBtn.style.display = "inline-block"; }
-            }, 500);
+                container.innerHTML = "";
+                new QRCode(container, { 
+                    text: text, 
+                    width: 280, 
+                    height: 280, 
+                    colorDark : "#1a202c", 
+                    colorLight : "#ffffff", 
+                    correctLevel : QRCode.CorrectLevel.H 
+                });
+                
+                setTimeout(() => {
+                    const qrImage = container.querySelector("img");
+                    if (qrImage) { 
+                        currentQRCodeUrl = qrImage.src;
+                        downloadBtn.style.display = "flex";
+                        isQRGenerated = true;
+                        
+                        // Add success effect
+                        container.style.border = "2px solid #48bb78";
+                        container.style.borderStyle = "solid";
+                    }
+                }, 300);
+            }, 800);
         }
+        
+        function downloadQR() {
+            const text = document.getElementById("text").value;
+            const errorMsg = document.getElementById("errorMsg");
+            const inputField = document.getElementById("text");
+            const downloadBtn = document.getElementById("downloadBtn");
+            
+            // Check if QR code is generated
+            if (!isQRGenerated || !currentQRCodeUrl) {
+                // Check if input is empty
+                if(text.trim() === "") { 
+                    // Show error message
+                    errorMsg.style.display = "block";
+                    inputField.style.borderColor = "#e53e3e";
+                    inputField.style.boxShadow = "0 0 0 4px rgba(229, 62, 62, 0.2)";
+                    
+                    // Add shake animation to input field
+                    inputField.classList.add("shake");
+                    
+                    // Focus on input field
+                    inputField.focus();
+                    
+                    // Show message in QR container if it's empty
+                    const container = document.getElementById("qrcode");
+                    if (container.innerHTML.trim() === "" || !container.querySelector("img")) {
+                        container.innerHTML = `
+                            <div style="text-align:center; padding:30px;">
+                                <i class="fas fa-exclamation-triangle" style="font-size:3rem; color:#e53e3e; margin-bottom:15px;"></i>
+                                <p style="color:#e53e3e; font-size:1.1rem; font-weight:600; margin-bottom:10px;">প্রথমে QR কোড জেনারেট করুন!</p>
+                                <p style="color:#718096; font-size:0.9rem;">দয়া করে উপরের বক্সে কিছু লিখে "Generate QR Code" বাটনে ক্লিক করুন</p>
+                            </div>
+                        `;
+                    }
+                    return;
+                } else {
+                    // Input is not empty but QR is not generated
+                    alert("প্রথমে 'Generate QR Code' বাটনে ক্লিক করে QR কোড তৈরি করুন।");
+                    return;
+                }
+            }
+            
+            // Create a temporary link and trigger download
+            const link = document.createElement('a');
+            link.href = currentQRCodeUrl;
+            link.download = 'qrcode.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Show success message
+            const container = document.getElementById("qrcode");
+            const originalContent = container.innerHTML;
+            container.innerHTML = `
+                <div style="text-align:center;">
+                    ${originalContent}
+                    <div style="margin-top:15px; background:#48bb78; color:white; padding:10px 20px; border-radius:10px; display:inline-block;">
+                        <i class="fas fa-check-circle"></i> QR কোড ডাউনলোড হয়েছে!
+                    </div>
+                </div>
+            `;
+            
+            // Reset after 2 seconds
+            setTimeout(() => {
+                container.innerHTML = originalContent;
+            }, 2000);
+        }
+        
+        // Allow Enter key to generate QR code
+        document.getElementById("text").addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                generateQR();
+            }
+        });
+        
+        // Reset input styling when user starts typing
+        document.getElementById("text").addEventListener("input", function() {
+            const errorMsg = document.getElementById("errorMsg");
+            const inputField = document.getElementById("text");
+            
+            if (this.value.trim() !== "") {
+                errorMsg.style.display = "none";
+                inputField.style.borderColor = "#667eea";
+                inputField.style.boxShadow = "0 0 0 4px rgba(102, 126, 234, 0.2)";
+                inputField.classList.remove("shake");
+            }
+            
+            // Hide download button when input changes
+            if (isQRGenerated) {
+                const downloadBtn = document.getElementById("downloadBtn");
+                downloadBtn.style.display = "none";
+                isQRGenerated = false;
+                currentQRCodeUrl = null;
+                
+                // Clear QR code if input is changed
+                const container = document.getElementById("qrcode");
+                if (container.querySelector("img")) {
+                    container.innerHTML = `
+                        <div style="text-align:center; padding:40px; color:#718096;">
+                            <i class="fas fa-sync-alt fa-3x" style="color:#a0aec0;"></i>
+                            <p style="margin-top:15px;">আপনি টেক্সট পরিবর্তন করেছেন</p>
+                            <p style="font-size:0.9rem;">নতুন QR কোড তৈরি করতে "Generate QR Code" বাটনে ক্লিক করুন</p>
+                        </div>
+                    `;
+                    container.style.border = "2px dashed #cbd5e0";
+                }
+            }
+        });
     </script>
 </body>
 </html>
