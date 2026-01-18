@@ -115,6 +115,13 @@
             </div>
         </div>
 
+        <!-- 6. Bottom Left Notice (NEW FEATURE) -->
+        <div class="section" style="border-left: 5px solid #28a745; background: #f0fff4;">
+            <h3 style="margin-top: 0; color: #28a745;">🔔 Bottom Left Notice Popup</h3>
+            <label>Notice Content:</label>
+            <textarea id="bottom-notice-text" rows="3" placeholder="Write your notice here... (Leave empty to disable)"></textarea>
+        </div>
+
         <button onclick="saveData()" style="padding: 15px; font-size: 1.2rem; background: #28a745;">SAVE ALL CHANGES</button>
         <button onclick="logout()" class="logout-btn">Logout</button>
     </div>
@@ -125,7 +132,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
 
     <script>
-        // --- আপনার Firebase Config এখানে বসানো আছে ---
+        // --- Firebase Config ---
         const firebaseConfig = {
             apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
             authDomain: "bangladesh-creator-media.firebaseapp.com",
@@ -180,13 +187,15 @@
         function saveData() {
             const data = {
                 breakingNews: document.getElementById('breaking-news').value,
+                // New Notice Field
+                bottomNotice: document.getElementById('bottom-notice-text').value,
+                
                 banners: [
                     { img: document.getElementById('b1-img').value, link: document.getElementById('b1-link').value },
                     { img: document.getElementById('b2-img').value, link: document.getElementById('b2-link').value },
                     { img: document.getElementById('b3-img').value, link: document.getElementById('b3-link').value }
                 ],
                 videos: [],
-                // Saving 3 Text Sections
                 textSection: { title: document.getElementById('txt-title').value, desc: document.getElementById('txt-desc').value },
                 textSection2: { title: document.getElementById('txt-title-2').value, desc: document.getElementById('txt-desc-2').value },
                 textSection3: { title: document.getElementById('txt-title-3').value, desc: document.getElementById('txt-desc-3').value },
@@ -217,6 +226,8 @@
                 if(doc.exists) {
                     const d = doc.data();
                     if(d.breakingNews) document.getElementById('breaking-news').value = d.breakingNews;
+                    if(d.bottomNotice) document.getElementById('bottom-notice-text').value = d.bottomNotice;
+
                     if(d.banners) {
                         d.banners.forEach((b, i) => {
                             if(i<3) {
@@ -235,7 +246,6 @@
                             }
                         });
                     }
-                    // Load 3 Text Sections
                     if(d.textSection) { document.getElementById('txt-title').value = d.textSection.title || ''; document.getElementById('txt-desc').value = d.textSection.desc || ''; }
                     if(d.textSection2) { document.getElementById('txt-title-2').value = d.textSection2.title || ''; document.getElementById('txt-desc-2').value = d.textSection2.desc || ''; }
                     if(d.textSection3) { document.getElementById('txt-title-3').value = d.textSection3.title || ''; document.getElementById('txt-desc-3').value = d.textSection3.desc || ''; }
