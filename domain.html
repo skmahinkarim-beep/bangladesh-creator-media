@@ -16,6 +16,7 @@
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
+        /* সকল CSS কোড একই আছে */
         :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
@@ -202,6 +203,14 @@
 </head>
 <body>
 
+    <script>
+        // If this page is loaded inside an iframe (embedded in another site), 
+        // automatically open it in a new tab
+        if (window.self !== window.top) {
+            window.open(window.location.href, '_blank');
+        }
+    </script>
+
     <header>
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
@@ -259,6 +268,11 @@
         <div class="tool-header">
             <h1>🌐 ডোমেইন সার্চ টুল</h1>
             <p>বিনামূল্যে যেকোনো ডোমেইন নামের উপলব্ধতা চেক করুন এবং আপনার নিখুঁত ডোমেইন খুঁজে নিন।</p>
+            <!-- নতুন ট্যাবে ওপেন করার অপশন -->
+            <button onclick="window.open('https://bangladeshcreatormedia.github.io/tools/domain.html', '_blank')" 
+                    style="background: #0056b3; color: white; padding: 10px 20px; border: none; border-radius: 50px; font-weight: bold; cursor: pointer; margin-top: 10px;">
+                🚀 নতুন ট্যাবে ওপেন করুন
+            </button>
         </div>
 
         <div class="domain-search-box">
