@@ -75,7 +75,7 @@
         /* ADSTERRA BANNER */
         .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* POPUP AD STYLES (FIXED) */
+        /* MAIN POPUP AD STYLES */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -91,18 +91,16 @@
             background: white;
             padding: 20px;
             border-radius: 12px;
-            /* Width 320px থেকে বাড়িয়ে 350px করা হয়েছে যাতে এড কেটে না যায় */
             width: 350px; 
             text-align: center;
             position: relative;
             box-shadow: 0 10px 40px rgba(0,0,0,0.5);
             animation: popIn 0.4s ease;
-            /* Flex যোগ করা হয়েছে যাতে এড মাঝখানে থাকে */
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            border: 4px solid #f0f2f5; /* বর্ডার দেওয়া হয়েছে */
+            border: 4px solid #f0f2f5; 
         }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
         .popup-close {
@@ -119,6 +117,59 @@
             cursor: pointer;
             font-weight: bold;
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
+
+        /* NEW BOTTOM LEFT NOTICE STYLE */
+        .bottom-notice-card {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            width: 300px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.15);
+            z-index: 9990; /* Lower than main popup */
+            display: none; /* Hidden by default */
+            border-left: 5px solid var(--primary-color);
+            padding: 15px;
+            animation: slideUpFade 0.5s ease;
+            font-family: 'Segoe UI', sans-serif;
+        }
+        @keyframes slideUpFade { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        
+        .notice-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        .notice-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .notice-close-btn {
+            background: none;
+            border: none;
+            color: #999;
+            font-size: 1.2rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+        .notice-close-btn:hover { color: red; }
+        .notice-divider {
+            border: 0;
+            height: 1px;
+            background: #eee;
+            margin-bottom: 10px;
+        }
+        .notice-body {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.5;
         }
 
         /* SLIDER & CONTENT */
@@ -168,7 +219,7 @@
 
         @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
         @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
-        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } }
+        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
     </style>
 </head>
 <body>
@@ -220,7 +271,7 @@
         </div>
     </div>
 
-    <!-- POP-UP AD (YOUR 300x250 CODE HERE) -->
+    <!-- MAIN POP-UP AD -->
     <div class="popup-overlay" id="popup-ad">
         <div class="popup-content">
             <button class="popup-close" onclick="closePopup()">✖</button>
@@ -242,6 +293,18 @@
             </div>
             <!-- 👆 END AD CODE 👆 -->
         </div>
+    </div>
+
+    <!-- NEW: BOTTOM LEFT NOTICE BOX -->
+    <div id="bottom-notice" class="bottom-notice-card">
+        <div class="notice-header">
+            <span class="notice-title">📢 Notice Board</span>
+            <button class="notice-close-btn" onclick="document.getElementById('bottom-notice').style.display='none'">✖</button>
+        </div>
+        <hr class="notice-divider">
+        <p class="notice-body" id="bottom-notice-text">
+            <!-- Text will come from Firebase -->
+        </p>
     </div>
 
     <!-- ADSTERRA BANNER -->
@@ -354,6 +417,15 @@
                     tickerBox.style.display = "none";
                 }
 
+                // BOTTOM NOTICE TEXT LOAD
+                const noticeText = document.getElementById('bottom-notice-text');
+                if (data.bottomNotice) {
+                    noticeText.innerText = data.bottomNotice;
+                } else {
+                    // If no notice set, keep it empty (logic below handles display)
+                    noticeText.innerText = "";
+                }
+
                 // Slider
                 const sliderBox = document.getElementById('slider-box');
                 let slidesHtml = '';
@@ -451,7 +523,7 @@
             window.sliderInterval = setInterval(() => { moveSlide(1); }, 4000); 
         }
 
-        // --- POPUP AD LOGIC ---
+        // --- MAIN POPUP AD LOGIC ---
         window.addEventListener('load', function() {
             setTimeout(function() {
                 if (!sessionStorage.getItem('popupClosed')) {
@@ -461,8 +533,18 @@
         });
 
         function closePopup() {
+            // Close main popup
             document.getElementById('popup-ad').style.display = 'none';
             sessionStorage.setItem('popupClosed', 'true');
+
+            // Trigger Bottom Notice (After 1.5 seconds)
+            setTimeout(() => {
+                const noticeText = document.getElementById('bottom-notice-text').innerText;
+                // Only show if there is text in the notice
+                if (noticeText && noticeText.trim() !== "") {
+                    document.getElementById('bottom-notice').style.display = 'block';
+                }
+            }, 1500);
         }
     </script>
 </body>
