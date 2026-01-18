@@ -19,7 +19,6 @@
         :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f0f2f5; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Body কে Flexbox বানিয়েছি যাতে সবকিছু মাঝখানে থাকে */
         body { 
             font-family: 'Segoe UI', sans-serif; 
             line-height: 1.6; 
@@ -29,27 +28,32 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
-            padding: 20px;
+            /* justify-content: center সরিয়ে দিয়েছি যাতে অতিরিক্ত নিচে না নামে */
+            justify-content: flex-start; 
+            padding-top: 50px; /* ওপর থেকে ফিক্সড দূরত্ব */
+            padding-bottom: 50px;
+            padding-left: 20px;
+            padding-right: 20px;
         }
 
         /* AD CONTAINER style */
         .ad-banner-container { 
             text-align: center; 
-            margin-bottom: 20px; 
+            margin-bottom: 30px; /* এডের নিচে একটু গ্যাপ বাড়িয়েছি */
             max-width: 100%; 
             overflow: hidden; 
         }
 
-        /* TOOL CONTAINER - Shadow বাড়িয়ে দিয়েছি এবং ব্যাকগ্রাউন্ড সাদা করেছি */
+        /* TOOL CONTAINER */
         .tool-page-container {
             width: 100%;
             max-width: 800px;
             padding: 40px;
             background: white;
             border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08); /* শ্যাডো একটু সফট করেছি */
             text-align: center;
+            position: relative;
         }
 
         .tool-header { margin-bottom: 30px; }
@@ -131,26 +135,42 @@
         .status-available { background: #d4edda; color: #155724; }
         .status-taken { background: #f8d7da; color: #721c24; }
 
-        .back-link {
-            margin-top: 20px;
-            display: inline-block;
-            text-decoration: none;
-            color: #666;
-            font-size: 0.9rem;
+        /* Stylish Back Button Box */
+        .back-btn-container {
+            margin-top: 40px; /* বক্স থেকে একটু নিচে নামিয়েছি */
         }
-        .back-link:hover { color: var(--primary-color); }
+        
+        .back-btn {
+            display: inline-block;
+            padding: 12px 30px;
+            border: 2px solid var(--primary-color);
+            border-radius: 50px;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            background: transparent;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-color);
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.2);
+            transform: translateY(-2px);
+        }
 
         @media (max-width: 600px) { 
             .search-input-group { flex-direction: column; }
             .domain-btn { width: 100%; }
             .tool-page-container { padding: 20px; }
+            body { padding-top: 20px; } /* মোবাইলে ওপরের গ্যাপ একটু কমিয়েছি */
         }
     </style>
 </head>
 <body>
 
     <!-- ADSTERRA BANNER (অপরিবর্তিত) -->
-    <!-- এটি এখন টুলের ঠিক উপরে শো করবে যেমনটি QR পেজে ছিল -->
     <div class="ad-banner-container">
         <script>
             atOptions = {
@@ -193,8 +213,10 @@
             <!-- Results will appear here -->
         </div>
 
-        <!-- Home এ ফিরে যাওয়ার জন্য ছোট একটি লিংক রাখা হয়েছে, যাতে ইউজার আটকে না যায় -->
-        <a href="index.html" class="back-link">← হোম পেজে ফিরে যান</a>
+        <!-- Stylish Back Button inside the box (or just below content) -->
+        <div class="back-btn-container">
+            <a href="index.html" class="back-btn">← হোম পেজে ফিরে যান</a>
+        </div>
     </div>
 
     <!-- Firebase SDK (অপরিবর্তিত) -->
@@ -217,7 +239,7 @@
             if(currentVal) {
                 input.value = currentVal + ext;
             } else {
-                input.value = ext; // If empty, just add extension
+                input.value = ext; 
             }
         }
 
@@ -250,7 +272,7 @@
                     <div class="domain-name">${cleanName}.xyz</div>
                     <div class="domain-status status-available">উপলব্ধ ✅</div>
                 </div>
-                <p style="text-align: center; margin-top: 20px; font-size: 0.8rem; color: #888;">দ্রষ্টব্য: এটি একটি ডেমো রেজাল্ট। সঠিক তথ্যের জন্য ডোমেইন প্রোভাইডারের সাথে চেক করুন।</p>
+                <p style="text-align: center; margin-top: 20px; font-size: 0.8rem; color: #888;">দ্রষ্টব্য: এটি একটি ডেমো রেজাল্ট।</p>
             `;
         }
     </script>
