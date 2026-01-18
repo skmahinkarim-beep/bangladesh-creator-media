@@ -14,192 +14,682 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Domain Search Tool - Bangladesh Creator Media</title>
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
-        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f0f2f5; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --accent-color: #00dbde;
+            --dark-bg: #0f172a;
+            --card-bg: rgba(255, 255, 255, 0.1);
+            --text-light: #f8fafc;
+            --text-gray: #cbd5e1;
+            --success-color: #00ff9d;
+            --danger-color: #ff4d7e;
+            --shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            --glow: 0 0 20px rgba(102, 126, 234, 0.5);
+        }
         
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            line-height: 1.6; 
-            color: var(--text-color); 
-            background: var(--bg-color);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-light);
+            background: var(--dark-bg);
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
-            padding-top: 50px; 
+            justify-content: flex-start;
+            padding-top: 30px;
             padding-bottom: 50px;
             padding-left: 20px;
             padding-right: 20px;
+            position: relative;
+            overflow-x: hidden;
         }
-
+        
+        /* Animated Background Elements */
+        .bg-shape-1, .bg-shape-2, .bg-shape-3 {
+            position: fixed;
+            border-radius: 50%;
+            z-index: -2;
+            filter: blur(60px);
+            opacity: 0.2;
+        }
+        
+        .bg-shape-1 {
+            width: 500px;
+            height: 500px;
+            background: var(--accent-color);
+            top: -200px;
+            right: -100px;
+            animation: float 25s infinite ease-in-out;
+        }
+        
+        .bg-shape-2 {
+            width: 400px;
+            height: 400px;
+            background: #764ba2;
+            bottom: -150px;
+            left: -100px;
+            animation: float 30s infinite ease-in-out reverse;
+        }
+        
+        .bg-shape-3 {
+            width: 300px;
+            height: 300px;
+            background: #f5576c;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: pulse 20s infinite ease-in-out;
+        }
+        
         /* AD CONTAINER style */
-        .ad-banner-container { 
-            text-align: center; 
-            margin-bottom: 30px; 
-            max-width: 100%; 
-            overflow: hidden; 
+        .ad-banner-container {
+            text-align: center;
+            margin-bottom: 30px;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            animation: slideInDown 0.8s ease;
         }
-
+        
         /* TOOL CONTAINER */
         .tool-page-container {
             width: 100%;
-            max-width: 800px;
-            padding: 40px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            max-width: 900px;
+            padding: 50px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
+            box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.1);
             text-align: center;
             position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            animation: fadeInUp 1s ease;
+            z-index: 1;
+            overflow: hidden;
         }
-
-        .tool-header { margin-bottom: 30px; }
-        .tool-header h1 { font-size: 2.2rem; color: var(--primary-color); margin-bottom: 10px; }
-        .tool-header p { font-size: 1rem; color: #666; }
-
+        
+        .tool-page-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--primary-gradient);
+            z-index: 2;
+        }
+        
+        .tool-header {
+            margin-bottom: 40px;
+            position: relative;
+            animation: fadeIn 1.2s ease;
+        }
+        
+        .tool-header h1 {
+            font-size: 3rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+            letter-spacing: -0.5px;
+        }
+        
+        .tool-header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--primary-gradient);
+            border-radius: 2px;
+        }
+        
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--text-gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+        
+        /* Neon Pulse Animation for Title */
+        @keyframes neonPulse {
+            0%, 100% { text-shadow: 0 0 10px rgba(102, 126, 234, 0.7); }
+            50% { text-shadow: 0 0 20px rgba(102, 126, 234, 0.9), 0 0 30px rgba(102, 126, 234, 0.5); }
+        }
+        
         .domain-search-box {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 30px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            animation: fadeInUp 1s ease 0.2s both;
+            position: relative;
+            overflow: hidden;
         }
-
-        /* NEW LAYOUT STYLES */
-        .search-input-group { 
-            display: flex; 
-            flex-direction: column; /* উপর-নিচ সাজানো */
-            gap: 15px; 
-            margin-bottom: 20px; 
+        
+        .domain-search-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at top right, rgba(102, 126, 234, 0.1), transparent 70%);
+            pointer-events: none;
         }
-
-        /* Row 1: Input Box */
+        
+        /* Search Input Group */
+        .search-input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-bottom: 20px;
+        }
+        
+        /* Domain Input with Glow Effect */
         .domain-input {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 50px;
-            font-size: 1.1rem;
+            padding: 22px 25px;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            font-size: 1.2rem;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.4s ease;
+            background: rgba(0, 0, 0, 0.2);
+            color: var(--text-light);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
-        .domain-input:focus { border-color: var(--primary-color); }
-
-        /* Row 2: Dropdown & Button Container */
+        
+        .domain-input:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 5px 25px rgba(0, 219, 222, 0.3), var(--glow);
+            transform: translateY(-3px);
+        }
+        
+        .domain-input::placeholder {
+            color: rgba(255, 255, 255, 0.4);
+        }
+        
+        /* Action Row with Futuristic Design */
         .action-row {
             display: flex;
-            gap: 15px;
+            gap: 20px;
             width: 100%;
         }
-
-        /* Dropdown & Button shared style for 50-50 width */
-        .extension-select, .domain-btn {
-            flex: 1; /* অর্ধেক করে জায়গা নিবে */
-            padding: 15px;
-            border-radius: 50px;
-            font-size: 1rem;
-            height: 55px; /* ফিক্সড হাইট যাতে সমান দেখায় */
-        }
-
+        
+        /* Extension Select Styling - Simplified */
         .extension-select {
-            border: 2px solid #ddd;
+            flex: 1;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.1rem;
+            height: 65px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
             outline: none;
             cursor: pointer;
-            background: white;
-            color: #555;
-            transition: border-color 0.3s;
+            background: rgba(15, 23, 42, 0.9);
+            color: var(--text-light);
+            transition: all 0.4s ease;
             text-align: center;
-            text-align-last: center; /* টেক্সট মাঝখানে রাখার জন্য */
+            text-align-last: center;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23667eea'%3e%3cpath d='M7 10l5 5 5-5z'/%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 20px center;
+            background-size: 20px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            font-weight: 600;
         }
-        .extension-select:focus { border-color: var(--primary-color); }
+        
+        /* অপশনগুলির জন্য সহজ কালার সিস্টেম */
+        .extension-select option {
+            background: #0f172a;
+            color: #f8fafc;
+            padding: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+        }
 
+        .extension-select option:checked {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 700;
+        }
+
+        .extension-select option:hover {
+            background: rgba(102, 126, 234, 0.3);
+        }
+
+        .extension-select option:first-of-type {
+            color: #94a3b8;
+            font-style: italic;
+        }
+        
+        /* হোভার এবং ফোকাস স্টাইল */
+        .extension-select:hover {
+            border-color: rgba(102, 126, 234, 0.6);
+            background: rgba(15, 23, 42, 0.95);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+        }
+
+        .extension-select:focus {
+            border-color: var(--accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 219, 222, 0.2), 0 5px 25px rgba(0, 219, 222, 0.3);
+            background: rgba(15, 23, 42, 0.95);
+        }
+        
+        /* Search Button with Gradient and Animation */
         .domain-btn {
-            background: linear-gradient(45deg, #ff9800, #ff5722);
+            flex: 1;
+            padding: 20px;
+            border-radius: 15px;
+            font-size: 1.3rem;
+            height: 65px;
+            background: var(--primary-gradient);
             color: white;
             border: none;
             font-weight: 700;
-            font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.4s ease;
             white-space: nowrap;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
-        .domain-btn:hover { transform: translateY(-3px); }
-        .domain-btn:disabled { background: #ccc; cursor: not-allowed; }
-
-        .results-container { margin-top: 30px; text-align: left; }
-
-        .result-item {
-            background: #f8f9fa;
-            padding: 15px 20px;
-            border-radius: 10px;
-            margin-bottom: 10px;
+        
+        .domain-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
+        .domain-btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.6);
+        }
+        
+        .domain-btn:hover::before {
+            left: 100%;
+        }
+        
+        .domain-btn:active {
+            transform: translateY(-2px);
+        }
+        
+        .domain-btn:disabled {
+            background: #475569;
+            cursor: not-allowed;
+            box-shadow: none;
+            transform: none !important;
+        }
+        
+        /* Results Container */
+        .results-container {
+            margin-top: 40px;
+            text-align: left;
+            animation: fadeIn 1s ease 0.5s both;
+        }
+        
+        .results-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-left: 5px solid #ddd;
-            animation: fadeIn 0.5s ease;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
         }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
-
-        .result-item.available { border-left-color: #28a745; }
-        .result-item.taken { border-left-color: #dc3545; }
         
-        .domain-name { font-weight: 700; font-size: 1.1rem; }
-        
-        .domain-status { 
-            padding: 5px 15px; 
-            border-radius: 50px; 
-            font-weight: 600; 
-            font-size: 0.85rem; 
-            display: inline-block;
+        .results-header h3 {
+            font-size: 1.8rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
-        .status-available { background: #d4edda; color: #155724; }
-        .status-taken { background: #f8d7da; color: #721c24; }
+        
+        .result-count {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            color: var(--text-gray);
+        }
+        
+        /* Result Items with Modern Cards */
+        .result-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 18px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-left: 6px solid #ddd;
+            animation: slideInRight 0.6s ease;
+            transition: all 0.4s ease;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .result-item:hover {
+            transform: translateY(-5px);
+            border-color: rgba(102, 126, 234, 0.3);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2), 0 0 15px rgba(102, 126, 234, 0.1);
+        }
+        
+        .result-item.available {
+            border-left-color: var(--success-color);
+        }
+        
+        .result-item.taken {
+            border-left-color: var(--danger-color);
+        }
+        
+        .domain-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .domain-icon {
+            width: 50px;
+            height: 50px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-color);
+        }
+        
+        .domain-name {
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: var(--text-light);
+            letter-spacing: -0.5px;
+        }
+        
+        .domain-status {
+            padding: 10px 22px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+        }
+        
+        .status-available {
+            background: rgba(0, 255, 157, 0.1);
+            color: var(--success-color);
+            border: 1px solid rgba(0, 255, 157, 0.3);
+        }
+        
+        .status-taken {
+            background: rgba(255, 77, 126, 0.1);
+            color: var(--danger-color);
+            border: 1px solid rgba(255, 77, 126, 0.3);
+        }
+        
+        .domain-actions {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
         
         .buy-link {
-            margin-left: 10px;
+            padding: 12px 25px;
+            background: var(--secondary-gradient);
+            color: white;
             text-decoration: none;
-            font-size: 0.9rem;
-            color: #0056b3;
-            font-weight: bold;
+            font-weight: 700;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 8px 20px rgba(245, 87, 108, 0.3);
         }
-        .buy-link:hover { text-decoration: underline; }
-
-        /* Stylish Back Button Box */
-        .back-btn-container { margin-top: 40px; }
+        
+        .buy-link:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 25px rgba(245, 87, 108, 0.4);
+        }
+        
+        /* Back Button with Futuristic Design */
+        .back-btn-container {
+            margin-top: 60px;
+            animation: fadeIn 1s ease 0.8s both;
+        }
         
         .back-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 2px solid var(--primary-color);
-            border-radius: 50px;
-            color: var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 18px 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            color: var(--text-light);
             text-decoration: none;
-            font-weight: 600;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: transparent;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
         }
-
+        
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.2), transparent);
+            transition: left 0.7s ease;
+        }
+        
         .back-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            box-shadow: 0 5px 15px rgba(0, 86, 179, 0.2);
-            transform: translateY(-2px);
+            background: rgba(102, 126, 234, 0.1);
+            border-color: rgba(102, 126, 234, 0.6);
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
         }
-
-        @media (max-width: 600px) { 
-            .tool-page-container { padding: 20px; }
-            body { padding-top: 20px; }
-            /* মোবাইলেও যাতে পাশাপাশি থাকে তাই ফ্লেক্স চেঞ্জ করলাম না, তবে টেক্সট ছোট করলাম */
-            .domain-btn { font-size: 1rem; padding: 15px 10px; }
+        
+        .back-btn:hover::before {
+            left: 100%;
+        }
+        
+        /* Loading Animation */
+        .loading-spinner {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            border-top-color: var(--accent-color);
+            animation: spin 1s ease-in-out infinite;
+            margin: 30px auto;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInDown {
+            from { opacity: 0; transform: translateY(-30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(-30px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-20px) translateX(20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 0.2; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.05); }
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Footer */
+        .footer-note {
+            margin-top: 40px;
+            text-align: center;
+            color: var(--text-gray);
+            font-size: 0.9rem;
+            padding: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            width: 100%;
+            max-width: 900px;
+            animation: fadeIn 1s ease 1s both;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .tool-page-container {
+                padding: 30px 20px;
+            }
+            
+            .tool-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tool-header p {
+                font-size: 1rem;
+            }
+            
+            .domain-search-box {
+                padding: 25px 20px;
+            }
+            
+            .action-row {
+                flex-direction: column;
+            }
+            
+            .extension-select, .domain-btn {
+                width: 100%;
+                height: 60px;
+            }
+            
+            .result-item {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .domain-actions {
+                width: 100%;
+                justify-content: space-between;
+            }
+            
+            .domain-info {
+                width: 100%;
+            }
+            
+            .back-btn {
+                padding: 15px 30px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding-top: 20px;
+                padding-left: 15px;
+                padding-right: 15px;
+            }
+            
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .domain-input {
+                padding: 18px 20px;
+                font-size: 1rem;
+            }
+            
+            .results-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .domain-name {
+                font-size: 1.2rem;
+            }
+            
+            .domain-actions {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .buy-link {
+                width: 100%;
+                justify-content: center;
+            }
         }
     </style>
 </head>
 <body>
-
-    <!-- ADSTERRA BANNER -->
+    <!-- Animated Background Elements -->
+    <div class="bg-shape-1"></div>
+    <div class="bg-shape-2"></div>
+    <div class="bg-shape-3"></div>
+    
+    <!-- ADSTERRA BANNER (অপরিবর্তিত) -->
     <div class="ad-banner-container">
         <script>
             atOptions = {
@@ -216,20 +706,19 @@
     <!-- Domain Search Tool Container -->
     <div class="tool-page-container">
         <div class="tool-header">
-            <h1>🌐 ডোমেইন সার্চ টুল</h1>
-            <p>বিনামূল্যে যেকোনো ডোমেইন নামের উপলব্ধতা চেক করুন এবং আপনার নিখুঁত ডোমেইন খুঁজে নিন।</p>
+            <h1><i class="fas fa-globe-americas"></i> ডোমেইন এক্সপ্লোরার প্রো</h1>
+            <p>ডিজিটাল উপস্থিতির জন্য নিখুঁত ডোমেইন খুঁজুন। আমাদের এআই-চালিত সার্চ টুল সেকেন্ডের মধ্যে উপলব্ধতা চেক করে এবং সেরা বিকল্পগুলি প্রস্তাব করে।</p>
         </div>
 
         <div class="domain-search-box">
             <div class="search-input-group">
                 <!-- Row 1: Full Width Input -->
-                <input type="text" class="domain-input" id="domainInput" placeholder="ডোমেইন নাম লিখুন (উদাঃ mywebsite)">
+                <input type="text" class="domain-input" id="domainInput" placeholder="ডোমেইনের নাম লিখুন, উদাহরণ: mywebsite">
                 
                 <!-- Row 2: 50% Dropdown, 50% Button -->
                 <div class="action-row">
                     <select class="extension-select" id="extensionSelect" onchange="addExtensionFromDropdown()">
-                        <!-- এখানে Label পরিবর্তন করে .com ▼ দেওয়া হয়েছে -->
-                        <option value="" selected disabled>.com ▼</option>
+                        <option value="" selected disabled>এক্সটেনশন নির্বাচন করুন ▼</option>
                         <option value=".com">.com</option>
                         <option value=".org">.org</option>
                         <option value=".net">.net</option>
@@ -263,7 +752,9 @@
                         <option value=".world">.world</option>
                     </select>
 
-                    <button class="domain-btn" id="searchBtn" onclick="searchDomain()">সার্চ করুন</button>
+                    <button class="domain-btn" id="searchBtn" onclick="searchDomain()">
+                        <i class="fas fa-search"></i> ডোমেইন স্ক্যান করুন
+                    </button>
                 </div>
             </div>
         </div>
@@ -274,8 +765,15 @@
 
         <!-- Stylish Back Button -->
         <div class="back-btn-container">
-            <a href="index.html" class="back-btn">← হোম পেজে ফিরে যান</a>
+            <a href="index.html" class="back-btn">
+                <i class="fas fa-arrow-left"></i> ড্যাশবোর্ডে ফিরে যান
+            </a>
         </div>
+    </div>
+    
+    <!-- Footer Note -->
+    <div class="footer-note">
+        <p>© ২০২৬ বাংলাদেশ ক্রিয়েটর মিডিয়া | সকল ডোমেইন মূল্যায়ন বাস্তব-সময়ের DNS ডেটার উপর ভিত্তি করে</p>
     </div>
 
     <!-- Firebase SDK (অপরিবর্তিত) -->
@@ -292,76 +790,176 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        // ড্রপডাউন থেকে সিলেক্ট করলে ইনপুটে এড হবে
+        // ড্রপডাউন থেকে সিলেক্ট করলে ইনপুটে এড হবে এবং ড্রপডাউনেও দেখাবে
         function addExtensionFromDropdown() {
             const select = document.getElementById('extensionSelect');
             const input = document.getElementById('domainInput');
             const ext = select.value;
 
-            if(ext) {
+            if(ext && ext !== "") {
                 let currentVal = input.value.split('.')[0];
                 if(currentVal) {
                     input.value = currentVal + ext;
                 } else {
-                    input.value = ext;
+                    input.value = ext.replace('.', '');
                 }
+                
+                // ড্রপডাউনে সিলেক্টেড ভ্যালু দেখানো (রিসেট করছি না)
+                const firstOption = select.options[0];
+                firstOption.text = ext + " ▼";
+                firstOption.disabled = false;
+                select.value = ext;
             }
-            // রিসেট ড্রপডাউন
-            select.value = ""; 
         }
 
-        // রিয়েল-টাইম ডোমেইন চেকার লজিক (Google DNS API)
+        // রিয়েল-টাইম ডোমেইন চেকার লজিক (Google DNS API)
         async function searchDomain() {
             const inputVal = document.getElementById('domainInput').value.trim().toLowerCase();
             const resultsContainer = document.getElementById('resultsContainer');
             const searchBtn = document.getElementById('searchBtn');
             
             if (!inputVal) {
-                resultsContainer.innerHTML = '<p style="color: #dc3545; text-align: center;">দয়া করে একটি ডোমেইন নাম লিখুন!</p>';
+                resultsContainer.innerHTML = `
+                    <div class="results-header">
+                        <h3><i class="fas fa-exclamation-triangle"></i> ত্রুটি</h3>
+                    </div>
+                    <div class="result-item taken">
+                        <div class="domain-info">
+                            <div class="domain-icon">
+                                <i class="fas fa-exclamation-circle"></i>
+                            </div>
+                            <div>
+                                <div class="domain-name">ইনপুট প্রয়োজন</div>
+                                <div style="color: var(--text-gray); font-size: 0.9rem; margin-top: 5px;">দয়া করে একটি ডোমেইন নাম লিখুন!</div>
+                            </div>
+                        </div>
+                        <div class="domain-actions">
+                            <span class="domain-status status-taken">
+                                <i class="fas fa-times-circle"></i> ত্রুটি
+                            </span>
+                        </div>
+                    </div>`;
                 return;
             }
 
             let name = inputVal.split('.')[0];
-            let extensions = ['.com', '.net', '.org', '.xyz']; 
+            let extensions = ['.com', '.net', '.org', '.xyz', '.online']; 
             
             if (inputVal.includes('.')) {
                 extensions = ['.' + inputVal.split('.')[1]]; 
             }
 
-            resultsContainer.innerHTML = '<p style="text-align:center; color:#666;">চেক করা হচ্ছে... দয়া করে অপেক্ষা করুন ⏳</p>';
+            resultsContainer.innerHTML = `
+                <div class="results-header">
+                    <h3><i class="fas fa-search"></i> স্ক্যানিং ডোমেইন</h3>
+                    <div class="result-count">${extensions.length} এক্সটেনশন</div>
+                </div>
+                <div style="text-align:center; padding: 40px 0;">
+                    <div class="loading-spinner"></div>
+                    <p style="color: var(--text-gray); margin-top: 20px;">আপনার ডোমেইনগুলি চেক করা হচ্ছে... দয়া করে অপেক্ষা করুন</p>
+                </div>`;
+            
             searchBtn.disabled = true;
-            searchBtn.textContent = '...';
+            searchBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> স্ক্যানিং...';
 
-            let htmlContent = `<h3 style="margin-bottom:15px; color:#333;">ফলাফল (${name}):</h3>`;
+            // Delay for visual effect
+            await new Promise(resolve => setTimeout(resolve, 800));
+
+            let htmlContent = `
+                <div class="results-header">
+                    <h3><i class="fas fa-list-alt"></i> স্ক্যান রেজাল্ট</h3>
+                    <div class="result-count">${extensions.length} এক্সটেনশন</div>
+                </div>`;
+
+            let availableCount = 0;
+            let takenCount = 0;
 
             for (let ext of extensions) {
                 const fullDomain = name + ext;
                 const isTaken = await checkAvailability(fullDomain);
-
+                
                 if (isTaken) {
+                    takenCount++;
                     htmlContent += `
                         <div class="result-item taken">
-                            <div class="domain-name">${fullDomain}</div>
-                            <div>
-                                <span class="domain-status status-taken">ব্যস্ত ❌</span>
-                                <a href="https://www.namecheap.com/domains/registration/results/?domain=${fullDomain}" target="_blank" class="buy-link">Owner info</a>
+                            <div class="domain-info">
+                                <div class="domain-icon">
+                                    <i class="fas fa-times-circle"></i>
+                                </div>
+                                <div>
+                                    <div class="domain-name">${fullDomain}</div>
+                                    <div style="color: var(--text-gray); font-size: 0.9rem; margin-top: 5px;">এই ডোমেইনটি ইতিমধ্যেই নিবন্ধিত</div>
+                                </div>
+                            </div>
+                            <div class="domain-actions">
+                                <span class="domain-status status-taken">
+                                    <i class="fas fa-lock"></i> ব্যস্ত
+                                </span>
+                                <a href="https://www.namecheap.com/domains/registration/results/?domain=${fullDomain}" target="_blank" class="buy-link">
+                                    <i class="fas fa-info-circle"></i> বিবরণ
+                                </a>
                             </div>
                         </div>`;
                 } else {
+                    availableCount++;
                     htmlContent += `
                         <div class="result-item available">
-                            <div class="domain-name">${fullDomain}</div>
-                            <div>
-                                <span class="domain-status status-available">উপলব্ধ ✅</span>
-                                <a href="https://www.namecheap.com/domains/registration/results/?domain=${fullDomain}" target="_blank" class="buy-link">Buy Now</a>
+                            <div class="domain-info">
+                                <div class="domain-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div>
+                                    <div class="domain-name">${fullDomain}</div>
+                                    <div style="color: var(--text-gray); font-size: 0.9rem; margin-top: 5px;">এই ডোমেইনটি নিবন্ধনের জন্য উপলব্ধ</div>
+                                </div>
+                            </div>
+                            <div class="domain-actions">
+                                <span class="domain-status status-available">
+                                    <i class="fas fa-unlock"></i> উপলব্ধ
+                                </span>
+                                <a href="https://www.namecheap.com/domains/registration/results/?domain=${fullDomain}" target="_blank" class="buy-link">
+                                    <i class="fas fa-shopping-cart"></i> এখনই কিনুন
+                                </a>
                             </div>
                         </div>`;
                 }
+                
+                // Add slight delay between checks for visual effect
+                await new Promise(resolve => setTimeout(resolve, 200));
             }
+            
+            // Add summary
+            htmlContent += `
+                <div class="result-item" style="background: rgba(255, 255, 255, 0.03); border-left-color: #4361ee;">
+                    <div class="domain-info">
+                        <div class="domain-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <div>
+                            <div class="domain-name">স্ক্যান সারাংশ</div>
+                            <div style="color: var(--text-gray); font-size: 0.9rem; margin-top: 5px;">${extensions.length} টি ডোমেইন চেক করা হয়েছে</div>
+                        </div>
+                    </div>
+                    <div class="domain-actions">
+                        <span style="background: rgba(0, 219, 222, 0.1); color: var(--accent-color); padding: 10px 20px; border-radius: 50px; font-weight: 700;">
+                            <i class="fas fa-check-circle" style="color: var(--success-color);"></i> ${availableCount} উপলব্ধ
+                        </span>
+                        <span style="background: rgba(255, 77, 126, 0.1); color: var(--danger-color); padding: 10px 20px; border-radius: 50px; font-weight: 700; margin-left: 10px;">
+                            <i class="fas fa-times-circle"></i> ${takenCount} ব্যস্ত
+                        </span>
+                    </div>
+                </div>`;
 
             resultsContainer.innerHTML = htmlContent;
             searchBtn.disabled = false;
-            searchBtn.textContent = 'সার্চ করুন';
+            searchBtn.innerHTML = '<i class="fas fa-search"></i> ডোমেইন স্ক্যান করুন';
+            
+            // ড্রপডাউন রিসেট করুন
+            const select = document.getElementById('extensionSelect');
+            const firstOption = select.options[0];
+            firstOption.text = "এক্সটেনশন নির্বাচন করুন ▼";
+            firstOption.disabled = true;
+            select.value = "";
         }
 
         async function checkAvailability(domain) {
@@ -377,6 +975,43 @@
                 return true; 
             }
         }
+        
+        // Add some interactive effects
+        document.addEventListener('DOMContentLoaded', function() {
+            const domainInput = document.getElementById('domainInput');
+            const searchBtn = document.getElementById('searchBtn');
+            const select = document.getElementById('extensionSelect');
+            
+            // ফিক্সড প্লেসহোল্ডার
+            domainInput.placeholder = "ডোমেইনের নাম লিখুন, উদাহরণ: mywebsite";
+            
+            // Add input animation
+            domainInput.addEventListener('focus', function() {
+                this.parentElement.parentElement.style.transform = 'scale(1.01)';
+                this.parentElement.parentElement.style.transition = 'transform 0.3s ease';
+            });
+            
+            domainInput.addEventListener('blur', function() {
+                this.parentElement.parentElement.style.transform = 'scale(1)';
+            });
+            
+            // Enter key to search
+            domainInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    searchBtn.click();
+                }
+            });
+            
+            // ইনপুট ফিল্ড ক্লিয়ার হলে ড্রপডাউনও রিসেট হবে
+            domainInput.addEventListener('input', function() {
+                if (this.value === "") {
+                    const firstOption = select.options[0];
+                    firstOption.text = "এক্সটেনশন নির্বাচন করুন ▼";
+                    firstOption.disabled = true;
+                    select.value = "";
+                }
+            });
+        });
     </script>
 </body>
 </html>
