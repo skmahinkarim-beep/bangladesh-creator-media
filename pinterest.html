@@ -16,11 +16,9 @@
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
-        /* কালার ভেরিয়েবল পিনটারেস্টের থিম অনুযায়ী (লাল) */
         :root { --primary-color: #e60023; --text-color: #333; --bg-color: #f0f2f5; }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Body Layout Fix */
         body { 
             font-family: 'Segoe UI', sans-serif; 
             line-height: 1.6; 
@@ -108,7 +106,7 @@
             padding: 20px;
             background: #f9f9f9;
             border-radius: 10px;
-            display: none; /* ডিফল্টভাবে লুকানো থাকবে */
+            display: none;
         }
         .video-preview video, .video-preview img { 
             width: 100%; 
@@ -180,7 +178,7 @@
 </head>
 <body>
 
-    <!-- ADSTERRA BANNER (অপরিবর্তিত) -->
+    <!-- ADSTERRA BANNER -->
     <div class="ad-banner-container">
         <script>
             atOptions = {
@@ -211,15 +209,12 @@
             <div class="video-preview" id="videoPreview">
                 <h4 style="margin-bottom: 15px; color: #333;">মিডিয়া প্রিভিউ:</h4>
                 
-                <!-- কন্টেন্ট ডায়নামিকভাবে এখানে লোড হবে -->
                 <div id="mediaContainer"></div>
 
-                <div class="download-options" id="downloadButtons">
-                    <!-- বাটনগুলো জাভাস্ক্রিপ্ট দিয়ে তৈরি হবে -->
-                </div>
+                <div class="download-options" id="downloadButtons"></div>
                 
-                <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">
-                    নোট: ডাউনলোড বাটনে ক্লিক করলে ভিডিও নতুন ট্যাবে ওপেন হবে। সেখান থেকে "Three Dots" এ ক্লিক করে ডাউনলোড করুন।
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #888;" id="tipsText">
+                    <!-- টিপস এখানে ডায়নামিকালি আসবে -->
                 </p>
             </div>
         </div>
@@ -230,7 +225,7 @@
                 <li>পিনটারেস্ট অ্যাপ বা ওয়েবসাইট থেকে ভিডিও বা ছবির লিংক কপি করুন।</li>
                 <li>উপরের বক্সে লিংকটি পেস্ট করুন।</li>
                 <li>"ডাউনলোড করুন" বাটনে ক্লিক করুন।</li>
-                <li>নিচে প্রিভিউ আসলে কোয়ালিটি অনুযায়ী ডাউনলোড বাটনে ক্লিক করুন।</li>
+                <li>নিচে প্রিভিউ আসলে ডাউনলোড বাটনে ক্লিক করুন।</li>
             </ol>
         </div>
 
@@ -254,7 +249,6 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        // Pinterest Media Fetcher Logic
         async function fetchPinterestMedia() {
             const urlInput = document.getElementById('pinterestUrl');
             const statusMsg = document.getElementById('statusMsg');
@@ -262,6 +256,7 @@
             const mediaContainer = document.getElementById('mediaContainer');
             const downloadButtons = document.getElementById('downloadButtons');
             const fetchBtn = document.getElementById('fetchBtn');
+            const tipsText = document.getElementById('tipsText');
 
             const url = urlInput.value.trim();
 
@@ -270,79 +265,93 @@
                 statusMsg.innerText = 'দয়া করে একটি লিংক দিন!';
                 return;
             }
-            if (!url.includes('pinterest.com') && !url.includes('pin.it')) {
-                statusMsg.style.color = 'red';
-                statusMsg.innerText = 'এটি পিনটারেস্টের লিংক নয়!';
-                return;
-            }
 
-            // UI Reset
             statusMsg.style.color = '#0056b3';
-            statusMsg.innerText = 'লিংক প্রসেস করা হচ্ছে... অপেক্ষা করুন ⏳';
+            statusMsg.innerText = 'মিডিয়া খোঁজা হচ্ছে... ⏳';
             fetchBtn.disabled = true;
             fetchBtn.innerText = 'লোডিং...';
             previewArea.style.display = 'none';
             mediaContainer.innerHTML = '';
             downloadButtons.innerHTML = '';
+            tipsText.innerText = '';
 
             try {
-                // Using a CORS Proxy to fetch the page content safely
-                // AllOrigins is a safe, free, open-source proxy
-                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+                // Using corsproxy.io for better redirect handling
+                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
                 
                 const response = await fetch(proxyUrl);
-                const data = await response.json();
-                const htmlContent = data.contents;
+                const htmlText = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(htmlText, 'text/html');
 
-                // Extracting Video URL (.mp4)
-                // পিনটারেস্টের সোর্স কোড থেকে mp4 ফাইল খোঁজা হচ্ছে
-                const videoMatch = htmlContent.match(/https:\/\/v\.pinimg\.com\/videos\/[a-zA-Z0-9\/._-]+\.mp4/);
-                
-                // Extracting Image URL (Fallback)
-                const imageMatch = htmlContent.match(/https:\/\/i\.pinimg\.com\/originals\/[a-zA-Z0-9\/._-]+\.(jpg|png|webp)/);
+                let videoUrl = null;
+                let imageUrl = null;
+
+                // Meta tags check
+                const ogVideo = doc.querySelector('meta[property="og:video"]');
+                if (ogVideo) videoUrl = ogVideo.content;
+
+                // Backup check inside scripts
+                if (!videoUrl) {
+                    const scripts = doc.querySelectorAll('script');
+                    for (let script of scripts) {
+                        if (script.textContent.includes('.mp4')) {
+                            const match = script.textContent.match(/https?:\/\/[^"]+\.mp4/);
+                            if (match) {
+                                videoUrl = match[0];
+                                break;
+                            }
+                        }
+                    }
+                }
+
+                const ogImage = doc.querySelector('meta[property="og:image"]');
+                if (ogImage) imageUrl = ogImage.content;
 
                 statusMsg.innerText = '';
                 previewArea.style.display = 'block';
 
-                if (videoMatch) {
-                    // যদি ভিডিও পাওয়া যায়
-                    const videoUrl = videoMatch[0];
-                    
+                if (videoUrl) {
+                    // *** VIDEO ***
                     mediaContainer.innerHTML = `
-                        <video controls autoplay muted>
+                        <video controls autoplay name="media">
                             <source src="${videoUrl}" type="video/mp4">
-                            আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
                         </video>
                     `;
-
-                    // Generate Download Buttons for Video
-                    // Note: Pinterest usually serves one main quality via this method, which is the best available.
                     downloadButtons.innerHTML = `
-                        <a href="${videoUrl}" target="_blank" class="download-btn">⬇ ডাউনলোড ভিডিও (Best Quality)</a>
-                        <a href="${videoUrl}" target="_blank" class="download-btn" style="background:linear-gradient(45deg, #17a2b8, #117a8b);">⬇ প্রিভিউ লিঙ্ক</a>
+                        <a href="${videoUrl}" target="_blank" class="download-btn">⬇ ভিডিও ডাউনলোড করুন (HD)</a>
                     `;
-                    statusMsg.innerText = '✅ ভিডিও সফলভাবে পাওয়া গেছে!';
-
-                } else if (imageMatch) {
-                    // যদি ভিডিও না থাকে, কিন্তু ছবি থাকে
-                    const imageUrl = imageMatch[0];
-                    
+                    tipsText.innerText = 'টিপস: ভিডিও নতুন ট্যাবে চালু হলে, ভিডিওর ওপর Three Dots (⋮) এ ক্লিক করে ডাউনলোড করুন।';
+                    statusMsg.style.color = 'green';
+                    statusMsg.innerText = '✅ ভিডিও পাওয়া গেছে!';
+                } 
+                else if (imageUrl) {
+                    // *** IMAGE (SIMPLE LINK METHOD) ***
+                    // এখানে আমি বাটন সরিয়ে সিম্পল লিংক ব্যবহার করেছি যা ভিডিওর মতোই কাজ করবে
                     mediaContainer.innerHTML = `
                         <img src="${imageUrl}" alt="Pinterest Image">
                     `;
-
+                    
                     downloadButtons.innerHTML = `
-                        <a href="${imageUrl}" target="_blank" class="download-btn">⬇ ডাউনলোড ছবি (HD)</a>
+                        <a href="${imageUrl}" target="_blank" class="download-btn">⬇ ছবি ডাউনলোড করুন (HD)</a>
                     `;
+
+                    tipsText.innerText = 'টিপস: ছবিটি নতুন ট্যাবে ওপেন হবে। দয়া করে ছবির ওপর লং প্রেস (Long Press) বা রাইট ক্লিক করে সেভ করুন।';
+                    statusMsg.style.color = 'green';
                     statusMsg.innerText = '✅ ছবিটি পাওয়া গেছে!';
-                } else {
-                    throw new Error('মিডিয়া খুঁজে পাওয়া যায়নি।');
+                } 
+                else {
+                    throw new Error("Media not found");
                 }
 
             } catch (error) {
                 console.error(error);
                 statusMsg.style.color = 'red';
-                statusMsg.innerText = 'দুঃখিত! মিডিয়া ফেচ করা সম্ভব হয়নি অথবা লিংকটি প্রাইভেট।';
+                if (url.includes('pin.it')) {
+                    statusMsg.innerHTML = 'লিংকটি লোড করা যাচ্ছে না। দয়া করে <b>পিনটারেস্ট থেকে "Full Link" (pinterest.com/...) কপি করে চেষ্টা করুন।</b>';
+                } else {
+                    statusMsg.innerText = 'দুঃখিত! মিডিয়াটি পাওয়া যায়নি। ফুল লিংক ব্যবহার করুন।';
+                }
             } finally {
                 fetchBtn.disabled = false;
                 fetchBtn.innerText = 'ডাউনলোড করুন';
