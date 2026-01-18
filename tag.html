@@ -15,78 +15,272 @@
     <title>Tag Generator - Bangladesh Creator Media</title>
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&family=Orbitron:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <!-- Animate.css -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    
     <style>
-        :root { --primary-color: #6f42c1; --text-color: #333; --bg-color: #f0f2f5; }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body { 
-            font-family: 'Segoe UI', sans-serif; 
-            line-height: 1.6; 
-            color: var(--text-color); 
-            background: var(--bg-color);
+        :root {
+            --primary-gradient: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-bg: #0f0f23;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --neon-blue: #00f3ff;
+            --neon-purple: #b967ff;
+            --text-primary: #ffffff;
+            --text-secondary: #b0b0d0;
+            --accent-color: #ff4d8d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--dark-bg);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(107, 33, 168, 0.15) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(0, 243, 255, 0.1) 0%, transparent 20%);
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background Elements */
+        .bg-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--primary-gradient);
+            opacity: 0.1;
+            animation: float 20s infinite linear;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 300px;
+            height: 300px;
+            top: 10%;
+            left: 5%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 200px;
+            height: 200px;
+            top: 60%;
+            right: 10%;
+            animation-delay: -5s;
+            background: var(--secondary-gradient);
+        }
+
+        .floating-element:nth-child(3) {
+            width: 150px;
+            height: 150px;
+            bottom: 20%;
+            left: 15%;
+            animation-delay: -10s;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -50px) rotate(120deg); }
+            66% { transform: translate(-20px, 20px) rotate(240deg); }
+        }
+
+        /* AD CONTAINER */
+        .ad-banner-container {
+            text-align: center;
+            margin: 20px auto 40px;
+            max-width: 728px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 243, 255, 0.2);
+            animation: slideInDown 0.8s ease-out;
+        }
+
+        /* MAIN CONTAINER */
+        .main-wrapper {
+            width: 100%;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: flex-start; 
-            padding-top: 50px; 
-            padding-bottom: 50px;
-            padding-left: 20px;
-            padding-right: 20px;
+            justify-content: center;
+            padding: 40px 20px;
+            position: relative;
         }
 
-        /* AD CONTAINER */
-        .ad-banner-container { text-align: center; margin-bottom: 30px; max-width: 100%; overflow: hidden; }
-
-        /* TOOL CONTAINER */
+        /* TOOL CONTAINER - GLASS MORPHISM EFFECT */
         .tool-page-container {
             width: 100%;
             max-width: 900px;
-            padding: 40px;
-            background: white;
-            border-radius: 20px;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            padding: 50px;
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
             text-align: center;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 0.8s ease-out;
+            z-index: 1;
         }
 
-        .tool-header { margin-bottom: 30px; }
-        .tool-header h1 { font-size: 2.5rem; color: var(--primary-color); margin-bottom: 15px; }
-        .tool-header p { font-size: 1.1rem; color: #666; max-width: 700px; margin: 0 auto; }
+        .tool-page-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+        }
 
+        .tool-page-container::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 243, 255, 0.1) 0%, transparent 70%);
+            z-index: -1;
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* HEADER SECTION */
+        .tool-header {
+            margin-bottom: 50px;
+            position: relative;
+        }
+
+        .tool-header h1 {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 3.2rem;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            animation: neonGlow 2s ease-in-out infinite alternate;
+        }
+
+        @keyframes neonGlow {
+            from { text-shadow: 0 0 10px rgba(106, 17, 203, 0.5), 0 0 20px rgba(106, 17, 203, 0.3); }
+            to { text-shadow: 0 0 20px rgba(37, 117, 252, 0.7), 0 0 30px rgba(37, 117, 252, 0.5); }
+        }
+
+        .tool-header p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* TAG GENERATOR BOX */
         .tag-generator-box {
-            background: linear-gradient(135deg, #f8f9ff 0%, #eef2ff 100%);
-            padding: 40px;
-            border-radius: 15px;
-            margin-bottom: 30px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 50px;
+            border-radius: 25px;
+            margin-bottom: 40px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
         }
 
-        .caption-input-group { margin-bottom: 20px; text-align: left; }
-        .caption-label { display: block; margin-bottom: 10px; font-weight: 700; color: #555; }
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(0, 243, 255, 0); }
+            50% { box-shadow: 0 0 0 20px rgba(0, 243, 255, 0.1); }
+        }
+
+        /* INPUT GROUP */
+        .caption-input-group {
+            margin-bottom: 30px;
+            text-align: left;
+            position: relative;
+        }
+
+        .caption-label {
+            display: block;
+            margin-bottom: 15px;
+            font-weight: 600;
+            color: var(--neon-blue);
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
 
         .caption-input {
             width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #ddd;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            min-height: 80px;
-            resize: vertical;
+            padding: 20px 25px;
+            background: rgba(0, 0, 0, 0.5);
+            border: 2px solid rgba(0, 243, 255, 0.3);
+            border-radius: 15px;
+            font-size: 1.2rem;
+            color: var(--text-primary);
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
         }
-        .caption-input:focus { border-color: var(--primary-color); }
 
-        /* TAG TYPE TOGGLE STYLES */
+        .caption-input:focus {
+            border-color: var(--neon-blue);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .caption-input::placeholder {
+            color: rgba(255, 255, 255, 0.3);
+        }
+
+        /* TAG TYPE TOGGLE - MODERN STYLE */
+        .tag-options-wrapper {
+            margin: 30px auto;
+            display: inline-block;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 5px;
+            border-radius: 50px;
+            border: 1px solid rgba(0, 243, 255, 0.2);
+        }
+
         .tag-options {
             display: flex;
-            gap: 20px;
-            margin-bottom: 25px;
-            justify-content: center;
-            background: white;
-            padding: 10px;
-            border-radius: 50px;
-            display: inline-flex;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            gap: 0;
+            background: transparent;
         }
 
         .radio-label {
@@ -94,19 +288,187 @@
             align-items: center;
             cursor: pointer;
             font-weight: 600;
-            color: #555;
-            font-size: 0.95rem;
+            color: var(--text-secondary);
+            padding: 12px 30px;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .radio-label::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
         }
 
         .radio-label input {
-            margin-right: 8px;
-            accent-color: var(--primary-color);
-            transform: scale(1.2);
-            cursor: pointer;
+            display: none;
         }
 
+        .radio-label:has(input:checked) {
+            color: white;
+            background: var(--primary-gradient);
+            box-shadow: 0 5px 20px rgba(106, 17, 203, 0.4);
+        }
+
+        .radio-label:hover {
+            color: white;
+            background: rgba(0, 243, 255, 0.1);
+        }
+
+        /* GENERATE BUTTON */
         .generate-btn {
-            background: linear-gradient(45deg, #6f42c1, #5a32a3);
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 18px 50px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 40px auto;
+            width: 100%;
+            max-width: 350px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.4);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .generate-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .generate-btn:hover {
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.6);
+        }
+
+        .generate-btn:hover::before {
+            left: 100%;
+        }
+
+        .generate-btn:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        .generate-btn:disabled {
+            background: linear-gradient(135deg, #666 0%, #999 100%);
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* TAGS GRID */
+        .tags-container {
+            margin-top: 50px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        .tags-title {
+            text-align: center;
+            margin-bottom: 25px;
+            color: var(--neon-blue);
+            font-size: 1.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 10px;
+        }
+
+        .tags-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 3px;
+            background: var(--primary-gradient);
+            border-radius: 3px;
+        }
+
+        .tags-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .tag-item {
+            background: rgba(0, 0, 0, 0.4);
+            padding: 15px 20px;
+            border-radius: 15px;
+            border: 2px solid rgba(0, 243, 255, 0.2);
+            text-align: center;
+            font-weight: 600;
+            color: var(--text-primary);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            user-select: none;
+            position: relative;
+            font-size: 1rem;
+            overflow: hidden;
+        }
+
+        .tag-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--primary-gradient);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            z-index: -1;
+        }
+
+        .tag-item:hover {
+            transform: translateY(-3px);
+            border-color: var(--neon-blue);
+            box-shadow: 0 10px 20px rgba(0, 243, 255, 0.2);
+        }
+
+        .tag-item:hover::before {
+            opacity: 0.1;
+        }
+
+        .tag-item.selected {
+            background: var(--primary-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 10px 25px rgba(106, 17, 203, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .tag-item:active {
+            transform: translateY(0) scale(0.98);
+        }
+
+        /* COPY BUTTON */
+        .copy-selected-btn {
+            background: var(--secondary-gradient);
             color: white;
             border: none;
             padding: 15px 40px;
@@ -114,108 +476,247 @@
             font-weight: 700;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            margin: 30px auto;
             display: block;
-            margin: 0 auto;
-            width: 100%;
-            max-width: 300px;
-        }
-        .generate-btn:hover { transform: translateY(-3px); }
-        .generate-btn:disabled { background: #ccc; cursor: not-allowed; }
-
-        /* TAGS GRID (No Textarea) */
-        .tags-container { margin-top: 40px; }
-        .tags-title { text-align: center; margin-bottom: 20px; color: #555; }
-
-        .tags-grid {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-            justify-content: center;
-            margin-bottom: 20px;
-        }
-
-        .tag-item {
-            background: white;
-            padding: 10px 20px;
-            border-radius: 50px;
-            border: 2px solid #e9ecef;
-            text-align: center;
-            font-weight: 600;
-            color: #495057;
-            cursor: pointer;
-            transition: all 0.2s;
-            user-select: none;
             position: relative;
-            font-size: 0.95rem;
-        }
-        .tag-item:active { transform: scale(0.98); }
-        .tag-item:hover {
-            border-color: var(--primary-color);
-        }
-
-        /* Selected State Style */
-        .tag-item.selected {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-            box-shadow: 0 4px 10px rgba(111, 66, 193, 0.3);
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.4);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
         }
 
-        .copy-selected-btn {
-            background: linear-gradient(45deg, #28a745, #1e7e34);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 50px;
-            font-weight: 700;
-            cursor: pointer;
-            margin: 0 auto;
-            display: block;
-            transition: transform 0.3s;
+        .copy-selected-btn::after {
+            content: '📋';
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: all 0.3s ease;
         }
-        .copy-selected-btn:hover { transform: translateY(-3px); }
 
+        .copy-selected-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(245, 87, 108, 0.6);
+            padding-right: 60px;
+        }
+
+        .copy-selected-btn:hover::after {
+            opacity: 1;
+            right: 30px;
+        }
+
+        /* INSTRUCTIONS */
         .instructions {
-            background: #f8f9fa;
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 40px;
+            background: rgba(0, 0, 0, 0.3);
+            padding: 35px;
+            border-radius: 20px;
+            margin-top: 50px;
             text-align: left;
+            border: 1px solid rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
-        .instructions h3 { color: var(--primary-color); margin-bottom: 15px; }
-        .instructions ul { padding-left: 20px; list-style-type: disc; }
-        .instructions li { margin-bottom: 8px; color: #555; }
 
-        /* Stylish Back Button Box */
-        .back-btn-container { margin-top: 40px; }
+        .instructions::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 100%;
+            background: var(--primary-gradient);
+        }
+
+        .instructions h3 {
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .instructions ul {
+            padding-left: 25px;
+            list-style-type: none;
+        }
+
+        .instructions li {
+            margin-bottom: 15px;
+            color: var(--text-secondary);
+            position: relative;
+            padding-left: 30px;
+        }
+
+        .instructions li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--neon-blue);
+            font-weight: bold;
+        }
+
+        /* BACK BUTTON */
+        .back-btn-container {
+            margin-top: 50px;
+            text-align: center;
+        }
+
         .back-btn {
-            display: inline-block;
-            padding: 12px 30px;
-            border: 2px solid var(--primary-color);
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 35px;
+            border: 2px solid var(--neon-blue);
             border-radius: 50px;
-            color: var(--primary-color);
+            color: var(--neon-blue);
             text-decoration: none;
             font-weight: 600;
-            font-size: 1rem;
+            font-size: 1.1rem;
             transition: all 0.3s ease;
-            background: transparent;
-        }
-        .back-btn:hover {
-            background: var(--primary-color);
-            color: white;
-            box-shadow: 0 5px 15px rgba(111, 66, 193, 0.2);
-            transform: translateY(-2px);
+            background: rgba(0, 243, 255, 0.1);
+            position: relative;
+            overflow: hidden;
         }
 
-        @media (max-width: 600px) { 
-            .tool-page-container { padding: 20px; }
-            body { padding-top: 20px; }
-            .tag-options { width: 100%; justify-content: space-between; }
+        .back-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 243, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .back-btn:hover {
+            background: var(--neon-blue);
+            color: var(--dark-bg);
+            box-shadow: 0 0 30px rgba(0, 243, 255, 0.5);
+            transform: translateY(-3px);
+        }
+
+        .back-btn:hover::before {
+            left: 100%;
+        }
+
+        /* RESPONSIVE DESIGN */
+        @media (max-width: 768px) {
+            .tool-page-container {
+                padding: 30px 20px;
+            }
+            
+            .tool-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .tag-generator-box {
+                padding: 30px 20px;
+            }
+            
+            .tags-grid {
+                grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            }
+            
+            .caption-input {
+                font-size: 1rem;
+                padding: 15px 20px;
+            }
+            
+            .generate-btn, .copy-selected-btn {
+                width: 100%;
+                max-width: none;
+                padding: 15px 20px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .tool-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .tool-header p {
+                font-size: 1rem;
+            }
+            
+            .tag-options-wrapper {
+                width: 100%;
+            }
+            
+            .tag-options {
+                flex-direction: column;
+                width: 100%;
+            }
+            
+            .radio-label {
+                justify-content: center;
+                width: 100%;
+            }
+            
+            .tags-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* ANIMATION KEYFRAMES */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        /* SCROLLBAR STYLING */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary-gradient);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-gradient);
         }
     </style>
 </head>
 <body>
+
+    <!-- Animated Background Elements -->
+    <div class="bg-elements">
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+    </div>
 
     <!-- ADSTERRA BANNER -->
     <div class="ad-banner-container">
@@ -231,61 +732,74 @@
         <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
 
-    <!-- Tag Generator Tool Container -->
-    <div class="tool-page-container">
-        <div class="tool-header">
-            <h1>🏷️ ট্যাগ জেনারেটর</h1>
-            <p>আপনার ভিডিওর টপিক বা ক্যাপশন লিখুন, আমরা অপ্রয়োজনীয় শব্দ বাদ দিয়ে সেরা ট্যাগ খুঁজে দেব।</p>
-        </div>
-
-        <div class="tag-generator-box">
-            <div class="caption-input-group">
-                <label class="caption-label" for="keywordInput">ভিডিওর ক্যাপশন / টপিক:</label>
-                <input type="text" class="caption-input" id="keywordInput" placeholder="যেমন: এআই সারা বাংলাদেশকে ঘিরে ফেলেছে...">
+    <!-- Main Content Wrapper -->
+    <div class="main-wrapper">
+        <!-- Tag Generator Tool Container -->
+        <div class="tool-page-container animate__animated animate__fadeIn">
+            <div class="tool-header">
+                <h1 class="animate__animated animate__pulse animate__infinite animate__slower">🚀 ট্যাগ জেনারেটর</h1>
+                <p>আপনার ভিডিওর টপিক বা ক্যাপশন লিখুন, আমরা অপ্রয়োজনীয় শব্দ বাদ দিয়ে সেরা ট্যাগ খুঁজে দেব।</p>
             </div>
 
-            <!-- TAG OPTIONS TOGGLE -->
-            <div style="text-align: center;">
-                <div class="tag-options">
-                    <label class="radio-label">
-                        <input type="radio" name="tagType" value="hashtag" checked onchange="updateTagDisplay()"> 
-                        Hashtags (#tag)
-                    </label>
-                    <label class="radio-label">
-                        <input type="radio" name="tagType" value="plain" onchange="updateTagDisplay()"> 
-                        Plain Tags (No #)
-                    </label>
+            <div class="tag-generator-box">
+                <div class="caption-input-group">
+                    <label class="caption-label" for="keywordInput">ভিডিওর ক্যাপশন / টপিক:</label>
+                    <input type="text" class="caption-input" id="keywordInput" placeholder="যেমন: এআই সারা বাংলাদেশকে ঘিরে ফেলেছে...">
+                </div>
+
+                <!-- TAG OPTIONS TOGGLE -->
+                <div class="tag-options-wrapper">
+                    <div class="tag-options">
+                        <label class="radio-label">
+                            <input type="radio" name="tagType" value="hashtag" checked onchange="updateTagDisplay()"> 
+                            <span># Hashtags</span>
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="tagType" value="plain" onchange="updateTagDisplay()"> 
+                            <span>Plain Tags</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button class="generate-btn" id="genBtn" onclick="processTags()">
+                    <span class="btn-text">🚀 জেনারেট করুন</span>
+                </button>
+
+                <div class="tags-container" id="tagsContainer" style="display: none;">
+                    <h3 class="tags-title">🔥 টপ হাই ভলিউম ট্যাগ</h3>
+                    <p style="text-align:center; font-size:0.95rem; color:var(--text-secondary); margin-bottom:25px; padding:0 20px;">
+                        (আপনার পছন্দের ট্যাগগুলোতে ক্লিক করে সিলেক্ট করুন)
+                    </p>
+                    
+                    <!-- GRID VIEW -->
+                    <div class="tags-grid" id="tagsGrid">
+                        <!-- Tags will appear here as separate boxes -->
+                    </div>
+                    
+                    <button class="copy-selected-btn" id="copyBtn" onclick="copySelectedTags()">
+                        <span class="btn-text">নির্বাচিত ট্যাগ কপি করুন</span>
+                    </button>
                 </div>
             </div>
 
-            <button class="generate-btn" id="genBtn" onclick="processTags()">🚀 জেনারেট করুন</button>
-
-            <div class="tags-container" id="tagsContainer" style="display: none;">
-                <h3 class="tags-title">🔥 টপ হাই ভলিউম ট্যাগ:</h3>
-                <p style="text-align:center; font-size:0.9rem; color:#666; margin-bottom:15px;">(আপনার পছন্দের ট্যাগগুলোতে ক্লিক করে সিলেক্ট করুন)</p>
-                
-                <!-- GRID VIEW (NO TEXTBOX) -->
-                <div class="tags-grid" id="tagsGrid">
-                    <!-- Tags will appear here as separate boxes -->
-                </div>
-                
-                <button class="copy-selected-btn" id="copyBtn" onclick="copySelectedTags()">নির্বাচিত ট্যাগ কপি করুন</button>
+            <div class="instructions">
+                <h3>📊 ফিচারসমূহ:</h3>
+                <ul>
+                    <li><strong>স্মার্ট ডিটেকশন:</strong> আজেবাজে শব্দ বাদ দিয়ে শুধু মেইন কিওয়ার্ড ট্যাগ হিসেবে আসবে।</li>
+                    <li><strong>Hashtags (#):</strong> ফেসবুক ও টিকটকের জন্য সেরা।</li>
+                    <li><strong>Plain Tags:</strong> ইউটিউব এসইও এর জন্য সেরা।</li>
+                    <li><strong>সিলেকশন মোড:</strong> ক্লিক করে আপনার পছন্দের ট্যাগগুলো কপি করুন।</li>
+                    <li><strong>আধুনিক ডিজাইন:</strong> ডার্ক থিম, অ্যানিমেশন এবং ইন্টারেক্টিভ এলিমেন্টস।</li>
+                </ul>
             </div>
-        </div>
 
-        <div class="instructions">
-            <h3>📋 ফিচারসমূহ:</h3>
-            <ul>
-                <li><strong>স্মার্ট ডিটেকশন:</strong> আজেবাজে শব্দ বাদ দিয়ে শুধু মেইন কিওয়ার্ড ট্যাগ হিসেবে আসবে।</li>
-                <li><strong>Hashtags (#):</strong> ফেসবুক ও টিকটকের জন্য সেরা।</li>
-                <li><strong>Plain Tags:</strong> ইউটিউব এসইও এর জন্য সেরা।</li>
-                <li><strong>সিলেকশন মোড:</strong> ক্লিক করে আপনার পছন্দের ট্যাগগুলো কপি করুন।</li>
-            </ul>
-        </div>
-
-        <!-- Stylish Back Button -->
-        <div class="back-btn-container">
-            <a href="index.html" class="back-btn">← হোম পেজে ফিরে যান</a>
+            <!-- Stylish Back Button -->
+            <div class="back-btn-container">
+                <a href="index.html" class="back-btn">
+                    <span>←</span>
+                    <span>হোম পেজে ফিরে যান</span>
+                </a>
+            </div>
         </div>
     </div>
 
@@ -334,10 +848,13 @@
                 return;
             }
 
-            genBtn.innerText = "জেনারেট হচ্ছে...";
+            genBtn.innerHTML = '<span class="btn-text">⚡ জেনারেট হচ্ছে...</span>';
             genBtn.disabled = true;
             selectedIndices.clear(); // Reset Selection
 
+            // Add loading animation
+            genBtn.style.background = 'linear-gradient(135deg, #666 0%, #999 100%)';
+            
             setTimeout(() => {
                 let tagsSet = new Set();
 
@@ -365,8 +882,9 @@
                 updateTagDisplay();
                 tagsContainer.style.display = 'block';
                 tagsContainer.scrollIntoView({ behavior: 'smooth' });
-                genBtn.innerText = "🚀 জেনারেট করুন";
+                genBtn.innerHTML = '<span class="btn-text">🚀 জেনারেট করুন</span>';
                 genBtn.disabled = false;
+                genBtn.style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
 
             }, 500);
         }
@@ -391,6 +909,10 @@
                 tagElement.className = 'tag-item';
                 tagElement.textContent = displayText;
                 
+                // Add animation class
+                tagElement.classList.add('animate__animated', 'animate__fadeIn');
+                tagElement.style.animationDelay = `${index * 0.05}s`;
+                
                 // সিলেকশন স্ট্যাটাস চেক
                 if (selectedIndices.has(index)) {
                     tagElement.classList.add('selected');
@@ -398,6 +920,11 @@
 
                 // ক্লিক ইভেন্ট (সিলেকশন)
                 tagElement.onclick = function() {
+                    this.classList.add('animate__pulse');
+                    setTimeout(() => {
+                        this.classList.remove('animate__pulse');
+                    }, 300);
+                    
                     if (selectedIndices.has(index)) {
                         selectedIndices.delete(index);
                         this.classList.remove('selected');
@@ -434,16 +961,64 @@
 
             finalString = finalString.replace(/, $/, "").trim();
 
-            navigator.clipboard.writeText(finalString);
+            // Use both modern and fallback clipboard methods
+            copyToClipboard(finalString).then(() => {
+                showCopyFeedback(count);
+            }).catch(err => {
+                console.error('Clipboard copy failed:', err);
+                // Fallback method
+                fallbackCopyText(finalString, count);
+            });
+        }
+
+        function copyToClipboard(text) {
+            // Modern clipboard API
+            if (navigator.clipboard && window.isSecureContext) {
+                return navigator.clipboard.writeText(text);
+            } else {
+                // Fallback for older browsers
+                return new Promise((resolve, reject) => {
+                    fallbackCopyText(text, () => resolve());
+                });
+            }
+        }
+
+        function fallbackCopyText(text, count) {
+            const textArea = document.createElement('textarea');
+            textArea.value = text;
+            textArea.style.position = 'fixed';
+            textArea.style.left = '-999999px';
+            textArea.style.top = '-999999px';
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
             
+            try {
+                const successful = document.execCommand('copy');
+                if (successful) {
+                    showCopyFeedback(count);
+                } else {
+                    alert('ট্যাগ কপি করতে ব্যর্থ হয়েছে! ম্যানুয়ালি কপি করুন: ' + text);
+                }
+            } catch (err) {
+                console.error('Fallback copy failed:', err);
+                alert('ট্যাগ কপি করতে ব্যর্থ হয়েছে! ম্যানুয়ালি কপি করুন: ' + text);
+            }
+            
+            document.body.removeChild(textArea);
+        }
+
+        function showCopyFeedback(count) {
             const btn = document.getElementById('copyBtn');
-            const originalText = btn.innerText;
-            btn.innerText = `✅ ${count}টি ট্যাগ কপি হয়েছে!`;
-            btn.style.background = '#28a745';
+            const originalText = btn.innerHTML;
+            const originalBackground = btn.style.background;
+            
+            btn.innerHTML = `<span class="btn-text">✅ ${count}টি ট্যাগ কপি হয়েছে!</span>`;
+            btn.style.background = 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)';
             
             setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.background = 'linear-gradient(45deg, #28a745, #1e7e34)';
+                btn.innerHTML = originalText;
+                btn.style.background = originalBackground;
             }, 2000);
         }
     </script>
