@@ -119,7 +119,7 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
-        /* NEW BOTTOM LEFT NOTICE STYLE */
+        /* BOTTOM LEFT NOTICE STYLE */
         .bottom-notice-card {
             position: fixed;
             bottom: 20px;
@@ -128,8 +128,8 @@
             background: #fff;
             border-radius: 10px;
             box-shadow: 0 5px 25px rgba(0,0,0,0.15);
-            z-index: 9990; /* Lower than main popup */
-            display: none; /* Hidden by default */
+            z-index: 9990; 
+            display: none;
             border-left: 5px solid var(--primary-color);
             padding: 15px;
             animation: slideUpFade 0.5s ease;
@@ -137,40 +137,12 @@
         }
         @keyframes slideUpFade { from { transform: translateY(50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
-        .notice-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 8px;
-        }
-        .notice-title {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--primary-color);
-            display: flex;
-            align-items: center;
-            gap: 5px;
-        }
-        .notice-close-btn {
-            background: none;
-            border: none;
-            color: #999;
-            font-size: 1.2rem;
-            cursor: pointer;
-            line-height: 1;
-        }
+        .notice-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+        .notice-title { font-size: 1.1rem; font-weight: 800; color: var(--primary-color); display: flex; align-items: center; gap: 5px; }
+        .notice-close-btn { background: none; border: none; color: #999; font-size: 1.2rem; cursor: pointer; line-height: 1; }
         .notice-close-btn:hover { color: red; }
-        .notice-divider {
-            border: 0;
-            height: 1px;
-            background: #eee;
-            margin-bottom: 10px;
-        }
-        .notice-body {
-            font-size: 0.95rem;
-            color: #444;
-            line-height: 1.5;
-        }
+        .notice-divider { border: 0; height: 1px; background: #eee; margin-bottom: 10px; }
+        .notice-body { font-size: 0.95rem; color: #444; line-height: 1.5; }
 
         /* SLIDER & CONTENT */
         .slider-container { width: 100%; height: 450px; position: relative; overflow: hidden; background: #000; }
@@ -214,12 +186,111 @@
         .card-style-3 { background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%); }
         .card-style-4 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
 
-        footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
-        footer a { color: #aaa; text-decoration: none; margin: 0 10px; }
+        /* NEW FOOTER STYLES */
+        footer {
+            background: #fff;
+            color: #333;
+            padding-top: 60px;
+            padding-bottom: 0;
+            border-top: 1px solid #e9ecef;
+            text-align: left;
+            margin-top: 80px;
+        }
+        .footer-content {
+            max-width: 1150px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            padding: 0 20px 40px;
+        }
+        .footer-col h4 {
+            color: var(--primary-color);
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .footer-col ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+        .footer-col ul li a {
+            color: #555;
+            text-decoration: none;
+            transition: 0.3s;
+            display: block;
+            margin: 0;
+            font-size: 0.95rem;
+        }
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+        .footer-logo {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+        .footer-slogan {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        .footer-email {
+            font-weight: bold;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        .pay-badges {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .pay-badge {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #555;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+        }
+        .footer-social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .footer-social-icon {
+            width: 35px; height: 35px;
+            border-radius: 50%;
+            display: flex; justify-content: center; align-items: center;
+            color: white;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .footer-social-icon:hover { transform: translateY(-3px); }
+        .footer-social-icon svg { width: 18px; height: 18px; fill: white; }
 
+        .footer-bottom {
+            background: #1a1a1a;
+            color: #eee;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Footer */
         @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
+        @media (max-width: 900px) { .footer-content { grid-template-columns: repeat(2, 1fr); } }
         @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
-        @media (max-width: 480px) { .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
+        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; text-align: center; } .footer-col ul li a:hover { padding-left: 0; } .pay-badges, .footer-social-icons { justify-content: center; } .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
     </style>
 </head>
 <body>
@@ -247,6 +318,7 @@
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                 <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
                 <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
             </div>
         </div>
@@ -365,9 +437,67 @@
         </div>
     </div>
 
+    <!-- Updated Footer -->
     <footer>
-        <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
-        <p><a href="privacy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a></p>
+        <div class="footer-content">
+            <!-- Col 1: Branding -->
+            <div class="footer-col">
+                <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="footer-logo">
+                <p class="footer-slogan">Connecting Science, Technology & Innovation</p>
+                <a href="mailto:bcm.contact24@gmail.com" class="footer-email">bcm.contact24@gmail.com</a>
+            </div>
+
+            <!-- Col 2: Info -->
+            <div class="footer-col">
+                <h4>Information</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="terms.html">Terms & Conditions</a></li>
+                    <li><a href="disclaimer.html">Disclaimer</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Quick Links -->
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="service.html">Our Services</a></li>
+                    <li><a href="tools.html">Free Tools</a></li>
+                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="sitemap.html">Sitemap</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 4: Pay & Social -->
+            <div class="footer-col">
+                <h4>Pay With</h4>
+                <div class="pay-badges">
+                    <span class="pay-badge">Bkash</span>
+                    <span class="pay-badge">Nagad</span>
+                    <span class="pay-badge">Rocket</span>
+                    <span class="pay-badge">Visa</span>
+                    <span class="pay-badge">MasterCard</span>
+                    <span class="pay-badge">Payoneer</span>
+                    <span class="pay-badge">Binance</span>
+                    <span class="pay-badge">Bank</span>
+                    <span class="pay-badge">Dual Currency</span>
+                </div>
+
+                <h4 style="margin-top: 20px;">Follow Us</h4>
+                <div class="footer-social-icons">
+                    <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="footer-social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="footer-social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                    <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="footer-social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg></a>
+                    <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="footer-social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
+                    <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="footer-social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            &copy; 2026 Bangladesh Creator Media. All Rights Reserved.
+        </div>
     </footer>
 
     <!-- Firebase SDK -->
@@ -523,7 +653,7 @@
             window.sliderInterval = setInterval(() => { moveSlide(1); }, 4000); 
         }
 
-        // --- MAIN POPUP AD LOGIC ---
+        // --- POPUP AD LOGIC ---
         window.addEventListener('load', function() {
             setTimeout(function() {
                 if (!sessionStorage.getItem('popupClosed')) {
