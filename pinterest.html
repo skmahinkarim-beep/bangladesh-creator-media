@@ -90,6 +90,7 @@
             white-space: nowrap;
         }
         .pinterest-btn:hover { transform: translateY(-3px); }
+        .pinterest-btn:disabled { background: #ccc; cursor: not-allowed; }
 
         .instructions {
             background: #f8f9fa;
@@ -107,9 +108,14 @@
             padding: 20px;
             background: #f9f9f9;
             border-radius: 10px;
-            display: none;
+            display: none; /* ডিফল্টভাবে লুকানো থাকবে */
         }
-        .video-preview video { width: 100%; border-radius: 10px; }
+        .video-preview video, .video-preview img { 
+            width: 100%; 
+            max-width: 500px; 
+            border-radius: 10px; 
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
 
         .download-options {
             display: flex;
@@ -131,7 +137,9 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            transition: all 0.3s;
         }
+        .download-btn:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(40, 167, 69, 0.3); }
 
         /* Stylish Back Button Box */
         .back-btn-container { margin-top: 40px; }
@@ -154,6 +162,12 @@
             transform: translateY(-2px);
         }
 
+        .status-msg {
+            margin-top: 10px;
+            font-weight: 600;
+            color: #666;
+        }
+
         @media (max-width: 600px) { 
             .url-input-group { flex-direction: column; }
             .pinterest-btn { width: 100%; }
@@ -166,7 +180,7 @@
 </head>
 <body>
 
-    <!-- ADSTERRA BANNER -->
+    <!-- ADSTERRA BANNER (অপরিবর্তিত) -->
     <div class="ad-banner-container">
         <script>
             atOptions = {
@@ -184,37 +198,39 @@
     <div class="tool-page-container">
         <div class="tool-header">
             <h1>📥 পিনটারেস্ট ভিডিও ডাউনলোডার</h1>
-            <p>কোনো রেজিস্ট্রেশন ছাড়াই পিনটারেস্ট থেকে ভিডিও ডাউনলোড করুন সহজেই।</p>
+            <p>কোনো রেজিস্ট্রেশন ছাড়াই পিনটারেস্ট থেকে ভিডিও এবং ছবি ডাউনলোড করুন সহজেই।</p>
         </div>
 
         <div class="pinterest-box">
             <div class="url-input-group">
-                <input type="text" class="pinterest-input" id="pinterestUrl" placeholder="পিনটারেস্ট ভিডিও লিংক পেস্ট করুন...">
-                <button class="pinterest-btn" onclick="downloadVideo()">ডাউনলোড করুন</button>
+                <input type="text" class="pinterest-input" id="pinterestUrl" placeholder="পিনটারেস্ট ভিডিও/ছবির লিংক পেস্ট করুন...">
+                <button class="pinterest-btn" id="fetchBtn" onclick="fetchPinterestMedia()">ডাউনলোড করুন</button>
             </div>
+            <p class="status-msg" id="statusMsg"></p>
 
             <div class="video-preview" id="videoPreview">
-                <h4>ভিডিও প্রিভিউ:</h4>
-                <video controls>
-                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                    আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
-                </video>
-                <div class="download-options">
-                    <a href="#" class="download-btn" id="downloadMP4">⬇ MP4 ডাউনলোড</a>
-                    <a href="#" class="download-btn" id="downloadHD">⬇ HD Quality</a>
-                    <a href="#" class="download-btn" id="downloadAudio">⬇ অডিও এক্সট্রাক্ট</a>
+                <h4 style="margin-bottom: 15px; color: #333;">মিডিয়া প্রিভিউ:</h4>
+                
+                <!-- কন্টেন্ট ডায়নামিকভাবে এখানে লোড হবে -->
+                <div id="mediaContainer"></div>
+
+                <div class="download-options" id="downloadButtons">
+                    <!-- বাটনগুলো জাভাস্ক্রিপ্ট দিয়ে তৈরি হবে -->
                 </div>
+                
+                <p style="margin-top: 15px; font-size: 0.8rem; color: #888;">
+                    নোট: ডাউনলোড বাটনে ক্লিক করলে ভিডিও নতুন ট্যাবে ওপেন হবে। সেখান থেকে "Three Dots" এ ক্লিক করে ডাউনলোড করুন।
+                </p>
             </div>
         </div>
 
         <div class="instructions">
             <h3>📋 কিভাবে ব্যবহার করবেন:</h3>
             <ol>
-                <li>পিনটারেস্ট অ্যাপ বা ওয়েবসাইট থেকে আপনার কাঙ্খিত ভিডিওতে যান</li>
-                <li>"Share" বাটনে ক্লিক করুন এবং "Copy link" অপশনটি নির্বাচন করুন</li>
-                <li>উপরের বক্সে লিংকটি পেস্ট করুন</li>
-                <li>"ডাউনলোড করুন" বাটনে ক্লিক করুন</li>
-                <li>আপনার পছন্দের ফরম্যাট ও কোয়ালিটি সিলেক্ট করুন</li>
+                <li>পিনটারেস্ট অ্যাপ বা ওয়েবসাইট থেকে ভিডিও বা ছবির লিংক কপি করুন।</li>
+                <li>উপরের বক্সে লিংকটি পেস্ট করুন।</li>
+                <li>"ডাউনলোড করুন" বাটনে ক্লিক করুন।</li>
+                <li>নিচে প্রিভিউ আসলে কোয়ালিটি অনুযায়ী ডাউনলোড বাটনে ক্লিক করুন।</li>
             </ol>
         </div>
 
@@ -238,27 +254,99 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        function downloadVideo() {
-            const url = document.getElementById('pinterestUrl').value.trim();
-            const videoPreview = document.getElementById('videoPreview');
-            
+        // Pinterest Media Fetcher Logic
+        async function fetchPinterestMedia() {
+            const urlInput = document.getElementById('pinterestUrl');
+            const statusMsg = document.getElementById('statusMsg');
+            const previewArea = document.getElementById('videoPreview');
+            const mediaContainer = document.getElementById('mediaContainer');
+            const downloadButtons = document.getElementById('downloadButtons');
+            const fetchBtn = document.getElementById('fetchBtn');
+
+            const url = urlInput.value.trim();
+
             if (!url) {
-                alert('দয়া করে একটি পিনটারেস্ট লিংক পেস্ট করুন!');
+                statusMsg.style.color = 'red';
+                statusMsg.innerText = 'দয়া করে একটি লিংক দিন!';
                 return;
             }
-
             if (!url.includes('pinterest.com') && !url.includes('pin.it')) {
-                alert('দয়া করে একটি বৈধ পিনটারেস্ট লিংক দিন!');
+                statusMsg.style.color = 'red';
+                statusMsg.innerText = 'এটি পিনটারেস্টের লিংক নয়!';
                 return;
             }
 
-            videoPreview.style.display = 'block';
-            
-            document.getElementById('downloadMP4').href = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-            document.getElementById('downloadHD').href = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-            document.getElementById('downloadAudio').href = 'https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4';
-            
-            alert('ভিডিও প্রস্তুত! ডাউনলোড অপশনগুলো দেখতে নিচে স্ক্রল করুন।');
+            // UI Reset
+            statusMsg.style.color = '#0056b3';
+            statusMsg.innerText = 'লিংক প্রসেস করা হচ্ছে... অপেক্ষা করুন ⏳';
+            fetchBtn.disabled = true;
+            fetchBtn.innerText = 'লোডিং...';
+            previewArea.style.display = 'none';
+            mediaContainer.innerHTML = '';
+            downloadButtons.innerHTML = '';
+
+            try {
+                // Using a CORS Proxy to fetch the page content safely
+                // AllOrigins is a safe, free, open-source proxy
+                const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`;
+                
+                const response = await fetch(proxyUrl);
+                const data = await response.json();
+                const htmlContent = data.contents;
+
+                // Extracting Video URL (.mp4)
+                // পিনটারেস্টের সোর্স কোড থেকে mp4 ফাইল খোঁজা হচ্ছে
+                const videoMatch = htmlContent.match(/https:\/\/v\.pinimg\.com\/videos\/[a-zA-Z0-9\/._-]+\.mp4/);
+                
+                // Extracting Image URL (Fallback)
+                const imageMatch = htmlContent.match(/https:\/\/i\.pinimg\.com\/originals\/[a-zA-Z0-9\/._-]+\.(jpg|png|webp)/);
+
+                statusMsg.innerText = '';
+                previewArea.style.display = 'block';
+
+                if (videoMatch) {
+                    // যদি ভিডিও পাওয়া যায়
+                    const videoUrl = videoMatch[0];
+                    
+                    mediaContainer.innerHTML = `
+                        <video controls autoplay muted>
+                            <source src="${videoUrl}" type="video/mp4">
+                            আপনার ব্রাউজার ভিডিও সাপোর্ট করে না।
+                        </video>
+                    `;
+
+                    // Generate Download Buttons for Video
+                    // Note: Pinterest usually serves one main quality via this method, which is the best available.
+                    downloadButtons.innerHTML = `
+                        <a href="${videoUrl}" target="_blank" class="download-btn">⬇ ডাউনলোড ভিডিও (Best Quality)</a>
+                        <a href="${videoUrl}" target="_blank" class="download-btn" style="background:linear-gradient(45deg, #17a2b8, #117a8b);">⬇ প্রিভিউ লিঙ্ক</a>
+                    `;
+                    statusMsg.innerText = '✅ ভিডিও সফলভাবে পাওয়া গেছে!';
+
+                } else if (imageMatch) {
+                    // যদি ভিডিও না থাকে, কিন্তু ছবি থাকে
+                    const imageUrl = imageMatch[0];
+                    
+                    mediaContainer.innerHTML = `
+                        <img src="${imageUrl}" alt="Pinterest Image">
+                    `;
+
+                    downloadButtons.innerHTML = `
+                        <a href="${imageUrl}" target="_blank" class="download-btn">⬇ ডাউনলোড ছবি (HD)</a>
+                    `;
+                    statusMsg.innerText = '✅ ছবিটি পাওয়া গেছে!';
+                } else {
+                    throw new Error('মিডিয়া খুঁজে পাওয়া যায়নি।');
+                }
+
+            } catch (error) {
+                console.error(error);
+                statusMsg.style.color = 'red';
+                statusMsg.innerText = 'দুঃখিত! মিডিয়া ফেচ করা সম্ভব হয়নি অথবা লিংকটি প্রাইভেট।';
+            } finally {
+                fetchBtn.disabled = false;
+                fetchBtn.innerText = 'ডাউনলোড করুন';
+            }
         }
     </script>
 </body>
