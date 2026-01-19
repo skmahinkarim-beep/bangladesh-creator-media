@@ -739,9 +739,122 @@
         ::-webkit-scrollbar-thumb:hover {
             background: rgba(255, 255, 255, 0.3);
         }
+
+        /* =================================================================
+           NEW POPUP STYLES (RATIO SYSTEM INTEGRATED)
+           ================================================================= */
+        .popup-overlay {
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            display: none; /* Initially hidden */
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(5px);
+            padding: 10px;
+        }
+
+        .popup-content {
+            background: white;
+            padding: 25px 15px;
+            border-radius: 15px;
+            width: 100%; 
+            max-width: 360px; /* Perfect for 300x250 ad */
+            text-align: center;
+            position: relative;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.3);
+            animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 3px solid #667eea; /* Matching Theme Border */
+        }
+
+        @keyframes popIn { 
+            from { transform: scale(0.7); opacity: 0; } 
+            to { transform: scale(1); opacity: 1; } 
+        }
+
+        .popup-close {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff4757;
+            color: white;
+            border: 3px solid white;
+            width: 40px; height: 40px;
+            border-radius: 50%;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+            transition: transform 0.2s;
+            z-index: 10001;
+            font-weight: bold;
+        }
+
+        .popup-close:hover {
+            transform: scale(1.1) rotate(90deg);
+            background: red;
+        }
+
+        .popup-title {
+            font-size: 1.5rem;
+            color: #333;
+            margin-bottom: 5px;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+
+        .popup-text {
+            font-size: 0.95rem;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .ad-placeholder {
+            width: 300px;
+            height: 250px;
+            background: #f1f2f6;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 8px;
+            overflow: hidden;
+            margin: 0 auto;
+        }
     </style>
 </head>
 <body>
+
+    <!-- MAIN POP-UP AD (ADDED HERE) -->
+    <div class="popup-overlay" id="popup-ad">
+        <div class="popup-content">
+            <div class="popup-close" onclick="closePopup()">✖</div>
+            <h3 class="popup-title">Special Offer!</h3>
+            <p class="popup-text">Check out our latest services and offers.</p>
+            
+            <!-- 👇 ADSTERRA 300x250 CODE HERE 👇 -->
+            <div class="ad-placeholder">
+                <script>
+                    atOptions = {
+                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
+            </div>
+            <!-- 👆 END AD CODE 👆 -->
+        </div>
+    </div>
 
     <!-- নতুন: সাবল্ট ব্যাকগ্রাউন্ড এলিমেন্টস -->
     <div class="background-pattern"></div>
@@ -949,5 +1062,24 @@
             }
         });
     </script>
+
+    <!-- POPUP SCRIPT -->
+    <script>
+        // Show Popup automatically after 2 seconds
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Remove session storage check if you want it to show EVERY time
+                // if (!sessionStorage.getItem('popupClosed')) { 
+                    document.getElementById('popup-ad').style.display = 'flex';
+                // }
+            }, 2000);
+        });
+
+        function closePopup() {
+            document.getElementById('popup-ad').style.display = 'none';
+            sessionStorage.setItem('popupClosed', 'true');
+        }
+    </script>
+
 </body>
 </html>
