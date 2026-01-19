@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="bn">
 <head>
+    <!-- Google Analytics (Same as Index) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-64QZM220P0');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCM Tech Store - আপনার প্রযুক্তি শপিংয়ের নির্ভরযোগ্য স্থান</title>
@@ -36,6 +45,9 @@
         .btn { display: inline-block; padding: 12px 30px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
         .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
 
+        /* Adsterra Banner Container */
+        .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
+
         /* Products Grid */
         .featured-products { padding: 80px 0; background-color: #f8f9fa; }
         .section-title { text-align: center; margin-bottom: 50px; }
@@ -70,6 +82,20 @@
     </style>
 </head>
 <body>
+
+    <!-- ADSTERRA POPUP (Script loaded from Index) -->
+    <div style="display:none;">
+        <script>
+            atOptions = {
+                'key' : '08d5faeff146431c8017d7cfc9ab82b6',
+                'format' : 'iframe',
+                'height' : 250,
+                'width' : 300,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
+    </div>
 
     <!-- Header -->
     <header>
@@ -107,6 +133,20 @@
             </div>
         </div>
     </section>
+
+    <!-- ADSTERRA BANNER -->
+    <div class="ad-banner-container">
+        <script>
+            atOptions = {
+                'key' : '913c56baf27591442617260739df7bf0',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script type="text/javascript" src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+    </div>
 
     <!-- Products -->
     <section class="featured-products" id="products">
@@ -152,8 +192,40 @@
         <button class="btn" style="width:100%; margin-top:20px;">Checkout</button>
     </div>
 
-    <!-- Scripts -->
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <!-- Tawk.to Messaging Widget (Same as Index) -->
+    <script type="text/javascript">
+        var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
+        (function () {
+            var s1 = document.createElement("script"), s0 = document.getElementsByTagName("script")[0];
+            s1.async = true;
+            s1.src = 'https://embed.tawk.to/696b5e80e9768b197f02db61/1jf5mia2f';
+            s1.charset = 'UTF-8';
+            s1.setAttribute('crossorigin', '*');
+            s0.parentNode.insertBefore(s1, s0);
+        })();
+    </script>
+
     <script>
+        // FIREBASE CONFIGURATION (Same as Index)
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+        };
+
+        if (!firebase.apps.length) {
+            firebase.initializeApp(firebaseConfig);
+        }
+        const db = firebase.firestore();
+
+        // STORE PAGE LOGIC
         document.addEventListener('DOMContentLoaded', () => {
             const cartIcon = document.querySelector('.cart-icon');
             const cartModal = document.querySelector('.cart-modal');
