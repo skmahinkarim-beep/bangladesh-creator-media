@@ -24,19 +24,8 @@
         header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
-        
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
-        
-        /* UPDATED TAGLINE STYLE (One Line Fix) */
-        .header-text p { 
-            font-size: 0.75rem; 
-            color: #666; 
-            margin: 0; 
-            font-weight: 600; 
-            text-transform: uppercase; 
-            letter-spacing: 0.5px; 
-            white-space: nowrap; 
-        }
+        .header-text p { font-size: 0.75rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
 
         .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
         .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
@@ -44,12 +33,8 @@
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
 
         .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
-        
-        /* Default Orange Button */
         .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 15px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
         .header-service-btn:hover { transform: translateY(-2px); }
-
-        /* New Button Colors */
         .btn-purple { background: linear-gradient(45deg, #8E2DE2, #4A00E0) !important; box-shadow: 0 4px 10px rgba(74, 0, 224, 0.3) !important; }
         .btn-green { background: linear-gradient(45deg, #11998e, #38ef7d) !important; box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3) !important; }
 
@@ -59,28 +44,17 @@
         .social-icon svg { width: 18px; height: 18px; fill: white; }
         .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
 
-        /* NAV */
         nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
         nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
         nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; }
         nav ul li a:hover { background: rgba(255,255,255,0.2); }
-        
-        /* Highlight Terms Page */
         .nav-active { background: rgba(255, 255, 255, 0.15); border-bottom: 4px solid #ff9800 !important; }
 
-        /* AD CONTAINER STYLE */
-        .ad-banner-container {
-            text-align: center;
-            margin: 20px auto;
-            padding: 10px;
-            max-width: 100%;
-            overflow: hidden;
-        }
+        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* CONTENT */
         .legal-container { max-width: 900px; margin: 20px auto 50px; padding: 40px; background: #fff; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         h1 { color: #333; margin-top: 10px; margin-bottom: 20px; font-size: 1.8rem; text-align: center; }
-        h2 { color: var(--primary-color); margin-top: 25px; margin-bottom: 10px; font-size: 1.4rem; border-left: 5px solid var(--primary-color); padding-left: 15px; }
+        h2 { color: var(--primary-color); margin-top: 30px; margin-bottom: 10px; font-size: 1.4rem; border-left: 5px solid var(--primary-color); padding-left: 15px; }
         p { margin-bottom: 15px; color: #555; }
         
         footer { background: #1a1a1a; color: #eee; text-align: center; padding: 40px 20px; margin-top: 80px; }
@@ -91,7 +65,6 @@
 </head>
 <body>
 
-    <!-- Header Section -->
     <header>
         <div class="header-left">
             <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
@@ -100,21 +73,16 @@
                 <p>Connecting Science, Technology & Innovation</p>
             </div>
         </div>
-        
         <div class="header-center">
             <div class="search-box">
                 <input type="text" class="search-input" placeholder="Search videos...">
                 <button class="search-btn">🔍</button>
             </div>
         </div>
-
         <div class="header-right-container">
-            <!-- NEW BUTTONS ADDED IN HEADER -->
             <a href="tools.html" class="header-service-btn btn-purple">🛠 Free Tools</a>
             <a href="store.html" class="header-service-btn btn-green">🛒 Store</a>
-            <!-- EXISTING BUTTON -->
             <a href="service.html" class="header-service-btn">✨ Our Service</a>
-
             <div class="social-group">
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
@@ -149,7 +117,7 @@
                 'params' : {}
             };
         </script>
-        <script type="text/javascript" src="//www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+        <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
 
     <div class="legal-container">
@@ -159,24 +127,26 @@
                 <h1>TERMS AND CONDITIONS</h1>
                 <p><strong>Last updated January 14, 2026</strong></p>
             </div>
-            <br>
+            
             <h2>1. AGREEMENT TO OUR LEGAL TERMS</h2>
-            <p>We are <strong>Bangladesh Creator Media</strong> ("Company," "we," "us," "our"), a company registered in Bangladesh at 47 Gono Kabar Road, Faydabad, Dakshin Khan, Uttara Dhaka, Dhaka 1230, Bangladesh.</p>
-            <p>We operate the website <a href="https://skmahinkarim-beep.github.io/bangladesh-creator-media/">https://skmahinkarim-beep.github.io/bangladesh-creator-media/</a> (the "Site"), as well as any other related products and services that refer or link to these legal terms (the "Legal Terms") (collectively, the "Services").</p>
-            <p>You can contact us by email at <a href="mailto:bcm.contact24@gmail.com">bcm.contact24@gmail.com</a>.</p>
-            <br>
-            <h2>2. INTELLECTUAL PROPERTY RIGHTS</h2>
-            <p>We are the owner or the licensee of all intellectual property rights in our Services, including all source code, databases, functionality, software, website designs, audio, video, text, photographs, and graphics in the Services.</p>
-            <br>
-            <h2>3. USER REPRESENTATIONS</h2>
-            <p>By using the Services, you represent and warrant that you will not use the Services for any illegal or unauthorized purpose.</p>
-            <br>
-            <h2>4. PROHIBITED ACTIVITIES</h2>
-            <p>You may not access or use the Services for any purpose other than that for which we make the Services available.</p>
-            <br>
+            <p>We are <strong>Bangladesh Creator Media</strong> ("Company," "we," "us," "our"), registered in Bangladesh.</p>
+            <p>These terms apply to both our content website and our <strong>BCM Tech Store</strong>.</p>
+
+            <h2>2. E-COMMERCE TERMS (BCM TECH STORE)</h2>
+            <p><strong>a. Products & Pricing:</strong> Prices for products are subject to change without notice. We reserve the right to modify or discontinue any product at any time.</p>
+            <p><strong>b. Orders & Payment:</strong> We accept payments via Bkash, Nagad, Rocket, Bank Transfer, and Cash on Delivery (COD). We reserve the right to refuse any order you place with us.</p>
+            <p><strong>c. Shipping Policy:</strong> Delivery inside Dhaka takes 2-3 days, and outside Dhaka takes 3-5 days. Delivery charges are non-refundable if the product is returned for personal reasons.</p>
+            <p><strong>d. Returns & Refunds:</strong> You must check the product in front of the delivery man. If you find any defect, return it immediately. For electronics, if there is a manufacturing defect within the warranty period, we will claim warranty for you.</p>
+
+            <h2>3. INTELLECTUAL PROPERTY RIGHTS</h2>
+            <p>All content, including source code, databases, software, designs, audio, video, text, and graphics, are owned by us.</p>
+
+            <h2>4. USER REPRESENTATIONS</h2>
+            <p>By using the Services, you represent that you will not use the Services for any illegal or unauthorized purpose.</p>
+
             <h2>5. GOVERNING LAW</h2>
-            <p>These Legal Terms shall be governed by and defined following the laws of Bangladesh.</p>
-            <br>
+            <p>These Legal Terms shall be governed by the laws of Bangladesh.</p>
+
             <h2>CONTACT US</h2>
             <p>In order to resolve a complaint regarding the Services, please contact us at:</p>
             <p><strong>Bangladesh Creator Media</strong><br>Email: <a href="mailto:bcm.contact24@gmail.com">bcm.contact24@gmail.com</a></p>
