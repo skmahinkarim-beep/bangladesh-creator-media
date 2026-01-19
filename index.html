@@ -186,120 +186,186 @@
         .card-style-3 { background: linear-gradient(135deg, #8E2DE2 0%, #4A00E0 100%); }
         .card-style-4 { background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); }
 
-        /* NEW FOOTER STYLES */
+        /* -------------------------------------------
+           NEW DARK FOOTER STYLES (Updated)
+           ------------------------------------------- */
         footer {
-            /* COLOR CHANGED: From #fff to #eef2f6 (Light Greyish Blue Panel) */
-            background: #eef2f6;
-            color: #333;
-            padding-top: 60px;
-            padding-bottom: 0;
-            border-top: 1px solid #dce1e6;
-            text-align: left;
+            background-color: #1a202c; /* Dark Theme Background */
+            color: #ffffff;
+            padding: 70px 0 20px;
             margin-top: 80px;
+            font-family: 'Segoe UI', sans-serif;
+            border-top: none;
         }
         .footer-content {
-            max-width: 1150px;
+            max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 30px;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr; /* 4 Columns */
+            gap: 40px;
             padding: 0 20px 40px;
         }
+        /* Style for the logo inside footer */
+        .footer-logo-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+            border: 2px solid #00b894;
+            padding: 2px;
+        }
+
+        /* Footer Headings */
         .footer-col h4 {
-            color: var(--primary-color);
+            color: #ffffff;
             font-size: 1.1rem;
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             font-weight: 700;
             text-transform: uppercase;
+            position: relative;
+            padding-bottom: 10px;
+            display: inline-block;
         }
+        /* Border below Heading */
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #00b894; 
+            border-radius: 2px;
+        }
+
+        /* Description Text */
+        .footer-desc {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .social-heading {
+            color: #00b894; /* Color for 'Social Media Platform' text */
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        /* Social Media Box Grid */
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr); /* 3 in a row */
+            gap: 10px;
+        }
+        .social-box {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-box:hover {
+            background: #00b894;
+            transform: translateY(-3px);
+        }
+        .social-box svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+            margin-bottom: 5px;
+        }
+        .social-box span {
+            font-size: 0.75rem;
+            color: #fff;
+            font-weight: 500;
+        }
+
+        /* Links */
         .footer-col ul {
             list-style: none;
             padding: 0;
             margin: 0;
         }
         .footer-col ul li {
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
         .footer-col ul li a {
-            color: #555;
+            color: #bdc3c7;
             text-decoration: none;
             transition: 0.3s;
-            display: block;
-            margin: 0;
             font-size: 0.95rem;
+            display: block;
         }
         .footer-col ul li a:hover {
-            color: var(--primary-color);
+            color: #00b894;
             padding-left: 5px;
         }
-        .footer-logo {
-            width: 50px;
-            height: 50px;
-            margin-bottom: 5px;
-        }
-        /* Style for the new Bold Website Name */
-        .footer-site-name {
-            font-weight: 800;
-            font-size: 1.1rem;
-            color: #000;
-            margin-bottom: 10px;
-            display: block;
-        }
-        .footer-slogan {
-            font-size: 0.9rem;
-            color: #666;
+
+        /* Contact Info */
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin-bottom: 15px;
-            font-weight: 600;
+            color: #bdc3c7;
+            font-size: 0.95rem;
+        }
+        .contact-icon {
+            color: #00b894;
+            font-size: 1.1rem;
         }
         .footer-email {
-            font-weight: bold;
-            color: var(--primary-color);
+            color: #fff;
             text-decoration: none;
+            font-weight: 600;
+        }
+
+        /* Payment Badges & Bottom */
+        .footer-bottom-bar {
+            border-top: 1px solid #2d3748; /* The "Dag" (Line) separator */
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-top: 20px;
+            text-align: center;
+            background: #1a202c;
         }
         .pay-badges {
             display: flex;
             flex-wrap: wrap;
-            gap: 8px;
+            justify-content: center;
+            gap: 10px;
             margin-bottom: 20px;
         }
         .pay-badge {
-            background: #fff;
-            border: 1px solid #ddd;
-            padding: 5px 10px;
-            border-radius: 4px;
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: #555;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
-        }
-        .footer-social-icons {
+            background: #2d3748; /* Dark Box */
+            border: 1px solid #4a5568;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
             display: flex;
-            gap: 10px;
+            align-items: center;
+            gap: 5px;
         }
-        .footer-social-icon {
-            width: 35px; height: 35px;
-            border-radius: 50%;
-            display: flex; justify-content: center; align-items: center;
-            color: white;
-            text-decoration: none;
-            transition: 0.3s;
-        }
-        .footer-social-icon:hover { transform: translateY(-3px); }
-        .footer-social-icon svg { width: 18px; height: 18px; fill: white; }
-
-        .footer-bottom {
-            background: #1a1a1a;
-            color: #eee;
-            text-align: center;
-            padding: 20px;
+        .copyright-text {
+            color: #bdc3c7;
             font-size: 0.9rem;
+            margin-top: 15px;
         }
 
         /* Responsive Footer */
-        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } }
-        @media (max-width: 900px) { .footer-content { grid-template-columns: repeat(2, 1fr); } }
-        @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } }
-        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; text-align: center; } .footer-col ul li a:hover { padding-left: 0; } .pay-badges, .footer-social-icons { justify-content: center; } .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
+        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } .footer-content { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 900px) { .footer-content { grid-template-columns: 1fr 1fr; } }
+        @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } .footer-content { grid-template-columns: 1fr; text-align: left; } }
+        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; text-align: left; } .pay-badges { justify-content: center; } .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
     </style>
 </head>
 <body>
@@ -326,7 +392,6 @@
             <div class="social-group">
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-                <!-- UPDATED INSTAGRAM ICON HERE -->
                 <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
                 <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
                 <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
@@ -447,68 +512,103 @@
         </div>
     </div>
 
-    <!-- Updated Footer -->
+    <!-- NEW DARK FOOTER START -->
     <footer>
         <div class="footer-content">
-            <!-- Col 1: Branding -->
+            <!-- Col 1: Brand (Socials Moved to Right) -->
             <div class="footer-col">
-                <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="footer-logo">
-                <span class="footer-site-name">Bangladesh Creator Media</span>
-                <p class="footer-slogan">Connecting Science, Technology & Innovation</p>
-                <a href="mailto:bcm.contact24@gmail.com" class="footer-email">bcm.contact24@gmail.com</a>
+                <!-- Footer Logo -->
+                <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="footer-logo-img">
+                
+                <h4>Bangladesh Creator Media</h4>
+                <p class="footer-desc">Science & Technology News Hub in Bangladesh. Connecting Science, Technology & Innovation.</p>
             </div>
 
-            <!-- Col 2: Info -->
+            <!-- Col 2: Quick Links -->
             <div class="footer-col">
-                <h4>Information</h4>
+                <h4>Quick Links</h4>
                 <ul>
+                    <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About Us</a></li>
+                    <li><a href="service.html">Our Services</a></li>
+                    <li><a href="tools.html">Free Tools</a></li>
+                </ul>
+            </div>
+
+            <!-- Col 3: Support / Legal -->
+            <div class="footer-col">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="contact.html">Contact Support</a></li>
                     <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="terms.html">Terms & Conditions</a></li>
                 </ul>
             </div>
 
-            <!-- Col 3: Quick Links -->
+            <!-- Col 4: Contact & Socials (Moved Here) -->
             <div class="footer-col">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="service.html">Our Services</a></li>
-                    <li><a href="tools.html">Free Tools</a></li>
-                    <li><a href="contact.html">Contact Us</a></li>
-                </ul>
-            </div>
-
-            <!-- Col 4: Pay & Social -->
-            <div class="footer-col">
-                <h4>Pay With</h4>
-                <div class="pay-badges">
-                    <span class="pay-badge">Bkash</span>
-                    <span class="pay-badge">Nagad</span>
-                    <span class="pay-badge">Rocket</span>
-                    <span class="pay-badge">Visa</span>
-                    <span class="pay-badge">MasterCard</span>
-                    <span class="pay-badge">Payoneer</span>
-                    <span class="pay-badge">Binance</span>
-                    <span class="pay-badge">Bank</span>
-                    <span class="pay-badge">Dual Currency</span>
+                <h4>Contact Us</h4>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>Dhaka, Bangladesh</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <a href="mailto:bcm.contact24@gmail.com" class="footer-email">bcm.contact24@gmail.com</a>
                 </div>
 
-                <h4 style="margin-top: 20px;">Follow Us</h4>
-                <div class="footer-social-icons">
-                    <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="footer-social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
-                    <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="footer-social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
-                    <!-- UPDATED INSTAGRAM ICON HERE ALSO -->
-                    <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="footer-social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
-                    <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="footer-social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
-                    <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="footer-social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                <!-- SOCIALS MOVED HERE -->
+                <span class="social-heading" style="margin-top: 30px;">Social Media Platform</span>
+                <div class="social-grid">
+                    <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        <span>Telegram</span>
+                    </a>
+                    <a href="index.html" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <span>Website</span>
+                    </a>
                 </div>
             </div>
         </div>
 
-        <div class="footer-bottom">
-            &copy; 2026 Bangladesh Creator Media. All Rights Reserved.
+        <!-- NEW STRUCTURE: Badges OUTSIDE (Above), Copyright INSIDE (Below) -->
+        
+        <!-- Payment Badges moved ABOVE the footer-bottom-bar -->
+        <div class="pay-badges" style="margin-bottom: 20px;">
+            <span class="pay-badge">💳 Visa Card</span>
+            <span class="pay-badge">💳 Credit Card</span>
+            <span class="pay-badge">📱 Bkash</span>
+            <span class="pay-badge">📱 Nagad</span>
+            <span class="pay-badge">🚀 Rocket</span>
+            <span class="pay-badge">💱 Dual Currency</span>
+            <span class="pay-badge">🅿️ Payoneer</span>
+            <span class="pay-badge">🏦 Bank</span>
+            <span class="pay-badge">🪙 Binance</span>
+        </div>
+
+        <!-- The Bottom Bar with the Thin Line (border-top) and Copyright Text -->
+        <div class="footer-bottom-bar">
+            <p class="copyright-text">&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
         </div>
     </footer>
+    <!-- NEW DARK FOOTER END -->
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
