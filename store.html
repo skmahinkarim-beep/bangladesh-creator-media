@@ -26,10 +26,32 @@
         .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
         .logo { display: flex; align-items: center; font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
         .logo i { margin-right: 10px; color: var(--secondary-color); }
-        nav ul { display: flex; list-style: none; }
+        
+        nav ul { display: flex; list-style: none; align-items: center; }
         nav ul li { margin-left: 25px; }
         nav ul li a { text-decoration: none; color: var(--dark-color); font-weight: 500; transition: var(--transition); position: relative; }
-        nav ul li a:hover { color: var(--primary-color); }
+        
+        /* GENERAL NAV HOVER (For Store, Contact etc.) */
+        nav ul li a:not(.home-box-btn):hover { color: var(--primary-color); }
+        
+        /* UNIQUE HOME BUTTON STYLE (Box Design, No Icon) */
+        .home-box-btn {
+            background-color: #e0f2fe; /* Light Blue Background */
+            border: 2px solid var(--primary-color);
+            padding: 8px 25px !important;
+            border-radius: 8px;
+            font-weight: 700 !important;
+            color: var(--primary-color) !important;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            display: inline-block;
+        }
+        .home-box-btn:hover {
+            background-color: var(--primary-color);
+            color: white !important;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
+        }
+
         .header-icons { display: flex; align-items: center; }
         .header-icons i { margin-left: 20px; font-size: 1.2rem; cursor: pointer; transition: var(--transition); }
         .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--accent-color); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
@@ -102,14 +124,18 @@
         <div class="container header-container">
             <a href="store.html" class="logo"><i class="fas fa-microchip"></i> BCM Tech Store</a>
             <nav>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-            <li><a href="store.html" class="nav-active">Store</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="privacy.html">Privacy</a></li>
-            <li><a href="terms.html">Terms</a></li>
-        </ul>
-    </nav>
+                <ul>
+                    <!-- Unique Home Button (Box Style, No Icon) -->
+                    <li>
+                        <a href="index.html" class="home-box-btn">Home</a>
+                    </li>
+                    
+                    <!-- Other Links -->
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="privacy.html">Privacy</a></li>
+                    <li><a href="terms.html">Terms</a></li>
+                </ul>
+            </nav>
             <div class="header-icons">
                 <i class="fas fa-search"></i>
                 <div class="cart-icon">
