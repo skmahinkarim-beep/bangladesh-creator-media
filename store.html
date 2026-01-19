@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BCM Tech Store - আপনার প্রযুক্তি শপিংয়ের নির্ভরযোগ্য স্থান</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
+        :root { --primary-color: #2563eb; --secondary-color: #10b981; --accent-color: #f59e0b; --dark-color: #1e293b; --light-color: #f8fafc; --gray-color: #64748b; --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); --transition: all 0.3s ease; }
+        body { background-color: var(--light-color); color: var(--dark-color); line-height: 1.6; overflow-x: hidden; }
+        .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+        
+        /* Header & Nav */
+        header { background-color: white; box-shadow: var(--shadow); position: fixed; width: 100%; top: 0; z-index: 1000; }
+        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
+        .logo { display: flex; align-items: center; font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
+        .logo i { margin-right: 10px; color: var(--secondary-color); }
+        nav ul { display: flex; list-style: none; }
+        nav ul li { margin-left: 25px; }
+        nav ul li a { text-decoration: none; color: var(--dark-color); font-weight: 500; transition: var(--transition); position: relative; }
+        nav ul li a:hover { color: var(--primary-color); }
+        .header-icons { display: flex; align-items: center; }
+        .header-icons i { margin-left: 20px; font-size: 1.2rem; cursor: pointer; transition: var(--transition); }
+        .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--accent-color); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
+        .cart-icon { position: relative; }
+
+        /* Hero Section */
+        .hero { padding: 150px 0 80px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
+        .hero-content { display: flex; align-items: center; justify-content: space-between; }
+        .hero-text { flex: 1; }
+        .hero-image { flex: 1; text-align: center; }
+        .hero-image img { max-width: 100%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
+        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
+        .btn { display: inline-block; padding: 12px 30px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
+
+        /* Products Grid */
+        .featured-products { padding: 80px 0; background-color: #f8f9fa; }
+        .section-title { text-align: center; margin-bottom: 50px; }
+        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
+        .product-card { background-color: white; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); }
+        .product-card:hover { transform: translateY(-10px); }
+        .product-image { height: 200px; overflow: hidden; position: relative; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-info { padding: 20px; }
+        .product-price { display: flex; align-items: center; margin-bottom: 15px; }
+        .current-price { font-size: 1.4rem; font-weight: 700; color: var(--primary-color); }
+        .add-to-cart { background-color: var(--primary-color); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; width: 100%; }
+
+        /* Cart Modal */
+        .cart-modal { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background-color: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1100; transition: right 0.4s ease; padding: 20px; overflow-y: auto; }
+        .cart-modal.active { right: 0; }
+        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; display: none; }
+        .overlay.active { display: block; }
+        .cart-item { display: flex; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .cart-item img { width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 5px; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav { display: none; } /* Mobile menu implementation needed if required */
+            .header-container { justify-content: space-between; }
+            .hero-content { flex-direction: column; text-align: center; }
+            .hero-image { margin-top: 30px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="store.html" class="logo"><i class="fas fa-microchip"></i> BCM Tech Store</a>
+            <nav>
+                <ul>
+                    <!-- Link back to Main Site -->
+                    <li><a href="index.html">Main Website</a></li>
+                    <li><a href="store.html" style="color: var(--primary-color);">Shop Home</a></li>
+                    <li><a href="#products">Products</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            </nav>
+            <div class="header-icons">
+                <i class="fas fa-search"></i>
+                <div class="cart-icon">
+                    <i class="fas fa-shopping-cart"></i>
+                    <span class="cart-count">0</span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Best Tech Gadgets <br><span>In Bangladesh</span></h1>
+                <p>Welcome to Bangladesh Creator Media Store. Authentic products, best prices.</p>
+                <a href="#products" class="btn">Shop Now</a>
+            </div>
+            <div class="hero-image">
+                <img src="https://cdn.pixabay.com/photo/2016/11/29/12/30/phone-1869510_1280.jpg" alt="Gadgets">
+            </div>
+        </div>
+    </section>
+
+    <!-- Products -->
+    <section class="featured-products" id="products">
+        <div class="container">
+            <div class="section-title"><h2>Featured Products</h2></div>
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card">
+                    <div class="product-image"><img src="https://cdn.pixabay.com/photo/2014/08/05/10/30/iphone-410324_1280.jpg" alt="Phone"></div>
+                    <div class="product-info">
+                        <h3>Smartphone Pro Max</h3>
+                        <div class="product-price"><span class="current-price">৳120,000</span></div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                <!-- Product 2 -->
+                <div class="product-card">
+                    <div class="product-image"><img src="https://cdn.pixabay.com/photo/2014/05/02/21/50/laptop-336378_1280.jpg" alt="Laptop"></div>
+                    <div class="product-info">
+                        <h3>Ultraslim Laptop</h3>
+                        <div class="product-price"><span class="current-price">৳85,000</span></div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+                 <!-- Product 3 -->
+                 <div class="product-card">
+                    <div class="product-image"><img src="https://cdn.pixabay.com/photo/2015/06/25/17/22/smart-watch-821559_1280.jpg" alt="Watch"></div>
+                    <div class="product-info">
+                        <h3>Smart Watch Series 8</h3>
+                        <div class="product-price"><span class="current-price">৳45,000</span></div>
+                        <button class="add-to-cart">Add to Cart</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cart Modal -->
+    <div class="overlay"></div>
+    <div class="cart-modal">
+        <div class="cart-header"><h3>Shopping Cart</h3><button class="close-cart"><i class="fas fa-times"></i></button></div>
+        <div class="cart-items"></div> <!-- Items go here -->
+        <button class="btn" style="width:100%; margin-top:20px;">Checkout</button>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cartIcon = document.querySelector('.cart-icon');
+            const cartModal = document.querySelector('.cart-modal');
+            const overlay = document.querySelector('.overlay');
+            const closeCart = document.querySelector('.close-cart');
+            const cartCount = document.querySelector('.cart-count');
+            const cartItemsContainer = document.querySelector('.cart-items');
+            let count = 0;
+
+            // Open/Close Cart
+            cartIcon.addEventListener('click', () => { cartModal.classList.add('active'); overlay.classList.add('active'); });
+            closeCart.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
+            overlay.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
+
+            // Add to Cart Logic
+            document.querySelectorAll('.add-to-cart').forEach(btn => {
+                btn.addEventListener('click', function() {
+                    count++;
+                    cartCount.innerText = count;
+                    
+                    // Simple Visual Feedback
+                    const card = this.closest('.product-card');
+                    const title = card.querySelector('h3').innerText;
+                    const price = card.querySelector('.current-price').innerText;
+                    const img = card.querySelector('img').src;
+
+                    const itemDiv = document.createElement('div');
+                    itemDiv.classList.add('cart-item');
+                    itemDiv.innerHTML = `<img src="${img}"><div><h4>${title}</h4><p>${price}</p></div>`;
+                    cartItemsContainer.appendChild(itemDiv);
+                    
+                    alert('Item added to cart!');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
