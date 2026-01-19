@@ -30,19 +30,36 @@
         header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
         .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
         .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
+        
         .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
-        .header-text p { font-size: 0.8rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; }
+        
+        /* UPDATED TAGLINE STYLE (Fixed One Line Issue) */
+        .header-text p { 
+            font-size: 0.75rem; /* Slightly smaller to fit */
+            color: #666; 
+            margin: 0; 
+            font-weight: 600; 
+            text-transform: uppercase; 
+            letter-spacing: 0.5px; /* Reduced spacing */
+            white-space: nowrap; /* Forces text to stay in one line */
+        }
 
         .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
         .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
         .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
         .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
 
-        .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 15px; }
-        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 20px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.9rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; }
+        .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        
+        /* Default Orange Button */
+        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 15px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
         .header-service-btn:hover { transform: translateY(-2px); }
 
-        .social-group { display: flex; gap: 8px; }
+        /* New Button Colors */
+        .btn-purple { background: linear-gradient(45deg, #8E2DE2, #4A00E0) !important; box-shadow: 0 4px 10px rgba(74, 0, 224, 0.3) !important; }
+        .btn-green { background: linear-gradient(45deg, #11998e, #38ef7d) !important; box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3) !important; }
+
+        .social-group { display: flex; gap: 8px; margin-left: 5px; }
         .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-icon:hover { transform: translateY(-3px); }
         .social-icon svg { width: 18px; height: 18px; fill: white; }
@@ -388,7 +405,12 @@
         </div>
 
         <div class="header-right-container">
+            <!-- NEW BUTTONS ADDED IN HEADER -->
+            <a href="tools.html" class="header-service-btn btn-purple">🛠 Free Tools</a>
+            <a href="store.html" class="header-service-btn btn-green">🛒 Store</a>
+            <!-- EXISTING BUTTON -->
             <a href="service.html" class="header-service-btn">✨ Our Service</a>
+            
             <div class="social-group">
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
@@ -405,7 +427,6 @@
             <li><a href="about.html">About</a></li>
             <li><a href="service.html">Our Service</a></li>
             <li><a href="tools.html">Free Tools</a></li>
-            <!-- এই নতুন লাইনটি যুক্ত করা হয়েছে -->
             <li><a href="store.html">Store</a></li>
             <li><a href="contact.html">Contact</a></li>
             <li><a href="privacy.html">Privacy</a></li>
@@ -494,9 +515,19 @@
         <div class="text-box" id="text-box-3" style="margin-top:30px; display:none;"></div>
     </div>
 
-    <!-- CTA -->
+    <!-- CTA 1 (Original) -->
     <div class="cta-unique-box">
         <p>আমাদের সার্ভিস সম্বন্ধে জানতে <a href="service.html" class="cta-inline-btn">Our Service ✨</a> বাটনে চাপ দিন</p>
+    </div>
+
+    <!-- CTA 2 (New: Store) -->
+    <div class="cta-unique-box" style="margin-top: 20px;">
+        <p>BCM টেক স্টোর থেকে কিছু ক্রয় করতে <a href="store.html" class="cta-inline-btn btn-green">Store 🛒</a> বাটনে চাপ দিন</p>
+    </div>
+
+    <!-- CTA 3 (New: Free Tools) -->
+    <div class="cta-unique-box" style="margin-top: 20px;">
+        <p>নিত্য দিনের প্রয়োজনীয় ঝামেলা মুক্ত টুলস পেতে <a href="tools.html" class="cta-inline-btn btn-purple">Free Tools 🛠</a> বাটনে চাপ দিন</p>
     </div>
 
     <!-- STATS -->
