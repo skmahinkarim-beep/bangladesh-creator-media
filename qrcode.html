@@ -62,20 +62,8 @@
             bottom: 10%;
             right: 5%;
         }
-        
-        /* AD BANNER CONTAINER */
-        .ad-banner-container {
-            text-align: center;
-            margin: 20px auto;
-            padding: 10px;
-            max-width: 100%;
-            overflow: hidden;
-            border-radius: 15px;
-            background: white;
-            box-shadow: var(--shadow-soft);
-        }
 
-        /* --- MAIN POPUP AD STYLES (Added from index.html) --- */
+        /* --- MAIN POPUP AD STYLES (From Index File) --- */
         .popup-overlay {
             position: fixed;
             top: 0; left: 0;
@@ -119,6 +107,18 @@
             box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
         /* --- END POPUP AD STYLES --- */
+        
+        /* AD BANNER CONTAINER */
+        .ad-banner-container {
+            text-align: center;
+            margin: 20px auto;
+            padding: 10px;
+            max-width: 100%;
+            overflow: hidden;
+            border-radius: 15px;
+            background: white;
+            box-shadow: var(--shadow-soft);
+        }
 
         /* Header */
         .header-box {
@@ -476,7 +476,7 @@
     <div class="bg-blur blur-1"></div>
     <div class="bg-blur blur-2"></div>
 
-    <!-- MAIN POP-UP AD (CODE ADDED HERE) -->
+    <!-- MAIN POP-UP AD (START OF ADDED CODE) -->
     <div class="popup-overlay" id="popup-ad">
         <div class="popup-content">
             <button class="popup-close" onclick="closePopup()">✖</button>
@@ -499,6 +499,7 @@
             <!-- END AD CODE -->
         </div>
     </div>
+    <!-- (END OF ADDED POP-UP CODE) -->
 
     <!-- ADSTERRA BANNER -->
     <div class="ad-banner-container">
@@ -745,19 +746,22 @@
             }
         });
 
-        // --- POPUP AD LOGIC (Added) ---
+        // --- POPUP AD LOGIC (Start) ---
         window.addEventListener('load', function() {
             setTimeout(function() {
+                // Check if the user has already closed the popup in this session
                 if (!sessionStorage.getItem('popupClosed')) {
                     document.getElementById('popup-ad').style.display = 'flex';
                 }
-            }, 2000);
+            }, 2000); // 2 seconds delay
         });
 
         function closePopup() {
             document.getElementById('popup-ad').style.display = 'none';
+            // Save state so it doesn't show again on reload
             sessionStorage.setItem('popupClosed', 'true');
         }
+        // --- POPUP AD LOGIC (End) ---
     </script>
 </body>
 </html>
