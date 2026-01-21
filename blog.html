@@ -106,18 +106,16 @@
                 let hasNews = false;
 
                 if(data.news && data.news.length > 0) {
-                    // Loop through array (Reverse to show latest if added sequentially)
                     data.news.forEach((item, index) => {
-                        // Check if item has at least a title (so empty slots don't show)
                         if(item && item.title && item.title.trim() !== "") {
                             hasNews = true;
-                            // Limit description for preview
                             let shortDesc = item.desc ? item.desc.substring(0, 120) + '...' : '';
                             let imgUrl = item.img || 'https://via.placeholder.com/600x340?text=No+Image';
 
+                            /* CHANGE: Added referrerpolicy="no-referrer" to fix ImgBB loading issues */
                             html += `
                                 <div class="blog-card">
-                                    <img src="${imgUrl}" class="blog-thumb" alt="News Image">
+                                    <img src="${imgUrl}" class="blog-thumb" alt="News Image" referrerpolicy="no-referrer">
                                     <div class="blog-content">
                                         <div class="blog-date">${item.date || 'Tech News'}</div>
                                         <h3 class="blog-title">${item.title}</h3>
