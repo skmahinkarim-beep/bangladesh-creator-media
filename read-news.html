@@ -83,10 +83,11 @@
                         const item = data.news[newsIndex];
                         const imgUrl = item.img || 'https://via.placeholder.com/800x450';
                         
+                        /* CHANGE: Added referrerpolicy="no-referrer" */
                         document.getElementById('article-content').innerHTML = `
                             <h1 class="news-title">${item.title}</h1>
                             <div class="news-meta">📅 ${item.date || 'Unknown Date'} | ✍️ Admin</div>
-                            <img src="${imgUrl}" class="news-img" alt="News Image">
+                            <img src="${imgUrl}" class="news-img" alt="News Image" referrerpolicy="no-referrer">
                             <div class="news-body">${item.desc}</div>
                             <a href="blog.html" class="back-btn">← Back to Blog</a>
                         `;
