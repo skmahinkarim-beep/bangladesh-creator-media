@@ -20,33 +20,38 @@
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
-        /* HEADER STYLES */
-        header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
-        .header-left { display: flex; align-items: center; gap: 12px; flex: 1; }
-        .site-logo { width: 60px; height: 60px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
+        /* HEADER STYLES (MATCHED WITH INDEX) */
+        header { background: #fff; padding: 12px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
         
-        .header-text h1 { font-size: 1.4rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; }
+        .header-left { display: flex; align-items: center; gap: 15px; flex-shrink: 0; }
+        .site-logo { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
         
-        /* UPDATED TAGLINE STYLE (One Line Fix) */
+        .header-text h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.5px; }
+        
+        /* UPDATED TAGLINE STYLE (UPPERCASE MATCH) */
         .header-text p { 
-            font-size: 0.75rem; 
+            font-size: 0.7rem; 
             color: #666; 
-            margin: 0; 
+            margin: 3px 0 0 0; 
             font-weight: 600; 
             text-transform: uppercase; 
             letter-spacing: 0.5px; 
             white-space: nowrap; 
         }
 
-        .header-center { flex: 2; display: flex; justify-content: center; align-items: center; }
-        .search-box { width: 100%; max-width: 500px; display: flex; border: 2px solid #eee; border-radius: 50px; overflow: hidden; background: #fff; }
-        .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 1rem; }
-        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; font-size: 1.2rem; }
-
-        .header-right-container { flex: 1; display: flex; align-items: center; justify-content: flex-end; gap: 10px; }
+        .header-center { flex-grow: 1; display: flex; justify-content: center; align-items: center; margin: 0 20px; }
+        .search-box { width: 100%; max-width: 550px; display: flex; border: 1px solid #ddd; border-radius: 50px; overflow: hidden; background: #fff; height: 45px; }
+        .search-input { width: 100%; padding: 0 20px; border: none; outline: none; font-size: 0.95rem; color: #555; }
         
-        /* Default Orange Button */
-        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 15px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 5px; }
+        /* Updated Search Button Style (SVG Support) */
+        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 25px; cursor: pointer; display: flex; align-items: center; justify-content: center; transition: 0.3s; }
+        .search-btn:hover { background: #004494; }
+        .search-btn svg { width: 20px; height: 20px; fill: white; }
+
+        .header-right-container { display: flex; align-items: center; gap: 12px; flex-shrink: 0; }
+        
+        /* Button Styles */
+        .header-service-btn { background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 8px 18px; border-radius: 30px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transition: 0.3s; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
         .header-service-btn:hover { transform: translateY(-2px); }
 
         /* New Button Colors */
@@ -54,9 +59,9 @@
         .btn-green { background: linear-gradient(45deg, #11998e, #38ef7d) !important; box-shadow: 0 4px 10px rgba(56, 239, 125, 0.3) !important; }
 
         .social-group { display: flex; gap: 8px; margin-left: 5px; }
-        .social-icon { width: 35px; height: 35px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .social-icon { width: 34px; height: 34px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
         .social-icon:hover { transform: translateY(-3px); }
-        .social-icon svg { width: 18px; height: 18px; fill: white; }
+        .social-icon svg { width: 16px; height: 16px; fill: white; }
         .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
 
         /* NAV */
@@ -71,7 +76,7 @@
         /* AD CONTAINER */
         .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* --- CONTACT CONTENT --- */
+        /* --- CONTACT CONTENT STYLES --- */
         .container { max-width: 900px; margin: 50px auto; padding: 0 20px; }
         
         .contact-box {
@@ -101,11 +106,7 @@
         .divider-text::before, .divider-text::after { content: ""; flex: 1; height: 1px; background: #e0e0e0; margin: 0 15px; }
 
         /* CENTERED WHATSAPP BOX */
-        .whatsapp-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 40px;
-        }
+        .whatsapp-container { display: flex; justify-content: center; margin-top: 40px; }
 
         .whatsapp-box {
             padding: 15px 40px;
@@ -115,7 +116,7 @@
             text-align: center;
             box-shadow: 0 8px 20px rgba(37, 211, 102, 0.3);
             text-decoration: none;
-            display: inline-flex; /* Keeps it centered */
+            display: inline-flex;
             align-items: center;
             gap: 15px;
             transition: transform 0.3s ease;
@@ -146,7 +147,10 @@
         <div class="header-center">
             <div class="search-box">
                 <input type="text" class="search-input" placeholder="Search videos...">
-                <button class="search-btn">🔍</button>
+                <button class="search-btn">
+                    <!-- SVG Icon for Search -->
+                    <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                </button>
             </div>
         </div>
 
@@ -171,12 +175,11 @@
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog & News</a></li> <!-- Added Blog & News here -->
             <li><a href="service.html">Our Service</a></li>
             <li><a href="tools.html">Free Tools</a></li>
             <li><a href="store.html">Store</a></li>
             <li><a href="contact.html" class="nav-active">Contact</a></li>
-            <li><a href="privacy.html">Privacy</a></li>
-            <li><a href="terms.html">Terms</a></li>
         </ul>
     </nav>
 
