@@ -19,10 +19,61 @@
         :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-color); color: var(--text-color); }
         
-        nav { background: var(--primary-color); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 900; }
-        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px; }
-        nav a { color: white; text-decoration: none; font-weight: 700; }
+        /* --- NEW UNIQUE NAVBAR STYLE --- */
+        nav { 
+            background: linear-gradient(to right, #141E30, #243B55); /* Premium Dark Gradient */
+            padding: 15px 0; 
+            text-align: center; 
+            position: sticky; 
+            top: 0; 
+            z-index: 900; 
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3); 
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        nav ul { 
+            list-style: none; 
+            padding: 0; 
+            margin: 0; 
+            display: flex; 
+            justify-content: center; 
+            gap: 25px; 
+            align-items: center;
+        }
+        /* Common Button Style */
+        nav a { 
+            color: white; 
+            text-decoration: none; 
+            font-weight: 700; 
+            padding: 10px 30px; 
+            border-radius: 50px; 
+            text-transform: uppercase; 
+            font-size: 0.9rem; 
+            letter-spacing: 1px;
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+        
+        /* Unique Style for 'Home' Button (Green Gradient) */
+        nav a[href="index.html"] {
+            background: linear-gradient(45deg, #11998e, #38ef7d);
+        }
+        
+        /* Unique Style for 'Back to News' Button (Pink/Red Gradient) */
+        nav a[href="blog.html"] {
+            background: linear-gradient(45deg, #FF416C, #FF4B2B);
+        }
 
+        /* Hover Effect for Buttons */
+        nav a:hover { 
+            transform: translateY(-3px) scale(1.05); 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+            filter: brightness(1.1);
+        }
+
+        /* Article Container */
         .article-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         
         .news-img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; }
@@ -83,7 +134,7 @@
                         const item = data.news[newsIndex];
                         const imgUrl = item.img || 'https://via.placeholder.com/800x450';
                         
-                        /* CHANGE: Added referrerpolicy="no-referrer" */
+                        // referrerpolicy="no-referrer"
                         document.getElementById('article-content').innerHTML = `
                             <h1 class="news-title">${item.title}</h1>
                             <div class="news-meta">📅 ${item.date || 'Unknown Date'} | ✍️ Admin</div>
