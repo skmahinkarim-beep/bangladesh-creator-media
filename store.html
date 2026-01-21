@@ -14,78 +14,107 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BCM Tech Store - আপনার প্রযুক্তি শপিংয়ের নির্ভরযোগ্য স্থান</title>
     
-    <!-- ✅ এই লাইনটি যুক্ত করা হয়েছে লোগোর জন্য -->
+    <!-- ✅ লোগো -->
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Hind Siliguri', sans-serif; }
-        :root { --primary-color: #2563eb; --secondary-color: #10b981; --accent-color: #f59e0b; --dark-color: #1e293b; --light-color: #f8fafc; --gray-color: #64748b; --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); --transition: all 0.3s ease; }
-        body { background-color: var(--light-color); color: var(--dark-color); line-height: 1.6; overflow-x: hidden; }
+        :root { 
+            --primary-color: #0056b3; 
+            --secondary-color: #004494;
+            --accent-orange: #ff9800;
+            --text-color: #333; 
+            --bg-color: #f8f9fa; 
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.1); 
+            --transition: all 0.3s ease; 
+        }
+        body { background-color: var(--light-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
+        
+        /* -------------------------------------------
+           NEW HEADER STYLES (MATCHING INDEX & BLOG)
+           ------------------------------------------- */
+        header { 
+            background: #fff; 
+            padding: 12px 40px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 20px; 
+            position: relative; 
+            z-index: 1000; 
+        }
+        .header-left { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .site-logo { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
+        .header-text { display: flex; flex-direction: column; justify-content: center; }
+        .header-text h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.5px; }
+        .header-text p { font-size: 0.7rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+
+        .header-center { flex: 2; display: flex; justify-content: center; }
+        .search-box { width: 100%; max-width: 550px; display: flex; border: 1px solid #ddd; border-radius: 50px; overflow: hidden; background: #fdfdfd; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
+        .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 0.95rem; color: #444; }
+        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 30px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+        .search-btn:hover { background: var(--secondary-color); }
+
+        .header-right-container { flex: 1.5; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+        .header-service-btn { color: white; padding: 8px 18px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+        .header-service-btn:hover { transform: translateY(-2px); }
+
+        .btn-purple { background: linear-gradient(90deg, #8E2DE2, #4A00E0); }
+        .btn-green  { background: linear-gradient(90deg, #11998e, #38ef7d); }
+        .btn-orange { background: linear-gradient(90deg, #ff9800, #ff5722); }
+
+        /* Social Icons */
+        .social-group { display: flex; gap: 8px; margin-left: 10px; }
+        .social-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .social-icon:hover { transform: translateY(-3px); }
+        .social-icon svg { width: 16px; height: 16px; fill: white; }
+        .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
+
+        /* -------------------------------------------
+           NEW NAVBAR STYLES
+           ------------------------------------------- */
+        nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 0; width: 100%; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
+        nav ul li { margin: 0; }
+        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; border-radius: 0; }
+        nav ul li a:hover { background: rgba(255,255,255,0.1); }
+        
+        /* Active Class Logic: Darker Blue Background + Orange Border */
+        .nav-active { background: #003d82 !important; border-bottom: 4px solid var(--accent-orange) !important; }
+
+        /* Mobile Header Responsive */
+        @media (max-width: 1100px) { 
+            header { flex-direction: column; gap: 15px; padding: 15px; } 
+            .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } 
+            .header-right-container { flex-wrap: wrap; }
+            .search-box { max-width: 100%; }
+            nav { display: block; } /* Ensure Nav is visible */
+        }
+
+        /* Cart Icon (Custom Position) */
+        .cart-trigger { position: fixed; bottom: 20px; right: 20px; background: var(--accent-orange); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 1002; transition: 0.3s; }
+        .cart-trigger:hover { transform: scale(1.1); }
+        .cart-count { position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 0.8rem; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; border: 2px solid white; }
+
+        /* Store Styles */
         .container { width: 100%; max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        /* Header & Nav */
-        header { background-color: white; box-shadow: var(--shadow); position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .header-container { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; }
-        .logo { display: flex; align-items: center; font-size: 1.8rem; font-weight: 700; color: var(--primary-color); text-decoration: none; }
-        .logo i { margin-right: 10px; color: var(--secondary-color); }
-        
-        nav ul { display: flex; list-style: none; align-items: center; }
-        nav ul li { margin-left: 25px; }
-        nav ul li a { text-decoration: none; color: var(--dark-color); font-weight: 500; transition: var(--transition); position: relative; }
-        
-        /* GENERAL NAV HOVER */
-        nav ul li a:not(.home-box-btn):hover { color: var(--primary-color); }
-        
-        /* UNIQUE HOME BUTTON STYLE (Box Design, No Icon) */
-        .home-box-btn {
-            background-color: #e0f2fe;
-            border: 2px solid var(--primary-color);
-            padding: 8px 25px !important;
-            border-radius: 8px;
-            font-weight: 700 !important;
-            color: var(--primary-color) !important;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            display: inline-block;
-        }
-        .home-box-btn:hover {
-            background-color: var(--primary-color);
-            color: white !important;
-            transform: translateY(-3px);
-            box-shadow: 0 6px 12px rgba(37, 99, 235, 0.3);
-        }
+        .hero { padding: 80px 0; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); text-align: center; }
+        .hero h1 { font-size: 2.5rem; margin-bottom: 15px; color: var(--text-color); }
+        .btn { display: inline-block; padding: 10px 25px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
+        .btn:hover { background-color: var(--secondary-color); }
 
-        .header-icons { display: flex; align-items: center; }
-        .header-icons i { margin-left: 20px; font-size: 1.2rem; cursor: pointer; transition: var(--transition); }
-        .cart-count { position: absolute; top: -8px; right: -8px; background-color: var(--accent-color); color: white; font-size: 0.7rem; width: 18px; height: 18px; border-radius: 50%; display: flex; justify-content: center; align-items: center; }
-        .cart-icon { position: relative; }
-
-        /* Hero Section */
-        .hero { padding: 150px 0 80px; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); }
-        .hero-content { display: flex; align-items: center; justify-content: space-between; }
-        .hero-text { flex: 1; }
-        .hero-image { flex: 1; text-align: center; }
-        .hero-image img { max-width: 100%; filter: drop-shadow(0 10px 20px rgba(0,0,0,0.1)); }
-        .hero h1 { font-size: 3rem; margin-bottom: 20px; }
-        .btn { display: inline-block; padding: 12px 30px; background-color: var(--primary-color); color: white; border: none; border-radius: 5px; text-decoration: none; font-weight: 600; cursor: pointer; transition: var(--transition); }
-        .btn:hover { background-color: #1d4ed8; transform: translateY(-3px); }
-
-        /* Adsterra Banner Container */
-        .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
-
-        /* Products Grid */
-        .featured-products { padding: 80px 0; background-color: #f8f9fa; }
-        .section-title { text-align: center; margin-bottom: 50px; }
-        .section-title h2 { font-size: 2.2rem; margin-bottom: 10px; }
+        .featured-products { padding: 60px 0; background-color: #f8f9fa; }
+        .section-title { text-align: center; margin-bottom: 40px; }
         .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 30px; }
         .product-card { background-color: white; border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); transition: var(--transition); }
         .product-card:hover { transform: translateY(-10px); }
-        .product-image { height: 200px; overflow: hidden; position: relative; }
-        .product-image img { width: 100%; height: 100%; object-fit: cover; transition: var(--transition); }
+        .product-image { height: 200px; overflow: hidden; }
+        .product-image img { width: 100%; height: 100%; object-fit: cover; }
         .product-info { padding: 20px; }
-        .product-price { display: flex; align-items: center; margin-bottom: 15px; }
-        .current-price { font-size: 1.4rem; font-weight: 700; color: var(--primary-color); }
+        .current-price { font-size: 1.4rem; font-weight: 700; color: var(--primary-color); display: block; margin-bottom: 10px; }
         .add-to-cart { background-color: var(--primary-color); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer; width: 100%; }
 
         /* Cart Modal */
@@ -98,58 +127,68 @@
         .cart-item { display: flex; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
         .cart-item img { width: 50px; height: 50px; object-fit: cover; margin-right: 10px; border-radius: 5px; }
 
-        /* Responsive */
-        @media (max-width: 768px) {
-            nav { display: none; } /* Mobile menu implementation needed if required */
-            .header-container { justify-content: space-between; }
-            .hero-content { flex-direction: column; text-align: center; }
-            .hero-image { margin-top: 30px; }
-        }
+        /* Adsterra Banner */
+        .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
     </style>
 </head>
 <body>
 
-    <!-- ADSTERRA POPUP (Script loaded from Index) -->
+    <!-- ADSTERRA POPUP (Hidden Script from Index) -->
     <div style="display:none;">
         <script>
-            atOptions = {
-                'key' : '08d5faeff146431c8017d7cfc9ab82b6',
-                'format' : 'iframe',
-                'height' : 250,
-                'width' : 300,
-                'params' : {}
-            };
+            atOptions = { 'key' : '08d5faeff146431c8017d7cfc9ab82b6', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
         </script>
         <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
     </div>
 
-    <!-- Header -->
+    <!-- NEW HEADER SECTION (From Index) -->
     <header>
-        <div class="container header-container">
-            <a href="store.html" class="logo"><i class="fas fa-microchip"></i> BCM Tech Store</a>
-            <nav>
-                <ul>
-                    <!-- Unique Home Button (Box Style, No Icon) -->
-                    <li>
-                        <a href="index.html" class="home-box-btn">Home</a>
-                    </li>
-                    
-                    <!-- Other Links -->
-                    <li><a href="store.html" class="nav-active">Store</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                    <li><a href="privacy.html">Privacy</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                </ul>
-            </nav>
-            <div class="header-icons">
-                <i class="fas fa-search"></i>
-                <div class="cart-icon">
-                    <i class="fas fa-shopping-cart"></i>
-                    <span class="cart-count">0</span>
-                </div>
+        <div class="header-left">
+            <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
+            <div class="header-text">
+                <h1>Bangladesh Creator Media</h1>
+                <p>Connecting Science, Technology & Innovation</p>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search products...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+
+        <div class="header-right-container">
+            <a href="tools.html" class="header-service-btn btn-purple">🛠 Free Tools</a>
+            <a href="store.html" class="header-service-btn btn-green">🛒 Store</a>
+            <a href="service.html" class="header-service-btn btn-orange">✨ Our Service</a>
+            
+            <div class="social-group">
+                <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
             </div>
         </div>
     </header>
+
+    <!-- UPDATED NAVBAR HTML -->
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog & News</a></li>
+            <li><a href="service.html">Our Service</a></li>
+            <li><a href="tools.html">Free Tools</a></li>
+            <li><a href="store.html" class="nav-active">Store</a></li> <!-- Active Class Moved Here -->
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Floating Cart Button (Since Header Changed) -->
+    <div class="cart-trigger">
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count">0</span>
+    </div>
 
     <!-- Hero -->
     <section class="hero">
@@ -159,22 +198,13 @@
                 <p>Welcome to Bangladesh Creator Media Store. Authentic products, best prices.</p>
                 <a href="#products" class="btn">Shop Now</a>
             </div>
-            <div class="hero-image">
-                <img src="https://cdn.pixabay.com/photo/2016/11/29/12/30/phone-1869510_1280.jpg" alt="Gadgets">
-            </div>
         </div>
     </section>
 
     <!-- ADSTERRA BANNER -->
     <div class="ad-banner-container">
         <script>
-            atOptions = {
-                'key' : '913c56baf27591442617260739df7bf0',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
+            atOptions = { 'key' : '913c56baf27591442617260739df7bf0', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
@@ -219,7 +249,7 @@
     <div class="overlay"></div>
     <div class="cart-modal">
         <div class="cart-header"><h3>Shopping Cart</h3><button class="close-cart"><i class="fas fa-times"></i></button></div>
-        <div class="cart-items"></div> <!-- Items go here -->
+        <div class="cart-items"></div> 
         <button class="btn" style="width:100%; margin-top:20px;">Checkout</button>
     </div>
 
@@ -258,7 +288,7 @@
 
         // STORE PAGE LOGIC
         document.addEventListener('DOMContentLoaded', () => {
-            const cartIcon = document.querySelector('.cart-icon');
+            const cartTrigger = document.querySelector('.cart-trigger'); // Use new floating button
             const cartModal = document.querySelector('.cart-modal');
             const overlay = document.querySelector('.overlay');
             const closeCart = document.querySelector('.close-cart');
@@ -267,7 +297,7 @@
             let count = 0;
 
             // Open/Close Cart
-            cartIcon.addEventListener('click', () => { cartModal.classList.add('active'); overlay.classList.add('active'); });
+            cartTrigger.addEventListener('click', () => { cartModal.classList.add('active'); overlay.classList.add('active'); });
             closeCart.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
             overlay.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
 
@@ -277,7 +307,6 @@
                     count++;
                     cartCount.innerText = count;
                     
-                    // Simple Visual Feedback
                     const card = this.closest('.product-card');
                     const title = card.querySelector('h3').innerText;
                     const price = card.querySelector('.current-price').innerText;
