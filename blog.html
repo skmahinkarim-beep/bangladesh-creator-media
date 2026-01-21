@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics (Same as Index) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-64QZM220P0');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & News - Bangladesh Creator Media</title>
+    <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
+    
+    <style>
+        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-color); color: var(--text-color); }
+        
+        /* Navbar Style (Same as Index) */
+        nav { background: var(--primary-color); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 700; font-size: 1rem; text-transform: uppercase; }
+        nav a:hover { text-decoration: underline; }
+
+        /* Blog Section */
+        .container { max-width: 1200px; margin: 40px auto; padding: 0 20px; }
+        .page-title { text-align: center; margin-bottom: 40px; color: var(--primary-color); font-size: 2.5rem; font-weight: 800; border-bottom: 4px solid #ddd; padding-bottom: 10px; display: inline-block; }
+        
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        
+        /* Blog Card */
+        .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid #eee; }
+        .blog-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
+        
+        .blog-thumb { width: 100%; height: 200px; object-fit: cover; background: #ddd; }
+        .blog-content { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
+        
+        .blog-date { font-size: 0.8rem; color: #888; margin-bottom: 8px; font-weight: 600; text-transform: uppercase; }
+        .blog-title { font-size: 1.3rem; margin: 0 0 10px; color: #222; font-weight: 700; line-height: 1.4; }
+        .blog-excerpt { font-size: 0.95rem; color: #555; margin-bottom: 20px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .read-more-btn { margin-top: auto; align-self: flex-start; background: linear-gradient(45deg, #0056b3, #004494); color: white; text-decoration: none; padding: 10px 20px; border-radius: 30px; font-size: 0.9rem; font-weight: 600; transition: 0.2s; box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3); }
+        .read-more-btn:hover { transform: scale(1.05); }
+
+        #loader { text-align: center; font-size: 1.5rem; color: #666; padding: 50px; }
+        
+        /* Footer (Minimal) */
+        footer { text-align: center; padding: 20px; background: #1a202c; color: #bdc3c7; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="blog.html">Blog & News</a></li>
+            <li><a href="service.html">Services</a></li>
+            <li><a href="tools.html">Free Tools</a></li>
+            <li><a href="store.html">Store</a></li>
+        </ul>
+    </nav>
+
+    <div style="text-align: center; margin-top: 20px;">
+        <h1 class="page-title">Latest Technology News</h1>
+    </div>
+
+    <div class="container">
+        <div id="loader">Loading Articles...</div>
+        <div class="blog-grid" id="blog-container">
+            <!-- News will appear here -->
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+        };
+
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.firestore();
+
+        db.collection('siteContent').doc('homePage').onSnapshot((doc) => {
+            if(doc.exists) {
+                const data = doc.data();
+                const container = document.getElementById('blog-container');
+                document.getElementById('loader').style.display = 'none';
+                
+                let html = '';
+                let hasNews = false;
+
+                if(data.news && data.news.length > 0) {
+                    // Loop through array (Reverse to show latest if added sequentially)
+                    data.news.forEach((item, index) => {
+                        // Check if item has at least a title (so empty slots don't show)
+                        if(item && item.title && item.title.trim() !== "") {
+                            hasNews = true;
+                            // Limit description for preview
+                            let shortDesc = item.desc ? item.desc.substring(0, 120) + '...' : '';
+                            let imgUrl = item.img || 'https://via.placeholder.com/600x340?text=No+Image';
+
+                            html += `
+                                <div class="blog-card">
+                                    <img src="${imgUrl}" class="blog-thumb" alt="News Image">
+                                    <div class="blog-content">
+                                        <div class="blog-date">${item.date || 'Tech News'}</div>
+                                        <h3 class="blog-title">${item.title}</h3>
+                                        <p class="blog-excerpt">${shortDesc}</p>
+                                        <a href="read-news.html?id=${index}" class="read-more-btn">Read Full News →</a>
+                                    </div>
+                                </div>
+                            `;
+                        }
+                    });
+                }
+
+                if(!hasNews) {
+                    container.innerHTML = '<h3 style="text-align:center; grid-column:1/-1;">No news articles published yet.</h3>';
+                } else {
+                    container.innerHTML = html;
+                }
+            }
+        });
+    </script>
+
+    <!-- ADSTERRA POPUNDER AD -->
+    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
+
+    <!-- ADSTERRA SOCIAL BAR AD -->
+    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
+
+</body>
+</html>
