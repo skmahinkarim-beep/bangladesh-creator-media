@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-64QZM220P0"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-64QZM220P0');
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News Details - Bangladesh Creator Media</title>
+    <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
+    
+    <style>
+        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-color); color: var(--text-color); }
+        
+        nav { background: var(--primary-color); padding: 15px; text-align: center; position: sticky; top: 0; z-index: 900; }
+        nav ul { list-style: none; padding: 0; margin: 0; display: flex; justify-content: center; gap: 20px; }
+        nav a { color: white; text-decoration: none; font-weight: 700; }
+
+        .article-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
+        
+        .news-img { width: 100%; height: auto; border-radius: 8px; margin-bottom: 20px; }
+        .news-meta { color: #777; font-size: 0.9rem; margin-bottom: 15px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
+        .news-title { font-size: 2rem; color: #222; margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
+        .news-body { font-size: 1.1rem; line-height: 1.8; color: #444; white-space: pre-wrap; }
+        
+        .back-btn { display: inline-block; margin-top: 30px; text-decoration: none; color: var(--primary-color); font-weight: bold; }
+        .back-btn:hover { text-decoration: underline; }
+
+        /* Footer */
+        footer { text-align: center; padding: 20px; background: #1a202c; color: #bdc3c7; margin-top: 50px; }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="blog.html">Back to News</a></li>
+        </ul>
+    </nav>
+
+    <div class="article-container" id="article-content">
+        <h2 style="text-align:center; color:#666;">Loading News...</h2>
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyAEfAusfGr5VAhwbfpEjWBZijX0k3v3vAA",
+            authDomain: "bangladesh-creator-media.firebaseapp.com",
+            projectId: "bangladesh-creator-media",
+            storageBucket: "bangladesh-creator-media.firebasestorage.app",
+            messagingSenderId: "261777783760",
+            appId: "1:261777783760:web:9dcacf82fdca071f4b97d5"
+        };
+
+        if (!firebase.apps.length) { firebase.initializeApp(firebaseConfig); }
+        const db = firebase.firestore();
+
+        // Get ID from URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const newsIndex = urlParams.get('id');
+
+        if(newsIndex !== null) {
+            db.collection('siteContent').doc('homePage').get().then((doc) => {
+                if(doc.exists) {
+                    const data = doc.data();
+                    if(data.news && data.news[newsIndex]) {
+                        const item = data.news[newsIndex];
+                        const imgUrl = item.img || 'https://via.placeholder.com/800x450';
+                        
+                        document.getElementById('article-content').innerHTML = `
+                            <h1 class="news-title">${item.title}</h1>
+                            <div class="news-meta">📅 ${item.date || 'Unknown Date'} | ✍️ Admin</div>
+                            <img src="${imgUrl}" class="news-img" alt="News Image">
+                            <div class="news-body">${item.desc}</div>
+                            <a href="blog.html" class="back-btn">← Back to Blog</a>
+                        `;
+                    } else {
+                        document.getElementById('article-content').innerHTML = "<h3>News not found.</h3><a href='blog.html'>Go Back</a>";
+                    }
+                }
+            });
+        } else {
+            document.getElementById('article-content').innerHTML = "<h3>Invalid Link.</h3><a href='blog.html'>Go Back</a>";
+        }
+    </script>
+
+    <!-- ADSTERRA POPUNDER AD -->
+    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
+
+    <!-- ADSTERRA SOCIAL BAR AD -->
+    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
+
+</body>
+</html>
