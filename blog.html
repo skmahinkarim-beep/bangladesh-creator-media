@@ -16,108 +16,137 @@
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
     
     <style>
-        :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
+        :root { 
+            --primary-color: #0056b3; 
+            --secondary-color: #004494;
+            --accent-orange: #ff9800;
+            --text-color: #333; 
+            --bg-color: #f8f9fa; 
+        }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-color); color: var(--text-color); }
         
-        /* --- UPDATED NAVBAR STYLE (UNIQUE DESIGN) --- */
-        nav { 
-            background: linear-gradient(90deg, #0056b3, #004494); /* Gradient Background */
-            padding: 12px 0; 
-            text-align: center; 
-            position: sticky; 
-            top: 0; 
-            z-index: 900; 
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15); 
-        }
-        nav ul { 
-            list-style: none; 
-            padding: 0; 
-            margin: 0; 
+        /* -------------------------------------------
+           NEW HEADER STYLES (MATCHING INDEX & SCREENSHOT)
+           ------------------------------------------- */
+        header { 
+            background: #fff; 
+            padding: 12px 40px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05); 
             display: flex; 
-            justify-content: center; 
-            flex-wrap: wrap; 
-            gap: 10px; 
+            align-items: center; 
+            justify-content: space-between; 
+            gap: 20px; 
+            position: relative; 
+            z-index: 100; 
         }
-        nav a { 
-            color: white; 
-            text-decoration: none; 
-            font-weight: 600; 
-            font-size: 0.9rem; 
-            text-transform: uppercase; 
-            padding: 8px 20px; 
-            border-radius: 25px; 
-            transition: all 0.3s ease; 
-            letter-spacing: 0.5px;
-        }
-        /* Hover Effect */
-        nav a:hover { 
-            background: rgba(255, 255, 255, 0.2); 
-            transform: translateY(-2px); 
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-        }
-        /* Active Page Style */
-        .nav-active { 
-            background: white; 
-            color: var(--primary-color) !important; 
-            font-weight: 800; 
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+        .header-left { display: flex; align-items: center; gap: 15px; flex: 1; }
+        .site-logo { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
+        .header-text { display: flex; flex-direction: column; justify-content: center; }
+        .header-text h1 { font-size: 1.5rem; color: var(--primary-color); margin: 0; line-height: 1.1; font-weight: 800; letter-spacing: -0.5px; }
+        .header-text p { font-size: 0.7rem; color: #666; margin: 0; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+
+        .header-center { flex: 2; display: flex; justify-content: center; }
+        .search-box { width: 100%; max-width: 550px; display: flex; border: 1px solid #ddd; border-radius: 50px; overflow: hidden; background: #fdfdfd; box-shadow: inset 0 2px 5px rgba(0,0,0,0.02); }
+        .search-input { width: 100%; padding: 10px 20px; border: none; outline: none; font-size: 0.95rem; color: #444; }
+        .search-btn { background: var(--primary-color); color: white; border: none; padding: 0 30px; cursor: pointer; font-size: 1.1rem; transition: 0.3s; }
+        .search-btn:hover { background: var(--secondary-color); }
+
+        .header-right-container { flex: 1.5; display: flex; align-items: center; justify-content: flex-end; gap: 12px; }
+        .header-service-btn { color: white; padding: 8px 18px; border-radius: 25px; text-decoration: none; font-weight: 700; font-size: 0.85rem; box-shadow: 0 4px 10px rgba(0,0,0,0.15); transition: transform 0.2s; white-space: nowrap; display: flex; align-items: center; gap: 6px; }
+        .header-service-btn:hover { transform: translateY(-2px); }
+
+        .btn-purple { background: linear-gradient(90deg, #8E2DE2, #4A00E0); }
+        .btn-green  { background: linear-gradient(90deg, #11998e, #38ef7d); }
+        .btn-orange { background: linear-gradient(90deg, #ff9800, #ff5722); }
+
+        .social-group { display: flex; gap: 8px; margin-left: 10px; }
+        .social-icon { width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; color: white; text-decoration: none; transition: 0.3s; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+        .social-icon:hover { transform: translateY(-3px); }
+        .social-icon svg { width: 16px; height: 16px; fill: white; }
+        .bg-yt { background: #FF0000; } .bg-fb { background: #1877F2; } .bg-ig { background: radial-gradient(circle at 30% 107%, #fdf497 0%, #fdf497 5%, #fd5949 45%, #d6249f 60%, #285AEB 90%); } .bg-tk { background: #000000; } .bg-tg { background: #0088cc; }
+
+        /* -------------------------------------------
+           NEW NAVBAR STYLES (MATCHING SCREENSHOT)
+           ------------------------------------------- */
+        nav { background: var(--primary-color); position: sticky; top: 0; z-index: 900; text-align: center; box-shadow: 0 4px 10px rgba(0,0,0,0.1); padding: 0; }
+        nav ul { list-style: none; display: flex; justify-content: center; flex-wrap: wrap; margin: 0; padding: 0; }
+        nav ul li a { display: block; padding: 14px 25px; color: white; text-decoration: none; font-weight: 700; transition: background 0.3s; text-transform: uppercase; font-size: 0.9rem; border-bottom: 4px solid transparent; border-radius: 0; }
+        nav ul li a:hover { background: rgba(255,255,255,0.1); }
+        /* Active Class Logic: Darker Blue Background + Orange Border */
+        .nav-active { background: #003d82 !important; border-bottom: 4px solid var(--accent-orange) !important; }
+
+        /* Mobile Header Responsive */
+        @media (max-width: 1100px) { 
+            header { flex-direction: column; gap: 15px; padding: 15px; } 
+            .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } 
+            .header-right-container { flex-wrap: wrap; }
+            .search-box { max-width: 100%; }
         }
 
-        /* Blog Section */
+        /* -------------------------------------------
+           EXISTING BLOG STYLES (KEPT AS IS)
+           ------------------------------------------- */
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
         .page-title { text-align: center; margin-bottom: 40px; color: var(--primary-color); font-size: 2.5rem; font-weight: 800; border-bottom: 4px solid #ddd; padding-bottom: 10px; display: inline-block; }
-        
-        /* Grid Layout for 2 Items Per Line */
-        .blog-grid { 
-            display: grid; 
-            grid-template-columns: 1fr 1fr; 
-            gap: 30px; 
-        }
-
-        /* Mobile Layout */
-        @media (max-width: 768px) {
-            .blog-grid { grid-template-columns: 1fr; }
-        }
-        
-        /* Blog Card */
+        .blog-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+        @media (max-width: 768px) { .blog-grid { grid-template-columns: 1fr; } }
         .blog-card { background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: 0.3s; display: flex; flex-direction: column; border: 1px solid #eee; }
         .blog-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
-        
-        /* Image Height */
-        .blog-thumb { 
-            width: 100%; 
-            height: 250px; 
-            object-fit: cover; 
-            background: #ddd; 
-        }
-
+        .blog-thumb { width: 100%; height: 250px; object-fit: cover; background: #ddd; }
         .blog-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; }
-        
         .blog-date { font-size: 0.85rem; color: #888; margin-bottom: 10px; font-weight: 600; text-transform: uppercase; }
         .blog-title { font-size: 1.4rem; margin: 0 0 12px; color: #222; font-weight: 700; line-height: 1.4; }
         .blog-excerpt { font-size: 1rem; color: #555; margin-bottom: 20px; line-height: 1.6; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        
         .read-more-btn { margin-top: auto; align-self: flex-start; background: linear-gradient(45deg, #0056b3, #004494); color: white; text-decoration: none; padding: 10px 25px; border-radius: 30px; font-size: 0.95rem; font-weight: 600; transition: 0.2s; box-shadow: 0 4px 10px rgba(0, 86, 179, 0.3); }
         .read-more-btn:hover { transform: scale(1.05); }
-
         #loader { text-align: center; font-size: 1.5rem; color: #666; padding: 50px; }
-        
-        /* Footer (Minimal) */
         footer { text-align: center; padding: 20px; background: #1a202c; color: #bdc3c7; margin-top: 50px; }
     </style>
 </head>
 <body>
+
+    <!-- NEW HEADER SECTION (From Index) -->
+    <header>
+        <div class="header-left">
+            <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="site-logo">
+            <div class="header-text">
+                <h1>Bangladesh Creator Media</h1>
+                <p>Connecting Science, Technology & Innovation</p>
+            </div>
+        </div>
+        
+        <div class="header-center">
+            <div class="search-box">
+                <input type="text" class="search-input" placeholder="Search videos...">
+                <button class="search-btn">🔍</button>
+            </div>
+        </div>
+
+        <div class="header-right-container">
+            <a href="tools.html" class="header-service-btn btn-purple">🛠 Free Tools</a>
+            <a href="store.html" class="header-service-btn btn-green">🛒 Store</a>
+            <a href="service.html" class="header-service-btn btn-orange">✨ Our Service</a>
+            
+            <div class="social-group">
+                <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
+                <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
+                <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+            </div>
+        </div>
+    </header>
 
     <!-- UPDATED NAVBAR HTML -->
     <nav>
         <ul>
             <li><a href="index.html">Home</a></li>
             <li><a href="about.html">About</a></li>
-            <li><a href="blog.html" class="nav-active">Blog & News</a></li> <!-- Active Class Added -->
-            <li><a href="service.html">Services</a></li>
+            <li><a href="blog.html" class="nav-active">Blog & News</a></li> <!-- Active Class Moved Here -->
+            <li><a href="service.html">Our Service</a></li>
             <li><a href="tools.html">Free Tools</a></li>
             <li><a href="store.html">Store</a></li>
-            <li><a href="contact.html">Contact</a></li> <!-- Contact Added -->
+            <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
 
