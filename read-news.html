@@ -81,8 +81,31 @@
         .news-title { font-size: 2rem; color: #222; margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
         .news-body { font-size: 1.1rem; line-height: 1.8; color: #444; white-space: pre-wrap; }
         
-        .back-btn { display: inline-block; margin-top: 30px; text-decoration: none; color: var(--primary-color); font-weight: bold; }
-        .back-btn:hover { text-decoration: underline; }
+        /* UPDATED UNIQUE BACK BUTTON STYLE */
+        .back-btn { 
+            display: inline-flex; 
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 40px; 
+            padding: 12px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Premium Purple Gradient */
+            color: white;
+            text-decoration: none;
+            font-weight: 700;
+            border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            width: fit-content;
+        }
+        .back-btn:hover { 
+            transform: translateY(-5px); 
+            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6);
+            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        }
 
         /* Footer */
         footer { text-align: center; padding: 20px; background: #1a202c; color: #bdc3c7; margin-top: 50px; }
@@ -140,7 +163,9 @@
                             <div class="news-meta">📅 ${item.date || 'Unknown Date'} | ✍️ Admin</div>
                             <img src="${imgUrl}" class="news-img" alt="News Image" referrerpolicy="no-referrer">
                             <div class="news-body">${item.desc}</div>
-                            <a href="blog.html" class="back-btn">← Back to Blog</a>
+                            <div style="text-align: center;">
+                                <a href="blog.html" class="back-btn">⬅ Back to News Feed</a>
+                            </div>
                         `;
                     } else {
                         document.getElementById('article-content').innerHTML = "<h3>News not found.</h3><a href='blog.html'>Go Back</a>";
