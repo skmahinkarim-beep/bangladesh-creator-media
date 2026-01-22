@@ -41,6 +41,33 @@
 
         #admin-panel { display: none; }
         #login-section { max-width: 400px; margin: 50px auto; text-align: center; }
+
+        /* AD CONTAINER STYLE */
+        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
+
+        /* POPUP AD STYLES */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px);
+        }
+        .popup-content {
+            background: white; padding: 20px; border-radius: 12px;
+            width: 350px; text-align: center; position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: popIn 0.4s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 4px solid #f0f2f5; 
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .popup-close {
+            position: absolute; top: -15px; right: -15px;
+            background: red; color: white; border: 2px solid white;
+            width: 35px; height: 35px; border-radius: 50%;
+            font-size: 20px; line-height: 32px; cursor: pointer;
+            font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+        }
     </style>
 </head>
 <body>
@@ -56,6 +83,20 @@
     <!-- Main Admin Panel -->
     <div id="admin-panel" class="container">
         <h1>Website Control Panel</h1>
+
+        <!-- ADSTERRA BANNER 728x90 -->
+        <div class="ad-banner-container">
+            <script>
+                atOptions = {
+                    'key' : '913c56baf27591442617260739df7bf0',
+                    'format' : 'iframe',
+                    'height' : 90,
+                    'width' : 728,
+                    'params' : {}
+                };
+            </script>
+            <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+        </div>
         
         <!-- 1. BREAKING NEWS -->
         <div class="section" style="border-left: 5px solid #ff0000; background: #fff5f5;">
@@ -113,6 +154,13 @@
             </div>
         </div>
 
+        <!-- ADSTERRA NATIVE BANNER -->
+        <div style="margin: 20px auto; text-align: center; max-width: 100%;">
+            <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
+            <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
+        </div>
+        <!-- END NATIVE BANNER -->
+
         <!-- 5. Statistics -->
         <div class="section">
             <h3>5. Statistics (Numbers)</h3>
@@ -159,6 +207,29 @@
 
         <button onclick="saveData()" style="padding: 15px; font-size: 1.2rem; background: #28a745;">SAVE ALL CHANGES</button>
         <button onclick="logout()" class="logout-btn">Logout</button>
+    </div>
+
+    <!-- MAIN POP-UP AD (300x250) -->
+    <div class="popup-overlay" id="popup-ad">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">✖</button>
+            <h3 style="margin-bottom:10px;">Special Offer!</h3>
+            
+            <!-- ADSTERRA 300x250 CODE -->
+            <div>
+                <script>
+                    atOptions = {
+                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
+            </div>
+            <!-- END AD CODE -->
+        </div>
     </div>
 
     <!-- Firebase SDKs -->
@@ -347,6 +418,37 @@
                 .then(() => alert('Website Updated Successfully! (News Saved)'))
                 .catch(err => alert('Error: ' + err.message));
         }
+
+        // --- POPUP AD LOGIC (ADMIN) ---
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                if (!sessionStorage.getItem('popupClosedAdmin')) {
+                    document.getElementById('popup-ad').style.display = 'flex';
+                }
+            }, 2000);
+        });
+
+        function closePopup() {
+            document.getElementById('popup-ad').style.display = 'none';
+            sessionStorage.setItem('popupClosedAdmin', 'true');
+        }
     </script>
+
+    <!-- ADSTERRA POPUNDER AD -->
+    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
+
+    <!-- ADSTERRA SOCIAL BAR AD -->
+    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
+
+    <!-- ADSTERRA SMARTLINK (Opens on First Click) -->
+    <script>
+        document.body.addEventListener('click', function() {
+            if(!sessionStorage.getItem('smartLinkShownAdmin')) {
+                window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank');
+                sessionStorage.setItem('smartLinkShownAdmin', 'true');
+            }
+        }, { once: true });
+    </script>
+
 </body>
 </html>
