@@ -19,9 +19,9 @@
         :root { --primary-color: #0056b3; --text-color: #333; --bg-color: #f8f9fa; }
         body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background: var(--bg-color); color: var(--text-color); }
         
-        /* --- NEW UNIQUE NAVBAR STYLE --- */
+        /* --- NAVBAR STYLE --- */
         nav { 
-            background: linear-gradient(to right, #141E30, #243B55); /* Premium Dark Gradient */
+            background: linear-gradient(to right, #141E30, #243B55);
             padding: 15px 0; 
             text-align: center; 
             position: sticky; 
@@ -39,7 +39,6 @@
             gap: 25px; 
             align-items: center;
         }
-        /* Common Button Style */
         nav a { 
             color: white; 
             text-decoration: none; 
@@ -55,23 +54,9 @@
             display: inline-block;
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        
-        /* Unique Style for 'Home' Button (Green Gradient) */
-        nav a[href="index.html"] {
-            background: linear-gradient(45deg, #11998e, #38ef7d);
-        }
-        
-        /* Unique Style for 'Back to News' Button (Pink/Red Gradient) */
-        nav a[href="blog.html"] {
-            background: linear-gradient(45deg, #FF416C, #FF4B2B);
-        }
-
-        /* Hover Effect for Buttons */
-        nav a:hover { 
-            transform: translateY(-3px) scale(1.05); 
-            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
-            filter: brightness(1.1);
-        }
+        nav a[href="index.html"] { background: linear-gradient(45deg, #11998e, #38ef7d); }
+        nav a[href="blog.html"] { background: linear-gradient(45deg, #FF416C, #FF4B2B); }
+        nav a:hover { transform: translateY(-3px) scale(1.05); box-shadow: 0 10px 25px rgba(0,0,0,0.3); filter: brightness(1.1); }
 
         /* Article Container */
         .article-container { max-width: 800px; margin: 40px auto; background: white; padding: 40px; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
@@ -81,30 +66,42 @@
         .news-title { font-size: 2rem; color: #222; margin-bottom: 15px; line-height: 1.3; font-weight: 800; }
         .news-body { font-size: 1.1rem; line-height: 1.8; color: #444; white-space: pre-wrap; }
         
-        /* UPDATED UNIQUE BACK BUTTON STYLE */
+        /* Back Button */
         .back-btn { 
-            display: inline-flex; 
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            margin-top: 40px; 
-            padding: 12px 35px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Premium Purple Gradient */
-            color: white;
-            text-decoration: none;
-            font-weight: 700;
-            border-radius: 50px;
-            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
-            width: fit-content;
+            display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+            margin-top: 40px; padding: 12px 35px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white; text-decoration: none; font-weight: 700; border-radius: 50px;
+            box-shadow: 0 5px 15px rgba(118, 75, 162, 0.4); transition: all 0.3s ease;
+            text-transform: uppercase; font-size: 0.9rem; letter-spacing: 1px; width: fit-content;
         }
-        .back-btn:hover { 
-            transform: translateY(-5px); 
-            box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6);
-            background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+        .back-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6); background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
+
+        /* AD STYLES */
+        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
+
+        /* POPUP AD STYLES (MATCHING INDEX) */
+        .popup-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); z-index: 9999;
+            display: none; justify-content: center; align-items: center;
+            backdrop-filter: blur(4px);
+        }
+        .popup-content {
+            background: white; padding: 20px; border-radius: 12px;
+            width: 350px; text-align: center; position: relative;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
+            animation: popIn 0.4s ease;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            border: 4px solid #f0f2f5; 
+        }
+        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+        .popup-close {
+            position: absolute; top: -15px; right: -15px;
+            background: red; color: white; border: 2px solid white;
+            width: 35px; height: 35px; border-radius: 50%;
+            font-size: 20px; line-height: 32px; cursor: pointer;
+            font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
         }
 
         /* Footer */
@@ -120,13 +117,56 @@
         </ul>
     </nav>
 
+    <!-- ADSTERRA BANNER 728x90 -->
+    <div class="ad-banner-container">
+        <script>
+            atOptions = {
+                'key' : '913c56baf27591442617260739df7bf0',
+                'format' : 'iframe',
+                'height' : 90,
+                'width' : 728,
+                'params' : {}
+            };
+        </script>
+        <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
+    </div>
+
     <div class="article-container" id="article-content">
         <h2 style="text-align:center; color:#666;">Loading News...</h2>
+    </div>
+
+    <!-- ADSTERRA NATIVE BANNER (Inside Article Page) -->
+    <div style="max-width: 800px; margin: 0 auto 30px; text-align:center;">
+        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
+        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
     </div>
 
     <footer>
         <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
     </footer>
+
+    <!-- MAIN POP-UP AD (300x250) -->
+    <div class="popup-overlay" id="popup-ad">
+        <div class="popup-content">
+            <button class="popup-close" onclick="closePopup()">✖</button>
+            <h3 style="margin-bottom: 10px; color: #333;">Sponsored Offer</h3>
+            
+            <!-- ADSTERRA 300x250 CODE -->
+            <div>
+                <script>
+                    atOptions = {
+                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
+                        'format' : 'iframe',
+                        'height' : 250,
+                        'width' : 300,
+                        'params' : {}
+                    };
+                </script>
+                <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
+            </div>
+            <!-- END AD CODE -->
+        </div>
+    </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -175,6 +215,18 @@
         } else {
             document.getElementById('article-content').innerHTML = "<h3>Invalid Link.</h3><a href='blog.html'>Go Back</a>";
         }
+
+        // --- POPUP AD LOGIC ---
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                // Show popup 2 seconds after load
+                document.getElementById('popup-ad').style.display = 'flex';
+            }, 2000);
+        });
+
+        function closePopup() {
+            document.getElementById('popup-ad').style.display = 'none';
+        }
     </script>
 
     <!-- ADSTERRA POPUNDER AD -->
@@ -182,6 +234,16 @@
 
     <!-- ADSTERRA SOCIAL BAR AD -->
     <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
+
+    <!-- ADSTERRA SMARTLINK (Opens on First Click) -->
+    <script>
+        document.body.addEventListener('click', function() {
+            if(!sessionStorage.getItem('smartLinkShownNews')) {
+                window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank');
+                sessionStorage.setItem('smartLinkShownNews', 'true');
+            }
+        }, { once: true });
+    </script>
 
 </body>
 </html>
