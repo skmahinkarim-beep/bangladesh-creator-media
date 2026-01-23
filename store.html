@@ -88,11 +88,6 @@
             nav { display: block; } 
         }
 
-        /* Cart Icon */
-        .cart-trigger { position: fixed; bottom: 20px; right: 20px; background: var(--accent-orange); color: white; width: 60px; height: 60px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-size: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.3); cursor: pointer; z-index: 1002; transition: 0.3s; }
-        .cart-trigger:hover { transform: scale(1.1); }
-        .cart-count { position: absolute; top: -5px; right: -5px; background: red; color: white; font-size: 0.8rem; width: 22px; height: 22px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: bold; border: 2px solid white; }
-
         /* Store Styles */
         .container { width: 100%; max-width: 1250px; margin: 0 auto; padding: 0 20px; }
         .hero { padding: 80px 0; background: linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%); text-align: center; }
@@ -167,35 +162,140 @@
         }
         .buy-btn:hover { transform: scale(1.02); box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4); }
 
-        /* Cart Modal */
-        .cart-modal { position: fixed; top: 0; right: -400px; width: 350px; height: 100%; background-color: white; box-shadow: -5px 0 15px rgba(0,0,0,0.1); z-index: 1100; transition: right 0.4s ease; padding: 20px; overflow-y: auto; }
-        .cart-modal.active { right: 0; }
-        .cart-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
-        .close-cart { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
-        .overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); z-index: 1001; display: none; }
-        .overlay.active { display: block; }
-
         /* Adsterra Banner */
         .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
         /* -------------------------------------------
-           NEW DARK FOOTER STYLES (Added for consistency)
+           NEW DARK FOOTER STYLES (MATCHING INDEX.HTML)
            ------------------------------------------- */
-        footer { background-color: #1a202c; color: #ffffff; padding: 70px 0 20px; margin-top: 80px; font-family: 'Segoe UI', sans-serif; }
-        .footer-content { max-width: 1200px; margin: 0 auto; display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 40px; padding: 0 20px 40px; }
-        .footer-logo-img { width: 70px; height: 70px; border-radius: 50%; margin-bottom: 15px; display: block; border: 2px solid #00b894; padding: 2px; }
-        .footer-col h4 { color: #ffffff; font-size: 1.1rem; margin-bottom: 25px; font-weight: 700; text-transform: uppercase; position: relative; padding-bottom: 10px; }
-        .footer-col h4::after { content: ''; position: absolute; left: 0; bottom: 0; width: 40px; height: 3px; background-color: #00b894; border-radius: 2px; }
-        .footer-desc { font-size: 0.9rem; color: #bdc3c7; margin-bottom: 20px; line-height: 1.6; }
+        footer {
+            background-color: #1a202c; /* Dark Theme Background */
+            color: #ffffff;
+            padding: 70px 0 20px;
+            margin-top: 80px;
+            font-family: 'Segoe UI', sans-serif;
+            border-top: none;
+        }
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1fr; /* 4 Columns */
+            gap: 40px;
+            padding: 0 20px 40px;
+        }
+        .footer-logo-img {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            margin-bottom: 15px;
+            display: block;
+            border: 2px solid #00b894;
+            padding: 2px;
+        }
+        .footer-col h4 {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 25px;
+            font-weight: 700;
+            text-transform: uppercase;
+            position: relative;
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 40px;
+            height: 3px;
+            background-color: #00b894; 
+            border-radius: 2px;
+        }
+        .footer-desc {
+            font-size: 0.9rem;
+            color: #bdc3c7;
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+        .social-heading {
+            color: #00b894;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            display: block;
+        }
+        .social-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+        .social-box {
+            background: #2d3748;
+            border-radius: 8px;
+            padding: 12px 5px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+        .social-box:hover {
+            background: #00b894;
+            transform: translateY(-3px);
+        }
+        .social-box svg {
+            width: 24px;
+            height: 24px;
+            fill: #ffffff;
+            margin-bottom: 5px;
+        }
+        .social-box span {
+            font-size: 0.75rem;
+            color: #fff;
+            font-weight: 500;
+        }
         .footer-col ul { list-style: none; padding: 0; margin: 0; }
         .footer-col ul li { margin-bottom: 12px; }
         .footer-col ul li a { color: #bdc3c7; text-decoration: none; transition: 0.3s; font-size: 0.95rem; display: block; }
         .footer-col ul li a:hover { color: #00b894; padding-left: 5px; }
         .contact-item { display: flex; align-items: center; gap: 10px; margin-bottom: 15px; color: #bdc3c7; font-size: 0.95rem; }
-        .footer-bottom-bar { border-top: 1px solid #2d3748; padding-top: 30px; padding-bottom: 30px; margin-top: 20px; text-align: center; background: #1a202c; }
+        .contact-icon { color: #00b894; font-size: 1.1rem; }
+        .footer-email { color: #fff; text-decoration: none; font-weight: 600; }
+        
+        .footer-bottom-bar {
+            border-top: 1px solid #2d3748;
+            padding-top: 30px;
+            padding-bottom: 30px;
+            margin-top: 20px;
+            text-align: center;
+            background: #1a202c;
+        }
+        .pay-badges {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        .pay-badge {
+            background: #2d3748;
+            border: 1px solid #4a5568;
+            padding: 6px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
         .copyright-text { color: #bdc3c7; font-size: 0.9rem; }
+
         @media (max-width: 900px) { .footer-content { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; } }
+        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; } .pay-badges { justify-content: center; } }
     </style>
 </head>
 <body>
@@ -220,7 +320,8 @@
         
         <div class="header-center">
             <div class="search-box">
-                <input type="text" id="storeSearchInput" class="search-input" placeholder="Search products...">
+                <!-- Added oninput for live search -->
+                <input type="text" id="storeSearchInput" class="search-input" placeholder="Search products..." oninput="searchProducts()">
                 <button class="search-btn" onclick="searchProducts()">🔍</button>
             </div>
         </div>
@@ -231,9 +332,13 @@
             <a href="service.html" class="header-service-btn btn-orange">✨ Our Service</a>
             
             <div class="social-group">
-                <!-- Social Icons from Index -->
+                <!-- Social Icons from Index (ADDED INSTAGRAM & TIKTOK) -->
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+                <!-- Instagram Added -->
+                <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
+                <!-- TikTok Added -->
+                <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
                 <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
             </div>
         </div>
@@ -252,11 +357,7 @@
         </ul>
     </nav>
 
-    <!-- Floating Cart Button (Retained as per request, logic separate) -->
-    <div class="cart-trigger" onclick="document.querySelector('.cart-modal').classList.add('active'); document.querySelector('.overlay').classList.add('active');">
-        <i class="fas fa-shopping-cart"></i>
-        <span class="cart-count">0</span>
-    </div>
+    <!-- Cart Button Removed as requested -->
 
     <!-- Hero -->
     <section class="hero">
@@ -290,47 +391,99 @@
         </div>
     </section>
 
-    <!-- Footer (Added for Consistency) -->
+    <!-- NEW DARK FOOTER (FROM INDEX.HTML) -->
     <footer>
         <div class="footer-content">
+            <!-- Col 1: Brand -->
             <div class="footer-col">
                 <img src="https://i.ibb.co/sXXbLyk/Untitled-design.png" alt="Logo" class="footer-logo-img">
                 <h4>Bangladesh Creator Media</h4>
-                <p class="footer-desc">Your trusted tech partner in Bangladesh.</p>
+                <p class="footer-desc">Science & Technology News Hub in Bangladesh. Connecting Science, Technology & Innovation.</p>
             </div>
+
+            <!-- Col 2: Quick Links -->
             <div class="footer-col">
                 <h4>Quick Links</h4>
                 <ul>
                     <li><a href="index.html">Home</a></li>
+                    <li><a href="blog.html">Blog & News</a></li>
+                    <li><a href="service.html">Our Services</a></li>
+                    <li><a href="tools.html">Free Tools</a></li>
                     <li><a href="store.html">Store</a></li>
-                    <li><a href="tools.html">Tools</a></li>
                 </ul>
             </div>
+
+            <!-- Col 3: Support -->
             <div class="footer-col">
                 <h4>Support</h4>
                 <ul>
-                    <li><a href="contact.html">Contact Us</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
                     <li><a href="terms.html">Terms & Conditions</a></li>
                 </ul>
             </div>
+
+            <!-- Col 4: Contact & Socials -->
             <div class="footer-col">
                 <h4>Contact Us</h4>
-                <div class="contact-item"><span>📍</span><span>Dhaka, Bangladesh</span></div>
-                <div class="contact-item"><span>✉️</span><a href="mailto:bcm.contact24@gmail.com" style="color:#bdc3c7;">bcm.contact24@gmail.com</a></div>
+                <div class="contact-item">
+                    <span class="contact-icon">📍</span>
+                    <span>Dhaka, Bangladesh</span>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <a href="mailto:bcm.contact24@gmail.com" class="footer-email">bcm.contact24@gmail.com</a>
+                </div>
+
+                <!-- SOCIALS GRID -->
+                <span class="social-heading" style="margin-top: 30px;">Social Media Platform</span>
+                <div class="social-grid">
+                    <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                        <span>YouTube</span>
+                    </a>
+                    <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+                        <span>Facebook</span>
+                    </a>
+                    <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg>
+                        <span>Instagram</span>
+                    </a>
+                    <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg>
+                        <span>TikTok</span>
+                    </a>
+                    <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                        <span>Telegram</span>
+                    </a>
+                    <a href="index.html" class="social-box">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <span>Website</span>
+                    </a>
+                </div>
             </div>
         </div>
+
+        <!-- Payment Badges moved ABOVE the footer-bottom-bar -->
+        <div class="pay-badges" style="margin-bottom: 20px;">
+            <span class="pay-badge">💳 Visa Card</span>
+            <span class="pay-badge">💳 Credit Card</span>
+            <span class="pay-badge">📱 Bkash</span>
+            <span class="pay-badge">📱 Nagad</span>
+            <span class="pay-badge">🚀 Rocket</span>
+            <span class="pay-badge">💱 Dual Currency</span>
+            <span class="pay-badge">🅿️ Payoneer</span>
+            <span class="pay-badge">🏦 Bank</span>
+            <span class="pay-badge">🪙 Binance</span>
+        </div>
+
         <div class="footer-bottom-bar">
             <p class="copyright-text">&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
         </div>
     </footer>
-
-    <!-- Cart Modal (Structure kept) -->
-    <div class="overlay"></div>
-    <div class="cart-modal">
-        <div class="cart-header"><h3>Shopping Cart</h3><button class="close-cart"><i class="fas fa-times"></i></button></div>
-        <div class="cart-items"><p style="text-align:center; padding:20px;">Cart functionality coming soon for affiliate products!</p></div> 
-        <button class="btn" style="width:100%; margin-top:20px;">Checkout</button>
-    </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -446,26 +599,18 @@
             document.getElementById(`p-img-${index}`).src = src;
         }
 
-        // Search Function
+        // Search Function (UPDATED for Real-time Title Matching)
         window.searchProducts = function() {
-            const query = document.getElementById('storeSearchInput').value.toLowerCase();
+            const query = document.getElementById('storeSearchInput').value.toLowerCase().trim();
+            // Filter strictly by Title matching (or Serial) as requested
             const filtered = allProducts.filter(p => p.title.toLowerCase().includes(query) || p.serial.toString().includes(query));
             renderProducts(filtered);
         }
         
-        // Enter Key Search
+        // Enter Key Search (Retained for backup)
         document.getElementById('storeSearchInput').addEventListener('keyup', function(e) {
             if (e.key === 'Enter') searchProducts();
-            if (this.value === '') renderProducts(allProducts);
         });
-
-        // Cart Logic (Minimal for now as per affiliate request)
-        const cartModal = document.querySelector('.cart-modal');
-        const overlay = document.querySelector('.overlay');
-        const closeCart = document.querySelector('.close-cart');
-        
-        closeCart.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
-        overlay.addEventListener('click', () => { cartModal.classList.remove('active'); overlay.classList.remove('active'); });
 
     </script>
 </body>
