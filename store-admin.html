@@ -1,4 +1,3 @@
-<!-- START OF FILE store-admin.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +9,7 @@
         .container { max-width: 900px; margin: 20px auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); border-top: 5px solid #ff9800; }
         h1 { text-align: center; color: #e65100; }
         
-        input, textarea, button { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        input, textarea, button, select { width: 100%; padding: 12px; margin: 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
         label { font-weight: bold; margin-top: 15px; display: block; color: #555; }
         
         button { background: #ff9800; color: white; cursor: pointer; font-weight: bold; font-size: 1rem; border: none; transition: 0.3s; }
@@ -19,35 +18,34 @@
         .logout-btn:hover { background: #c9302c; }
         .btn-green { background: #28a745 !important; }
         .btn-green:hover { background: #218838 !important; }
+        .btn-blue { background: #007bff !important; }
 
-        /* NAVIGATION BUTTONS */
         .admin-nav { display: flex; justify-content: center; gap: 20px; margin-bottom: 30px; border-bottom: 2px solid #eee; padding-bottom: 20px; }
         .nav-link { padding: 12px 30px; border-radius: 30px; font-size: 1.1rem; text-decoration: none; font-weight: bold; display: inline-block; }
         .nav-active { background: #ff9800; color: white; box-shadow: 0 4px 10px rgba(255,152,0,0.3); }
         .nav-inactive { background: #e0e0e0; color: #333; transition: 0.3s; }
         .nav-inactive:hover { background: #ccc; }
 
-        /* Store Form Styles */
         .product-form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
         .full-width { grid-column: 1 / -1; }
         .img-preview-container { display: flex; gap: 10px; margin-top: 10px; }
         .img-preview-box { width: 80px; height: 80px; border: 1px solid #ddd; overflow: hidden; background: #fff; border-radius: 5px; }
-        .img-preview-box img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; transition: transform 0.3s; }
-        .img-preview-box:hover img { transform: scale(2.5); z-index: 100; }
-
+        .img-preview-box img { width: 100%; height: 100%; object-fit: cover; cursor: zoom-in; }
+        
         .search-result-item { padding: 10px; background: white; border-bottom: 1px solid #eee; cursor: pointer; display: flex; justify-content: space-between; align-items: center; }
         .search-result-item:hover { background: #f0f7ff; }
+
+        .section-header { background: #eee; padding: 10px; margin-top: 30px; font-weight: bold; border-left: 5px solid #ff9800; }
+        .banner-group { background: #fafafa; padding: 15px; border: 1px solid #ddd; margin-bottom: 10px; border-radius: 5px; }
 
         #admin-panel { display: none; }
         #login-section { max-width: 400px; margin: 50px auto; text-align: center; }
         .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
-        /* POPUP AD STYLES */
         .popup-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.7); z-index: 9999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(4px); }
         .popup-content { background: white; padding: 20px; border-radius: 12px; width: 350px; text-align: center; position: relative; box-shadow: 0 10px 40px rgba(0,0,0,0.5); animation: popIn 0.4s ease; display: flex; flex-direction: column; align-items: center; justify-content: center; border: 4px solid #f0f2f5; }
         @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .popup-close { position: absolute; top: -15px; right: -15px; background: red; color: white; border: 2px solid white; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; line-height: 32px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); z-index: 1000; display: flex; justify-content: center; align-items: center; padding: 0; }
-        .popup-close:hover { background: darkred; transform: scale(1.1); }
+        .popup-close { position: absolute; top: -15px; right: -15px; background: red; color: white; border: 2px solid white; width: 35px; height: 35px; border-radius: 50%; font-size: 20px; line-height: 32px; cursor: pointer; font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2); }
     </style>
 </head>
 <body>
@@ -62,13 +60,11 @@
     <div id="admin-panel" class="container">
         <h1>Store Product Manager</h1>
 
-        <!-- NAVIGATION -->
         <div class="admin-nav">
             <a href="admin.html" class="nav-link nav-inactive">Main Admin</a>
             <a href="store-admin.html" class="nav-link nav-active">Store Admin 🛒</a>
         </div>
 
-        <!-- ADSTERRA BANNER (728x90) -->
         <div class="ad-banner-container">
             <script>
                 atOptions = { 'key' : '913c56baf27591442617260739df7bf0', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
@@ -76,17 +72,65 @@
             <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
         </div>
 
-        <!-- SEARCH -->
+        <!-- LAYOUT MANAGEMENT -->
+        <h3 class="section-header">Store Layout (Banners & Offers)</h3>
+        
+        <label>Main Top Banners (3 Slides):</label>
+        <p style="color:red; font-size: 0.9rem; margin:0;">Recommended Ratio: 1200x400 (3:1)</p>
+        <div class="banner-group">
+            <input type="text" id="ban1-img" placeholder="Banner 1 Image URL">
+            <input type="text" id="ban1-link" placeholder="Banner 1 Link">
+        </div>
+        <div class="banner-group">
+            <input type="text" id="ban2-img" placeholder="Banner 2 Image URL">
+            <input type="text" id="ban2-link" placeholder="Banner 2 Link">
+        </div>
+        <div class="banner-group">
+            <input type="text" id="ban3-img" placeholder="Banner 3 Image URL">
+            <input type="text" id="ban3-link" placeholder="Banner 3 Link">
+        </div>
+
+        <label>Small Offer Banners (3 Items):</label>
+        <p style="color:red; font-size: 0.9rem; margin:0;">Recommended Ratio: 400x250 (8:5)</p>
+        <div class="banner-group">
+            <input type="text" id="off1-img" placeholder="Offer 1 Image URL">
+            <input type="text" id="off1-link" placeholder="Offer 1 Link">
+        </div>
+        <div class="banner-group">
+            <input type="text" id="off2-img" placeholder="Offer 2 Image URL">
+            <input type="text" id="off2-link" placeholder="Offer 2 Link">
+        </div>
+        <div class="banner-group">
+            <input type="text" id="off3-img" placeholder="Offer 3 Image URL">
+            <input type="text" id="off3-link" placeholder="Offer 3 Link">
+        </div>
+        <button onclick="saveSiteLayout()" class="btn-blue">Update Layout & Banners</button>
+
+        <!-- PRODUCT MANAGEMENT -->
+        <h3 class="section-header">Product Management</h3>
         <div style="display: flex; gap: 10px; margin-bottom: 20px;">
             <input type="text" id="store-search" placeholder="Search by Product Name or Serial..." onkeyup="searchProducts()" style="margin:0;">
             <button onclick="clearStoreForm()" style="width: 150px; background: #0056b3;">+ Add New</button>
         </div>
         <div id="product-list" style="max-height: 200px; overflow-y: auto; border: 1px solid #ccc; margin-bottom: 20px; display: none;"></div>
 
-        <!-- FORM -->
         <div id="store-form" style="background: white; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
             <label>8. Serial Number (Order ID):</label>
             <input type="number" id="p-serial" placeholder="e.g. 101">
+
+            <label>Category:</label>
+            <select id="p-category">
+                <option value="Mobile & Accessories">Mobile & Accessories</option>
+                <option value="Computer & Laptop">Computer & Laptop</option>
+                <option value="Smart Devices">Smart Devices</option>
+                <option value="Audio & Music">Audio & Music</option>
+                <option value="Camera & Video">Camera & Video</option>
+                <option value="Gaming Gadgets">Gaming Gadgets</option>
+                <option value="Smart Home">Smart Home</option>
+                <option value="Electronic Accessories">Electronic Accessories</option>
+                <option value="Car & Bike Gadgets">Car & Bike Gadgets</option>
+                <option value="Trending & Reviews">Trending & Reviews</option>
+            </select>
 
             <label>1. Product Images (4 Images - Hover to Zoom):</label>
             <div class="product-form-grid">
@@ -135,7 +179,6 @@
             <p id="store-msg" style="text-align: center; font-weight: bold; margin-top: 10px; color: green;"></p>
         </div>
 
-        <!-- ADSTERRA NATIVE BANNER -->
         <div style="margin: 20px auto; text-align: center;">
             <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
             <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
@@ -144,21 +187,14 @@
         <button onclick="logout()" class="logout-btn">Logout</button>
     </div>
 
-    <!-- MAIN POP-UP AD (300x250) - ADDED HERE -->
+    <!-- POP-UP AD -->
     <div class="popup-overlay" id="popup-ad">
         <div class="popup-content">
             <button class="popup-close" onclick="closePopup()">✖</button>
             <h3 style="margin-bottom:10px;">Special Offer!</h3>
             <div>
-                <!-- 300x250 Adsterra Code -->
                 <script>
-                    atOptions = {
-                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
+                    atOptions = { 'key' : '08d5faeff146431c8017d7cfc9ab82b6', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
                 </script>
                 <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
             </div>
@@ -175,6 +211,8 @@
         if (!firebase.apps.length) firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth(); const db = firebase.firestore();
         let storeProducts = [];
+        let topBanners = [];
+        let offerBanners = [];
 
         auth.onAuthStateChanged(user => {
             if(user) { document.getElementById('login-section').style.display = 'none'; document.getElementById('admin-panel').style.display = 'block'; loadStoreData(); }
@@ -186,8 +224,44 @@
 
         function loadStoreData() {
             db.collection('siteContent').doc('storePage').get().then(doc => {
-                if(doc.exists) { storeProducts = doc.data().products || []; } else { storeProducts = []; }
+                if(doc.exists) { 
+                    const data = doc.data();
+                    storeProducts = data.products || []; 
+                    topBanners = data.topBanners || [];
+                    offerBanners = data.offerBanners || [];
+
+                    // FILL BANNER INPUTS
+                    if(topBanners[0]) { document.getElementById('ban1-img').value = topBanners[0].img; document.getElementById('ban1-link').value = topBanners[0].link; }
+                    if(topBanners[1]) { document.getElementById('ban2-img').value = topBanners[1].img; document.getElementById('ban2-link').value = topBanners[1].link; }
+                    if(topBanners[2]) { document.getElementById('ban3-img').value = topBanners[2].img; document.getElementById('ban3-link').value = topBanners[2].link; }
+
+                    if(offerBanners[0]) { document.getElementById('off1-img').value = offerBanners[0].img; document.getElementById('off1-link').value = offerBanners[0].link; }
+                    if(offerBanners[1]) { document.getElementById('off2-img').value = offerBanners[1].img; document.getElementById('off2-link').value = offerBanners[1].link; }
+                    if(offerBanners[2]) { document.getElementById('off3-img').value = offerBanners[2].img; document.getElementById('off3-link').value = offerBanners[2].link; }
+
+                } else { storeProducts = []; }
             });
+        }
+
+        function saveSiteLayout() {
+            const newTopBanners = [
+                { img: document.getElementById('ban1-img').value, link: document.getElementById('ban1-link').value },
+                { img: document.getElementById('ban2-img').value, link: document.getElementById('ban2-link').value },
+                { img: document.getElementById('ban3-img').value, link: document.getElementById('ban3-link').value }
+            ];
+            const newOfferBanners = [
+                { img: document.getElementById('off1-img').value, link: document.getElementById('off1-link').value },
+                { img: document.getElementById('off2-img').value, link: document.getElementById('off2-link').value },
+                { img: document.getElementById('off3-img').value, link: document.getElementById('off3-link').value }
+            ];
+
+            db.collection('siteContent').doc('storePage').set({ 
+                products: storeProducts,
+                topBanners: newTopBanners,
+                offerBanners: newOfferBanners
+            }, { merge: true })
+            .then(() => alert("Layout & Banners Updated!"))
+            .catch(e => alert(e.message));
         }
 
         function updatePreview(num) { document.getElementById(`prev-${num}`).src = document.getElementById(`p-img${num}`).value; }
@@ -197,6 +271,7 @@
             document.getElementById('p-img1').value = ''; document.getElementById('p-img2').value = ''; document.getElementById('p-img3').value = ''; document.getElementById('p-img4').value = '';
             document.getElementById('p-price').value = ''; document.getElementById('p-old-price').value = ''; document.getElementById('p-rating').value = '';
             document.getElementById('p-link').value = ''; document.getElementById('p-desc').value = '';
+            document.getElementById('p-category').selectedIndex = 0;
             for(let i=1; i<=4; i++) document.getElementById(`prev-${i}`).src = '';
             document.getElementById('store-msg').innerText = "Mode: Add New Product";
         }
@@ -224,6 +299,7 @@
                 document.getElementById('p-img1').value = product.images[0]||''; document.getElementById('p-img2').value = product.images[1]||''; document.getElementById('p-img3').value = product.images[2]||''; document.getElementById('p-img4').value = product.images[3]||'';
                 document.getElementById('p-price').value = product.price; document.getElementById('p-old-price').value = product.oldPrice;
                 document.getElementById('p-rating').value = product.rating; document.getElementById('p-link').value = product.link; document.getElementById('p-desc').value = product.desc;
+                document.getElementById('p-category').value = product.category || "Mobile & Accessories";
                 updatePreview(1); updatePreview(2); updatePreview(3); updatePreview(4);
                 document.getElementById('product-list').style.display = 'none';
                 document.getElementById('store-msg').innerText = "Mode: Editing Product #" + product.serial;
@@ -237,14 +313,22 @@
                 serial: serial, title: document.getElementById('p-title').value,
                 images: [document.getElementById('p-img1').value, document.getElementById('p-img2').value, document.getElementById('p-img3').value, document.getElementById('p-img4').value],
                 price: document.getElementById('p-price').value, oldPrice: document.getElementById('p-old-price').value,
-                rating: document.getElementById('p-rating').value, link: document.getElementById('p-link').value, desc: document.getElementById('p-desc').value
+                rating: document.getElementById('p-rating').value, link: document.getElementById('p-link').value, desc: document.getElementById('p-desc').value,
+                category: document.getElementById('p-category').value
             };
-            const existingIndex = storeProducts.findIndex(p => p.serial == serial);
-            if(existingIndex > -1) storeProducts[existingIndex] = newProduct; else storeProducts.push(newProduct);
-
-            db.collection('siteContent').doc('storePage').set({ products: storeProducts })
-                .then(() => { alert('Product Saved Successfully!'); clearStoreForm(); loadStoreData(); })
-                .catch(err => alert("Error: " + err.message));
+            
+            // Re-fetch banners to ensure we don't overwrite them
+            db.collection('siteContent').doc('storePage').get().then(doc => {
+                let currentData = doc.exists ? doc.data() : {};
+                let currentProducts = currentData.products || [];
+                
+                const existingIndex = currentProducts.findIndex(p => p.serial == serial);
+                if(existingIndex > -1) currentProducts[existingIndex] = newProduct; else currentProducts.push(newProduct);
+                
+                db.collection('siteContent').doc('storePage').set({ products: currentProducts }, { merge: true })
+                    .then(() => { alert('Product Saved Successfully!'); clearStoreForm(); loadStoreData(); })
+                    .catch(err => alert("Error: " + err.message));
+            });
         }
 
         window.addEventListener('load', function() { setTimeout(function() { if (!sessionStorage.getItem('popupClosedStore')) document.getElementById('popup-ad').style.display = 'flex'; }, 2000); });
