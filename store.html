@@ -272,12 +272,6 @@
         <!-- Offers inserted via JS -->
     </div>
 
-    <!-- NEW NATIVE BANNER AD (Moved Here: Between Offer Banners & Products) -->
-    <div style="width: 100%; max-width: 1250px; margin: 20px auto; text-align: center;">
-        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
-        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
-    </div>
-
     <!-- Products Section -->
     <section class="featured-products" id="products">
         <div class="container">
@@ -287,6 +281,12 @@
             </div>
         </div>
     </section>
+
+    <!-- NEW NATIVE BANNER AD -->
+    <div style="text-align:center; margin: 30px auto; max-width: 100%; overflow: hidden;">
+        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
+        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
+    </div>
 
     <!-- DARK FOOTER -->
     <footer>
@@ -455,32 +455,42 @@
                         if(img) thumbHtml += `<div class="thumb-box"><img src="${img}" alt="Thumb"></div>`;
                     });
                 }
-                let stars = '';
-                for(let i=0; i<5; i++) { stars += i < p.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'; }
                 
-                // --- UPDATED LINK LOGIC HERE ---
-                // Clicking the card, image, title or button goes to the details page
+                // --- RATING CHANGED TO NUMBER ---
+                let ratingHtml = `<span class="rating-number"><i class="fas fa-star"></i> ${p.rating}</span>`;
+                
+                // --- LINKS ---
                 const detailsLink = `product-view.html?s=${p.serial}`;
+                const affiliateLink = p.link;
 
                 html += `
-                    <div class="product-card" onclick="window.location.href='${detailsLink}'">
+                    <div class="product-card">
                         <div class="product-gallery">
                             <div class="main-img-box"><img src="${mainImg}" alt="${p.title}"></div>
                             <div class="thumb-row">${thumbHtml}</div>
                         </div>
                         <div class="product-info">
-                            <div style="display:flex; justify-content:space-between;">
+                            <div style="display:flex; justify-content:space-between; align-items:center;">
                                 <span class="serial-badge">SN: ${p.serial}</span>
                                 ${p.category ? `<span class="category-tag">${p.category}</span>` : ''}
                             </div>
+                            
                             <a href="${detailsLink}" class="product-title">${p.title}</a>
-                            <div class="rating-stars">${stars}</div>
-                            <div class="price-box">
-                                <span class="current-price">৳${p.price}</span>
-                                <span class="old-price">${p.oldPrice ? '৳'+p.oldPrice : ''}</span>
+                            
+                            <div class="price-box" style="justify-content:space-between; width:100%;">
+                                <div>
+                                    <span class="current-price">৳${p.price}</span>
+                                    <span class="old-price">${p.oldPrice ? '৳'+p.oldPrice : ''}</span>
+                                </div>
+                                ${ratingHtml}
                             </div>
-                            <p class="product-desc">${p.desc}</p>
-                            <a href="${detailsLink}" class="buy-btn">View Details</a>
+                            
+                            <!-- DESCRIPTION REMOVED FROM HERE -->
+                            
+                            <div class="card-btn-group">
+                                <a href="${detailsLink}" class="btn-view">View Details</a>
+                                <a href="${affiliateLink}" target="_blank" class="btn-buy">Buy Now</a>
+                            </div>
                         </div>
                     </div>
                 `;
@@ -507,8 +517,8 @@
     </script>
     
     <!-- ADSTERRA ADS (POPUNDER & SOCIAL BAR) -->
-    <!-- SOCIAL BAR ONLY (Popunder removed as requested) -->
+    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
     <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
-    
+    <script> document.body.addEventListener('click', function() { if(!sessionStorage.getItem('smartLinkShownStore')) { window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank'); sessionStorage.setItem('smartLinkShownStore', 'true'); } }, { once: true }); </script>
 </body>
 </html>
