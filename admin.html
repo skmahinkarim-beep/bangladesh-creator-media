@@ -74,9 +74,21 @@
 
         <div class="section">
             <h3>2. Top Full-Screen Banners</h3>
-            <label>Banner 1:</label> <input type="text" id="b1-img" placeholder="Image Link"><input type="text" id="b1-link" placeholder="YouTube Link">
-            <label>Banner 2:</label> <input type="text" id="b2-img" placeholder="Image Link"><input type="text" id="b2-link" placeholder="YouTube Link">
-            <label>Banner 3:</label> <input type="text" id="b3-img" placeholder="Image Link"><input type="text" id="b3-link" placeholder="YouTube Link">
+            <!-- Added Size Guides Here -->
+            <label>Banner 1:</label> 
+            <input type="text" id="b1-img" placeholder="Image Link">
+            <span class="size-guide">Recommended Size: 1920 x 1080 px (16:9)</span>
+            <input type="text" id="b1-link" placeholder="YouTube Link">
+            
+            <label>Banner 2:</label> 
+            <input type="text" id="b2-img" placeholder="Image Link">
+            <span class="size-guide">Recommended Size: 1920 x 1080 px (16:9)</span>
+            <input type="text" id="b2-link" placeholder="YouTube Link">
+            
+            <label>Banner 3:</label> 
+            <input type="text" id="b3-img" placeholder="Image Link">
+            <span class="size-guide">Recommended Size: 1920 x 1080 px (16:9)</span>
+            <input type="text" id="b3-link" placeholder="YouTube Link">
         </div>
 
         <div class="section">
@@ -124,7 +136,11 @@
             <select id="news-select" onchange="loadSpecificNews()"></select>
             <div style="background: white; padding: 20px; border-radius: 8px; margin-top: 15px;">
                 <label>News Title:</label><input type="text" id="news-title">
-                <label>Image Link:</label><input type="text" id="news-img">
+                <label>Image Link:</label>
+                <input type="text" id="news-img">
+                <!-- Added Size Guide Here -->
+                <span class="size-guide">Recommended Size: 1200 x 630 px</span>
+                
                 <label>Date/Author:</label><input type="text" id="news-date">
                 <label>Full Content:</label><textarea id="news-desc" rows="6"></textarea>
             </div>
@@ -160,7 +176,10 @@
         let allData = {};
 
         const vidContainer = document.getElementById('video-inputs');
-        for(let i=1; i<=6; i++) { vidContainer.innerHTML += `<div style="margin-top:10px; border-top:1px dashed #ccc;"><strong>Video ${i}</strong><input type="text" id="v${i}-title" placeholder="Title"><input type="text" id="v${i}-img" placeholder="Img Link"><input type="text" id="v${i}-link" placeholder="YT Link"></div>`; }
+        // Added Size Guide inside the Javascript loop for Video Grid
+        for(let i=1; i<=6; i++) { 
+            vidContainer.innerHTML += `<div style="margin-top:10px; border-top:1px dashed #ccc;"><strong>Video ${i}</strong><input type="text" id="v${i}-title" placeholder="Title"><input type="text" id="v${i}-img" placeholder="Img Link"><span class="size-guide">Recommended Size: 1280 x 720 px (16:9)</span><input type="text" id="v${i}-link" placeholder="YT Link"></div>`; 
+        }
 
         const newsSelect = document.getElementById('news-select');
         for(let i=1; i<=30; i++) { let option = document.createElement("option"); option.value = i - 1; option.text = "News Slot " + i; newsSelect.appendChild(option); }
