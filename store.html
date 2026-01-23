@@ -124,30 +124,41 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.08); transition: all 0.3s ease; 
             display: flex; flex-direction: column;
             border: 1px solid #eee;
+            cursor: pointer; /* Pointer to show clickable */
         }
         .product-card:hover { transform: translateY(-8px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
 
         .product-gallery { position: relative; padding: 10px; background: #fff; }
-        .main-img-box { width: 100%; height: 220px; overflow: hidden; border-radius: 8px; display: flex; justify-content: center; align-items: center; cursor: crosshair; }
+        .main-img-box { width: 100%; height: 220px; overflow: hidden; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
         .main-img-box img { max-width: 100%; max-height: 100%; transition: transform 0.4s ease; }
-        .main-img-box:hover img { transform: scale(1.6); }
+        .main-img-box:hover img { transform: scale(1.1); }
 
         .thumb-row { display: flex; gap: 8px; margin-top: 10px; justify-content: center; }
-        .thumb-box { width: 50px; height: 50px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; cursor: pointer; transition: 0.2s; }
-        .thumb-box:hover { border-color: var(--accent-orange); transform: scale(1.05); }
+        .thumb-box { width: 50px; height: 50px; border: 1px solid #ddd; border-radius: 4px; overflow: hidden; transition: 0.2s; }
         .thumb-box img { width: 100%; height: 100%; object-fit: cover; }
 
         .product-info { padding: 20px; flex-grow: 1; display: flex; flex-direction: column; }
         .serial-badge { font-size: 0.75rem; background: #eee; padding: 2px 8px; border-radius: 4px; color: #666; display: inline-block; margin-bottom: 5px; width: fit-content; }
         .category-tag { font-size: 0.7rem; color: var(--accent-orange); font-weight: 700; text-transform: uppercase; margin-bottom: 5px; }
-        .product-title { font-size: 1.1rem; font-weight: 700; color: #222; margin-bottom: 8px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+        
+        .product-title { 
+            font-size: 1.1rem; font-weight: 700; color: #222; margin-bottom: 8px; 
+            display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; text-decoration: none;
+        }
+        
         .rating-stars { color: #ff9800; font-size: 0.9rem; margin-bottom: 10px; }
         .price-box { display: flex; align-items: baseline; gap: 10px; margin-bottom: 10px; }
         .current-price { font-size: 1.3rem; font-weight: 800; color: var(--primary-color); }
         .old-price { font-size: 0.95rem; color: #999; text-decoration: line-through; }
         .product-desc { font-size: 0.9rem; color: #555; margin-bottom: 15px; flex-grow: 1; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; }
-        .buy-btn { display: block; width: 100%; text-align: center; background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 700; transition: 0.3s; box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); }
-        .buy-btn:hover { transform: scale(1.02); box-shadow: 0 6px 15px rgba(255, 87, 34, 0.4); }
+        
+        /* Updated Button */
+        .buy-btn { 
+            display: block; width: 100%; text-align: center; background: linear-gradient(45deg, #0056b3, #004494); color: white; 
+            padding: 10px; border-radius: 6px; text-decoration: none; font-weight: 700; transition: 0.3s; 
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        }
+        .buy-btn:hover { transform: scale(1.02); }
 
         .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
 
@@ -326,8 +337,6 @@
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-firestore.js"></script>
-
-    <!-- Tawk.to Messaging Widget -->
     <script type="text/javascript">
         var Tawk_API = Tawk_API || {}, Tawk_LoadStart = new Date();
         (function () {
@@ -440,16 +449,20 @@
                 let thumbHtml = '';
                 if(p.images) {
                     p.images.forEach(img => {
-                        if(img) thumbHtml += `<div class="thumb-box" onmouseover="changeMainImage('${index}', '${img}')"><img src="${img}" alt="Thumb"></div>`;
+                        if(img) thumbHtml += `<div class="thumb-box"><img src="${img}" alt="Thumb"></div>`;
                     });
                 }
                 let stars = '';
                 for(let i=0; i<5; i++) { stars += i < p.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'; }
                 
+                // --- UPDATED LINK LOGIC HERE ---
+                // Clicking the card, image, title or button goes to the details page
+                const detailsLink = `product-view.html?s=${p.serial}`;
+
                 html += `
-                    <div class="product-card">
+                    <div class="product-card" onclick="window.location.href='${detailsLink}'">
                         <div class="product-gallery">
-                            <div class="main-img-box"><img id="p-img-${index}" src="${mainImg}" alt="${p.title}"></div>
+                            <div class="main-img-box"><img src="${mainImg}" alt="${p.title}"></div>
                             <div class="thumb-row">${thumbHtml}</div>
                         </div>
                         <div class="product-info">
@@ -457,14 +470,14 @@
                                 <span class="serial-badge">SN: ${p.serial}</span>
                                 ${p.category ? `<span class="category-tag">${p.category}</span>` : ''}
                             </div>
-                            <h3 class="product-title">${p.title}</h3>
+                            <a href="${detailsLink}" class="product-title">${p.title}</a>
                             <div class="rating-stars">${stars}</div>
                             <div class="price-box">
                                 <span class="current-price">৳${p.price}</span>
                                 <span class="old-price">${p.oldPrice ? '৳'+p.oldPrice : ''}</span>
                             </div>
                             <p class="product-desc">${p.desc}</p>
-                            <a href="${p.link}" target="_blank" class="buy-btn">BUY NOW <i class="fas fa-external-link-alt"></i></a>
+                            <a href="${detailsLink}" class="buy-btn">View Details</a>
                         </div>
                     </div>
                 `;
@@ -472,8 +485,6 @@
             grid.innerHTML = html;
         }
 
-        window.changeMainImage = function(index, src) { document.getElementById(`p-img-${index}`).src = src; }
-        
         window.searchProducts = function() {
             const query = document.getElementById('storeSearchInput').value.toLowerCase().trim();
             const filtered = allProducts.filter(p => p.title.toLowerCase().includes(query) || p.serial.toString().includes(query));
@@ -491,5 +502,10 @@
             }, 5000);
         }
     </script>
+    
+    <!-- ADSTERRA ADS (POPUNDER & SOCIAL BAR) -->
+    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
+    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
+    <script> document.body.addEventListener('click', function() { if(!sessionStorage.getItem('smartLinkShownStore')) { window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank'); sessionStorage.setItem('smartLinkShownStore', 'true'); } }, { once: true }); </script>
 </body>
 </html>
