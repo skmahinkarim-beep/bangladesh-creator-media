@@ -12,8 +12,8 @@
     
     <meta charset="UTF-8">
     
-    <!-- CHANGED: Viewport set to fixed width to force Desktop View on Mobile -->
-    <meta name="viewport" content="width=1280">
+    <!-- FIXED: Reverted to standard viewport so it fits mobile screen without cutting off -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <title>Bangladesh Creator Media</title>
     <meta name="description" content="Science & Technology News Hub in Bangladesh.">
@@ -28,8 +28,8 @@
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        /* Added min-width to body to ensure layout stays stable */
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); min-width: 1280px; }
+        /* Removed fixed min-width so it fits mobile perfectly */
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
 
         /* HEADER STYLES */
         header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
@@ -176,7 +176,10 @@
         .section-container { max-width: 1150px; margin: 80px auto 40px; padding: 0 20px; }
         .section-title { font-size: 2rem; color: #222; margin-bottom: 30px; position: relative; padding-left: 20px; font-weight: 800; }
         .section-title::before { content: ''; position: absolute; left: 0; top: 5px; height: 80%; width: 6px; background: var(--primary-color); border-radius: 3px; }
+        
+        /* DEFAULT GRID (DESKTOP) */
         .video-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+        
         .video-card { background: #fff; border-radius: 15px; overflow: hidden; box-shadow: 0 10px 20px rgba(0,0,0,0.05); transition: 0.3s; border: none; }
         .video-card:hover { transform: translateY(-10px); box-shadow: 0 15px 30px rgba(0,0,0,0.15); }
         .vid-thumb { width: 100%; height: 200px; object-fit: cover; }
@@ -383,8 +386,43 @@
             margin-top: 15px;
         }
 
-        /* REMOVED ALL @MEDIA QUERIES HERE TO DISABLE RESPONSIVE VIEW */
-        /* The site will now scale down on mobile just like a Desktop site */
+        /* -------------------------------------------
+           MOBILE RESPONSIVE FIXES (SIDE BY SIDE / SMALL BLOCKS)
+           ------------------------------------------- */
+        @media (max-width: 1100px) { 
+            header { flex-direction: column; gap: 15px; } 
+            .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } 
+            .header-right-container { flex-direction: column; gap: 10px; } 
+            .stats-wrapper { flex-direction: column; } 
+            .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } 
+            .cta-unique-box { border-radius: 20px; padding: 20px; } 
+            .footer-content { grid-template-columns: 1fr 1fr; } 
+        }
+
+        @media (max-width: 768px) {
+            /* FORCE VIDEO GRID TO BE 2 COLUMNS (Side-by-Side) ON MOBILE */
+            .video-grid { 
+                grid-template-columns: repeat(2, 1fr) !important; 
+                gap: 15px; 
+            }
+            .vid-thumb { height: 140px; } /* Smaller images */
+            .vid-title { font-size: 0.9rem; padding: 10px; line-height: 1.3; }
+
+            .slider-container { height: 250px; } 
+            .footer-content { grid-template-columns: 1fr; text-align: left; }
+            
+            /* Stats also side by side */
+            .stats-right { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 500px) { 
+            /* On very small screens, still keep 2 columns but maybe tighter */
+            .video-grid { grid-template-columns: repeat(2, 1fr) !important; gap: 10px; }
+            
+            .footer-content { grid-template-columns: 1fr; text-align: left; } 
+            .pay-badges { justify-content: center; } 
+            .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } 
+        }
 
     </style>
 </head>
