@@ -59,7 +59,7 @@
         }
 
         /* -------------------------------------------
-           PRODUCT DETAILS STYLES (FIXED IMAGE)
+           PRODUCT DETAILS STYLES (FINAL FIX)
            ------------------------------------------- */
         .details-container { max-width: 1100px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         
@@ -84,11 +84,11 @@
             padding: 5px;
         }
         
-        /* FIX: Image will fill the frame but keep aspect ratio */
+        /* Image Setting: Big & Clear */
         .main-view-box img { 
             width: 100%; 
             height: 100%; 
-            object-fit: contain; /* Fills the box without distortion */
+            object-fit: contain; 
             display: block;
         }
         
@@ -99,8 +99,8 @@
 
         /* Right Side: Info */
         .info-section { display: flex; flex-direction: column; justify-content: center; }
-        .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
-        .breadcrumb a { color: var(--primary-color); text-decoration: none; }
+        
+        /* Breadcrumb Removed via JS, CSS Style Removed to keep clean */
         
         .p-title-lg { font-size: 2rem; font-weight: 800; color: #222; margin-bottom: 15px; line-height: 1.3; }
         
@@ -379,7 +379,7 @@
                         const ratingHtml = `<span class="rating-number"><i class="fas fa-star"></i> ${product.rating}</span>`;
 
                         container.innerHTML = `
-                            <div class="breadcrumb"><a href="store.html">Store</a> > ${product.category || 'Product'} > ${product.title}</div>
+                            <!-- Breadcrumb Removed -->
                             
                             <div class="product-view-grid">
                                 <div class="image-section">
