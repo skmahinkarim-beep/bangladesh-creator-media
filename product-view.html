@@ -59,7 +59,7 @@
         }
 
         /* -------------------------------------------
-           PRODUCT DETAILS STYLES (UPDATED)
+           PRODUCT DETAILS STYLES (FIXED IMAGE)
            ------------------------------------------- */
         .details-container { max-width: 1100px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         
@@ -69,11 +69,10 @@
         /* Left Side: Images */
         .image-section { display: flex; flex-direction: column; align-items: center; }
         
-        /* Updated Main View Box - Better Image Handling */
+        /* Fixed Main View Box - Force Large Image */
         .main-view-box { 
             width: 100%; 
-            min-height: 450px; 
-            height: auto;
+            height: 450px; /* Fixed Height to ensure frame is big */
             border: 1px solid #eee; 
             border-radius: 10px; 
             overflow: hidden; 
@@ -82,18 +81,15 @@
             align-items: center; 
             margin-bottom: 15px; 
             background: #fff; 
-            padding: 10px;
+            padding: 5px;
         }
         
-        /* FIX FOR BLURRY IMAGES: width: auto; max-width: 100%; */
+        /* FIX: Image will fill the frame but keep aspect ratio */
         .main-view-box img { 
-            width: auto;         /* Prevents stretching */
-            max-width: 100%;     /* Keeps inside container */
-            height: auto; 
-            max-height: 500px;
-            object-fit: contain; 
+            width: 100%; 
+            height: 100%; 
+            object-fit: contain; /* Fills the box without distortion */
             display: block;
-            margin: 0 auto;
         }
         
         .thumb-list { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
@@ -243,6 +239,7 @@
                 <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
                 <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_d=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
                 <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                <a href="index.html" class="social-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></a>
             </div>
         </div>
     </header>
