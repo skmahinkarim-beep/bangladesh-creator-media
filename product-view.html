@@ -30,7 +30,7 @@
         }
         body { background-color: var(--bg-color); color: var(--text-color); line-height: 1.6; overflow-x: hidden; }
 
-        /* HEADER & FOOTER STYLES (COPIED FROM STORE.HTML) */
+        /* HEADER & FOOTER STYLES (UNCHANGED) */
         header { background: #fff; padding: 12px 40px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 20px; position: relative; z-index: 1000; }
         .header-left { display: flex; align-items: center; gap: 15px; flex: 1; }
         .site-logo { width: 55px; height: 55px; border-radius: 50%; border: 2px solid var(--primary-color); padding: 2px; }
@@ -59,49 +59,97 @@
         }
 
         /* -------------------------------------------
-           PRODUCT DETAILS STYLES
+           PRODUCT DETAILS STYLES (UPDATED)
            ------------------------------------------- */
         .details-container { max-width: 1100px; margin: 40px auto; padding: 20px; background: white; border-radius: 10px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); }
         
-        .product-view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; }
+        /* Grid for Image and Info Only */
+        .product-view-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 40px; }
         
         /* Left Side: Images */
         .image-section { display: flex; flex-direction: column; align-items: center; }
-        .main-view-box { width: 100%; height: 400px; border: 1px solid #eee; border-radius: 10px; overflow: hidden; display: flex; justify-content: center; align-items: center; margin-bottom: 15px; background: #fff; }
-        .main-view-box img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        
+        /* Updated Main View Box - Bigger Image */
+        .main-view-box { 
+            width: 100%; 
+            min-height: 450px; /* Height increased */
+            height: auto;
+            border: 1px solid #eee; 
+            border-radius: 10px; 
+            overflow: hidden; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            margin-bottom: 15px; 
+            background: #fff; 
+            padding: 10px;
+        }
+        .main-view-box img { 
+            width: 100%; 
+            height: auto; 
+            max-height: 500px;
+            object-fit: contain; /* Ensures image fits well but looks big */
+        }
         
         .thumb-list { display: flex; gap: 10px; flex-wrap: wrap; justify-content: center; }
-        .thumb-item { width: 70px; height: 70px; border: 2px solid #ddd; border-radius: 5px; cursor: pointer; overflow: hidden; transition: 0.3s; }
+        .thumb-item { width: 80px; height: 80px; border: 2px solid #ddd; border-radius: 5px; cursor: pointer; overflow: hidden; transition: 0.3s; }
         .thumb-item:hover, .thumb-item.active-thumb { border-color: var(--accent-orange); transform: scale(1.05); }
         .thumb-item img { width: 100%; height: 100%; object-fit: cover; }
 
         /* Right Side: Info */
-        .info-section { display: flex; flex-direction: column; }
-        .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 10px; }
+        .info-section { display: flex; flex-direction: column; justify-content: center; }
+        .breadcrumb { font-size: 0.9rem; color: #666; margin-bottom: 15px; }
         .breadcrumb a { color: var(--primary-color); text-decoration: none; }
         
-        .p-title-lg { font-size: 1.8rem; font-weight: 800; color: #222; margin-bottom: 10px; line-height: 1.3; }
-        .p-meta { display: flex; gap: 15px; font-size: 0.9rem; color: #555; margin-bottom: 15px; flex-wrap: wrap; }
-        .p-badge { background: #eee; padding: 3px 10px; border-radius: 4px; font-weight: 600; }
-        .p-rating { color: #ff9800; }
+        .p-title-lg { font-size: 2rem; font-weight: 800; color: #222; margin-bottom: 15px; line-height: 1.3; }
+        
+        /* Updated Rating Style (Like Store File) */
+        .rating-number { 
+            background: #fff8e1; 
+            color: #ff9800; 
+            padding: 4px 12px; 
+            border-radius: 5px; 
+            font-weight: 700; 
+            font-size: 1rem; 
+            border: 1px solid #ff9800; 
+            display: inline-flex; 
+            align-items: center; 
+            gap: 5px; 
+        }
 
-        .p-price-lg { font-size: 2rem; color: var(--primary-color); font-weight: 800; margin-bottom: 20px; display: flex; align-items: center; gap: 15px; }
-        .p-old-price { font-size: 1.2rem; color: #999; text-decoration: line-through; font-weight: normal; }
+        .p-meta { display: flex; align-items: center; gap: 15px; font-size: 0.95rem; color: #555; margin-bottom: 20px; flex-wrap: wrap; }
+        .p-badge { background: #f0f2f5; padding: 5px 12px; border-radius: 6px; font-weight: 600; color: #444; border: 1px solid #ddd; }
+
+        .p-price-lg { font-size: 2.2rem; color: var(--primary-color); font-weight: 800; margin-bottom: 30px; display: flex; align-items: center; gap: 15px; }
+        .p-old-price { font-size: 1.3rem; color: #999; text-decoration: line-through; font-weight: normal; }
 
         .affiliate-btn-lg { 
-            background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 15px 30px; 
-            font-size: 1.2rem; font-weight: 700; border-radius: 8px; text-decoration: none; 
+            background: linear-gradient(45deg, #ff9800, #ff5722); color: white; padding: 18px 30px; 
+            font-size: 1.3rem; font-weight: 700; border-radius: 10px; text-decoration: none; 
             text-align: center; display: inline-block; transition: 0.3s; 
             box-shadow: 0 5px 15px rgba(255, 87, 34, 0.4); border: none; cursor: pointer;
-            width: 100%; margin-bottom: 25px;
+            width: 100%; margin-bottom: 20px;
         }
-        .affiliate-btn-lg:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(255, 87, 34, 0.5); }
+        .affiliate-btn-lg:hover { transform: translateY(-3px); box-shadow: 0 10px 25px rgba(255, 87, 34, 0.5); }
 
-        .desc-box { background: #f9f9f9; padding: 20px; border-radius: 8px; border-left: 4px solid var(--primary-color); }
-        .desc-box h3 { margin-bottom: 10px; color: #333; }
-        .desc-text { white-space: pre-line; color: #444; font-size: 1rem; line-height: 1.7; }
+        /* Description Box - Full Width Styles */
+        .desc-container-full {
+            width: 100%;
+            margin-top: 20px;
+            padding-top: 30px;
+            border-top: 2px solid #eee;
+        }
+        .desc-box { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 12px; 
+            box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+            border: 1px solid #eee;
+        }
+        .desc-box h3 { margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; border-bottom: 2px solid var(--accent-orange); display: inline-block; padding-bottom: 5px; }
+        .desc-text { white-space: pre-line; color: #333; font-size: 1.05rem; line-height: 1.8; }
 
-        /* NATIVE BANNER STYLES (COPIED FROM STORE.HTML) */
+        /* NATIVE BANNER STYLES */
         .native-banner-container {
             text-align: center;
             margin: 30px auto;
@@ -114,7 +162,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .native-banner-container > div {
             width: 100%;
             height: auto;
@@ -122,7 +169,6 @@
             justify-content: center;
             align-items: center;
         }
-
         .native-banner-container iframe {
             max-width: 100%;
             height: auto;
@@ -130,12 +176,9 @@
         }
 
         @media (max-width: 768px) {
-            .native-banner-container {
-                padding: 0 15px;
-                margin: 20px auto;
-            }
-            .product-view-grid { grid-template-columns: 1fr; gap: 20px; }
-            .main-view-box { height: 300px; }
+            .native-banner-container { padding: 0 15px; margin: 20px auto; }
+            .product-view-grid { grid-template-columns: 1fr; gap: 30px; }
+            .main-view-box { min-height: 300px; }
         }
 
         /* Footer */
@@ -194,8 +237,9 @@
                 <a href="https://youtube.com/@bangladesh_creator_media0?si=zFQC16qV77DOS9Bn" target="_blank" class="social-icon bg-yt"><svg viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
                 <a href="https://www.facebook.com/share/17eK76CVLG/" target="_blank" class="social-icon bg-fb"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
                 <a href="https://www.instagram.com/bangladeshcreatormedia?igsh=MWc2cHM1YnV3ejZreA==" target="_blank" class="social-icon bg-ig"><svg viewBox="0 0 24 24"><path d="M7.8,2H16.2C19.4,2 22,4.6 22,7.8V16.2A5.8,5.8 0 0,1 16.2,22H7.8C4.6,22 2,19.4 2,16.2V7.8A5.8,5.8 0 0,1 7.8,2M7.6,4A3.6,3.6 0 0,0 4,7.6V16.4C4,18.39 5.61,20 7.6,20H16.4A3.6,3.6 0 0,0 20,16.4V7.6C20,5.61 18.39,4 16.4,4H7.6M17.25,5.5A1.25,1.25 0 0,1 18.5,6.75A1.25,1.25 0 0,1 17.25,8A1.25,1.25 0 0,1 16,6.75A1.25,1.25 0 0,1 17.25,5.5M12,7A5,5 0 0,1 17,12A5,5 0 0,1 12,17A5,5 0 0,1 7,12A5,5 0 0,1 12,7M12,9A3,3 0 0,0 9,12A3,3 0 0,0 12,15A3,3 0 0,0 15,12A3,3 0 0,0 12,9Z"/></svg></a>
-                <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_t=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
+                <a href="https://www.tiktok.com/@bangladeshcreatormedia?_r=1&_d=ZS-932DorHaHd2" target="_blank" class="social-icon bg-tk"><svg viewBox="0 0 24 24"><path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.08-2.86-.31-4.08-1.03-2.02-1.19-3.49-3.35-3.98-5.6-1.11-5.09 2.06-10.27 7.15-11.22V9.5c-1.39.32-2.71 1.05-3.53 2.14-1.3 1.73-.8 4.25 1.05 5.37.95.57 2.08.77 3.15.54 1.62-.35 2.87-1.63 3.03-3.29.09-3.21.05-6.42.06-9.63.01-.15.01-.31.01-.46h-3.92V.02z"/></svg></a>
                 <a href="https://t.me/bangladeshcreatormedia" target="_blank" class="social-icon bg-tg"><svg viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.48.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg></a>
+                <a href="index.html" class="social-box"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg></a>
             </div>
         </div>
     </header>
@@ -331,8 +375,8 @@
                             });
                         }
                         
-                        let stars = '';
-                        for(let i=0; i<5; i++) { stars += i < product.rating ? '<i class="fas fa-star"></i>' : '<i class="far fa-star"></i>'; }
+                        // Rating: Changed to Number Style
+                        const ratingHtml = `<span class="rating-number"><i class="fas fa-star"></i> ${product.rating}</span>`;
 
                         container.innerHTML = `
                             <div class="breadcrumb"><a href="store.html">Store</a> > ${product.category || 'Product'} > ${product.title}</div>
@@ -350,7 +394,7 @@
                                     <div class="p-meta">
                                         <span class="p-badge">Serial: ${product.serial}</span>
                                         <span class="p-badge">${product.category || 'General'}</span>
-                                        <div class="p-rating">${stars}</div>
+                                        ${ratingHtml}
                                     </div>
                                     
                                     <div class="p-price-lg">
@@ -361,11 +405,14 @@
                                     <a href="${product.link}" target="_blank" class="affiliate-btn-lg">
                                         BUY NOW <i class="fas fa-external-link-alt"></i>
                                     </a>
-
-                                    <div class="desc-box">
-                                        <h3>Product Description:</h3>
-                                        <p class="desc-text">${product.desc}</p>
-                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Description moved outside the grid to be full width -->
+                            <div class="desc-container-full">
+                                <div class="desc-box">
+                                    <h3>Product Description:</h3>
+                                    <p class="desc-text">${product.desc}</p>
                                 </div>
                             </div>
                         `;
