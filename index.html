@@ -11,7 +11,10 @@
     </script>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- CHANGED: Viewport set to fixed width to force Desktop View on Mobile -->
+    <meta name="viewport" content="width=1280">
+    
     <title>Bangladesh Creator Media</title>
     <meta name="description" content="Science & Technology News Hub in Bangladesh.">
     <link rel="icon" href="https://i.ibb.co/sXXbLyk/Untitled-design.png" type="image/png">
@@ -24,7 +27,9 @@
             --bg-color: #f8f9fa;
         }
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); }
+        
+        /* Added min-width to body to ensure layout stays stable */
+        body { font-family: 'Segoe UI', sans-serif; line-height: 1.6; color: var(--text-color); background: var(--bg-color); min-width: 1280px; }
 
         /* HEADER STYLES */
         header { background: #fff; padding: 10px 30px; box-shadow: 0 4px 20px rgba(0,0,0,0.05); display: flex; align-items: center; justify-content: space-between; gap: 15px; position: relative; z-index: 100; }
@@ -378,11 +383,9 @@
             margin-top: 15px;
         }
 
-        /* Responsive Footer */
-        @media (max-width: 1100px) { header { flex-direction: column; gap: 15px; } .header-left, .header-center, .header-right-container { width: 100%; justify-content: center; flex: auto; } .header-right-container { flex-direction: column; gap: 10px; } .stats-wrapper { flex-direction: column; } .stats-left { padding-right: 0; text-align: center; margin-bottom: 30px; } .cta-unique-box { border-radius: 20px; padding: 20px; } .footer-content { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 900px) { .footer-content { grid-template-columns: 1fr 1fr; } }
-        @media (max-width: 768px) { .video-grid { grid-template-columns: 1fr 1fr; } .slider-container { height: 250px; } .footer-content { grid-template-columns: 1fr; text-align: left; } }
-        @media (max-width: 500px) { .footer-content { grid-template-columns: 1fr; text-align: left; } .pay-badges { justify-content: center; } .video-grid { grid-template-columns: 1fr; } .stats-right { grid-template-columns: 1fr; } .bottom-notice-card { width: 90%; left: 5%; bottom: 10px; } }
+        /* REMOVED ALL @MEDIA QUERIES HERE TO DISABLE RESPONSIVE VIEW */
+        /* The site will now scale down on mobile just like a Desktop site */
+
     </style>
 </head>
 <body>
