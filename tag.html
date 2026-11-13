@@ -455,6 +455,115 @@
             transform: translateY(0) scale(0.98);
         }
 
+        /* MULTILINGUAL SECTIONS & COMBINED OUTPUT (USING EXISTING THEME) */
+        .seo-meta-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .seo-meta-pill {
+            background: rgba(0, 243, 255, 0.1);
+            border: 1px solid rgba(0, 243, 255, 0.25);
+            color: var(--neon-blue);
+            padding: 6px 16px;
+            border-radius: 50px;
+            font-size: 0.88rem;
+            font-weight: 600;
+        }
+
+        .tag-section-block {
+            background: rgba(0, 0, 0, 0.28);
+            border: 1px solid rgba(0, 243, 255, 0.18);
+            border-radius: 20px;
+            padding: 22px;
+            margin-bottom: 22px;
+            text-align: left;
+        }
+
+        .tag-section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-bottom: 16px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .tag-section-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--neon-blue);
+            letter-spacing: 0.5px;
+        }
+
+        .section-copy-btn {
+            background: rgba(0, 243, 255, 0.12);
+            color: var(--neon-blue);
+            border: 1px solid rgba(0, 243, 255, 0.35);
+            padding: 7px 16px;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .section-copy-btn:hover {
+            background: var(--primary-gradient);
+            color: #fff;
+            border-color: transparent;
+        }
+
+        .combined-box {
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(0, 243, 255, 0.25);
+            border-radius: 15px;
+            padding: 16px 20px;
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+            line-height: 1.7;
+            word-break: break-word;
+            margin-bottom: 18px;
+        }
+
+        .action-buttons-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .action-buttons-row .copy-selected-btn {
+            margin: 0;
+        }
+
+        .regen-btn {
+            background: var(--primary-gradient);
+            color: white;
+            border: none;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.05rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(106, 17, 203, 0.4);
+            font-family: 'Orbitron', sans-serif;
+            letter-spacing: 1px;
+        }
+
+        .regen-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(106, 17, 203, 0.6);
+        }
+
         /* COPY BUTTON */
         .copy-selected-btn {
             background: var(--secondary-gradient);
@@ -616,7 +725,7 @@
                 padding: 15px 20px;
             }
             
-            .generate-btn, .copy-selected-btn {
+            .generate-btn, .copy-selected-btn, .regen-btn {
                 width: 100%;
                 max-width: none;
                 padding: 15px 20px;
@@ -731,18 +840,56 @@
 
                 <div class="tags-container" id="tagsContainer" style="display: none;">
                     <h3 class="tags-title">🔥 টপ হাই ভলিউম ট্যাগ</h3>
-                    <p style="text-align:center; font-size:0.95rem; color:var(--text-secondary); margin-bottom:25px; padding:0 20px;">
-                        (আপনার পছন্দের ট্যাগগুলোতে ক্লিক করে সিলেক্ট করুন)
+                    <p style="text-align:center; font-size:0.95rem; color:var(--text-secondary); margin-bottom:20px; padding:0 20px;">
+                        (আপনার পছন্দের ট্যাগগুলোতে ক্লিক করে সিলেক্ট করুন অথবা সেকশন অনুযায়ী কপি করুন)
                     </p>
-                    
-                    <!-- GRID VIEW -->
-                    <div class="tags-grid" id="tagsGrid">
-                        <!-- Tags will appear here as separate boxes -->
+
+                    <div class="seo-meta-bar" id="seoMetaBar"></div>
+
+                    <!-- 1. বাংলা Tags -->
+                    <div class="tag-section-block">
+                        <div class="tag-section-header">
+                            <span class="tag-section-title">১. বাংলা Tags</span>
+                            <button class="section-copy-btn" id="copyBnBtn" onclick="copySectionTags('bn')">📋 Copy বাংলা Tags</button>
+                        </div>
+                        <div class="tags-grid" id="tagsGridBn"></div>
                     </div>
-                    
-                    <button class="copy-selected-btn" id="copyBtn" onclick="copySelectedTags()">
-                        <span class="btn-text">নির্বাচিত ট্যাগ কপি করুন</span>
-                    </button>
+
+                    <!-- 2. English Tags -->
+                    <div class="tag-section-block">
+                        <div class="tag-section-header">
+                            <span class="tag-section-title">২. English Tags</span>
+                            <button class="section-copy-btn" id="copyEnBtn" onclick="copySectionTags('en')">📋 Copy English Tags</button>
+                        </div>
+                        <div class="tags-grid" id="tagsGridEn"></div>
+                    </div>
+
+                    <!-- 3. Banglish Tags -->
+                    <div class="tag-section-block">
+                        <div class="tag-section-header">
+                            <span class="tag-section-title">৩. Banglish Tags</span>
+                            <button class="section-copy-btn" id="copyBanglishBtn" onclick="copySectionTags('banglish')">📋 Copy Banglish Tags</button>
+                        </div>
+                        <div class="tags-grid" id="tagsGridBanglish"></div>
+                    </div>
+
+                    <!-- Combined Tags (YouTube 500-char limit) -->
+                    <div class="tag-section-block">
+                        <div class="tag-section-header">
+                            <span class="tag-section-title" id="combinedStatsTitle">Combined Tags (0 tags | 0/500 chars)</span>
+                            <button class="section-copy-btn" id="copyAllBtn" onclick="copyAllTags()">📋 Copy All Tags</button>
+                        </div>
+                        <div class="combined-box" id="combinedTagsBox"></div>
+                    </div>
+
+                    <div class="action-buttons-row">
+                        <button class="copy-selected-btn" id="copyBtn" onclick="copySelectedTags()">
+                            <span class="btn-text">নির্বাচিত ট্যাগ কপি করুন</span>
+                        </button>
+                        <button class="regen-btn" id="regenBtn" onclick="regenerateTags()">
+                            🔄 Regenerate Tags
+                        </button>
+                    </div>
                 </div>
             </div>
 
@@ -781,173 +928,666 @@
         };
         firebase.initializeApp(firebaseConfig);
 
-        // --- SMART EXTRACTION LOGIC ---
-        
-        const stopWords = [
-            "আমি", "আমরা", "তুমি", "তোমরা", "সে", "তারা", "আমার", "আমাদের", "তোমার", "তাদের", "কে", "কি", "কিভাবে", "কেন", "কবে", "কোথায়",
-            "হচ্ছে", "হলো", "হবে", "আছে", "ছিল", "থাকবে", "করে", "করেন", "করছে", "করবেন", "দিয়ে", "দিয়েছেন", "দিচ্ছে", "নিয়ে", "নেয়",
+        // =========================================================================
+        // ADVANCED MULTILINGUAL YOUTUBE SEO TAG GENERATOR ALGORITHM
+        // =========================================================================
+
+        const stopWords = new Set([
+            "আমি", "আমরা", "তুমি", "তোমরা", "সে", "তারা", "আমার", "আমাদের", "তোমার", "তাদের", "কে", "কী", "কি", "কিভাবে", "কীভাবে", "কেন", "কবে", "কোথায়", "কোথায়",
+            "হচ্ছে", "হলো", "হল", "হবে", "আছে", "ছিল", "থাকবে", "করে", "করেন", "করছে", "করবেন", "করব", "করবো", "দিয়ে", "দিয়ে", "দিয়েছেন", "দিচ্ছে", "নিয়ে", "নিয়ে", "নেয়",
             "একটি", "একটা", "গুলো", "টি", "টা", "খানা", "খানি", "জন", "এবং", "ও", "কিন্তু", "অথবা", "বা", "নাকি", "সারা", "ঘিরে", "ফেলেছে",
-            "থেকে", "চেয়ে", "দিকে", "মত", "মতো", "জন্য", "কারণে", "ফলে", "তাই", "বটে", "তো", "না", "নি", "নাই", "নয়", "খুব", "অনেক", "বেশী", "কম",
-            "অবশ্যই", "আসলে", "এখন", "তখন", "কখন", "আজ", "কাল", "পরশু", "এই", "সেই", "ওই", "কিছু", "সব", "সকল", "সমস্ত", "পুরো", "মাত্র", "শুধু",
-            "a", "an", "the", "in", "on", "at", "to", "for", "of", "with", "by", "from", "up", "about", "into", "over", "after",
-            "is", "are", "am", "was", "were", "be", "been", "being", "have", "has", "had", "do", "does", "did",
-            "i", "you", "he", "she", "it", "we", "they", "my", "your", "his", "her", "its", "our", "their",
-            "and", "but", "or", "nor", "so", "yet", "if", "because", "as", "while", "that", "this", "these", "those",
-            "how", "what", "why", "when", "where", "who", "which", "make", "made", "making", "get", "got", "getting",
-            "just", "only", "very", "really", "so", "too", "full", "whole", "all"
+            "থেকে", "চেয়ে", "চেয়ে", "দিকে", "মত", "মতো", "জন্য", "কারণে", "ফলে", "তাই", "বটে", "তো", "না", "নি", "নাই", "নয়", "নয়", "খুব", "অনেক", "বেশী", "বেশি", "কম",
+            "অবশ্যই", "আসলে", "এখন", "তখন", "কখন", "আজ", "কাল", "পরশু", "এই", "সেই", "ওই", "কিছু", "সব", "সকল", "সমস্ত", "পুরো", "মাত্র", "শুধু", "আর", "এর", "তে", "কে", "রে",
+            "a", "an", "the", "in", "on", "at", "to", "for", "of", "with", "by", "from", "up", "about", "into", "over", "after", "before", "under", "between",
+            "is", "are", "am", "was", "were", "be", "been", "being", "have", "has", "had", "do", "does", "did", "will", "would", "can", "could", "should",
+            "i", "you", "he", "she", "it", "we", "they", "my", "your", "his", "her", "its", "our", "their", "me", "him", "them",
+            "and", "but", "or", "nor", "so", "yet", "if", "because", "as", "while", "that", "this", "these", "those", "here", "there",
+            "how", "what", "why", "when", "where", "who", "which", "make", "made", "making", "get", "got", "getting", "best", "top", "new",
+            "just", "only", "very", "really", "too", "full", "whole", "all", "vs", "v", "part", "ep", "episode",
+            "ami", "amra", "tumi", "tomra", "amar", "amader", "tomar", "tader", "ki", "kivabe", "ki vabe", "kemne", "keno", "kobe", "kothay",
+            "korbo", "kora", "kore", "korben", "hoy", "hobe", "holo", "ache", "chilo", "ekti", "ekta", "ebong", "ar", "er", "theke", "jonno",
+            "ei", "sei", "oi", "sob", "shob", "puro", "shudhu", "sara", "ajke", "ajker", "notun", "ekdom", "khub", "onek", "niye", "diye"
+        ]);
+
+        const banglishMarkerWords = new Set([
+            "kivabe", "kemne", "keno", "kobe", "kothay", "amader", "amar", "tomar", "bangla", "khela", "khobor",
+            "natok", "gaan", "taka", "dam", "koto", "bhalo", "valo", "sundor", "shundor", "korbo", "korben",
+            "banabo", "banano", "khulbo", "khulben", "ranna", "khabar", "ajker", "notun", "sorasori", "bonam",
+            "banam", "shikhun", "janun", "dekho", "dekhun", "bistarito", "sorkar", "desh", "prithibi", "mohakash",
+            "projukti", "biggan", "porikkha", "chakri", "bebsha", "ay", "upay", "niyom", "sohoj", "shohoj", "roza", "namaz"
+        ]);
+
+        // Bidirectional Knowledge Graph: concept -> { bn, en, banglish, cat, aliases[] }
+        const knowledgeBase = [
+            // Intent & Modifiers
+            { cat: "intent", bn: "কিভাবে", en: "how to", banglish: "kivabe", aliases: ["কিভাবে", "কীভাবে", "kivabe", "ki vabe", "kemne", "how to", "how"] },
+            { cat: "intent", bn: "সেরা", en: "best", banglish: "sera", aliases: ["সেরা", "ভালো", "ভাল", "best", "top", "sera", "bhalo", "valo"] },
+            { cat: "intent", bn: "নতুন", en: "new", banglish: "notun", aliases: ["নতুন", "সর্বশেষ", "new", "latest", "notun", "update", "আপডেট"] },
+            { cat: "intent", bn: "রিভিউ", en: "review", banglish: "review", aliases: ["রিভিউ", "review", "unboxing", "আনবক্সিং"] },
+            { cat: "intent", bn: "টিউটোরিয়াল", en: "tutorial", banglish: "tutorial", aliases: ["টিউটোরিয়াল", "টিউটোরিয়াল", "tutorial", "guide", "গাইড", "শিক্ষা", "shikkha", "sikha"] },
+            { cat: "intent", bn: "টিপস ও ট্রিকস", en: "tips and tricks", banglish: "tips and tricks", aliases: ["টিপস", "ট্রিকস", "উপায়", "tips", "tricks", "upay", "niyom", "নিয়ম"] },
+            { cat: "intent", bn: "দাম", en: "price", banglish: "dam", aliases: ["দাম", "কত টাকা", "price", "cost", "dam", "koto"] },
+            { cat: "intent", bn: "বনাম", en: "vs", banglish: "bonam", aliases: ["বনাম", "vs", "versus", "bonam", "banam"] },
+            { cat: "intent", bn: "লাইভ", en: "live", banglish: "live", aliases: ["লাইভ", "সরাসরি", "live", "sorasori", "streaming"] },
+            { cat: "intent", bn: "ডাউনলোড", en: "download", banglish: "download", aliases: ["ডাউনলোড", "নামানো", "download", "namano"] },
+
+            // Countries & Regions
+            { cat: "news", bn: "বাংলাদেশ", en: "bangladesh", banglish: "bangladesh", aliases: ["বাংলাদেশ", "বাংলাদেশের", "bangladesh", "bd", "bangladeshi", "বাংলা"] },
+            { cat: "news", bn: "ঢাকা", en: "dhaka", banglish: "dhaka", aliases: ["ঢাকা", "dhaka"] },
+            { cat: "news", bn: "ভারত", en: "india", banglish: "bharat", aliases: ["ভারত", "ইন্ডিয়া", "india", "indian", "bharat"] },
+            { cat: "news", bn: "পাকিস্তান", en: "pakistan", banglish: "pakistan", aliases: ["পাকিস্তান", "pakistan"] },
+            { cat: "sports", bn: "আর্জেন্টিনা", en: "argentina", banglish: "argentina", aliases: ["আর্জেন্টিনা", "argentina"] },
+            { cat: "sports", bn: "ব্রাজিল", en: "brazil", banglish: "brazil", aliases: ["ব্রাজিল", "brazil", "brasil"] },
+
+            // Football & Sports
+            { cat: "sports", bn: "ফুটবল", en: "football", banglish: "football", aliases: ["ফুটবল", "football", "soccer"] },
+            { cat: "sports", bn: "ক্রিকেট", en: "cricket", banglish: "cricket", aliases: ["ক্রিকেট", "cricket"] },
+            { cat: "sports", bn: "মেসি", en: "lionel messi", banglish: "messi", aliases: ["মেসি", "লিওনেল মেসি", "messi", "lionel messi", "leo messi"] },
+            { cat: "sports", bn: "রোনালদো", en: "cristiano ronaldo", banglish: "ronaldo", aliases: ["রোনালদো", "ক্রিশ্চিয়ানো রোনালদো", "ronaldo", "cristiano ronaldo", "cr7"] },
+            { cat: "sports", bn: "নেইমার", en: "neymar jr", banglish: "neymar", aliases: ["নেইমার", "neymar", "neymar jr"] },
+            { cat: "sports", bn: "এমবাপ্পে", en: "kylian mbappe", banglish: "mbappe", aliases: ["এমবাপ্পে", "mbappe", "kylian mbappe"] },
+            { cat: "sports", bn: "হালান্ড", en: "erling haaland", banglish: "haaland", aliases: ["হালান্ড", "haaland", "erling haaland"] },
+            { cat: "sports", bn: "সাকিব আল হাসান", en: "shakib al hasan", banglish: "shakib al hasan", aliases: ["সাকিব", "সাকিব আল হাসান", "shakib", "shakib al hasan"] },
+            { cat: "sports", bn: "তামিম ইকবাল", en: "tamim iqbal", banglish: "tamim iqbal", aliases: ["তামিম", "তামিম ইকবাল", "tamim", "tamim iqbal"] },
+            { cat: "sports", bn: "রিয়াল মাদ্রিদ", en: "real madrid", banglish: "real madrid", aliases: ["রিয়াল মাদ্রিদ", "রিয়াল মাদ্রিদ", "real madrid", "madrid"] },
+            { cat: "sports", bn: "বার্সেলোনা", en: "fc barcelona", banglish: "barcelona", aliases: ["বার্সেলোনা", "বার্সা", "barcelona", "barca"] },
+            { cat: "sports", bn: "ম্যানচেস্টার ইউনাইটেড", en: "manchester united", banglish: "man united", aliases: ["ম্যানচেস্টার ইউনাইটেড", "manchester united", "man united"] },
+            { cat: "sports", bn: "লিভারপুল", en: "liverpool", banglish: "liverpool", aliases: ["লিভারপুল", "liverpool"] },
+            { cat: "sports", bn: "বিশ্বকাপ", en: "world cup", banglish: "world cup", aliases: ["বিশ্বকাপ", "world cup", "fifa world cup", "বিশ্বকাপ ফুটবল"] },
+            { cat: "sports", bn: "চ্যাম্পিয়ন্স লিগ", en: "champions league", banglish: "champions league", aliases: ["চ্যাম্পিয়ন্স লিগ", "চ্যাম্পিয়ন্স লিগ", "champions league", "ucl"] },
+            { cat: "sports", bn: "গোল", en: "goals", banglish: "goal", aliases: ["গোল", "goal", "goals"] },
+            { cat: "sports", bn: "হাইলাইটস", en: "highlights", banglish: "highlights", aliases: ["হাইলাইটস", "highlights", "highlight"] },
+            { cat: "sports", bn: "খেলা", en: "match", banglish: "khela", aliases: ["খেলা", "ম্যাচ", "khela", "match", "today match"] },
+            { cat: "sports", bn: "বিপিএল", en: "bpl", banglish: "bpl", aliases: ["বিপিএল", "bpl"] },
+            { cat: "sports", bn: "আইপিএল", en: "ipl", banglish: "ipl", aliases: ["আইপিএল", "ipl"] },
+
+            // Technology & Science
+            { cat: "tech", bn: "এআই", en: "artificial intelligence", banglish: "ai", aliases: ["এআই", "কৃত্রিম বুদ্ধিমত্তা", "ai", "artificial intelligence"] },
+            { cat: "tech", bn: "চ্যাটজিপিটি", en: "chatgpt", banglish: "chatgpt", aliases: ["চ্যাটজিপিটি", "chatgpt", "openai"] },
+            { cat: "tech", bn: "ইউটিউব", en: "youtube", banglish: "youtube", aliases: ["ইউটিউব", "youtube", "yt"] },
+            { cat: "tech", bn: "ইউটিউব চ্যানেল", en: "youtube channel", banglish: "youtube channel", aliases: ["ইউটিউব চ্যানেল", "youtube channel"] },
+            { cat: "tech", bn: "ফেসবুক", en: "facebook", banglish: "facebook", aliases: ["ফেসবুক", "facebook", "fb"] },
+            { cat: "tech", bn: "টিকটক", en: "tiktok", banglish: "tiktok", aliases: ["টিকটক", "tiktok"] },
+            { cat: "tech", bn: "ইনস্টাগ্রাম", en: "instagram", banglish: "instagram", aliases: ["ইনস্টাগ্রাম", "ইন্সটাগ্রাম", "instagram", "insta"] },
+            { cat: "tech", bn: "হোয়াটসঅ্যাপ", en: "whatsapp", banglish: "whatsapp", aliases: ["হোয়াটসঅ্যাপ", "whatsapp"] },
+            { cat: "tech", bn: "স্মার্টফোন", en: "smartphone", banglish: "smartphone", aliases: ["স্মার্টফোন", "মোবাইল", "ফোন", "smartphone", "mobile", "phone"] },
+            { cat: "tech", bn: "আইফোন", en: "iphone", banglish: "iphone", aliases: ["আইফোন", "iphone", "apple"] },
+            { cat: "tech", bn: "স্যামসাং", en: "samsung", banglish: "samsung", aliases: ["স্যামসাং", "samsung"] },
+            { cat: "tech", bn: "শাওমি", en: "xiaomi", banglish: "xiaomi", aliases: ["শাওমি", "xiaomi", "redmi", "poco"] },
+            { cat: "tech", bn: "ল্যাপটপ", en: "laptop", banglish: "laptop", aliases: ["ল্যাপটপ", "laptop"] },
+            { cat: "tech", bn: "কম্পিউটার", en: "computer", banglish: "computer", aliases: ["কম্পিউটার", "পিসি", "computer", "pc"] },
+            { cat: "tech", bn: "ওয়েবসাইট", en: "website", banglish: "website", aliases: ["ওয়েবসাইট", "ওয়েবসাইট", "website", "web"] },
+            { cat: "tech", bn: "ভিডিও এডিটিং", en: "video editing", banglish: "video editing", aliases: ["ভিডিও এডিটিং", "video editing", "video edit", "capcut", "ক্যাপকাট"] },
+            { cat: "tech", bn: "প্রযুক্তি", en: "technology", banglish: "projukti", aliases: ["প্রযুক্তি", "টেকনোলজি", "টেক", "technology", "tech", "projukti"] },
+            { cat: "tech", bn: "বিজ্ঞান", en: "science", banglish: "biggan", aliases: ["বিজ্ঞান", "সায়েন্স", "science", "biggan"] },
+            { cat: "tech", bn: "মহাকাশ", en: "space", banglish: "mohakash", aliases: ["মহাকাশ", "নাসা", "space", "nasa", "mohakash"] },
+            { cat: "tech", bn: "ইন্টারনেট", en: "internet", banglish: "internet", aliases: ["ইন্টারনেট", "ওয়াইফাই", "internet", "wifi"] },
+            { cat: "tech", bn: "কোডিং", en: "coding", banglish: "coding", aliases: ["কোডিং", "প্রোগ্রামিং", "coding", "programming", "python", "javascript", "html"] },
+            { cat: "tech", bn: "এসইও", en: "seo", banglish: "seo", aliases: ["এসইও", "seo", "youtube seo"] },
+
+            // Business, Finance & Income
+            { cat: "business", bn: "অনলাইন ইনকাম", en: "online income", banglish: "online income", aliases: ["অনলাইন ইনকাম", "অনলাইন আয়", "online income", "make money online", "earn money", "টাকা আয়", "taka ay"] },
+            { cat: "business", bn: "ফ্রিল্যান্সিং", en: "freelancing", banglish: "freelancing", aliases: ["ফ্রিল্যান্সিং", "ফ্রিল্যান্সার", "freelancing", "freelancer", "fiverr", "upwork"] },
+            { cat: "business", bn: "ব্যবসা", en: "business", banglish: "bebsha", aliases: ["ব্যবসা", "বিজনেস", "business", "bebsha", "startup"] },
+            { cat: "business", bn: "টাকা", en: "money", banglish: "taka", aliases: ["টাকা", "আয়", "money", "taka", "income", "ay"] },
+            { cat: "business", bn: "বিকাশ", en: "bkash", banglish: "bkash", aliases: ["বিকাশ", "bkash", "bikash", "নগদ", "nagad"] },
+
+            // Education & Career
+            { cat: "education", bn: "শিক্ষা", en: "education", banglish: "shikkha", aliases: ["শিক্ষা", "পড়াশোনা", "education", "study", "shikkha", "porashona"] },
+            { cat: "education", bn: "ইংরেজি", en: "english", banglish: "english", aliases: ["ইংরেজি", "স্পোকেন ইংলিশ", "english", "spoken english", "ingreji"] },
+            { cat: "education", bn: "পরীক্ষা", en: "exam", banglish: "porikkha", aliases: ["পরীক্ষা", "রেজাল্ট", "exam", "result", "porikkha", "ssc", "hsc", "bcs"] },
+            { cat: "education", bn: "চাকরি", en: "job", banglish: "chakri", aliases: ["চাকরি", "নিয়োগ", "job", "career", "chakri", "job circular"] },
+
+            // Entertainment, Culture & Islamic
+            { cat: "entertainment", bn: "নাটক", en: "bangla natok", banglish: "natok", aliases: ["নাটক", "natok", "drama", "bangla natok"] },
+            { cat: "entertainment", bn: "সিনেমা", en: "movie", banglish: "cinema", aliases: ["সিনেমা", "মুভি", "movie", "film", "cinema"] },
+            { cat: "entertainment", bn: "গান", en: "song", banglish: "gaan", aliases: ["গান", "মিউজিক", "song", "music", "gaan", "gan"] },
+            { cat: "entertainment", bn: "ভ্লগ", en: "vlog", banglish: "vlog", aliases: ["ভ্লগ", "ব্লগ", "vlog", "daily vlog"] },
+            { cat: "entertainment", bn: "কমেডি", en: "comedy", banglish: "comedy", aliases: ["কমেডি", "হাসির", "মজার", "comedy", "funny", "hasir"] },
+            { cat: "entertainment", bn: "ওয়াজ", en: "islamic waz", banglish: "waz", aliases: ["ওয়াজ", "ওয়াজ", "ইসলামিক", "ইসলাম", "waz", "islamic", "islamic lecture", "নামাজ", "namaz", "dua", "দোয়া"] },
+
+            // Gaming
+            { cat: "gaming", bn: "গেমিং", en: "gaming", banglish: "gaming", aliases: ["গেমিং", "গেম", "গেমপ্লে", "gaming", "game", "gameplay"] },
+            { cat: "gaming", bn: "ফ্রি ফায়ার", en: "free fire", banglish: "free fire", aliases: ["ফ্রি ফায়ার", "ফ্রি ফায়ার", "free fire", "ff"] },
+            { cat: "gaming", bn: "পাবজি", en: "pubg mobile", banglish: "pubg", aliases: ["পাবজি", "pubg", "bgmi"] },
+
+            // News & Lifestyle / Cooking / Travel
+            { cat: "news", bn: "খবর", en: "news", banglish: "khobor", aliases: ["খবর", "সংবাদ", "নিউজ", "news", "khobor", "breaking news", "আজকের খবর", "ajker khobor"] },
+            { cat: "lifestyle", bn: "রান্না", en: "cooking", banglish: "ranna", aliases: ["রান্না", "রেসিপি", "ranna", "recipe", "cooking"] },
+            { cat: "lifestyle", bn: "বিরিয়ানি", en: "biryani", banglish: "biryani", aliases: ["বিরিয়ানি", "বিরিয়ানি", "কাচ্চি", "biryani", "kacchi", "kacchi biryani"] },
+            { cat: "lifestyle", bn: "ভ্রমণ", en: "travel", banglish: "vromon", aliases: ["ভ্রমণ", "ভ্রমন", "ট্রাভেল", "travel", "tour", "vromon"] },
+            { cat: "lifestyle", bn: "স্বাস্থ্য", en: "health", banglish: "sastho", aliases: ["স্বাস্থ্য", "ফিটনেস", "health", "fitness", "sastho"] },
+            { cat: "tech", bn: "খুলবেন", en: "create", banglish: "khulben", aliases: ["খুলবেন", "খুলবো", "তৈরি", "তৈরি করবেন", "বানাবো", "create", "make", "open", "setup", "khulben", "khulbo", "banabo", "toiri"] }
         ];
 
-        const viralTags = ['Viral', 'Trending', 'Bangladesh', '2026', 'New', 'Video', 'Popular', 'Best', 'Review', 'Bangla'];
+        // Category-specific relevant search modifiers (strictly tied to detected context, never random)
+        const categoryTemplates = {
+            sports: {
+                bn: ["ফুটবল হাইলাইটস", "খেলার খবর", "ম্যাচ বিশ্লেষণ"],
+                en: ["match highlights", "football analysis", "sports update"],
+                banglish: ["khela highlights", "khelar khobor", "match review"]
+            },
+            tech: {
+                bn: ["টেক রিভিউ বাংলা", "প্রযুক্তি টিপস", "বাংলা টিউটোরিয়াল"],
+                en: ["tech tutorial", "step by step guide", "tech bangla"],
+                banglish: ["bangla tech tutorial", "tech review bangla", "tech tips"]
+            },
+            news: {
+                bn: ["আজকের খবর", "সর্বশেষ সংবাদ", "বাংলাদেশ নিউজ"],
+                en: ["latest news", "bangladesh news today", "current affairs"],
+                banglish: ["ajker khobor", "bangladesh news", "sorbosesh khobor"]
+            },
+            education: {
+                bn: ["সহজ গাইড", "শিক্ষামূলক ভিডিও", "পরীক্ষার প্রস্তুতি"],
+                en: ["study guide", "learning tutorial", "education bangla"],
+                banglish: ["shohoj niyom", "bangla tutorial", "study tips"]
+            },
+            entertainment: {
+                bn: ["বাংলা বিনোদন", "নতুন ভিডিও", "জনপ্রিয় কনটেন্ট"],
+                en: ["bangla entertainment", "new bangla video", "trending bangla"],
+                banglish: ["bangla entertainment", "notun video", "bangla video"]
+            },
+            gaming: {
+                bn: ["বাংলা গেমপ্লে", "গেমিং টিপস", "প্রো গেমপ্লে"],
+                en: ["gaming highlights", "pro gameplay", "bangla gaming"],
+                banglish: ["bangla gameplay", "gaming bangla", "pro tips"]
+            },
+            business: {
+                bn: ["আয়ের উপায়", "ব্যবসার আইডিয়া", "অনলাইন গাইড"],
+                en: ["business ideas", "income guide", "online earning bangla"],
+                banglish: ["online income bangla", "taka income upay", "bebshar idea"]
+            },
+            lifestyle: {
+                bn: ["সহজ রেসিপি", "বাংলা লাইফস্টাইল", "ঘরোয়া টিপস"],
+                en: ["easy tutorial", "bangladeshi lifestyle", "step by step"],
+                banglish: ["bangla recipe", "shohoj upay", "lifestyle bangla"]
+            },
+            general: {
+                bn: ["বাংলা ভিডিও", "বিস্তারিত আলোচনা"],
+                en: ["bangla video", "explained in bangla"],
+                banglish: ["bangla video", "bistarito"]
+            }
+        };
 
-        let generatedTags = [];
-        let selectedIndices = new Set();
+        // Phonetic Bengali -> Banglish Transliteration Engine
+        const bnConsonants = {
+            'ক':'k','খ':'kh','গ':'g','ঘ':'gh','ঙ':'ng',
+            'চ':'ch','ছ':'chh','জ':'j','ঝ':'jh','ঞ':'n',
+            'ট':'t','ঠ':'th','ড':'d','ঢ':'dh','ণ':'n',
+            'ত':'t','থ':'th','দ':'d','ধ':'dh','ন':'n',
+            'প':'p','ফ':'f','ব':'b','ভ':'bh','ম':'m',
+            'য':'j','র':'r','ল':'l','শ':'sh','ষ':'sh','স':'s','হ':'h',
+            'ড়':'r','ঢ়':'rh','য়':'y','ৎ':'t','ং':'ng','ঃ':'h','ঁ':''
+        };
+        const bnVowels = {
+            'অ':'o','আ':'a','ই':'i','ঈ':'i','উ':'u','ঊ':'u','ঋ':'ri','এ':'e','ঐ':'oi','ও':'o','ঔ':'ou'
+        };
+        const bnKars = {
+            'া':'a','ি':'i','ী':'i','ু':'u','ূ':'u','ৃ':'ri','ে':'e','ৈ':'oi','ো':'o','ৌ':'ou','্':''
+        };
+        const bnDigits = {'০':'0','১':'1','২':'2','৩':'3','৪':'4','৫':'5','৬':'6','৭':'7','৮':'8','৯':'9'};
 
-        function processTags() {
-            const input = document.getElementById('keywordInput').value.trim();
+        function transliterateBanglaToBanglish(word) {
+            if (!/[\u0980-\u09FF]/.test(word)) return word;
+            let out = '';
+            const chars = Array.from(word);
+            for (let i = 0; i < chars.length; i++) {
+                const ch = chars[i];
+                const next = chars[i + 1];
+                if (bnDigits[ch] !== undefined) { out += bnDigits[ch]; continue; }
+                if (bnVowels[ch] !== undefined) { out += bnVowels[ch]; continue; }
+                if (bnKars[ch] !== undefined) { out += bnKars[ch]; continue; }
+                if (bnConsonants[ch] !== undefined) {
+                    out += bnConsonants[ch];
+                    // Inherent 'o' if followed by another consonant (not hasant/kar)
+                    if (next && bnConsonants[next] !== undefined && i < chars.length - 1) {
+                        out += 'o';
+                    }
+                    continue;
+                }
+                if (/[a-zA-Z0-9]/.test(ch)) out += ch;
+            }
+            return out.replace(/jj/g, 'j').replace(/oo+/g, 'o').trim();
+        }
+
+        // State for 3 multilingual sections + UI compatibility
+        let tagData = {
+            langLabel: '',
+            categoryLabel: '',
+            bn: [],
+            en: [],
+            banglish: [],
+            combined: []
+        };
+        let regenerateVariant = 0;
+        let selectedTagsSet = new Set();
+
+        function detectInputLanguage(text) {
+            const hasBangla = /[\u0980-\u09FF]/.test(text);
+            const hasLatin = /[a-zA-Z]/.test(text);
+            const hasOtherScript = /[^\u0980-\u09FFa-zA-Z0-9\s.,?!|:\-'"()@#&/+]/.test(text);
+
+            if (hasBangla && hasLatin) return "Mixed (বাংলা + English)";
+            if (hasBangla) return "বাংলা (Bengali)";
+            if (hasOtherScript && !hasLatin) return "International";
+
+            const tokens = text.toLowerCase().split(/\s+/);
+            let banglishHits = 0;
+            tokens.forEach(t => {
+                const clean = t.replace(/[^a-z]/g, '');
+                if (banglishMarkerWords.has(clean)) banglishHits++;
+            });
+            if (banglishHits > 0) return "Banglish";
+            return "English";
+        }
+
+        function cleanText(text) {
+            return text
+                .replace(/[।?!,|:\-"'()\[\]{}]/g, ' ')
+                .replace(/\s+/g, ' ')
+                .trim();
+        }
+
+        function dedupeTags(arr) {
+            const seen = new Set();
+            const result = [];
+            for (const item of arr) {
+                const normalized = item.trim().replace(/\s+/g, ' ');
+                const key = normalized.toLowerCase();
+                if (normalized.length > 1 && !seen.has(key)) {
+                    seen.add(key);
+                    result.push(normalized);
+                }
+            }
+            return result;
+        }
+
+        function processTags(isRegenerate = false) {
+            const inputRaw = document.getElementById('keywordInput').value.trim();
             const genBtn = document.getElementById('genBtn');
             const tagsContainer = document.getElementById('tagsContainer');
 
-            if (!input) {
-                alert("দয়া করে কিছু লিখুন!");
+            if (!inputRaw) {
+                alert("দয়া করে একটি ভিডিওর টাইটেল বা টপিক লিখুন!");
+                document.getElementById('keywordInput').focus();
                 return;
             }
 
+            if (!isRegenerate) regenerateVariant = 0;
+            selectedTagsSet.clear();
+
             genBtn.innerHTML = '<span class="btn-text">⚡ জেনারেট হচ্ছে...</span>';
             genBtn.disabled = true;
-            selectedIndices.clear(); // Reset Selection
-
-            // Add loading animation
             genBtn.style.background = 'linear-gradient(135deg, #666 0%, #999 100%)';
-            
+
             setTimeout(() => {
-                let tagsSet = new Set();
-
-                // Step 1: Clean and Tokenize Input
-                const words = input.toLowerCase()
-                    .replace(/[।?!,.]/g, '') // বিরাম চিহ্ন রিমুভ
-                    .split(/\s+/); 
-
-                // Step 2: Extract Key Words (Stop words filter)
-                words.forEach(word => {
-                    if (!stopWords.includes(word) && word.length > 1) {
-                        tagsSet.add(word); // মেইন কিওয়ার্ড (যেমন: এআই, বাংলাদেশ)
-                    }
-                });
-
-                // Step 3: Add Viral Tags to fill up
-                let i = 0;
-                while (tagsSet.size < 12 && i < viralTags.length) {
-                    tagsSet.add(viralTags[i]);
-                    i++;
+                try {
+                    const result = generateMultilingualTags(inputRaw, regenerateVariant);
+                    tagData = result;
+                    updateTagDisplay();
+                    tagsContainer.style.display = 'block';
+                    tagsContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                } catch (err) {
+                    console.error("Tag generation error:", err);
+                    alert("ট্যাগ তৈরি করতে সমস্যা হয়েছে। আবার চেষ্টা করুন।");
+                } finally {
+                    genBtn.innerHTML = '<span class="btn-text">🚀 জেনারেট করুন</span>';
+                    genBtn.disabled = false;
+                    genBtn.style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
                 }
-
-                generatedTags = Array.from(tagsSet);
-                
-                updateTagDisplay();
-                tagsContainer.style.display = 'block';
-                tagsContainer.scrollIntoView({ behavior: 'smooth' });
-                genBtn.innerHTML = '<span class="btn-text">🚀 জেনারেট করুন</span>';
-                genBtn.disabled = false;
-                genBtn.style.background = 'linear-gradient(135deg, #6a11cb 0%, #2575fc 100%)';
-
-            }, 500);
+            }, 350);
         }
 
-        function updateTagDisplay() {
-            const tagsGrid = document.getElementById('tagsGrid');
-            const isHashtag = document.querySelector('input[name="tagType"]:checked').value === 'hashtag';
-            
-            tagsGrid.innerHTML = '';
+        function regenerateTags() {
+            regenerateVariant = (regenerateVariant + 1) % 3;
+            processTags(true);
+        }
 
-            generatedTags.forEach((tag, index) => {
-                let displayText = '';
-                
-                if (isHashtag) {
-                    const cleanTag = tag.replace(/\s+/g, ''); // স্পেস রিমুভ
-                    displayText = `#${cleanTag}`;
+        function generateMultilingualTags(title, variant) {
+            const cleaned = cleanText(title);
+            const lowerTitle = cleaned.toLowerCase();
+            const langLabel = detectInputLanguage(title);
+
+            // Extract years/numbers if present (e.g. 2026)
+            const yearMatch = cleaned.match(/\b(20\d{2}|২০\d{2})\b/);
+            const yearEn = yearMatch ? yearMatch[0].replace(/[০-৯]/g, d => '০১২৩৪৫৬৭৮৯'.indexOf(d)) : '';
+            const yearBn = yearEn ? yearEn.replace(/[0-9]/g, d => '০১২৩৪৫৬৭৮৯'[d]) : '';
+
+            // 1. Semantic Concept & Entity Matching
+            const matchedConcepts = [];
+            const categoryScores = {};
+            knowledgeBase.forEach(concept => {
+                for (const alias of concept.aliases) {
+                    const escaped = alias.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+                    // Match boundary for latin, substring/space boundary for Bangla
+                    const isLatinAlias = /^[a-z0-9\s]+$/i.test(alias);
+                    const regex = isLatinAlias
+                        ? new RegExp(`(^|\\s)${escaped}(\\s|$)`, 'i')
+                        : new RegExp(escaped, 'i');
+                    if (regex.test(lowerTitle)) {
+                        matchedConcepts.push(concept);
+                        if (concept.cat !== "intent") {
+                            categoryScores[concept.cat] = (categoryScores[concept.cat] || 0) + 1;
+                        }
+                        break;
+                    }
+                }
+            });
+
+            // Determine primary category
+            let detectedCategory = "general";
+            let topScore = 0;
+            for (const [cat, score] of Object.entries(categoryScores)) {
+                if (score > topScore) {
+                    topScore = score;
+                    detectedCategory = cat;
+                }
+            }
+
+            // Extract core meaningful tokens not covered by stopWords
+            const rawTokens = cleaned.split(/\s+/).filter(w => w.length > 1 && !stopWords.has(w.toLowerCase()));
+            const bnTokens = [];
+            const enOrBanglishTokens = [];
+
+            rawTokens.forEach(tok => {
+                if (/[\u0980-\u09FF]/.test(tok)) {
+                    bnTokens.push(tok);
                 } else {
-                    displayText = tag;
+                    enOrBanglishTokens.push(tok);
+                }
+            });
+
+            const intents = matchedConcepts.filter(c => c.cat === "intent");
+            const entities = matchedConcepts.filter(c => c.cat !== "intent");
+
+            // Build primary, secondary, and long-tail tags per language
+            let bnTags = [];
+            let enTags = [];
+            let banglishTags = [];
+
+            // Include original phrase cleanly in its appropriate bucket
+            if (/[\u0980-\u09FF]/.test(cleaned) && !/[a-zA-Z]/.test(cleaned)) {
+                bnTags.push(cleaned);
+            } else if (/^[a-zA-Z0-9\s]+$/.test(cleaned)) {
+                if (langLabel === "Banglish") banglishTags.push(cleaned.toLowerCase());
+                else enTags.push(cleaned.toLowerCase());
+            } else {
+                // Mixed title: keep full cleaned title as high-intent tag in Banglish/English and Bangla
+                banglishTags.push(rawTokens.map(t => transliterateBanglaToBanglish(t)).join(' ').toLowerCase());
+                if (bnTokens.length > 0) bnTags.push(bnTokens.join(' '));
+            }
+
+            // Build combined primary concepts across all 3 languages
+            const entityBn = entities.map(e => e.bn);
+            const entityEn = entities.map(e => e.en);
+            const entityBanglish = entities.map(e => e.banglish);
+
+            const intentBn = intents.map(i => i.bn);
+            const intentEn = intents.map(i => i.en);
+            const intentBanglish = intents.map(i => i.banglish);
+
+            // Long-tail combinations from detected entities + intents
+            if (entityBn.length >= 2) {
+                if (intentBn.includes("বনাম")) {
+                    bnTags.push(`${entityBn[0]} বনাম ${entityBn[1]}`);
+                    enTags.push(`${entityEn[0]} vs ${entityEn[1]}`);
+                    banglishTags.push(`${entityBanglish[0]} bonam ${entityBanglish[1]}`, `${entityBanglish[0]} vs ${entityBanglish[1]}`);
+                } else {
+                    bnTags.push(`${entityBn[0]} ${entityBn[1]}`);
+                    enTags.push(`${entityEn[0]} ${entityEn[1]}`);
+                    banglishTags.push(`${entityBanglish[0]} ${entityBanglish[1]}`);
+                }
+            }
+
+            // Intent + Entity natural queries
+            if (entities.length > 0 && intents.length > 0) {
+                const mainBn = entityBn[0];
+                const mainEn = entityEn[0];
+                const mainBl = entityBanglish[0];
+                const actBn = intentBn[0];
+                const actEn = intentEn[0];
+                const actBl = intentBanglish[0];
+
+                bnTags.push(`${actBn} ${mainBn}`, `${mainBn} ${actBn}`);
+                enTags.push(`${actEn} ${mainEn}`, `${mainEn} ${actEn}`);
+                banglishTags.push(`${actBl} ${mainBl}`, `${mainBl} ${actBl}`);
+            }
+
+            // Individual Entities
+            entityBn.forEach(t => bnTags.push(t));
+            entityEn.forEach(t => enTags.push(t));
+            entityBanglish.forEach(t => banglishTags.push(t));
+
+            // Add unmapped raw tokens + transliterations for 100% topic coverage
+            bnTokens.forEach(tok => {
+                bnTags.push(tok);
+                const tr = transliterateBanglaToBanglish(tok).toLowerCase();
+                if (tr.length > 1) banglishTags.push(tr);
+            });
+
+            enOrBanglishTokens.forEach(tok => {
+                const low = tok.toLowerCase();
+                if (banglishMarkerWords.has(low)) {
+                    banglishTags.push(low);
+                } else {
+                    enTags.push(low);
+                    banglishTags.push(low);
+                }
+            });
+
+            // Year-enhanced long-tail queries (only if user mentioned a year, or variant adds contextual year)
+            const activeYearEn = yearEn || (variant === 1 ? "2026" : "");
+            const activeYearBn = yearBn || (variant === 1 ? "২০২৬" : "");
+
+            if (entityBn.length > 0) {
+                const primaryBn = entityBn[0];
+                const primaryEn = entityEn[0];
+                const primaryBl = entityBanglish[0];
+
+                if (variant === 0) {
+                    bnTags.push(`${primaryBn} বাংলা`, `${primaryBn} সম্পর্কে বিস্তারিত`);
+                    enTags.push(`${primaryEn} explained`, `${primaryEn} bangla`);
+                    banglishTags.push(`${primaryBl} bangla`, `${primaryBl} bistarito`);
+                } else if (variant === 1) {
+                    bnTags.push(`${primaryBn} আপডেট ${activeYearBn}`.trim(), `${primaryBn} গাইড`);
+                    enTags.push(`${primaryEn} update ${activeYearEn}`.trim(), `${primaryEn} guide`);
+                    banglishTags.push(`${primaryBl} notun update ${activeYearEn}`.trim(), `${primaryBl} shohoj guide`);
+                } else {
+                    bnTags.push(`${primaryBn} টিপস`, `${primaryBn} রিভিউ বাংলা`);
+                    enTags.push(`${primaryEn} tips`, `${primaryEn} full video`);
+                    banglishTags.push(`${primaryBl} tips bangla`, `${primaryBl} puro video`);
+                }
+            } else if (rawTokens.length > 0) {
+                const coreBn = bnTokens.join(' ') || rawTokens.join(' ');
+                const coreBl = rawTokens.map(t => transliterateBanglaToBanglish(t)).join(' ').toLowerCase();
+                const coreEn = enOrBanglishTokens.join(' ') || coreBl;
+
+                bnTags.push(`${coreBn} বাংলা`, `${coreBn} টিউটোরিয়াল`, `${coreBn} বিস্তারিত`);
+                enTags.push(`${coreEn} tutorial`, `${coreEn} guide`, `${coreEn} bangla`);
+                banglishTags.push(`${coreBl} bangla`, `${coreBl} kivabe korbo`, `${coreBl} video`);
+            }
+
+            // Add category-relevant contextual tags (strictly matching detected category)
+            const catExtras = categoryTemplates[detectedCategory] || categoryTemplates.general;
+            bnTags.push(...catExtras.bn);
+            enTags.push(...catExtras.en);
+            banglishTags.push(...catExtras.banglish);
+
+            // Clean, deduplicate & limit each section to top 10 high-relevance tags
+            bnTags = dedupeTags(bnTags).slice(0, 10);
+            enTags = dedupeTags(enTags).slice(0, 10);
+            banglishTags = dedupeTags(banglishTags).slice(0, 10);
+
+            // Interleave priority tags across all 3 languages for balanced Combined Tags
+            const prioritized = [];
+            const maxLen = Math.max(bnTags.length, enTags.length, banglishTags.length);
+            for (let i = 0; i < maxLen; i++) {
+                if (enTags[i]) prioritized.push(enTags[i]);
+                if (bnTags[i]) prioritized.push(bnTags[i]);
+                if (banglishTags[i]) prioritized.push(banglishTags[i]);
+            }
+            const combinedUnique = dedupeTags(prioritized);
+
+            const catNames = {
+                sports: "Football & Sports",
+                tech: "Technology & Science",
+                news: "News & Current Affairs",
+                education: "Education & Career",
+                entertainment: "Entertainment & Culture",
+                gaming: "Gaming",
+                business: "Business & Finance",
+                lifestyle: "Lifestyle & Food",
+                general: "General Content"
+            };
+
+            return {
+                langLabel,
+                categoryLabel: catNames[detectedCategory] || "General Content",
+                bn: bnTags,
+                en: enTags,
+                banglish: banglishTags,
+                combined: combinedUnique
+            };
+        }
+
+        function formatTag(tag, isHashtag) {
+            if (isHashtag) {
+                return `#${tag.replace(/\s+/g, '')}`;
+            }
+            return tag;
+        }
+
+        // Enforce strict <= 500 chars limit for YouTube Combined Tags
+        function getCombinedStringWithinLimit(tags, isHashtag, maxChars = 500) {
+            const sep = isHashtag ? ' ' : ', ';
+            const included = [];
+            let currentStr = '';
+
+            for (const raw of tags) {
+                const formatted = formatTag(raw, isHashtag);
+                const candidate = included.length === 0 ? formatted : currentStr + sep + formatted;
+                if (candidate.length <= maxChars) {
+                    included.push(formatted);
+                    currentStr = candidate;
+                }
+            }
+            return { text: currentStr, count: included.length };
+        }
+
+        function renderSectionGrid(gridId, tags, isHashtag) {
+            const grid = document.getElementById(gridId);
+            grid.innerHTML = '';
+
+            tags.forEach((rawTag, index) => {
+                const displayText = formatTag(rawTag, isHashtag);
+                const tagEl = document.createElement('div');
+                tagEl.className = 'tag-item animate__animated animate__fadeIn';
+                tagEl.style.animationDelay = `${index * 0.03}s`;
+                tagEl.textContent = displayText;
+
+                if (selectedTagsSet.has(rawTag)) {
+                    tagEl.classList.add('selected');
                 }
 
-                const tagElement = document.createElement('div');
-                tagElement.className = 'tag-item';
-                tagElement.textContent = displayText;
-                
-                // Add animation class
-                tagElement.classList.add('animate__animated', 'animate__fadeIn');
-                tagElement.style.animationDelay = `${index * 0.05}s`;
-                
-                // সিলেকশন স্ট্যাটাস চেক
-                if (selectedIndices.has(index)) {
-                    tagElement.classList.add('selected');
-                }
-
-                // ক্লিক ইভেন্ট (সিলেকশন)
-                tagElement.onclick = function() {
+                tagEl.onclick = function () {
                     this.classList.add('animate__pulse');
-                    setTimeout(() => {
-                        this.classList.remove('animate__pulse');
-                    }, 300);
-                    
-                    if (selectedIndices.has(index)) {
-                        selectedIndices.delete(index);
+                    setTimeout(() => this.classList.remove('animate__pulse'), 300);
+
+                    if (selectedTagsSet.has(rawTag)) {
+                        selectedTagsSet.delete(rawTag);
                         this.classList.remove('selected');
                     } else {
-                        selectedIndices.add(index);
+                        selectedTagsSet.add(rawTag);
                         this.classList.add('selected');
                     }
                 };
-                
-                tagsGrid.appendChild(tagElement);
+
+                grid.appendChild(tagEl);
+            });
+        }
+
+        function updateTagDisplay() {
+            if (!tagData.combined || tagData.combined.length === 0) return;
+
+            const isHashtag = document.querySelector('input[name="tagType"]:checked').value === 'hashtag';
+
+            // Meta info bar
+            document.getElementById('seoMetaBar').innerHTML = `
+                <span class="seo-meta-pill">🌐 Detected: ${tagData.langLabel}</span>
+                <span class="seo-meta-pill">🎯 Context: ${tagData.categoryLabel}</span>
+            `;
+
+            // Render 3 separate sections
+            renderSectionGrid('tagsGridBn', tagData.bn, isHashtag);
+            renderSectionGrid('tagsGridEn', tagData.en, isHashtag);
+            renderSectionGrid('tagsGridBanglish', tagData.banglish, isHashtag);
+
+            // Render Combined Tags (Strictly <= 500 chars)
+            const combinedRes = getCombinedStringWithinLimit(tagData.combined, isHashtag, 500);
+            document.getElementById('combinedTagsBox').textContent = combinedRes.text;
+            document.getElementById('combinedStatsTitle').textContent =
+                `Combined Tags (${combinedRes.count} tags | ${combinedRes.text.length}/500 chars)`;
+        }
+
+        function copySectionTags(sectionKey) {
+            const list = tagData[sectionKey] || [];
+            if (list.length === 0) return;
+
+            const isHashtag = document.querySelector('input[name="tagType"]:checked').value === 'hashtag';
+            const sep = isHashtag ? ' ' : ', ';
+            const finalString = list.map(t => formatTag(t, isHashtag)).join(sep);
+
+            const btnMap = { bn: 'copyBnBtn', en: 'copyEnBtn', banglish: 'copyBanglishBtn' };
+            copyToClipboard(finalString).then(() => {
+                flashButton(btnMap[sectionKey], `✅ ${list.length}টি কপি হয়েছে!`);
+            }).catch(() => {
+                fallbackCopyText(finalString, () => flashButton(btnMap[sectionKey], `✅ ${list.length}টি কপি হয়েছে!`));
+            });
+        }
+
+        function copyAllTags() {
+            const isHashtag = document.querySelector('input[name="tagType"]:checked').value === 'hashtag';
+            const combinedRes = getCombinedStringWithinLimit(tagData.combined, isHashtag, 500);
+            if (!combinedRes.text) return;
+
+            copyToClipboard(combinedRes.text).then(() => {
+                flashButton('copyAllBtn', `✅ ${combinedRes.count}টি ট্যাগ কপি হয়েছে!`);
+            }).catch(() => {
+                fallbackCopyText(combinedRes.text, () => flashButton('copyAllBtn', `✅ ${combinedRes.count}টি ট্যাগ কপি হয়েছে!`));
             });
         }
 
         function copySelectedTags() {
-            if (selectedIndices.size === 0) {
+            if (selectedTagsSet.size === 0) {
                 alert('দয়া করে অন্তত একটি ট্যাগ সিলেক্ট করুন!');
                 return;
             }
 
             const isHashtag = document.querySelector('input[name="tagType"]:checked').value === 'hashtag';
-            let finalString = '';
-            let count = 0;
+            const sep = isHashtag ? ' ' : ', ';
+            const selectedArr = Array.from(selectedTagsSet).map(t => formatTag(t, isHashtag));
+            const finalString = selectedArr.join(sep);
+            const count = selectedArr.length;
 
-            generatedTags.forEach((tag, index) => {
-                if (selectedIndices.has(index)) {
-                    if (isHashtag) {
-                        finalString += `#${tag.replace(/\s+/g, '')} `;
-                    } else {
-                        finalString += `${tag}, `;
-                    }
-                    count++;
-                }
-            });
-
-            finalString = finalString.replace(/, $/, "").trim();
-
-            // Use both modern and fallback clipboard methods
             copyToClipboard(finalString).then(() => {
                 showCopyFeedback(count);
             }).catch(err => {
                 console.error('Clipboard copy failed:', err);
-                // Fallback method
-                fallbackCopyText(finalString, count);
+                fallbackCopyText(finalString, () => showCopyFeedback(count));
             });
         }
 
         function copyToClipboard(text) {
-            // Modern clipboard API
             if (navigator.clipboard && window.isSecureContext) {
                 return navigator.clipboard.writeText(text);
             } else {
-                // Fallback for older browsers
-                return new Promise((resolve, reject) => {
-                    fallbackCopyText(text, () => resolve());
+                return new Promise((resolve) => {
+                    fallbackCopyText(text, resolve);
                 });
             }
         }
 
-        function fallbackCopyText(text, count) {
+        function fallbackCopyText(text, onSuccess) {
             const textArea = document.createElement('textarea');
             textArea.value = text;
             textArea.style.position = 'fixed';
@@ -956,11 +1596,11 @@
             document.body.appendChild(textArea);
             textArea.focus();
             textArea.select();
-            
+
             try {
                 const successful = document.execCommand('copy');
-                if (successful) {
-                    showCopyFeedback(count);
+                if (successful && typeof onSuccess === 'function') {
+                    onSuccess();
                 } else {
                     alert('ট্যাগ কপি করতে ব্যর্থ হয়েছে! ম্যানুয়ালি কপি করুন: ' + text);
                 }
@@ -968,23 +1608,36 @@
                 console.error('Fallback copy failed:', err);
                 alert('ট্যাগ কপি করতে ব্যর্থ হয়েছে! ম্যানুয়ালি কপি করুন: ' + text);
             }
-            
+
             document.body.removeChild(textArea);
+        }
+
+        function flashButton(btnId, tempText) {
+            const btn = document.getElementById(btnId);
+            if (!btn) return;
+            const originalText = btn.textContent;
+            btn.textContent = tempText;
+            setTimeout(() => { btn.textContent = originalText; }, 2000);
         }
 
         function showCopyFeedback(count) {
             const btn = document.getElementById('copyBtn');
             const originalText = btn.innerHTML;
             const originalBackground = btn.style.background;
-            
+
             btn.innerHTML = `<span class="btn-text">✅ ${count}টি ট্যাগ কপি হয়েছে!</span>`;
             btn.style.background = 'linear-gradient(135deg, #00b09b 0%, #96c93d 100%)';
-            
+
             setTimeout(() => {
                 btn.innerHTML = originalText;
                 btn.style.background = originalBackground;
             }, 2000);
         }
+
+        // Enter key support
+        document.getElementById('keywordInput').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') processTags();
+        });
     </script>
 
 </body>
