@@ -89,53 +89,6 @@
         .ticker-content:hover span { animation-play-state: paused; }
         @keyframes tickerScroll { 0% { transform: translate(0, 0); } 100% { transform: translate(-100%, 0); } }
 
-        /* ADSTERRA BANNER */
-        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
-
-        /* MAIN POPUP AD STYLES */
-        .popup-overlay {
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 9999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            backdrop-filter: blur(4px);
-        }
-        .popup-content {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            width: 350px; 
-            text-align: center;
-            position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            animation: popIn 0.4s ease;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            border: 4px solid #f0f2f5; 
-        }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .popup-close {
-            position: absolute;
-            top: -15px;
-            right: -15px;
-            background: red;
-            color: white;
-            border: 2px solid white;
-            width: 35px; height: 35px;
-            border-radius: 50%;
-            font-size: 20px;
-            line-height: 32px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
         /* BOTTOM LEFT NOTICE STYLE */
         .bottom-notice-card {
             position: fixed;
@@ -440,30 +393,6 @@
         </div>
     </div>
 
-    <!-- MAIN POP-UP AD -->
-    <div class="popup-overlay" id="popup-ad">
-        <div class="popup-content">
-            <button class="popup-close" onclick="closePopup()">✖</button>
-            <h3 class="popup-title">Special Offer!</h3>
-            <p class="popup-text">Check out our latest services and offers.</p>
-            
-            <!-- 👇 ADSTERRA 300x250 CODE HERE 👇 -->
-            <div class="ad-placeholder">
-                <script>
-                    atOptions = {
-                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
-            </div>
-            <!-- 👆 END AD CODE 👆 -->
-        </div>
-    </div>
-
     <!-- NEW: BOTTOM LEFT NOTICE BOX -->
     <div id="bottom-notice" class="bottom-notice-card">
         <div class="notice-header">
@@ -474,20 +403,6 @@
         <p class="notice-body" id="bottom-notice-text">
             <!-- Text will come from Firebase -->
         </p>
-    </div>
-
-    <!-- ADSTERRA BANNER -->
-    <div class="ad-banner-container">
-        <script>
-            atOptions = {
-                'key' : '913c56baf27591442617260739df7bf0',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
     </div>
 
     <!-- Slider -->
@@ -506,13 +421,6 @@
             <p>Loading videos...</p>
         </div>
     </div>
-
-    <!-- ADSTERRA NATIVE BANNER ADDED HERE -->
-    <div class="section-container" style="text-align:center; margin-top:20px;">
-        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
-        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
-    </div>
-    <!-- END NATIVE BANNER -->
 
     <!-- 3 Text Sections -->
     <div class="section-container">
@@ -806,45 +714,15 @@
             window.sliderInterval = setInterval(() => { moveSlide(1); }, 4000); 
         }
 
-        // --- POPUP AD LOGIC ---
+        // --- BOTTOM NOTICE DISPLAY ---
         window.addEventListener('load', function() {
-            setTimeout(function() {
-                if (!sessionStorage.getItem('popupClosed')) {
-                    document.getElementById('popup-ad').style.display = 'flex';
-                }
-            }, 2000);
-        });
-
-        function closePopup() {
-            // Close main popup
-            document.getElementById('popup-ad').style.display = 'none';
-            sessionStorage.setItem('popupClosed', 'true');
-
-            // Trigger Bottom Notice (After 1.5 seconds)
             setTimeout(() => {
                 const noticeText = document.getElementById('bottom-notice-text').innerText;
-                // Only show if there is text in the notice
                 if (noticeText && noticeText.trim() !== "") {
                     document.getElementById('bottom-notice').style.display = 'block';
                 }
-            }, 1500);
-        }
-    </script>
-
-    <!-- ADSTERRA POPUNDER AD -->
-    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
-
-    <!-- ADSTERRA SOCIAL BAR AD -->
-    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
-
-    <!-- ADSTERRA SMARTLINK INTEGRATION (Opens on First Click) -->
-    <script>
-        document.body.addEventListener('click', function() {
-            if(!sessionStorage.getItem('smartLinkShown')) {
-                window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank');
-                sessionStorage.setItem('smartLinkShown', 'true');
-            }
-        }, { once: true });
+            }, 2000);
+        });
     </script>
 
 </body>
