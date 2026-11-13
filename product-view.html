@@ -149,34 +149,7 @@
         .desc-box h3 { margin-bottom: 20px; color: var(--primary-color); font-size: 1.5rem; border-bottom: 2px solid var(--accent-orange); display: inline-block; padding-bottom: 5px; }
         .desc-text { white-space: pre-line; color: #333; font-size: 1.05rem; line-height: 1.8; }
 
-        /* NATIVE BANNER STYLES */
-        .native-banner-container {
-            text-align: center;
-            margin: 30px auto;
-            max-width: 1250px;
-            padding: 0 20px;
-            overflow: hidden;
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .native-banner-container > div {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .native-banner-container iframe {
-            max-width: 100%;
-            height: auto;
-            border: none;
-        }
-
         @media (max-width: 768px) {
-            .native-banner-container { padding: 0 15px; margin: 20px auto; }
             .product-view-grid { grid-template-columns: 1fr; gap: 30px; }
             .main-view-box { min-height: 300px; }
         }
@@ -210,14 +183,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ADSTERRA POPUP -->
-    <div style="display:none;">
-        <script>
-            atOptions = { 'key' : '08d5faeff146431c8017d7cfc9ab82b6', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
-        </script>
-        <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
-    </div>
 
     <header>
         <div class="header-left">
@@ -255,23 +220,9 @@
         </ul>
     </nav>
 
-    <!-- ADSTERRA BANNER -->
-    <div style="text-align: center; margin: 20px auto;">
-        <script>
-            atOptions = { 'key' : '913c56baf27591442617260739df7bf0', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
-    </div>
-
     <!-- PRODUCT DETAILS CONTAINER -->
     <div class="details-container" id="product-details-content">
         <p style="text-align:center; font-size:1.2rem;">Loading Product Details...</p>
-    </div>
-
-    <!-- NEW NATIVE BANNER (Added Here) - SAME STYLE AS STORE.HTML -->
-    <div class="native-banner-container">
-        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
-        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
     </div>
 
     <!-- DARK FOOTER -->
