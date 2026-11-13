@@ -91,7 +91,7 @@
         .container { width: 100%; max-width: 1250px; margin: 0 auto; padding: 0 20px; }
         
         /* BANNER STYLES */
-        .banner-slider-container { width: 100%; max-width: 1250px; margin: 15px auto 10px; overflow: hidden; border-radius: 10px; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
+        .banner-slider-container { width: 100%; max-width: 1250px; margin: 20px auto 10px; overflow: hidden; border-radius: 10px; position: relative; box-shadow: 0 5px 15px rgba(0,0,0,0.1); }
         .banner-slide { display: none; width: 100%; height: auto; }
         .banner-slide.active { display: block; animation: fade 1s; }
         .banner-slide img { width: 100%; height: auto; display: block; max-height: 400px; object-fit: cover; }
@@ -101,41 +101,6 @@
         .offer-card { border-radius: 10px; overflow: hidden; box-shadow: 0 4px 10px rgba(0,0,0,0.1); transition: 0.3s; cursor: pointer; }
         .offer-card:hover { transform: translateY(-5px); }
         .offer-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
-        
-        /* NATIVE BANNER STYLES */
-        .native-banner-container {
-            text-align: center;
-            margin: 30px auto;
-            max-width: 1250px;
-            padding: 0 20px;
-            overflow: hidden;
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .native-banner-container > div {
-            width: 100%;
-            height: auto;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .native-banner-container iframe {
-            max-width: 100%;
-            height: auto;
-            border: none;
-        }
-
-        @media (max-width: 768px) {
-            .native-banner-container {
-                padding: 0 15px;
-                margin: 20px auto;
-            }
-        }
         
         /* CATEGORY STYLES */
         .category-container { width: 100%; max-width: 1250px; margin: 10px auto; padding: 0 20px; text-align: center; }
@@ -194,8 +159,6 @@
         .btn-buy { flex: 1; text-align: center; padding: 8px; background: linear-gradient(45deg, #ff9800, #ff5722); color: white; border-radius: 5px; text-decoration: none; font-size: 0.85rem; font-weight: 700; transition: 0.3s; }
         .btn-buy:hover { box-shadow: 0 4px 10px rgba(255, 87, 34, 0.3); transform: translateY(-2px); }
 
-        .ad-banner-container { text-align: center; margin: 40px auto; padding: 10px; max-width: 100%; overflow: hidden; }
-
         @media (max-width: 768px) {
             .offer-banners-grid { grid-template-columns: 1fr; }
         }
@@ -229,14 +192,6 @@
     </style>
 </head>
 <body>
-
-    <!-- ADSTERRA POPUP -->
-    <div style="display:none;">
-        <script>
-            atOptions = { 'key' : '08d5faeff146431c8017d7cfc9ab82b6', 'format' : 'iframe', 'height' : 250, 'width' : 300, 'params' : {} };
-        </script>
-        <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
-    </div>
 
     <header>
         <div class="header-left">
@@ -281,14 +236,6 @@
         </ul>
     </nav>
 
-    <!-- ADSTERRA BANNER (Above Main Banner) -->
-    <div class="ad-banner-container">
-        <script>
-            atOptions = { 'key' : '913c56baf27591442617260739df7bf0', 'format' : 'iframe', 'height' : 90, 'width' : 728, 'params' : {} };
-        </script>
-        <script type="text/javascript" src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
-    </div>
-
     <!-- MAIN BANNERS (3 SLIDES) -->
     <div class="banner-slider-container" id="main-banner-slider">
         <!-- Banners inserted via JS -->
@@ -305,12 +252,6 @@
     <!-- 3 SMALL OFFER BANNERS -->
     <div class="offer-banners-grid" id="offer-banners">
         <!-- Offers inserted via JS -->
-    </div>
-
-    <!-- NEW NATIVE BANNER AD - MOVED HERE WITH FIXED STYLE -->
-    <div class="native-banner-container">
-        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
-        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
     </div>
 
     <!-- Products Section -->
