@@ -77,33 +77,6 @@
         }
         .back-btn:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(118, 75, 162, 0.6); background: linear-gradient(135deg, #764ba2 0%, #667eea 100%); }
 
-        /* AD STYLES */
-        .ad-banner-container { text-align: center; margin: 20px auto; padding: 10px; max-width: 100%; overflow: hidden; }
-
-        /* POPUP AD STYLES (MATCHING INDEX) */
-        .popup-overlay {
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7); z-index: 9999;
-            display: none; justify-content: center; align-items: center;
-            backdrop-filter: blur(4px);
-        }
-        .popup-content {
-            background: white; padding: 20px; border-radius: 12px;
-            width: 350px; text-align: center; position: relative;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
-            animation: popIn 0.4s ease;
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            border: 4px solid #f0f2f5; 
-        }
-        @keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-        .popup-close {
-            position: absolute; top: -15px; right: -15px;
-            background: red; color: white; border: 2px solid white;
-            width: 35px; height: 35px; border-radius: 50%;
-            font-size: 20px; line-height: 32px; cursor: pointer;
-            font-weight: bold; box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-        }
-
         /* Footer */
         footer { text-align: center; padding: 20px; background: #1a202c; color: #bdc3c7; margin-top: 50px; }
     </style>
@@ -117,56 +90,13 @@
         </ul>
     </nav>
 
-    <!-- ADSTERRA BANNER 728x90 -->
-    <div class="ad-banner-container">
-        <script>
-            atOptions = {
-                'key' : '913c56baf27591442617260739df7bf0',
-                'format' : 'iframe',
-                'height' : 90,
-                'width' : 728,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/913c56baf27591442617260739df7bf0/invoke.js"></script>
-    </div>
-
     <div class="article-container" id="article-content">
         <h2 style="text-align:center; color:#666;">Loading News...</h2>
-    </div>
-
-    <!-- ADSTERRA NATIVE BANNER (Inside Article Page) -->
-    <div style="max-width: 800px; margin: 0 auto 30px; text-align:center;">
-        <script async="async" data-cfasync="false" src="https://pl28530993.effectivegatecpm.com/04804b2bd758cb3163372944a85a8bb2/invoke.js"></script>
-        <div id="container-04804b2bd758cb3163372944a85a8bb2"></div>
     </div>
 
     <footer>
         <p>&copy; 2026 Bangladesh Creator Media. All Rights Reserved.</p>
     </footer>
-
-    <!-- MAIN POP-UP AD (300x250) -->
-    <div class="popup-overlay" id="popup-ad">
-        <div class="popup-content">
-            <button class="popup-close" onclick="closePopup()">✖</button>
-            <h3 style="margin-bottom: 10px; color: #333;">Sponsored Offer</h3>
-            
-            <!-- ADSTERRA 300x250 CODE -->
-            <div>
-                <script>
-                    atOptions = {
-                        'key' : '08d5faeff146431c8017d7cfc9ab82b6',
-                        'format' : 'iframe',
-                        'height' : 250,
-                        'width' : 300,
-                        'params' : {}
-                    };
-                </script>
-                <script src="https://www.highperformanceformat.com/08d5faeff146431c8017d7cfc9ab82b6/invoke.js"></script>
-            </div>
-            <!-- END AD CODE -->
-        </div>
-    </div>
 
     <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-app.js"></script>
@@ -215,34 +145,6 @@
         } else {
             document.getElementById('article-content').innerHTML = "<h3>Invalid Link.</h3><a href='blog.html'>Go Back</a>";
         }
-
-        // --- POPUP AD LOGIC ---
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                // Show popup 2 seconds after load
-                document.getElementById('popup-ad').style.display = 'flex';
-            }, 2000);
-        });
-
-        function closePopup() {
-            document.getElementById('popup-ad').style.display = 'none';
-        }
-    </script>
-
-    <!-- ADSTERRA POPUNDER AD -->
-    <script src="https://pl28528078.effectivegatecpm.com/ac/d5/c2/acd5c23b9f6f77e8f9f6ebae6a44ab89.js"></script>
-
-    <!-- ADSTERRA SOCIAL BAR AD -->
-    <script src="https://pl28528081.effectivegatecpm.com/ef/bf/ed/efbfedfbecfa4341c8c49c5e2eb5597a.js"></script>
-
-    <!-- ADSTERRA SMARTLINK (Opens on First Click) -->
-    <script>
-        document.body.addEventListener('click', function() {
-            if(!sessionStorage.getItem('smartLinkShownNews')) {
-                window.open('https://www.effectivegatecpm.com/tvh8g9tv2?key=d1007f785c6fd53c1310c7811f50889e', '_blank');
-                sessionStorage.setItem('smartLinkShownNews', 'true');
-            }
-        }, { once: true });
     </script>
 
 </body>
