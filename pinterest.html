@@ -58,7 +58,6 @@
             overflow-x: hidden;
         }
 
-        /* নতুন: সাবল্ট প্যাটার্ন ব্যাকগ্রাউন্ড */
         .background-pattern {
             position: fixed;
             top: 0;
@@ -72,7 +71,6 @@
             z-index: -2;
         }
 
-        /* নতুন: সাবল্ট গ্রিড প্যাটার্ন */
         .grid-pattern {
             position: fixed;
             top: 0;
@@ -88,7 +86,6 @@
             animation: gridMove 60s linear infinite;
         }
 
-        /* নতুন: সাবল্ট পার্টিকেল এফেক্ট */
         .particles-container {
             position: fixed;
             top: 0;
@@ -161,7 +158,6 @@
             z-index: 1;
         }
 
-        /* Animated Border Effect */
         .tool-page-container::before {
             content: '';
             position: absolute;
@@ -176,7 +172,6 @@
             animation: borderPulse 4s ease-in-out infinite;
         }
 
-        /* HEADER STYLES */
         .tool-header {
             margin-bottom: 50px;
             position: relative;
@@ -203,7 +198,6 @@
             font-weight: 400;
         }
 
-        /* MAIN INPUT BOX */
         .pinterest-box {
             background: rgba(255, 255, 255, 0.95);
             padding: 50px;
@@ -236,7 +230,6 @@
             background: var(--primary-gradient);
         }
 
-        /* INPUT GROUP - Modern Design */
         .url-input-group {
             display: flex;
             gap: 15px;
@@ -271,7 +264,6 @@
             font-weight: 400;
         }
 
-        /* DOWNLOAD BUTTON - Modern with Icon */
         .pinterest-btn {
             background: var(--primary-gradient);
             color: white;
@@ -323,7 +315,6 @@
             left: -100%;
         }
 
-        /* STATUS MESSAGE */
         .status-msg {
             margin-top: 20px;
             font-weight: 600;
@@ -339,7 +330,6 @@
             color: var(--text-primary);
         }
 
-        /* PREVIEW SECTION */
         .video-preview {
             margin-top: 40px;
             padding: 30px;
@@ -377,7 +367,6 @@
             transform: scale(1.02);
         }
 
-        /* DOWNLOAD OPTIONS */
         .download-options {
             display: flex;
             gap: 20px;
@@ -407,6 +396,11 @@
             overflow: hidden;
         }
 
+        .download-btn:disabled {
+            opacity: 0.8;
+            cursor: wait;
+        }
+
         .download-btn::after {
             content: '';
             position: absolute;
@@ -430,7 +424,6 @@
             animation: ripple 1s ease-out;
         }
 
-        /* INSTRUCTIONS SECTION */
         .instructions {
             background: white;
             padding: 40px;
@@ -485,7 +478,6 @@
             border-radius: 50%;
         }
 
-        /* BACK BUTTON - Modern Design */
         .back-btn-container {
             margin-top: 50px;
             animation: fadeIn 1s ease-out;
@@ -532,7 +524,6 @@
             box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
         }
 
-        /* TIPS TEXT */
         #tipsText {
             margin-top: 20px;
             font-size: 0.9rem;
@@ -543,7 +534,6 @@
             border-left: 3px solid var(--success-color);
         }
 
-        /* নতুন: সাবল্ট অ্যানিমেশন */
         @keyframes gridMove {
             0% { transform: translate(0, 0); }
             100% { transform: translate(50px, 50px); }
@@ -594,7 +584,6 @@
             }
         }
 
-        /* Loading Animation for Button */
         @keyframes loading {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
@@ -610,7 +599,6 @@
             animation: loading 1s ease-in-out infinite;
         }
 
-        /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
             body {
                 padding: 20px 15px;
@@ -694,12 +682,10 @@
             }
         }
 
-        /* নতুন: সুন্দর ফোকাস স্টাইল */
         *:focus {
             outline: none;
         }
 
-        /* নতুন: সাবল্ট স্ক্রলবার স্টাইল */
         ::-webkit-scrollbar {
             width: 10px;
         }
@@ -721,7 +707,6 @@
 </head>
 <body>
 
-    <!-- নতুন: সাবল্ট ব্যাকগ্রাউন্ড এলিমেন্টস -->
     <div class="background-pattern"></div>
     <div class="grid-pattern"></div>
     <div class="particles-container">
@@ -735,7 +720,7 @@
     <div class="tool-page-container">
         <div class="tool-header">
             <h1><i class="fas fa-download"></i> পিনটারেস্ট ভিডিও ডাউনলোডার</h1>
-            <p>কোনো রেজিস্ট্রেশন ছাড়াই পিনটারেস্ট থেকে ভিডিও এবং ছবি ডাউনলোড করুন সহজেই।</p>
+            <p>কোনো রেজিস্ট্রেশন ছাড়াই পিনটারেস্ট থেকে ভিডিও এবং ছবি ডাউনলোড করুন সহজেই।</p>
         </div>
 
         <div class="pinterest-box">
@@ -757,7 +742,7 @@
                 <div class="download-options" id="downloadButtons"></div>
                 
                 <p style="margin-top: 15px; font-size: 0.8rem; color: #888;" id="tipsText">
-                    <!-- টিপস এখানে ডায়নামিকালি আসবে -->
+                    <!-- টিপস এখানে ডায়নামিকালি আসবে -->
                 </p>
             </div>
         </div>
@@ -765,14 +750,13 @@
         <div class="instructions">
             <h3><i class="fas fa-info-circle"></i> কিভাবে ব্যবহার করবেন:</h3>
             <ol>
-                <li>পিনটারেস্ট অ্যাপ বা ওয়েবসাইট থেকে ভিডিও বা ছবির লিংক কপি করুন।</li>
+                <li>পিনটারেস্ট অ্যাপ বা ওয়েবসাইট থেকে ভিডিও বা ছবির লিংক কপি করুন।</li>
                 <li>উপরের বক্সে লিংকটি পেস্ট করুন।</li>
                 <li>"ডাউনলোড করুন" বাটনে ক্লিক করুন।</li>
                 <li>নিচে প্রিভিউ আসলে ডাউনলোড বাটনে ক্লিক করুন।</li>
             </ol>
         </div>
 
-        <!-- Stylish Back Button -->
         <div class="back-btn-container">
             <a href="tools.html" class="back-btn">
                 <i class="fas fa-arrow-left"></i> টুলস পেজে ফিরে যান
@@ -794,6 +778,110 @@
         };
         firebase.initializeApp(firebaseConfig);
 
+        // ---------- Helpers ----------
+        const PROXIES = [
+            u => `https://corsproxy.io/?url=${encodeURIComponent(u)}`,
+            u => `https://api.allorigins.win/raw?url=${encodeURIComponent(u)}`,
+            u => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(u)}`
+        ];
+
+        async function timedFetch(url, ms = 15000) {
+            const ctrl = new AbortController();
+            const t = setTimeout(() => ctrl.abort(), ms);
+            try { return await fetch(url, { signal: ctrl.signal }); }
+            finally { clearTimeout(t); }
+        }
+
+        async function fetchHtml(url) {
+            for (const mk of PROXIES) {
+                try {
+                    const res = await timedFetch(mk(url));
+                    if (!res.ok) continue;
+                    const txt = await res.text();
+                    if (txt && txt.length > 500) return txt;
+                } catch (e) { /* পরের প্রক্সি চেষ্টা */ }
+            }
+            throw new Error('All proxies failed');
+        }
+
+        function clean(s) {
+            return s.replace(/\\u002F/g, '/').replace(/\\\//g, '/').replace(/&amp;/g, '&');
+        }
+
+        function hlsToMp4(u) {
+            if (u.includes('.m3u8')) {
+                return u.replace('/hls/', '/720p/').replace('.m3u8', '.mp4');
+            }
+            return u;
+        }
+
+        function extractVideo(doc, html) {
+            let v = null;
+            const metas = ['meta[property="og:video"]', 'meta[property="og:video:url"]',
+                           'meta[property="og:video:secure_url"]', 'meta[name="twitter:player:stream"]'];
+            for (const s of metas) {
+                const m = doc.querySelector(s);
+                if (m && m.content) { v = m.content; break; }
+            }
+            if (!v) {
+                for (const s of doc.querySelectorAll('script[type="application/ld+json"]')) {
+                    try {
+                        const j = JSON.parse(s.textContent);
+                        const c = j.contentUrl || (j.video && j.video.contentUrl);
+                        if (c) { v = c; break; }
+                    } catch (e) {}
+                }
+            }
+            if (!v) {
+                const src = clean(html);
+                const mp4 = src.match(/https?:\/\/[^"'\s\\]+?\.mp4/);
+                const m3u8 = src.match(/https?:\/\/[^"'\s\\]+?\.m3u8/);
+                v = (mp4 && mp4[0]) || (m3u8 && m3u8[0]) || null;
+            }
+            return v ? hlsToMp4(clean(v)) : null;
+        }
+
+        function extractImage(doc) {
+            const m = doc.querySelector('meta[property="og:image"]') || doc.querySelector('meta[name="twitter:image"]');
+            if (!m || !m.content) return null;
+            return m.content.replace(/\/(\d+x|\d+x\d+)\//, '/originals/');
+        }
+
+        // ---------- Real download (blob) ----------
+        async function downloadFile(fileUrl, fileName, btn) {
+            const original = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner loading-spinner"></i> ডাউনলোড হচ্ছে...';
+
+            const attempts = [u => u, ...PROXIES];
+            let blob = null;
+            for (const mk of attempts) {
+                try {
+                    const res = await timedFetch(mk(fileUrl), 60000);
+                    if (!res.ok) continue;
+                    const b = await res.blob();
+                    if (b && b.size > 1000) { blob = b; break; }
+                } catch (e) { /* পরেরটা চেষ্টা */ }
+            }
+
+            if (blob) {
+                const a = document.createElement('a');
+                const objUrl = URL.createObjectURL(blob);
+                a.href = objUrl;
+                a.download = fileName;
+                document.body.appendChild(a);
+                a.click();
+                a.remove();
+                setTimeout(() => URL.revokeObjectURL(objUrl), 10000);
+                btn.innerHTML = '<i class="fas fa-check"></i> ডাউনলোড সম্পন্ন!';
+            } else {
+                window.open(fileUrl, '_blank');
+                btn.innerHTML = '<i class="fas fa-external-link-alt"></i> নতুন ট্যাবে খোলা হয়েছে';
+            }
+            setTimeout(() => { btn.innerHTML = original; btn.disabled = false; }, 3000);
+        }
+
+        // ---------- Main ----------
         async function fetchPinterestMedia() {
             const urlInput = document.getElementById('pinterestUrl');
             const statusMsg = document.getElementById('statusMsg');
@@ -807,12 +895,12 @@
 
             if (!url) {
                 statusMsg.style.color = '#ef4444';
-                statusMsg.innerText = 'দয়া করে একটি লিংক দিন!';
+                statusMsg.innerText = 'দয়া করে একটি লিংক দিন!';
                 return;
             }
 
             statusMsg.style.color = '#3b82f6';
-            statusMsg.innerText = 'মিডিয়া খোঁজা হচ্ছে... ⏳';
+            statusMsg.innerText = 'মিডিয়া খোঁজা হচ্ছে... ⏳';
             fetchBtn.disabled = true;
             fetchBtn.innerHTML = '<i class="fas fa-spinner loading-spinner"></i> লোডিং...';
             previewArea.style.display = 'none';
@@ -821,84 +909,53 @@
             tipsText.innerText = '';
 
             try {
-                // Using corsproxy.io for better redirect handling
-                const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
-                
-                const response = await fetch(proxyUrl);
-                const htmlText = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
+                const htmlText = await fetchHtml(url);
+                const doc = new DOMParser().parseFromString(htmlText, 'text/html');
 
-                let videoUrl = null;
-                let imageUrl = null;
+                const videoUrl = extractVideo(doc, htmlText);
+                const imageUrl = extractImage(doc);
+                const stamp = Date.now();
 
-                // Meta tags check
-                const ogVideo = doc.querySelector('meta[property="og:video"]');
-                if (ogVideo) videoUrl = ogVideo.content;
-
-                // Backup check inside scripts
-                if (!videoUrl) {
-                    const scripts = doc.querySelectorAll('script');
-                    for (let script of scripts) {
-                        if (script.textContent.includes('.mp4')) {
-                            const match = script.textContent.match(/https?:\/\/[^"]+\.mp4/);
-                            if (match) {
-                                videoUrl = match[0];
-                                break;
-                            }
-                        }
-                    }
-                }
-
-                const ogImage = doc.querySelector('meta[property="og:image"]');
-                if (ogImage) imageUrl = ogImage.content;
+                if (!videoUrl && !imageUrl) throw new Error('Media not found');
 
                 statusMsg.innerText = '';
                 previewArea.style.display = 'block';
 
+                const btn = document.createElement('button');
+                btn.className = 'download-btn';
+
                 if (videoUrl) {
                     // *** VIDEO ***
                     mediaContainer.innerHTML = `
-                        <video controls autoplay name="media">
+                        <video controls playsinline muted referrerpolicy="no-referrer" poster="${imageUrl || ''}">
                             <source src="${videoUrl}" type="video/mp4">
-                        </video>
-                    `;
-                    downloadButtons.innerHTML = `
-                        <a href="${videoUrl}" target="_blank" class="download-btn">
-                            <i class="fas fa-video"></i> ভিডিও ডাউনলোড করুন (HD)
-                        </a>
-                    `;
-                    tipsText.innerText = 'টিপস: ভিডিও নতুন ট্যাবে চালু হলে, ভিডিওর ওপর Three Dots (⋮) এ ক্লিক করে ডাউনলোড করুন।';
+                        </video>`;
+                    btn.innerHTML = '<i class="fas fa-video"></i> ভিডিও ডাউনলোড করুন (HD)';
+                    btn.addEventListener('click', () =>
+                        downloadFile(videoUrl, `pinterest-video-${stamp}.mp4`, btn));
+                    tipsText.innerText = 'টিপস: ডাউনলোড বাটনে ক্লিক করলে ভিডিও সরাসরি আপনার ডিভাইসে সেভ হবে। না হলে নতুন ট্যাবে খুলবে, সেখানে Three Dots (⋮) এ ক্লিক করে ডাউনলোড করুন।';
                     statusMsg.style.color = '#10b981';
-                    statusMsg.innerText = '✅ ভিডিও পাওয়া গেছে!';
-                } 
-                else if (imageUrl) {
-                    // *** IMAGE (SIMPLE LINK METHOD) ***
-                    mediaContainer.innerHTML = `
-                        <img src="${imageUrl}" alt="Pinterest Image">
-                    `;
-                    
-                    downloadButtons.innerHTML = `
-                        <a href="${imageUrl}" target="_blank" class="download-btn">
-                            <i class="fas fa-image"></i> ছবি ডাউনলোড করুন (HD)
-                        </a>
-                    `;
-
-                    tipsText.innerText = 'টিপস: ছবিটি নতুন ট্যাবে ওপেন হবে। দয়া করে ছবির ওপর লং প্রেস (Long Press) বা রাইট ক্লিক করে সেভ করুন।';
+                    statusMsg.innerText = '✅ ভিডিও পাওয়া গেছে!';
+                } else {
+                    // *** IMAGE ***
+                    mediaContainer.innerHTML = `<img src="${imageUrl}" alt="Pinterest Image" referrerpolicy="no-referrer">`;
+                    btn.innerHTML = '<i class="fas fa-image"></i> ছবি ডাউনলোড করুন (HD)';
+                    btn.addEventListener('click', () =>
+                        downloadFile(imageUrl, `pinterest-image-${stamp}.jpg`, btn));
+                    tipsText.innerText = 'টিপস: ডাউনলোড বাটনে ক্লিক করলে ছবি সরাসরি সেভ হবে। না হলে নতুন ট্যাবে খুলবে, সেখানে লং প্রেস (Long Press) বা রাইট ক্লিক করে সেভ করুন।';
                     statusMsg.style.color = '#10b981';
-                    statusMsg.innerText = '✅ ছবিটি পাওয়া গেছে!';
-                } 
-                else {
-                    throw new Error("Media not found");
+                    statusMsg.innerText = '✅ ছবিটি পাওয়া গেছে!';
                 }
+                downloadButtons.appendChild(btn);
 
             } catch (error) {
                 console.error(error);
+                previewArea.style.display = 'none';
                 statusMsg.style.color = '#ef4444';
                 if (url.includes('pin.it')) {
-                    statusMsg.innerHTML = 'লিংকটি লোড করা যাচ্ছে না। দয়া করে <b>পিনটারেস্ট থেকে "Full Link" (pinterest.com/...) কপি করে চেষ্টা করুন।</b>';
+                    statusMsg.innerHTML = 'লিংকটি লোড করা যাচ্ছে না। দয়া করে <b>পিনটারেস্ট থেকে "Full Link" (pinterest.com/...) কপি করে চেষ্টা করুন।</b>';
                 } else {
-                    statusMsg.innerText = 'দুঃখিত! মিডিয়াটি পাওয়া যায়নি। ফুল লিংক ব্যবহার করুন।';
+                    statusMsg.innerText = 'দুঃখিত! মিডিয়াটি পাওয়া যায়নি। ফুল লিংক ব্যবহার করুন।';
                 }
             } finally {
                 fetchBtn.disabled = false;
